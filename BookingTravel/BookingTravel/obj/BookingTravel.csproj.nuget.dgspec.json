@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\.net7\\BookingTravel\\BookingTravel\\BookingTravel.csproj": {}
+    "D:\\TT_Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj": {}
   },
   "projects": {
-    "D:\\.net7\\BookingTravel\\BookingTravel\\BookingTravel.csproj": {
+    "D:\\TT_Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\.net7\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
+        "projectUniqueName": "D:\\TT_Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
         "projectName": "BookingTravel",
-        "projectPath": "D:\\.net7\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
+        "projectPath": "D:\\TT_Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\.net7\\BookingTravel\\BookingTravel\\obj\\",
+        "outputPath": "D:\\TT_Tour\\BookingTravel\\BookingTravel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
