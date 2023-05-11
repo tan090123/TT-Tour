@@ -35,12 +35,14 @@ namespace BookingTravel.Controllers
             {
                 Id = x.Id,
                 Name = x.Name,
+                ImageUrl = x.ImageUrl,
                 Departure = x.Departure,
                 Destination = x.Destination,
                 Description = x.Description!,
                 Price = x.Price,
                 Start_date = x.Start_date,
-                End_date = x.End_date
+                End_date = x.End_date,
+                DateTime = x.DateTime,
             }).ToList();
 
             return tours;
@@ -55,12 +57,14 @@ namespace BookingTravel.Controllers
             var tour = new Tour
             {
                 Name = newTour.Name,
+                ImageUrl = newTour.ImageUrl,
                 Departure = newTour.Departure,
                 Destination = newTour.Destination,
                 Description = newTour.Description!,
                 Price = newTour.Price,
                 Start_date = newTour.Start_date,
-                End_date = newTour.End_date
+                End_date = newTour.End_date,
+                DateTime = newTour.DateTime,
             };
 
             _context.Tours!.Add(tour);
@@ -108,12 +112,14 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 tour.Name = updateTour.Name;
+                tour.ImageUrl = updateTour.ImageUrl;
                 tour.Description = updateTour.Description;
                 tour.Departure = updateTour.Departure;
                 tour.Destination = updateTour.Destination;
                 tour.Price = updateTour.Price;
                 tour.Start_date = updateTour.Start_date;
                 tour.End_date = updateTour.End_date;
+                tour.DateTime = updateTour.DateTime;
 
                 _context.Update(tour);
                 _context.SaveChanges();
