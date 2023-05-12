@@ -1,10 +1,11 @@
 @import 'reset';
 
-$minH: 43%;
-
+$textColor: #2d4271;
+$fontSmall: 13px roboto, sans-serif;
+$fontNor: 18px roboto, sans-serif;
 //-------------- Extend---------------
 %TitleStyle {
-    font: 18px roboto, sans-serif;
+    font: $fontNor;
     font-weight: 700;
     line-height: 30px;
     margin: 10px 0px;
@@ -22,16 +23,18 @@ $minH: 43%;
 }
 
 %menuItemStyle {
-    color: #2d4271;
-    font: 13px roboto, sans-serif;
+    color: $textColor;
+    font: $fontSmall;
     text-align: left;
 }
 
 //------------CSS------------------
 .footer {
+    min-width: fit-content;
     background: #f9f9f9;
     &__top{
         padding: 60px 0px;
+        
     }
     &__bottom{
         background-image: url(../assets/footer/bg-footer.png);
@@ -39,7 +42,7 @@ $minH: 43%;
         & p{
             @extend %menuItemStyle;
             & a {
-                color: #2d4271;
+                color: $textColor;
             }
         }
     }
@@ -48,7 +51,6 @@ $minH: 43%;
 
 //Du lịch trong nước
 .travel-inside {
-    min-height: $minH;
 
     &__title {
         @extend %TitleStyle;
@@ -63,12 +65,11 @@ $minH: 43%;
 
             &--item {
                 line-height: 30px;
-                text-align: -webkit-match-parent;
+                a {
+                    @extend %menuItemStyle;
+                }
             }
 
-            &--item a {
-                @extend %menuItemStyle;
-            }
         }
     }
 }
@@ -85,8 +86,8 @@ $minH: 43%;
         margin: 20px 0px 0px 0px;
 
         line-height: 30px;
-        color: #2d4271;
-        font: 13px roboto, sans-serif;
+        color: $textColor;
+        font: $fontSmall;
         text-align: start;
     }
 
@@ -108,7 +109,7 @@ $minH: 43%;
         }
 
         &-social a i {
-            color: #2d4271;
+            color: $textColor;
         }
     }
 
@@ -138,7 +139,6 @@ $minH: 43%;
 
 //Du lịch ngoài nước
 .travel-outside {
-    min-height: $minH;
 
     &__title {
         @extend %TitleStyle;
@@ -153,11 +153,9 @@ $minH: 43%;
 
             &--item {
                 line-height: 30px;
-                text-align: -webkit-match-parent;
-            }
-
-            &--item a {
-                @extend %menuItemStyle;
+                a {
+                    @extend %menuItemStyle;
+                }
             }
         }
     }
@@ -190,7 +188,6 @@ $minH: 43%;
 
 //Tour
 .tour {
-    min-height: $minH;
 
     &__title {
         @extend %TitleStyle;
@@ -222,51 +219,35 @@ $minH: 43%;
     }
 
     &__form {
-        &-email {
+        &-email, &-search {
             display: flex;
             height: 40px;
+            max-width: 22em;
 
             & input {
                 padding: 0px 20px;
-                border: 1px solid #2d4271;
+                border: 1px solid $textColor;
                 border-right: none;
                 border-radius: 10px 0px 0px 10px;
             }
             & button {
-                border: 1px solid #2d4271;
+                border: 1px solid $textColor;
                 border-radius: 0px 10px 10px 0px;
                 
             }
         }
 
-        &-search {
-            display: flex;
-            height: 40px;
-
-            input {
-                padding: 0px 20px;
-                border: 1px solid #2d4271;
-                border-right: none;
-                border-radius: 10px 0px 0px 10px;
-                color: #2d4271;
-
-            }
-
-            button {
-
-                border: 1px solid #2d4271;
-                border-radius: 0px 10px 10px 0px;
-                
-            }
-        }
+        
     }
     &__security-payment{
+        max-width: 30em;
         display: flex;
         margin: 10px 0px;
         justify-content: space-between;
     }
     &__security{
-        margin-right: 5em;
+        margin-right: 5rem;
+        max-width: 10em;
     }   
 }
 
@@ -282,14 +263,25 @@ $minH: 43%;
     &__scan{
         display: flex;
         justify-content: space-between;
-        &-android p{
+        &-android p, &-ios p{
             @extend %menuItemStyle;
             margin: 10px 0px;
         }
-        &-ios p{
-            @extend %menuItemStyle;
-            margin: 10px 0px;
-
+    }
+}
+@media screen and (max-width: 768px) {
+    img{
+        width: 100%;
+    }
+    .footer__top{
+        padding: 0px 10px;
+    }
+    .travel-inside, .travel-outside, .tour, .contact , .infomation, .newsletter, .appMobie{
+        &__title,&__titleSocial{
+            font: $fontSmall;
+            color: $textColor;
+            font-weight: 700;
+            line-height: 30px;
         }
     }
 }

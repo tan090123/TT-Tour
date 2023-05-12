@@ -2,15 +2,14 @@
     <footer class="footer">
         <div class="footer__top container">
 
-            <div class="row row-cols-lg-4 row-cols-2">
+            <div class="row">
 
-                <div class="col">
-
-                    <!--Du lịch trong nước-->
+                <!--Du lịch trong nước-->
+                <div class="col-lg-3 col-6">
                     <div class="travel-inside">
                         <h4 class="travel-inside__title">Du lịch trong nước</h4>
-                        <div class="travel-inside__listMenu row row-cols-lg-2 row-cols-1">
-                            <ul class="travel-inside__listMenu-menu col">
+                        <div class="travel-inside__listMenu row">
+                            <ul class="travel-inside__listMenu-menu col-lg-6 col-12">
                                 <li class="travel-inside__listMenu-menu--item">
                                     <a href="">Hà Nội</a>
                                 </li>
@@ -37,7 +36,7 @@
                                 </li>
 
                             </ul>
-                            <ul class="travel-inside-listMenu-menu">
+                            <ul class="travel-inside__listMenu-menu col-lg-6 col-12">
                                 <li class="travel-inside__listMenu-menu--item">
                                     <a href="">Đà Lạt</a>
                                 </li>
@@ -68,8 +67,123 @@
                         </div>
 
                     </div>
+                </div>
 
-                    <!--Liên hệ-->
+                <!--Du lịch ngoài nước-->
+                <div class="col-lg-3 col-6">
+                    <div class="travel-outside">
+                        <h4 class="travel-outside__title">Du lịch ngoài nước</h4>
+                        <div class="travel-outside__listMenu row">
+                            <ul class="travel-outside__listMenu-menu col-lg-6">
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Trung Quốc</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Thái Lan</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Malaysia</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Singapore</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Hàn Quốc</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Úc</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Mỹ - Hoa Kỳ</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Nhật Bản</a>
+                                </li>
+
+                            </ul>
+                            <ul class="travel-inside__listMenu-menu col-lg-6 col-12">
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Ấn Độ</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Philippines</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Maldives</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Na Uy</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Tây Ban Nha</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Hà Lan</a>
+                                </li>
+                                <li class="travel-outside__listMenu-menu--item">
+                                    <a href="">Đức</a>
+                                </li>
+                                <li class="travel-inside__listMenu-menu--item">
+                                    <a href="">Anh</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+                
+
+                <!--Tour-->
+                <div class="col-lg-3 col-6">
+                    <div class="tour">
+                        <h4 class="tour__title">Dòng Tour</h4>
+                        <div class="tour__listMenu">
+                            <ul class="tour__listMenu-menu">
+                                <li class="tour__listMenu-menu--item">
+                                    <a href="">Cao cấp</a>
+                                </li>
+                                <li class="tour__listMenu-menu--item">
+                                    <a href="">Tiêu chuẩn</a>
+                                </li>
+                                <li class="tour__listMenu-menu--item">
+                                    <a href="">Tiết kiệm</a>
+                                </li>
+                                <li class="tour__listMenu-menu--item">
+                                    <a href="">Giá tốt</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Ứng dụng di động-->
+                <div class="col-lg-3 col-6">
+                    <div class="appMobie">
+                        <h4 class="appMobie__title">Ứng dụng di động</h4>
+                        <div class="appMobie__down">
+                            <a href=""><img src="../assets/footer/CHplay.png" alt=""></a>
+                            <a href=""><img src="../assets/footer/Appstore.png" alt=""></a>
+                        </div>
+                        <div class="appMobie__scan">
+                            <div class="appMobie__scan-android">
+                                <p>Android</p>
+                                <a href=""><img src="../assets/footer/android.png" alt=""></a>
+                            </div>
+                            <div class="appMobie__scan-ios">
+                                <p>iOS</p>
+                                <a href=""><img src="../assets/footer/ios.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- Liên hệ -->
+                <div class="col-lg-3 col-6">
                     <div class="contact">
                         <h4 class="contact__title">Liên Hệ</h4>
                         <div class="contact__info">
@@ -104,7 +218,7 @@
                             </li>
                         </ul>
                         <div class="contact__call">
-                            <button class="btn btn-danger w-50">
+                            <button class="btn btn-danger">
                                 <i class="fa-solid fa-phone"></i>
                                 1900 1839
                             </button>
@@ -113,71 +227,8 @@
                     </div>
                 </div>
 
-                <div class="col">
-                    <!--Du lịch ngoài nước-->
-                    <div class="travel-outside">
-                        <h4 class="travel-outside__title">Du lịch ngoài nước</h4>
-                        <div class="travel-outside__listMenu row row-cols-lg-2 row-cols-1">
-                            <ul class="travel-outside__listMenu-menu col">
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Trung Quốc</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Thái Lan</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Malaysia</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Singapore</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Hàn Quốc</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Úc</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Mỹ - Hoa Kỳ</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Nhật Bản</a>
-                                </li>
-
-                            </ul>
-                            <ul class="travel-inside-listMenu-menu">
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Ấn Độ</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Philippines</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Maldives</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Na Uy</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Tây Ban Nha</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Hà Lan</a>
-                                </li>
-                                <li class="travel-outside__listMenu-menu--item">
-                                    <a href="">Đức</a>
-                                </li>
-                                <li class="travel-inside__listMenu-menu--item">
-                                    <a href="">Anh</a>
-                                </li>
-
-
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <!--Thông tin-->
+                <!-- Thông tin -->
+                <div class="col-lg-3 col-6">
                     <div class="infomation">
                         <h4 class="infomation__title">Thông tin</h4>
                         <div class="infomation__listMenu">
@@ -207,35 +258,11 @@
 
                         </div>
                     </div>
-
                 </div>
 
-                <div class="col">
-
-                    <!--Tour-->
-                    <div class="tour">
-                        <h4 class="tour__title">Dòng Tour</h4>
-                        <div class="tour__listMenu">
-                            <ul class="tour__listMenu-menu">
-                                <li class="tour__listMenu-menu--item">
-                                    <a href="">Cao cấp</a>
-                                </li>
-                                <li class="tour__listMenu-menu--item">
-                                    <a href="">Tiêu chuẩn</a>
-                                </li>
-                                <li class="tour__listMenu-menu--item">
-                                    <a href="">Tiết kiệm</a>
-                                </li>
-                                <li class="tour__listMenu-menu--item">
-                                    <a href="">Giá tốt</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <!--Newsletter-->
-                    <div class="newsletter row row-cols-lg-1">
+                <!-- Newsletter -->
+                <div class="col-lg-6 col-12">
+                    <div class="newsletter">
                         <h4 class="newsletter__title">Newsletter</h4>
                         <form action="" class="newsletter__form-email">
                             <input type="email" name="" class="form-control w-75" placeholder="Email của quý khách" id="">
@@ -256,33 +283,12 @@
                             </div>
                             <div class="newsletter__payment">
                                 <h4 class="newsletter__title">Chấp nhận thanh toán</h4>
-                                <a href=""><img src="../assets/footer/payment.png" alt="img"></a>
-                                
+                                <img src="../assets/footer/payment.png" alt="img">
+
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <!--Ứng dụng di động-->
-                <div class="col">
-                    <div class="appMobie">
-                        <h4 class="appMobie__title">Ứng dụng di động</h4>
-                        <div class="appMobie__down">
-                            <a href=""><img src="../assets/footer/CHplay.png" alt=""></a>
-                            <a href=""><img src="../assets/footer/Appstore.png" alt=""></a>
-                        </div>
-                        <div class="appMobie__scan">
-                            <div class="appMobie__scan-android">
-                                <p>Android</p>
-                                <a href=""><img src="../assets/footer/android.png" alt=""></a>
-                            </div>
-                            <div class="appMobie__scan-ios">
-                                <p>iOS</p>
-                                <a href=""><img src="../assets/footer/ios.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -293,7 +299,8 @@
         <div class="footer__bottom">
             <div class="container">
                 <p>Bản quyền của Vietravel ® 2022. Bảo lưu mọi quyền.</p>
-                <p>Ghi rõ nguồn <a href="">"www.travel.com.vn"</a> <span>® khi sử dụng lại thông tin từ website này.</span></p>
+                <p>Ghi rõ nguồn <a href="">"www.travel.com.vn"</a> <span>® khi sử dụng lại thông tin từ website này.</span>
+                </p>
                 <p>Số giấy phép kinh doanh lữ hành Quốc tế: 79-234/2022/TCDL-GP LHQT</p>
             </div>
         </div>
