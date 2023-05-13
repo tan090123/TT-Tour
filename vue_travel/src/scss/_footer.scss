@@ -32,14 +32,13 @@ $fontNor: 18px roboto, sans-serif;
 .footer {
     min-width: fit-content;
     background: #f9f9f9;
-    &__top{
+    &__top {
         padding: 60px 0px;
-        
     }
-    &__bottom{
+    &__bottom {
         background-image: url(../assets/footer/bg-footer.png);
         padding: 20px 0px;
-        & p{
+        & p {
             @extend %menuItemStyle;
             & a {
                 color: $textColor;
@@ -48,10 +47,8 @@ $fontNor: 18px roboto, sans-serif;
     }
 }
 
-
 //Du lịch trong nước
 .travel-inside {
-
     &__title {
         @extend %TitleStyle;
     }
@@ -69,14 +66,12 @@ $fontNor: 18px roboto, sans-serif;
                     @extend %menuItemStyle;
                 }
             }
-
         }
     }
 }
 
 //Liên hệ
 .contact {
-
     &__title {
         @extend %TitleStyle;
     }
@@ -127,19 +122,16 @@ $fontNor: 18px roboto, sans-serif;
         height: 50px;
         font: 22px roboto, sans-serif;
         min-height: 80%;
-
     }
 
     &__datetime {
         @extend %menuItemStyle;
         text-align: start;
     }
-
 }
 
 //Du lịch ngoài nước
 .travel-outside {
-
     &__title {
         @extend %TitleStyle;
     }
@@ -188,7 +180,6 @@ $fontNor: 18px roboto, sans-serif;
 
 //Tour
 .tour {
-
     &__title {
         @extend %TitleStyle;
     }
@@ -219,7 +210,8 @@ $fontNor: 18px roboto, sans-serif;
     }
 
     &__form {
-        &-email, &-search {
+        &-email,
+        &-search {
             display: flex;
             height: 40px;
             max-width: 22em;
@@ -233,51 +225,56 @@ $fontNor: 18px roboto, sans-serif;
             & button {
                 border: 1px solid $textColor;
                 border-radius: 0px 10px 10px 0px;
-                
             }
         }
-
-        
     }
-    &__security-payment{
+    &__security-payment {
         max-width: 30em;
         display: flex;
         margin: 10px 0px;
         justify-content: space-between;
     }
-    &__security{
+    &__security {
         margin-right: 5rem;
         max-width: 10em;
-    }   
+    }
 }
 
 //Application Mobie
-.appMobie{
-    &__title{
+.appMobie {
+    &__title {
         @extend %TitleStyle;
     }
-    &__down{
+    &__down {
         display: flex;
         justify-content: space-between;
     }
-    &__scan{
+    &__scan {
         display: flex;
         justify-content: space-between;
-        &-android p, &-ios p{
+        &-android p,
+        &-ios p {
             @extend %menuItemStyle;
             margin: 10px 0px;
         }
     }
 }
 @media screen and (max-width: 768px) {
-    img{
+    img {
         width: 100%;
     }
-    .footer__top{
+    .footer__top {
         padding: 0px 10px;
     }
-    .travel-inside, .travel-outside, .tour, .contact , .infomation, .newsletter, .appMobie{
-        &__title,&__titleSocial{
+    .travel-inside,
+    .travel-outside,
+    .tour,
+    .contact,
+    .infomation,
+    .newsletter,
+    .appMobie {
+        &__title,
+        &__titleSocial {
             font: $fontSmall;
             color: $textColor;
             font-weight: 700;
