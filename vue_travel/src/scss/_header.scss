@@ -1,9 +1,13 @@
 @import 'reset';
 
 $nav-clr: #2d4271;
+header {
+    height: 8rem;
+}
 
 nav {
     background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .logo {
         max-width: 17rem;
