@@ -3,12 +3,14 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <h3></h3>
   <Header/>
+    <TourMain/>
     <TourCarousel/>
   <Footer/>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import TourMain from './Views/Page/TourMain.vue';
 import Footer from './components/Footer.vue';
 import TourCarousel from './Views/Page/TourCarousel.vue';
 
@@ -16,8 +18,9 @@ export default {
   name: 'App',
   components: {
     Header,
+    TourMain,
+    TourCarousel,
     Footer,
-    TourCarousel
   }
 }
 </script>
