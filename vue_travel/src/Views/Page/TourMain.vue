@@ -97,7 +97,7 @@
           </div>
 
           <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            2
+            this í 2
           </div>
           <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
             3
