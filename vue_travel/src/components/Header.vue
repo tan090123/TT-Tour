@@ -9,7 +9,8 @@
                     <div class="d-flex">
                         <!-- Icon user trong dạng mobile -->
                         <a class="nav-link d-lg-none user_mobile" href="!#">
-                            <i class="fa-regular fa-user"></i>
+                            <i class="fa fa-user" @click="showLogin = true"></i>
+                            <!-- <i class="fa-regular fa-user"></i> -->
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -89,7 +90,7 @@
                         </form>
                         <li class="nav-item">
                             <a class="nav-link" href="!#">
-                                <i class="fa-regular fa-user"></i>
+                                <i class="fa-regular fa-user" @click="showLogin = true"></i>
                             </a>
                         </li>
                     </ul>
