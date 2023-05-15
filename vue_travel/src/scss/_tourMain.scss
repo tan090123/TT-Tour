@@ -1,0 +1,89 @@
+@import 'reset';
+$textColor: #4d4aef;
+$fontSmall: 13px roboto, sans-serif;
+$fontNor: 18px roboto, sans-serif;
+
+.tourMain {
+    z-index: 10;
+    position: relative;
+
+    &__both {
+        position: absolute;
+        left: 50%;
+        top: 60%;
+        transform: translateX(-50%);
+        background: white;
+        border-radius: 10px;
+        padding: 0px;
+        margin: 0px;
+
+        &-nav {
+            background-color: rgba(45, 66, 113, .8);
+            padding: 0px;
+            margin: 0px;
+            border-radius: 10px 10px 0px 0px;
+            width: 100%;
+            height: 100%;
+            .nav-link {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font: $fontSmall;
+                font-weight: 700;
+                line-height: 30px;
+                cursor: pointer;
+                padding: 16px 24px;
+                color: white;
+                border-radius: 10px 10px 0px 0px;
+                position: relative;
+                overflow: visible;
+                width: 100%;
+                height: 100%;
+
+                p {
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+                .badge {
+                    position: absolute;
+                    right: -20%;
+                    top: 20%;
+                    border-radius: 10px;
+                    overflow: visible;
+
+                }
+            }
+
+            .nav-link.active {
+                font: $fontSmall;
+                color: $textColor;
+                font-weight: 700;
+                line-height: 30px;
+                border: none;
+                width: 100%;
+                height: 100%;
+            }
+
+            .nav-link:hover {
+                width: 100%;
+                color: $textColor;
+                border: none;
+                background: white;
+                height: 100%;
+
+
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tourMain{
+        display: none;
+    }
+}

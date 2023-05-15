@@ -3,18 +3,21 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <h3></h3>
   <Header/>
+  <TourMain/>
   <Footer/>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import TourMain from './Views/Page/TourMain.vue';
 import Footer from './components/Footer.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    Footer
+    TourMain,
+    Footer,
   }
 }
 </script>
