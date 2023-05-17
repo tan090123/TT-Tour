@@ -5,6 +5,7 @@
   <Header/>
     <TourMain/>
     <TourCarousel/>
+    <TourCard/>
   <Footer/>
 </template>
 
@@ -13,6 +14,7 @@ import Header from './components/Header.vue';
 import TourMain from './Views/Page/TourMain.vue';
 import Footer from './components/Footer.vue';
 import TourCarousel from './Views/Page/TourCarousel.vue';
+import TourCard from './Views/Page/TourCard.vue';
 
 export default {
   name: 'App',
@@ -20,7 +22,9 @@ export default {
     Header,
     TourMain,
     TourCarousel,
+    TourCard,
     Footer,
+
   }
 }
 </script>
