@@ -2,8 +2,8 @@
     <div class="TourCard">
         <div class="container-fluid">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
-            <div class="TourCard__content row row-cols-3">
-                <div class="col">
+            <div class="TourCard__content row row-cols-lg-3 row-cols-1">
+                <div class="col mt-sm-auto">
                     <div class="card">
                         <div class="img">
                             <a href="">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mt-sm-3">
                     <div class="card">
                         <div class="img">
                             <a href="">
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mt-sm-3">
                     <div class="card">
                         <div class="img">
                             <a href="">
@@ -233,7 +233,6 @@ export default {
 .TourCard__title {
     font: 30px roboto, sans-serif;
     font-weight: 700;
-    font-size: 30px;
     color: #2d4271;
     margin-bottom: 24px;
 }
@@ -407,9 +406,4 @@ export default {
 
 }
 
-@media screen and (max-width: 768px) {
-
-    .TourCard__content {
-        display: none;
-    }
-}</style>
+</style>
