@@ -1,8 +1,7 @@
 <template>
   <div class="tourMain">
     <div class="tourMain__img">
-
-      <img src="../../assets/banner/banner.jpg" alt="" />
+      <img src="../../assets/banner/banner.jpg" class="w-100" alt="" />
     </div>
     <div class="tourMain__both container shadow">
 
