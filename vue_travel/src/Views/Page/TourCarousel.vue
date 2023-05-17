@@ -1,5 +1,6 @@
 <template>
-    <div class="container-fluid">
+    <div class="carousel">
+        <div class="container-fluid">
         <h2 class="carousel-title">Ưu đãi</h2>
         <div class="owl-carousel owl-theme">
             <div class="item">
@@ -23,6 +24,7 @@
                 </a>
             </div>
         </div>
+    </div>
     </div>
 </template>
 
@@ -54,10 +56,12 @@ export default {
             });
         });
     },
-
 }
 </script>
 <style>
+.carousel {
+    margin: 3rem 0;
+}
 .carousel-title {
     font-size: 3rem;
     color: #2d4271;
@@ -83,5 +87,11 @@ export default {
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
     background-color: #2d4271 ;
+}
+
+@media screen and (max-width: 992px) {
+    .owl-dots {
+        display: none;
+    }
 }
 </style>

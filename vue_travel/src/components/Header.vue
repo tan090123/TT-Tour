@@ -1,5 +1,4 @@
 <template>
-    <header class="header">
             <nav class="navbar navbar-expand-lg fixed-top text-danger">
                 <div class="container-fluid">
                     <a class="navbar-brand logo" href="#">
@@ -9,14 +8,14 @@
                     <div class="d-flex">
                         <!-- Icon user trong dạng mobile -->
                         <a class="nav-link d-lg-none user_mobile" href="!#">
-                            <i class="fa fa-user" @click="showLogin = true"></i>
-                            <!-- <i class="fa-regular fa-user"></i> -->
+                            <!-- <i class="fa fa-user" @click="showLogin = true"></i> -->
+                            <i class="fa-regular fa-user"></i>
                         </a>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation" data-bs-auto-close="outside">
-                            <span class="navbar-toggler-icon" style="color: #2d4271; font-size: 20px; outline: none;">
+                            <span class="navbar-toggler-icon" style="color: #2d4271; font-size: 20px; outline: none;box-shadow: none; ">
                                 <i class="fa fa-bars mt-2" aria-hidden="true"></i>
                             </span>
                         </button>
@@ -96,7 +95,7 @@
                     </ul>
                 </div>
             </nav>
-        </header>
+    
 </template>
 
 <script>

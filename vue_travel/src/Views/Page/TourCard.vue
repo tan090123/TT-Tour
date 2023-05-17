@@ -1,6 +1,6 @@
 <template>
     <div class="TourCard">
-        <div class="container">
+        <div class="container-fluid">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
             <div class="TourCard__content row row-cols-3">
                 <div class="col">
@@ -213,6 +213,9 @@ export default {
 </script>
 
 <style>
+.TourCard {
+    padding: 0 10px;
+}
 .TourCard .card {
     margin-right: 12px;
     border-radius: 10px;

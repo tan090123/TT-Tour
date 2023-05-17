@@ -1,13 +1,14 @@
 @import 'reset';
 
 $nav-clr: #2d4271;
-header {
-    height: 8rem;
-}
+// header {
+//     height: 8rem;
+// }
 
 nav {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30rem;
 
     .logo {
         max-width: 17rem;
@@ -18,10 +19,13 @@ nav {
     }
 
     .user_mobile {
-        // padding-left: 5rem;
         font-size: 1.8rem;
         color: $nav-clr;
         text-align: end;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none !important;
     }
 
     .navbar-nav {

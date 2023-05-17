@@ -4,8 +4,9 @@ $fontSmall: 13px roboto, sans-serif;
 $fontNor: 18px roboto, sans-serif;
 
 .tourMain {
-    z-index: 10;
     position: relative;
+    // z-index: 9999;
+    margin-top: 6.7rem;
     &__both {
         position: absolute;
         left: 50%;
