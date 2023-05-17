@@ -1,6 +1,6 @@
 <template>
     <div class="TourCard">
-        <div class="container">
+        <div class="container-xxl">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
             <div class="TourCard__content row row-cols-3">
                 <div class="col">
@@ -36,7 +36,7 @@
                             <p class="p-date">23/05/2023 - 6 ngày</p>
                             <p class="p-title"><a href="">
                                     Trung Quốc: Trương Gia Giới - Phượng Hoàng Cổ Trấn - Thiên Môn Sơn - Viên Gia Giới - Đại
-                                    Hiệp Cốc | 6 ngày 5 đêm | Ngày Hội Du Lịch</a></p>
+                                    Hiệp Cốc | 6 ngày 5 đêm | Ngày Hội Du Lịch </a></p>
                             <div class="code">
                                 <p>Mã tour:</p>
                                 <p><i class="fa-solid fa-ticket"></i>
@@ -72,8 +72,7 @@
                     <div class="card">
                         <div class="img">
                             <a href="">
-                                <img src="../../assets/card/lm__230517113916_260383.jpg" class="card-img-top"
-                                    alt="">
+                                <img src="../../assets/card/lm__230517113916_260383.jpg" class="card-img-top" alt="">
                             </a>
                             <div class="img-icon">
                                 <a href="">
@@ -213,13 +212,15 @@ export default {
 </script>
 
 <style>
+/* .TourCard{
+    margin: 0px auto;
+} */
 .TourCard .card {
-    margin-right: 12px;
     border-radius: 10px;
 }
 
 .TourCard .card:hover {
-    box-shadow: 3px 3px 10px rgba(126, 126, 126, 0.226);
+    box-shadow: 3px 3px 10px rgba(95, 95, 95, 0.5);
     transform: translateY(-1%);
 }
 
@@ -329,6 +330,13 @@ export default {
     line-height: 20px;
 }
 
+.body .p-title {
+    white-space: initial;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 6rem;
+}
+
 .body .code,
 .body .p-startPlace,
 .body .price-old {
@@ -353,7 +361,7 @@ export default {
     border-radius: 5px;
     color: white;
     background: #fd5056;
-    padding: 5px;
+    padding: 10px 5px;
 }
 
 .body .timer {
@@ -380,8 +388,9 @@ export default {
 .body .addList i {
     color: #4d4aef;
 }
-.TourCard__btn button{
-    font: 16px roboto,sans-serif;
+
+.TourCard__btn button {
+    font: 16px roboto, sans-serif;
     font-weight: 700;
     border: 1px solid #ced4de;
     background: none;
@@ -389,16 +398,18 @@ export default {
     border-radius: 5px;
     cursor: pointer;
     padding: 8px 24px;
-    margin: 24px 12px 0px 0px;
+    margin: 24px 0px 0px 0px;
 }
-.TourCard__btn button:hover{
+
+.TourCard__btn button:hover {
     border: 1px solid #2d4271;
     transition: border 0.5s ease;
 
 }
-@media screen and (max-width: 1000px) {
-    .TourCard__content{
+
+@media screen and (max-width: 768px) {
+
+    .TourCard__content {
         display: none;
     }
-}
-</style>
+}</style>
