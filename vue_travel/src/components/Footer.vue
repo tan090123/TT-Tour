@@ -1,8 +1,8 @@
 <template>
     <footer class="footer">
-        <div class="footer__top container-xxl">
+        <div class="container-fluid">
 
-            <div class="row">
+            <div class="row footer__top">
 
                 <!--Du lịch trong nước-->
                 <div class="col-lg-3 col-6">
@@ -296,8 +296,8 @@
         </div>
 
         <!--Footer bottom-->
-        <div class="footer__bottom">
-            <div class="container">
+        <div class="footer__bottom p-3">
+            <div class="container-fluid">
                 <p>Bản quyền của Vietravel ® 2022. Bảo lưu mọi quyền.</p>
                 <p>Ghi rõ nguồn <a href="">"www.travel.com.vn"</a> <span>® khi sử dụng lại thông tin từ website này.</span>
                 </p>

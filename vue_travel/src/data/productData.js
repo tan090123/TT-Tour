@@ -4,7 +4,7 @@ const tourProduct = [
         name: "Đà Nẵng: Dịch vụ vé máy bay + 2 đêm nghỉ dưỡng tại Khách sạn Hải Triều 3 sao (đã bao gồm ăn sáng)",
         images: "da_nanghotel.jpg",
         desc: "Vé máy bay Vietravel Airlines khứ hồi + Phòng superior + Ăn sáng",
-        point: "9.4",
+        point: 9.4,
         rating: 3,
         feedback: "Rất tốt",
         location: "205 Đ. Trần Hưng Đạo, An Hải Bắc, Sơn Trà, Đà Nẵng, Việt Nam",

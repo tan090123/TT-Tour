@@ -33,10 +33,12 @@ $fontNor: 18px roboto, sans-serif;
     min-width: fit-content;
     background: #f9f9f9;
     &__top {
-        padding: 60px 0px;
+        padding: 60px 10px;
     }
     &__bottom {
         background-image: url(../assets/footer/bg-footer.png);
+        width: 100%;
+        object-fit: contain;
         padding: 20px 0px;
         & p {
             @extend %menuItemStyle;
@@ -221,6 +223,11 @@ $fontNor: 18px roboto, sans-serif;
                 border: 1px solid $textColor;
                 border-right: none;
                 border-radius: 10px 0px 0px 10px;
+
+                &:focus {
+                    border: 1px solid $textColor;
+                    box-shadow: none;
+                }
             }
             & button {
                 border: 1px solid $textColor;
