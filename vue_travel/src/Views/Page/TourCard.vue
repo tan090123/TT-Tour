@@ -1,14 +1,14 @@
 <template>
-    <div class="TourCard">
+    <div class="TourCard" onload="startCountdown()">
         <div class="container-fluid">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
             <div class="TourCard__content row row-cols-lg-3 row-cols-1">
-                <div class="col mt-sm-auto">
+                <div class="col mt-sm-auto" v-for="(card, index) in cards.slice(0, 3)" :key="index">
                     <div class="card">
                         <div class="img">
                             <a href="">
-                                <img src="../../assets/card/lm__230511101557_042389.jpg" class="card-img-top" width="100%"
-                                    alt="">
+                                <img :src="require(`@/assets/card/${card.images}`)" class="card-img-top" width="100%"
+                                    :alt="card.name">
                             </a>
                             <div class="img-icon">
                                 <a href="">
@@ -23,101 +23,40 @@
                             </div>
                             <div class="img-sumary">
                                 <div class="img-sumary--ratting">
-                                    <span>9.4</span>
+                                    <span>{{ card.point }}</span>
                                 </div>
                                 <div class="img-sumary--review">
-                                    <h3 class="fw-bold">Tuyệt vời</h3>
+                                    <h3 class="fw-bold">{{ feedback }}</h3>
                                     <p class="fw-lighter">358 quan tâm</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="body card-body">
-                            <p class="p-date">23/05/2023 - 6 ngày</p>
-                            <p class="p-title"><a href="">
-                                    Trung Quốc: Trương Gia Giới - Phượng Hoàng Cổ Trấn - Thiên Môn Sơn - Viên Gia Giới - Đại
-                                    Hiệp Cốc | 6 ngày 5 đêm | Ngày Hội Du Lịch </a></p>
-                            <div class="code">
-                                <p>Mã tour:</p>
-                                <p><i class="fa-solid fa-ticket"></i>
-                                    NNSGN380-012-230523VJ1-H</p>
-                            </div>
-                            <p class="p-startPlace">Nơi khởi hành: TP. Hồ Chí Minh</p>
-                            <div class="price">
-                                <p class="price-old">
-                                    Giá: <span class="text-decoration-line-through">16,990.000 <sup>đ</sup> </span>
-                                </p>
-                                <div class="price-now">
-                                    <span class="price-now-number">15,490,000 <sup>đ</sup> </span>
-                                    <span class="price-now-discount">9% GIẢM</span>
-                                </div>
-                            </div>
-                            <div class="timer">
-                                <span>Time</span>
-                            </div>
-                            <div class="addList-numberSit">
-                                <div class="addList">
-                                    <i class="fa-solid fa-circle-plus me-2"></i>
-                                    <a href="">Thêm vào danh sách</a>
-                                </div>
-                                <div class="numberSit d-flex align-items-center justify-content-center">
-                                    <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                    <p class="text-danger fw-bold" style="font-size: 22px;">8</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mt-sm-3">
-                    <div class="card">
-                        <div class="img">
-                            <a href="">
-                                <img src="../../assets/card/lm__230517113916_260383.jpg" class="card-img-top" alt="">
-                            </a>
-                            <div class="img-icon">
+                            <p class="p-date">{{ card.date }}</p>
+                            <p class="p-title">
                                 <a href="">
-                                    <i class="fa-regular fa-heart fs-1"></i>
+                                    {{ card.name }}
                                 </a>
-                            </div>
-                            <div class="img-bottom">
-                                <span>
-                                    <i class="fa-sharp fa-solid fa-circle-dollar-to-slot"></i>
-                                    Giờ chót
-                                </span>
-                            </div>
-                            <div class="img-sumary">
-                                <div class="img-sumary--ratting">
-                                    <span>9.4</span>
-                                </div>
-                                <div class="img-sumary--review">
-                                    <h3 class="fw-bold">Tuyệt vời</h3>
-                                    <p class="fw-lighter">358 quan tâm</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="body card-body">
-                            <p class="p-date">23/05/2023 - 6 ngày</p>
-                            <p class="p-title"><a href="">
-                                    Trung Quốc: Trương Gia Giới - Phượng Hoàng Cổ Trấn - Thiên Môn Sơn - Viên Gia Giới - Đại
-                                    Hiệp Cốc | 6 ngày 5 đêm | Ngày Hội Du Lịch</a></p>
+                            </p>
                             <div class="code">
                                 <p>Mã tour:</p>
                                 <p><i class="fa-solid fa-ticket"></i>
-                                    NNSGN380-012-230523VJ1-H</p>
+                                    {{ card.code_tour }}</p>
                             </div>
-                            <p class="p-startPlace">Nơi khởi hành: TP. Hồ Chí Minh</p>
+                            <p class="p-startPlace">Nơi khởi hành: {{ card.starting_gate }}</p>
                             <div class="price">
                                 <p class="price-old">
-                                    Giá: <span class="text-decoration-line-through">16,990.000 <sup>đ</sup> </span>
+                                    Giá: <span class="text-decoration-line-through">{{ formatter.format(card.price)
+                                    }}</span>
                                 </p>
                                 <div class="price-now">
-                                    <span class="price-now-number">15,490,000 <sup>đ</sup> </span>
-                                    <span class="price-now-discount">9% GIẢM</span>
+                                    <span class="price-now-number">{{ formatter.format(card.discount) }}</span>
+                                    <span class="price-now-discount">{{ card.preferential }}% GIẢM</span>
                                 </div>
                             </div>
                             <div class="timer">
-                                <span>Time</span>
+                                <span>{{ card.date }}</span>
                             </div>
                             <div class="addList-numberSit">
                                 <div class="addList">
@@ -126,72 +65,7 @@
                                 </div>
                                 <div class="numberSit d-flex align-items-center justify-content-center">
                                     <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                    <p class="text-danger fw-bold" style="font-size: 22px;">8</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mt-sm-3">
-                    <div class="card">
-                        <div class="img">
-                            <a href="">
-                                <img src="../../assets/card/lm__230517101534_519738.jpg" class="card-img-top" width="100%"
-                                    alt="">
-                            </a>
-                            <div class="img-icon">
-                                <a href="">
-                                    <i class="fa-regular fa-heart fs-1"></i>
-                                </a>
-                            </div>
-                            <div class="img-bottom">
-                                <span>
-                                    <i class="fa-sharp fa-solid fa-circle-dollar-to-slot"></i>
-                                    Giờ chót
-                                </span>
-                            </div>
-                            <div class="img-sumary">
-                                <div class="img-sumary--ratting">
-                                    <span>9.4</span>
-                                </div>
-                                <div class="img-sumary--review">
-                                    <h3 class="fw-bold">Tuyệt vời</h3>
-                                    <p class="fw-lighter">358 quan tâm</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="body card-body">
-                            <p class="p-date">23/05/2023 - 6 ngày</p>
-                            <p class="p-title"><a href="">
-                                    Trung Quốc: Trương Gia Giới - Phượng Hoàng Cổ Trấn - Thiên Môn Sơn - Viên Gia Giới - Đại
-                                    Hiệp Cốc | 6 ngày 5 đêm | Ngày Hội Du Lịch</a></p>
-                            <div class="code">
-                                <p>Mã tour:</p>
-                                <p><i class="fa-solid fa-ticket"></i>
-                                    NNSGN380-012-230523VJ1-H</p>
-                            </div>
-                            <p class="p-startPlace">Nơi khởi hành: TP. Hồ Chí Minh</p>
-                            <div class="price">
-                                <p class="price-old">
-                                    Giá: <span class="text-decoration-line-through">16,990.000 <sup>đ</sup> </span>
-                                </p>
-                                <div class="price-now">
-                                    <span class="price-now-number">15,490,000 <sup>đ</sup> </span>
-                                    <span class="price-now-discount">9% GIẢM</span>
-                                </div>
-                            </div>
-                            <div class="timer">
-                                <span>Time</span>
-                            </div>
-                            <div class="addList-numberSit">
-                                <div class="addList">
-                                    <i class="fa-solid fa-circle-plus me-2"></i>
-                                    <a href="">Thêm vào danh sách</a>
-                                </div>
-                                <div class="numberSit d-flex align-items-center justify-content-center">
-                                    <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                    <p class="text-danger fw-bold" style="font-size: 22px;">8</p>
+                                    <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.num_seats }}</p>
                                 </div>
                             </div>
                         </div>
@@ -206,8 +80,19 @@
 </template>
 
 <script>
+import cardData from '../../data/cardData.js';
+// import { differenceInSeconds } from '@/../node_modules/date-fns';
 export default {
-    name: "TourCard-comp"
+    name: "TourCard-comp",
+    data() {
+        return {
+            cards: cardData,
+            formatter: new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }),
+        };
+    },
 }
 </script>
 
@@ -215,6 +100,7 @@ export default {
 .TourCard {
     padding: 0 10px;
 }
+
 .TourCard .card {
     border-radius: 10px;
 }
@@ -228,6 +114,7 @@ export default {
     border-radius: 10px 10px 0px 0px;
     object-fit: cover;
     height: 300px;
+    overflow: hidden;
 }
 
 .TourCard__title {
@@ -405,5 +292,4 @@ export default {
     transition: border 0.5s ease;
 
 }
-
 </style>
