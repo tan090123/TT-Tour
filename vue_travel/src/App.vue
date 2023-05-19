@@ -8,6 +8,7 @@
     <TourCard/>
     <TourProduct/>
     <TourPlace/>
+    <TourSelect/>
   <Footer/>
 </template>
 
@@ -19,6 +20,7 @@ import TourCarousel from './Views/Page/TourCarousel.vue';
 import TourCard from './Views/Page/TourCard.vue';
 import TourProduct from './Views/Page/TourProduct.vue';
 import TourPlace from './Views/Page/TourPlace.vue';
+import TourSelect from './Views/Page/TourSelect.vue';
 
 export default {
   name: 'App',
@@ -29,6 +31,7 @@ export default {
     TourCard,
     TourProduct,
     TourPlace,
+    TourSelect,
     Footer,
 
   }
