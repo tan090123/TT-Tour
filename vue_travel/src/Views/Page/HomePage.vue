@@ -150,7 +150,63 @@
     <!-- ========== End Tour Carousel ========== -->
 
     <!-- ========== Start Tour Khám Phá ========== -->
-    
+    <div class="tourkp">
+        <div class="container-fluid">
+            <h2 class="tourkp__title">Khám phá sản phẩm Vietravel</h2>
+            <div class="row justify-content-between">
+                <div class="tourkp__card col-12 col-lg-2">
+                    <div class="tourkp__img">
+                    <a href="">
+                        <img class="w-100" src="@/assets/tourkp/kp1.jpg" alt="Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nươc">
+                    </a>
+                    </div>
+                <div class="tourkp__text">
+                    <a href="#">Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nước</a>
+                </div>
+                </div>
+                <div class="tourkp__card col-12 col-lg-2">
+                    <div class="tourkp__img">
+                    <a href="">
+                        <img class="w-100" src="@/assets/tourkp/kp2.jpg" alt="Đến Úc trượt tuyết mùa hè">
+                    </a>
+                    </div>
+                <div class="tourkp__text">
+                    <a href="#">Đến Úc trượt tuyết mùa hè</a>
+                </div>
+                </div>
+                <div class="tourkp__card col-12 col-lg-2">
+                    <div class="tourkp__img">
+                    <a href="">
+                        <img class="w-100" src="@/assets/tourkp/kp3.jpg" alt="TLễ hội Pháo hoa Quốc tế Đà Nẵng 2023">
+                    </a>
+                    </div>
+                <div class="tourkp__text">
+                    <a href="#">Lễ hội Pháo hoa Quốc tế Đà Nẵng 2023</a>
+                </div>
+                </div>
+                <div class="tourkp__card col-12 col-lg-2">
+                    <div class="tourkp__img">
+                    <a href="">
+                        <img class="w-100" src="@/assets/tourkp/tourkp4.jpg" alt="Dưới bầu trời Tây Âu thơ mộng">
+                    </a>
+                    </div>
+                <div class="tourkp__text">
+                    <a href="#">Dưới bầu trời Tây Âu thơ mộng</a>
+                </div>
+                </div>
+                <div class="tourkp__card col-12 col-lg-2">
+                    <div class="tourkp__img">
+                    <a href="">
+                        <img class="w-100" src="@/assets/tourkp/kp4.jpg" alt="[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao">
+                    </a>
+                    </div>
+                <div class="tourkp__text">
+                    <a href="#">[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- ========== End Tour Khám Phá ========== -->
 
     <!-- ========== Start Tour Card ========== -->
@@ -477,24 +533,65 @@
     <!-- ========== End Tour Place ========== -->
 
     <!-- ========== Start Tour .... ========== -->
+    <div class="TourSelect">
+        <div class="container-fluid">
+            <div class="TourSelect__title">
+                <h2>Vì sao chọn Vietravel</h2>
+            </div>
+            <div class="TourSelect_content row row-cols-lg-3 row-cols-md-2 row-cols-1">
+                <div class="col p-5">
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Mạng bán tour</h5>
+                    <p class="TourSelect_content-text">Đầu tiên tại Viêt Nam</p>
+                    <p class="TourSelect_content-text">Ứng dụng công nghệ mới nhất</p>
+                </div>
+                <div class="col p-5">
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Sản phẩm & Dịch vụ</h5>
+                    <p class="TourSelect_content-text">Đa dạng – Chất lượng – An toàn</p>
+                </div>
+                <div class="col p-5">
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Giá cả</h5>
+                    <p class="TourSelect_content-text">Luôn có mức giá tốt nhất</p>
+                </div>
+                <div class="col p-5" >
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Đặt tour</h5>
+                    <p class="TourSelect_content-text">Dễ dàng & nhanh chóng chỉ với 3 bước</p>
+                </div>
+                <div class="col p-5">
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Thanh toán</h5>
+                    <p class="TourSelect_content-text">An toàn & linh hoạt</p>
+                </div>
+                <div class="col p-5">
+                    <i class="fa-solid fa-house fa-4x"></i>
+                    <h5 class="TourSelect_content-title">Hỗ trợ</h5>
+                    <p class="TourSelect_content-text">Hotline & trực tuyến (08h00 - 22h00)</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
     
     <!-- ========== End Tour .... ========== -->
 </template>
 <script>
 import "@/scss/_tourMain.scss";
 import "@/scss/_tourProduct.scss";
-import cardData from '@/data/cardData.js';
-import productData from '@/data/productData.js';
+import cardData from "@/data/cardData.js";
+import productData from "@/data/productData.js";
 export default {
     data() {
         return {
             cards: cardData,
             products: productData,
-            formatter: new Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
+            formatter: new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
             }),
-        }
+        };
     },
 
     mounted() {
@@ -507,35 +604,37 @@ export default {
                 margin: 20,
                 responsive: {
                     0: {
-                        items: 2
+                        items: 2,
                     },
                     600: {
-                        items: 2
+                        items: 2,
                     },
                     1000: {
-                        items: 3
-                    }
+                        items: 3,
+                    },
                 },
                 autoplay: true,
                 autoplayTimeout: 4000,
-                autoplayHoverPause: true
+                autoplayHoverPause: true,
             });
         });
     },
-}
+};
 </script>
 <style>
 /* Start Carousel */
 .carousel {
     margin: 3rem 0;
 }
+
 .carousel-title {
     font-size: 3rem;
     color: #2d4271;
     font-weight: bold;
     margin-bottom: 2rem;
-    padding:0 10px;
+    padding: 0 10px;
 }
+
 .owl-carousel {
     padding: 0 10px;
 }
@@ -548,12 +647,14 @@ export default {
 .owl-carousel .owl-stage {
     transition: all 0.7s ease-in-out !important;
 }
+
 .owl-dots button span {
-    background-color: rgb(0 100 182 / 25%) ;
+    background-color: rgb(0 100 182 / 25%);
 }
 
-.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
-    background-color: #2d4271 ;
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background-color: #2d4271;
 }
 
 @media screen and (max-width: 992px) {
@@ -561,8 +662,55 @@ export default {
         display: none;
     }
 }
+
 /* End Carousel */
 
+/* Start Tourkp */
+.tourkp {
+    padding: 0 10px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.tourkp h2 {
+    font: 30px roboto, sans-serif;
+    font-weight: 700;
+    color: #2d4271;
+    margin-bottom: 24px;
+}
+
+.tourkp__card {
+    position: relative;
+    padding-right: 0;
+    margin-bottom: 3rem;
+}
+
+.tourkp__img {
+    width: 100%;
+}
+
+.tourkp__img img {
+    height: 28rem;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.tourkp__text a {
+    position: absolute;
+    bottom: 0rem;
+    color: #fff;
+    padding: 4rem 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    background-image: linear-gradient(180deg, rgba(45, 66, 113, 0) 0%, #2d4271 100%);
+    width: 97%;
+}
+
+/* End Tourkp */
 
 /* Start TourCard */
 .TourCard {
@@ -758,11 +906,15 @@ export default {
 .TourCard__btn button:hover {
     border: 1px solid #2d4271;
     transition: border 0.5s ease;
-
 }
+
 /* End TourCard */
 
 /* Start Tour Place */
+.TourPlace {
+    padding: 0 10px;
+}
+
 .TourPlace__title h1 {
     font: 30px roboto, sans-serif;
     font-weight: 700;
@@ -773,6 +925,7 @@ export default {
 .TourPlace__content .div {
     padding: 16px;
 }
+
 .TourPlace__content-img img {
     filter: brightness(0.75);
     min-height: 18em;
@@ -780,13 +933,15 @@ export default {
     border-radius: 10px;
     position: relative;
 }
+
 .TourPlace__content-img i {
     position: absolute;
     left: 50%;
     top: 40%;
-    transform: translate(-50%,-40%);
+    transform: translate(-50%, -40%);
     color: #ffff;
 }
+
 .TourPlace__content-place a {
     font: 17px roboto, sans-serif;
     color: #2d4271;
@@ -798,5 +953,46 @@ export default {
     font: 13px roboto, sans-serif;
     color: #2d4271;
 }
+
 /* End Tour Place */
+
+/*  Start: Tour Select */
+.TourSelect {
+    padding: 0 10px;
+}
+
+.TourSelect__title h2 {
+    font: 30px roboto, sans-serif;
+    font-weight: 700;
+    color: #2d4271;
+    margin-bottom: 24px;
+}
+
+.TourSelect_content {
+    text-align: center;
+}
+
+.TourSelect_content-title {
+    font: 17px roboto, sans-serif;
+    color: #2d4271;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.TourSelect_content i {
+    background: linear-gradient(180deg, #4d4aef, #adabff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+}
+
+.TourSelect_content-text {
+    font: 15px roboto, sans-serif;
+    color: #2d4271;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+/*  End: Tour Select */
 </style>
