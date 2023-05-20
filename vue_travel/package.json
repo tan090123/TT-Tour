@@ -13,7 +13,8 @@
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "slick-carousel": "^1.8.1",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

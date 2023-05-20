@@ -12,7 +12,6 @@ const tourCard = [
         feedback: "Tuyệt vời",
         date: "23/05/2023",
         num_seats: 7,
-        countdown: ""
     },
     {
         id : 2,

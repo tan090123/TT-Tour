@@ -187,4 +187,5 @@ export default {
 .TourPlace__content-desc p {
     font: 13px roboto, sans-serif;
     color: #2d4271;
-}</style>
+}
+</style>
