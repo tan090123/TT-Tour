@@ -7,7 +7,7 @@
 
             <div class="d-flex">
                 <!-- Icon user trong dạng mobile -->
-                <a class="nav-link d-lg-none user_mobile" href="!#">
+                <a class="nav-link d-lg-none user_mobile" href="/login">
                     <!-- <i class="fa fa-user" @click="showLogin = true"></i> -->
                     <i class="fa-regular fa-user"></i>
                 </a>
