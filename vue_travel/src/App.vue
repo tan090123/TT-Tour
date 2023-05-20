@@ -3,37 +3,19 @@
   <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <h3></h3>
   <Header/>
-    <TourMain/>
-    <TourCarousel/>
-    <TourCard/>
-    <TourProduct/>
-    <TourPlace/>
-    <TourSelect/>
+    <router-view></router-view>
   <Footer/>
 </template>
 
 <script>
 import Header from './components/Header.vue';
-import TourMain from './Views/Page/TourMain.vue';
 import Footer from './components/Footer.vue';
-import TourCarousel from './Views/Page/TourCarousel.vue';
-import TourCard from './Views/Page/TourCard.vue';
-import TourProduct from './Views/Page/TourProduct.vue';
-import TourPlace from './Views/Page/TourPlace.vue';
-import TourSelect from './Views/Page/TourSelect.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
-    TourMain,
-    TourCarousel,
-    TourCard,
-    TourProduct,
-    TourPlace,
-    TourSelect,
     Footer,
-
   }
 }
 </script>

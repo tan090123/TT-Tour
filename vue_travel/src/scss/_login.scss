@@ -1,0 +1,144 @@
+$main-clr: #2d4271;
+.login {
+    height: 100%;
+    width: 50rem;
+    margin: 8rem auto;
+
+    @media (max-width: 768px) {
+        width: 85%;
+    }
+}
+
+.form-wrap {
+    .login-title {
+        // padding: 1.5rem 0;
+
+        h5 {
+            font-size: 2.1rem;
+            color: $main-clr;
+            padding: 1rem 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: $main-clr;
+        }
+    }
+
+    .login-form {
+        h2 {
+            font-size: 2.7rem;
+            color: $main-clr;
+            font-weight: 700;
+            background-color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        form {
+            margin: 0 3rem;
+
+            label {
+                font-size: 1.6rem;
+                color: $main-clr;
+            }
+
+            input {
+                display: block;
+                width: 100%;
+                padding: 1rem 2rem;
+                border-radius: 4px;
+                border: 1px solid #aaa;
+                outline: none;
+                color: $main-clr;
+                font-weight: 400;
+
+                &::placeholder {
+                    color: $main-clr;
+                    font-weight: 400;
+                }
+            }
+
+            .text-end {
+                padding: 1rem 0;
+
+                a {
+                    color: $main-clr;
+                    text-decoration: none;
+                    font-weight: 500;
+                    // padding: 3rem 0;
+                    margin-right: 5px;
+                }
+                span {
+                    margin-right: 5px;
+                }
+            }
+
+            button {
+                background-color: #fd5056;
+                padding: 1.5rem 20px;
+                border-radius: 4px;
+
+                i {
+                    padding: 0 1rem;
+                }
+
+                &:hover {
+                    transition: all 0.25s ease-in-out;
+                    opacity: 0.9;
+                    background-color: #c74045;
+                }
+            }
+
+            .form-or {
+                text-align: center;
+                padding: 1rem 0;
+                font-size: 1.8rem;
+                color: $main-clr;
+                font-weight: 400;
+            }
+
+            .form-on {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                @media (max-width: 768px) {
+                    padding: 0 !important;
+                }
+
+                div {
+                    padding: 2.5rem 1.5rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+
+                    @media (max-width: 599px) {
+                        width: 100%;
+                        margin-bottom: 2rem;
+                    }
+
+                    &:hover {
+                        opacity: 0.9;
+                        transition: all 0.25s ease-in-out;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: #fff;
+                    }
+
+                    i {
+                        padding-right: 5px;
+                    }
+                }
+
+                .btn-facebook {
+                    background-color: #4267b2;
+                }
+
+                .btn-google {
+                    background-color: #fd5056;
+                }
+            }
+        }
+    }
+}
