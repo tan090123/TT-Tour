@@ -64,11 +64,10 @@
     <!-- ========== End Register ========== -->
 </template>
 <script>
-import "@/scss/_login.scss"
 export default {
     name: "register-component",
 }
 </script>
-<style>
-    
+<style lang="scss">
+@import "@/assets/scss/_login.scss";
 </style>

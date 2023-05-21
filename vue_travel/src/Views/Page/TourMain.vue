@@ -16,8 +16,8 @@
             </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-              role="tab" aria-controls="profile" aria-selected="false">
+            <button class="nav-link" style="padding: 0 5rem;" id="profile-tab" data-bs-toggle="tab"
+              data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
               <i class="fa-solid fa-hotel mb-2 fs-3"></i>
               <p>Khách sạn</p>
               <small class="badge btn-danger">Ưu đãi hot</small>
@@ -68,7 +68,7 @@
 
       <div class="tourMain__both-tab">
         <div class="tab-content">
-          
+
           <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="p-4">
 
@@ -91,7 +91,7 @@
                   </li>
                 </ul>
               </div>
-              
+
             </div>
           </div>
 

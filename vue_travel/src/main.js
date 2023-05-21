@@ -1,28 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router';
-// import { createRouter, createWebHistory } from 'vue-router';
+// import { VueRecaptchaPlugin } from 'vue-recaptcha';
 
 
-import "./scss/_reset.scss"
-
-// const router = createRouter(
-//     {
-//         history: createWebHistory(),
-//         routes: [
-//             {
-//                 path: '/',
-//                 name: 'HomePage',
-//                 component: () => import("@/Views/Page/HomePage.vue"),
-//             },
-//             {
-//                 path: '/contact',
-//                 name: 'Contact',
-//                 component: () => import("@/Views/Page/Contact.vue"),
-//             }
-//         ]
-//     }
-// )
+import "./scss/_reset.scss";
 
 createApp(App)
     .use(router)
