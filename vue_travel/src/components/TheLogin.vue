@@ -15,7 +15,8 @@
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">Số điện thoại hoặc email</label>
                             <span class="text-danger">*</span>
-                            <input class="fomr-control" type="text" name="email" id="email" placeholder="Tài khoản">
+                            <input class="fomr-control" v-model="inputValue" @blur="validateInput" type="text" name="email" id="email" placeholder="Tài khoản">
+                            <p v-if="isError" class="error-message">{{ errorMessage }}</p>
                         </div>
 
                         <div class="mb-3">
@@ -23,7 +24,7 @@
                             <span class="text-danger">*</span>
                             <input class="fomr-control" type="text" name="email" id="email" placeholder="Mật khẩu">
                             <div class="text-end">
-                                <a href="/register" target="_blank" rel="nofollow no-referrer">Đăng ký</a>
+                                <router-link :to="{name: 'register_component'}" target="_blank" rel="nofollow no-referrer">Đăng ký</router-link>
                                 <span>hoặc</span>
                                 <a href="!#" target="_blank" rel="nofollow no-referrer">Lấy lại mật khẩu</a>
                             </div>
@@ -58,9 +59,57 @@
     <!-- ========== End Main Login ========== -->
 </template>
 <script>
-import "@/scss/_login.scss";
 export default {
     name: "login_component",
+    data() {
+        return {
+
+            inputValue: "",
+            isError: false,
+            errorMessage: "",
+        }
+    },
+    methods: {
+        validateInput() {
+            // Kiểm tra nếu giá trị rỗng
+            if (this.inputValue === "") {
+                this.isError = true;
+                this.errorMessage = "Vui lòng nhập giá trị.";
+            }
+            // Kiểm tra định dạng số điện thoại
+            else if (this.isPhoneNumber(this.inputValue)) {
+                this.isError = false;
+                this.errorMessage = "";
+            }
+            // Kiểm tra định dạng email
+            else if (this.isEmail(this.inputValue)) {
+                this.isError = false;
+                this.errorMessage = "";
+            }
+            // Nếu không phù hợp với cả số điện thoại và email
+            else {
+                this.isError = true;
+                this.errorMessage = "Vui lòng nhập số điện thoại hoặc email hợp lệ.";
+            }
+        },
+        isPhoneNumber(value) {
+            // Sử dụng biểu thức chính quy để kiểm tra định dạng số điện thoại
+            // Ví dụ: kiểm tra xem giá trị có 10 chữ số và bắt đầu bằng số 0 hay không
+            const phoneNumberRegex = /^0\d{9}$/;
+            return phoneNumberRegex.test(value);
+        },
+        isEmail(value) {
+            // Sử dụng biểu thức chính quy để kiểm tra định dạng email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(value);
+        },
+    },
 }
 </script>
-<style></style>
+<style lang="scss">
+@import "@/assets/scss/_login.scss";
+
+.error-message {
+    color: red;
+}
+</style>

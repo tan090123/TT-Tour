@@ -1,16 +1,15 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top text-danger">
         <div class="container-fluid">
-            <a class="navbar-brand logo" href="/">
-                <img src="../assets/nav/logo.png" class="w-100" alt="Vietravel logo">
-            </a>
+            <router-link class="navbar-brand logo" :to="{ name: 'HomePage' }">
+                <img src="@/assets/nav/logo.png" class="w-100" alt="Vietravel logo">
+            </router-link>
 
             <div class="d-flex">
                 <!-- Icon user trong dạng mobile -->
-                <a class="nav-link d-lg-none user_mobile" href="/login">
-                    <!-- <i class="fa fa-user" @click="showLogin = true"></i> -->
+                <router-link class="nav-link d-lg-none user_mobile" :to="{ name: 'login_component' }">
                     <i class="fa-regular fa-user"></i>
-                </a>
+                </router-link>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
@@ -29,9 +28,12 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Du lịch
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navlink-du-lich">
+                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-du-lich">
                             <!-- Menu items here -->
-                            <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Thuê xe</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Tour du lịch
+                                    trong nước</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -43,7 +45,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Vận chuyển
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navlink-van-chuyen">
+                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-van-chuyen">
                             <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Thuê xe</a></li>
                             <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Vé máy bay</a>
                             </li>
@@ -54,7 +56,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Tin tức
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navlink-tin-tuc">
+                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-tin-tuc">
                             <li><a class="dropdown-item" href="#">Tin mới</a></li>
                             <li><a class="dropdown-item" href="#">Tin tức du lịch</a></li>
                             <li><a class="dropdown-item" href="#">Cẩm nang du lịch</a>
@@ -71,8 +73,8 @@
                         <a class="nav-link" href="!#">VietravelPlus</a>
                     </li>
                     <li class="nav-item">
-                        <!-- <router-link to="/contact">Contact</router-link> -->
-                        <a class="nav-link" href="/contact">Liên hệ</a>
+                        <router-link class="nav-link" :to="{ name: 'contact' }">Liên hệ</router-link>
+                        <!-- <a class="nav-link" href="/contact">Liên hệ</a> -->
                     </li>
                 </ul>
             </div>
@@ -85,9 +87,9 @@
                     </button>
                 </form>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">
+                    <router-link class="nav-link" :to="{ name: 'login_component' }">
                         <i class="fa-regular fa-user" @click="showLogin = true"></i>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -95,9 +97,11 @@
 </template>
 
 <script>
-import '@/scss/_header.scss';
-
 export default {
     name: 'header-component',
 }
 </script>
+
+<style lang="scss">
+@import '@/assets/scss/_header.scss';
+</style>

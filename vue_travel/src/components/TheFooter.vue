@@ -134,7 +134,7 @@
                     </div>
                 </div>
 
-                
+
 
                 <!--Tour-->
                 <div class="col-lg-3 col-6">
@@ -181,7 +181,7 @@
                     </div>
                 </div>
 
-                
+
                 <!-- Liên hệ -->
                 <div class="col-lg-3 col-6">
                     <div class="contact">
@@ -309,9 +309,12 @@
 
 
 <script>
-import '@/scss/_footer.scss';
 export default {
     name: 'footer-component',
 
 }
 </script>
+
+<style lang="scss">
+@import '@/assets/scss/_footer.scss';
+</style>

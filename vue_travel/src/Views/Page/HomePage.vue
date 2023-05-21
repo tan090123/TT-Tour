@@ -2,11 +2,11 @@
     <!-- ========== Start TourMain ========== -->
     <div class="tourMain">
     <div class="tourMain__img">
-      <img src="../../assets/banner/banner.jpg" class="w-100" alt="" />
+      <img src="@/../public/images/banner/banner.jpg" class="w-100" alt="" />
     </div>
     <div class="tourMain__both container shadow">
 
-      <div class="tourMain__both-nav">
+    <div class="tourMain__both-nav">
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -126,22 +126,22 @@
         <div class="owl-carousel owl-theme">
             <div class="item">
                 <a href="#">
-                    <img src="../../assets/owl_carousel/bn_230403_TourHongKong_1024-768px.png" alt="Hong Kong">
+                    <img src="@/../public/images/owl_carousel/bn_230403_TourHongKong_1024-768px.png" alt="Hong Kong">
                 </a>
             </div>
             <div class="item">
                 <a href="#">
-                    <img src="../../assets/owl_carousel/bn_230403_HANQUOC-DAINHACHOI_1024-768px.png" alt="Dai hoi han quoc">
+                    <img src="@/../public/images/owl_carousel/bn_230403_HANQUOC-DAINHACHOI_1024-768px.png" alt="Dai hoi han quoc">
                 </a>
             </div>
             <div class="item">
                 <a href="#">
-                    <img src="../../assets/owl_carousel/bn__230511_.png" alt="Dai hoi han quoc 4 ngay 3 dem">
+                    <img src="@/../public/images/owl_carousel/bn__230511_.png" alt="Dai hoi han quoc 4 ngay 3 dem">
                 </a>
             </div>
             <div class="item">
                 <a href="#">
-                    <img src="../../assets/owl_carousel/bn__230510_.png" alt="Trai nghiem mua he nuoc uc">
+                    <img src="@/../public/images/owl_carousel/bn__230510_.png" alt="Trai nghiem mua he nuoc uc">
                 </a>
             </div>
         </div>
@@ -157,7 +157,7 @@
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
                     <a href="">
-                        <img class="w-100" src="@/assets/tourkp/kp1.jpg" alt="Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nươc">
+                        <img class="w-100" src="@/../public/images/tourkp/kp1.jpg" alt="Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nươc">
                     </a>
                     </div>
                 <div class="tourkp__text">
@@ -167,7 +167,7 @@
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
                     <a href="">
-                        <img class="w-100" src="@/assets/tourkp/kp2.jpg" alt="Đến Úc trượt tuyết mùa hè">
+                        <img class="w-100" src="@/../public/images/tourkp/kp2.jpg" alt="Đến Úc trượt tuyết mùa hè">
                     </a>
                     </div>
                 <div class="tourkp__text">
@@ -177,7 +177,7 @@
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
                     <a href="">
-                        <img class="w-100" src="@/assets/tourkp/kp3.jpg" alt="TLễ hội Pháo hoa Quốc tế Đà Nẵng 2023">
+                        <img class="w-100" src="@/../public/images/tourkp/kp3.jpg" alt="TLễ hội Pháo hoa Quốc tế Đà Nẵng 2023">
                     </a>
                     </div>
                 <div class="tourkp__text">
@@ -187,7 +187,7 @@
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
                     <a href="">
-                        <img class="w-100" src="@/assets/tourkp/tourkp4.jpg" alt="Dưới bầu trời Tây Âu thơ mộng">
+                        <img class="w-100" src="@/../public/images/tourkp/tourkp4.jpg" alt="Dưới bầu trời Tây Âu thơ mộng">
                     </a>
                     </div>
                 <div class="tourkp__text">
@@ -197,7 +197,7 @@
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
                     <a href="">
-                        <img class="w-100" src="@/assets/tourkp/kp4.jpg" alt="[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao">
+                        <img class="w-100" src="@/../public/images/tourkp/kp4.jpg" alt="[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao">
                     </a>
                     </div>
                 <div class="tourkp__text">
@@ -218,7 +218,7 @@
                     <div class="card">
                         <div class="img">
                             <a href="">
-                                <img :src="require(`@/assets/card/${card.images}`)" class="card-img-top" width="100%"
+                                <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top" width="100%"
                                     :alt="card.name">
                             </a>
                             <div class="img-icon">
@@ -298,7 +298,7 @@
                     <div class="row h-100">
                         <div class="col-12 col-lg-3 product-item__image">
                             <a href="!#">
-                                <img :src="require(`@/assets/product/${product.images}`)"
+                                <img :src="require(`@/../public/images/product/${product.images}`)"
                                     :alt="product.name">
                             </a>
                         </div>
@@ -394,7 +394,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                         <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/hanoi.jpg" class="card-img-top" alt="Hà Nội"></a>
+                            <a href=""><img src="@/../public/images/place/hanoi.jpg" class="card-img-top" alt="Hà Nội"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -411,7 +411,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/haiphong.jpg" class="card-img-top" alt="Haỉ Phòng"></a>
+                            <a href=""><img src="@/../public/images/place/haiphong.jpg" class="card-img-top" alt="Haỉ Phòng"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -428,7 +428,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/danang.jpg" class="card-img-top" alt="Đà Nẵng"></a>
+                            <a href=""><img src="@/../public/images/place/danang.jpg" class="card-img-top" alt="Đà Nẵng"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -445,7 +445,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/dalat.jpg" class="card-img-top" alt="Đà Lạt"></a>
+                            <a href=""><img src="@/../public/images/place/dalat.jpg" class="card-img-top" alt="Đà Lạt"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -462,7 +462,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/chaua.jpg" class="card-img-top" alt="Châu Á"></a>
+                            <a href=""><img src="@/../public/images/place/chaua.jpg" class="card-img-top" alt="Châu Á"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -479,7 +479,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/chaumy.jpg" class="card-img-top" alt="Châu Mỹ"></a>
+                            <a href=""><img src="@/../public/images/place/chaumy.jpg" class="card-img-top" alt="Châu Mỹ"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -496,7 +496,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/chauau.jpg" class="card-img-top" alt="Châu Âu"></a>
+                            <a href=""><img src="@/../public/images/place/chauau.jpg" class="card-img-top" alt="Châu Âu"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -513,7 +513,7 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                        <div class="TourPlace__content-img">
-                            <a href=""><img src="../../assets/place/bi.jpg" class="card-img-top" alt="Bỉ"></a>
+                            <a href=""><img src="@/../public/images/place/bi.jpg" class="card-img-top" alt="Bỉ"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -578,8 +578,6 @@
     <!-- ========== End Tour .... ========== -->
 </template>
 <script>
-import "@/scss/_tourMain.scss";
-import "@/scss/_tourProduct.scss";
 import cardData from "@/data/cardData.js";
 import productData from "@/data/productData.js";
 export default {
@@ -621,7 +619,11 @@ export default {
     },
 };
 </script>
-<style>
+
+<style lang="scss">
+@import "@/assets/scss/_tourMain.scss";
+@import "@/assets/scss/_tourProduct.scss";
+
 /* Start Carousel */
 .carousel {
     margin: 3rem 0;
@@ -706,7 +708,9 @@ export default {
     font-weight: bold;
     text-decoration: none;
     border-radius: 10px;
-    background-image: linear-gradient(180deg, rgba(45, 66, 113, 0) 0%, #2d4271 100%);
+    background-image: linear-gradient(180deg,
+            rgba(45, 66, 113, 0) 0%,
+            #2d4271 100%);
     width: 97%;
 }
 

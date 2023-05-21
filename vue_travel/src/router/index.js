@@ -37,8 +37,8 @@ const router = createRouter(
 )
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Your Default Title'; // Thiết lập tiêu đề dựa trên meta trong route
-  next();
+    document.title = to.meta.title || 'Your Default Title';
+    next();
 });
 
 export default router;
