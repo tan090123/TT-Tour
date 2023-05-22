@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg fixed-top text-danger">
         <div class="container-fluid">
             <router-link class="navbar-brand logo" :to="{ name: 'HomePage' }">
-                <img src="@/assets/nav/logo.png" class="w-100" alt="Vietravel logo">
+                <img src="@/../public/images/nav/logo.png" class="w-100" alt="Vietravel logo">
             </router-link>
 
             <div class="d-flex">
