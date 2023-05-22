@@ -165,17 +165,17 @@
                     <div class="appMobie">
                         <h4 class="appMobie__title">Ứng dụng di động</h4>
                         <div class="appMobie__down">
-                            <a href=""><img src="../assets/footer/CHplay.png" alt=""></a>
-                            <a href=""><img src="../assets/footer/Appstore.png" alt=""></a>
+                            <a href=""><img src="@/../public/images/footer/CHplay.png" alt=""></a>
+                            <a href=""><img src="@/../public/images/footer/Appstore.png" alt=""></a>
                         </div>
                         <div class="appMobie__scan">
                             <div class="appMobie__scan-android">
                                 <p>Android</p>
-                                <a href=""><img src="../assets/footer/android.png" alt=""></a>
+                                <a href=""><img src="@/../public/images/footer/android.png" alt=""></a>
                             </div>
                             <div class="appMobie__scan-ios">
                                 <p>iOS</p>
-                                <a href=""><img src="../assets/footer/ios.png" alt=""></a>
+                                <a href=""><img src="@/../public/images/footer/ios.png" alt=""></a>
                             </div>
                         </div>
                     </div>
@@ -278,12 +278,12 @@
                         <div class="newsletter__security-payment">
                             <div class="newsletter__security">
                                 <h4 class="newsletter__title">Chứng nhận</h4>
-                                <a href=""><img src="../assets/footer/security.png" alt="img"></a>
-                                <a href=""><img src="../assets/footer/sertification.png" alt="img"></a>
+                                <a href=""><img src="@/../public/images/footer/security.png" alt="img"></a>
+                                <a href=""><img src="@/../public/images/footer/sertification.png" alt="img"></a>
                             </div>
                             <div class="newsletter__payment">
                                 <h4 class="newsletter__title">Chấp nhận thanh toán</h4>
-                                <img src="../assets/footer/payment.png" alt="img">
+                                <img src="@/../public/images/footer/payment.png" alt="img">
 
                             </div>
                         </div>
