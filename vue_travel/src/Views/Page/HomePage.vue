@@ -1,151 +1,153 @@
 <template lang="">
     <!-- ========== Start TourMain ========== -->
     <div class="tourMain">
-    <div class="tourMain__img">
-      <img src="@/../public/images/banner/banner.jpg" class="w-100" alt="" />
-    </div>
-    <div class="tourMain__both container shadow">
+        <div class="tourMain__img">
+            <img src="@/../public/images/banner/banner.jpg" class="w-100" alt="" />
+        </div>
+        <div class="tourMain__both container shadow">
 
-    <div class="tourMain__both-nav">
+            <div class="tourMain__both-nav">
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-              role="tab" aria-controls="home" aria-selected="true">
-              <i class="fa-solid fa-bus mb-2 fs-3"></i>
-              <p>Tour du lịch <br>trọn gói </p>
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
-              role="tab" aria-controls="profile" aria-selected="false">
-              <i class="fa-solid fa-hotel mb-2 fs-3"></i>
-              <p>Khách sạn</p>
-              <small class="badge btn-danger">Ưu đãi hot</small>
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button"
-              role="tab" aria-controls="messages" aria-selected="false">
-              <i class="fa-solid fa-jet-fighter-up mb-2 fs-3"></i>
-              <p>Vé máy bay</p>
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button"
-              role="tab" aria-controls="settings" aria-selected="false">
-              <div class="d-flex">
-                <i class="fa-solid fa-jet-fighter-up me-2 fs-3"></i>
-                <p>+</p>
-                <i class="fa-solid fa-hotel ms-2 fs-3"></i>
-              </div>
-              <p>Combo</p>
-              <p>Vé máy bay + Khách sạn</p>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">
+                            <i class="fa-solid fa-bus mb-2 fs-3"></i>
+                            <p>Tour du lịch <br>trọn gói </p>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button" role="tab" aria-controls="profile" aria-selected="false">
+                            <i class="fa-solid fa-hotel mb-2 fs-3"></i>
+                            <p>Khách sạn</p>
+                            <small class="badge btn-danger">Ưu đãi hot</small>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"
+                            type="button" role="tab" aria-controls="messages" aria-selected="false">
+                            <i class="fa-solid fa-jet-fighter-up mb-2 fs-3"></i>
+                            <p>Vé máy bay</p>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings"
+                            type="button" role="tab" aria-controls="settings" aria-selected="false">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-jet-fighter-up me-2 fs-3"></i>
+                                <p>+</p>
+                                <i class="fa-solid fa-hotel ms-2 fs-3"></i>
+                            </div>
+                            <p>Combo</p>
+                            <p>Vé máy bay + Khách sạn</p>
 
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="carAndres-tab" data-bs-toggle="tab" data-bs-target="#carAndres" type="button"
-              role="tab" aria-controls="carAndres" aria-selected="false">
-              <div class="d-flex">
-                <i class="fa-solid fa-car me-2 fs-3"></i>
-                <p>+</p>
-                <i class="fa-solid fa-hotel ms-2 fs-3"></i>
-              </div>
-              <p>Combo</p>
-              <p>Xe + Khách sạn</p>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="carAndres-tab" data-bs-toggle="tab" data-bs-target="#carAndres"
+                            type="button" role="tab" aria-controls="carAndres" aria-selected="false">
+                            <div class="d-flex">
+                                <i class="fa-solid fa-car me-2 fs-3"></i>
+                                <p>+</p>
+                                <i class="fa-solid fa-hotel ms-2 fs-3"></i>
+                            </div>
+                            <p>Combo</p>
+                            <p>Xe + Khách sạn</p>
 
-            </button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button"
-              role="tab" aria-controls="search" aria-selected="false">
-              <i class="fa-solid fa-magnifying-glass mb-2 fs-3"></i>
-              <p>Tra cứu Booking</p>
-            </button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="tourMain__both-tab">
-        <div class="tab-content">
-          
-          <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <div class="p-4">
-
-              <div class="tab-nav">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                  <li class="nav-item me-3" role="presentation">
-                    <button class="nav-link dltn active" id="pills-home-tab" data-bs-toggle="pill"
-                      data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                      aria-selected="true">
-                      Du lịch trong nước
-                    </button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link dlnn" id="pills-profile-tab" data-bs-toggle="pill"
-                      data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                      aria-selected="false">
-                      Du lịch nước
-                      ngoài
-                    </button>
-                  </li>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search"
+                            type="button" role="tab" aria-controls="search" aria-selected="false">
+                            <i class="fa-solid fa-magnifying-glass mb-2 fs-3"></i>
+                            <p>Tra cứu Booking</p>
+                        </button>
+                    </li>
                 </ul>
-              </div>
-              
             </div>
-          </div>
 
-          <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            this í 2
-          </div>
-          <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-            3
-          </div>
-          <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-            4
-          </div>
-          <div class="tab-pane" id="carAndres" role="tabpanel" aria-labelledby="carAndres-tab">
-            5
-          </div>
-          <div class="tab-pane" id="search" role="tabpanel" aria-labelledby="search-tab">
-            6
-          </div>
+            <div class="tourMain__both-tab">
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="p-4">
+
+                            <div class="tab-nav">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item me-3" role="presentation">
+                                        <button class="nav-link dltn active" id="pills-home-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-home" type="button" role="tab"
+                                            aria-controls="pills-home" aria-selected="true">
+                                            Du lịch trong nước
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link dlnn" id="pills-profile-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-profile" type="button" role="tab"
+                                            aria-controls="pills-profile" aria-selected="false">
+                                            Du lịch nước
+                                            ngoài
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        this í 2
+                    </div>
+                    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                        3
+                    </div>
+                    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                        4
+                    </div>
+                    <div class="tab-pane" id="carAndres" role="tabpanel" aria-labelledby="carAndres-tab">
+                        5
+                    </div>
+                    <div class="tab-pane" id="search" role="tabpanel" aria-labelledby="search-tab">
+                        6
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-      </div>
     </div>
-
-  </div>
     <!-- ========== End TourMain ========== -->
 
     <!-- ========== Start Tour Carousel ========== -->
     <div class="carousel">
         <div class="container-fluid">
-        <h2 class="carousel-title">Ưu đãi</h2>
-        <div class="owl-carousel owl-theme">
-            <div class="item">
-                <a href="#">
-                    <img src="@/../public/images/owl_carousel/bn_230403_TourHongKong_1024-768px.png" alt="Hong Kong">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="@/../public/images/owl_carousel/bn_230403_HANQUOC-DAINHACHOI_1024-768px.png" alt="Dai hoi han quoc">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="@/../public/images/owl_carousel/bn__230511_.png" alt="Dai hoi han quoc 4 ngay 3 dem">
-                </a>
-            </div>
-            <div class="item">
-                <a href="#">
-                    <img src="@/../public/images/owl_carousel/bn__230510_.png" alt="Trai nghiem mua he nuoc uc">
-                </a>
+            <h2 class="carousel-title">Ưu đãi</h2>
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <a href="#">
+                        <img src="@/../public/images/owl_carousel/bn_230403_TourHongKong_1024-768px.png"
+                            alt="Hong Kong">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img src="@/../public/images/owl_carousel/bn_230403_HANQUOC-DAINHACHOI_1024-768px.png"
+                            alt="Dai hoi han quoc">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img src="@/../public/images/owl_carousel/bn__230511_.png" alt="Dai hoi han quoc 4 ngay 3 dem">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <img src="@/../public/images/owl_carousel/bn__230510_.png" alt="Trai nghiem mua he nuoc uc">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- ========== End Tour Carousel ========== -->
 
@@ -156,53 +158,57 @@
             <div class="row justify-content-between">
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
-                    <a href="">
-                        <img class="w-100" src="@/../public/images/tourkp/kp1.jpg" alt="Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nươc">
-                    </a>
+                        <a href="">
+                            <img class="w-100" src="@/../public/images/tourkp/kp1.jpg"
+                                alt="Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nươc">
+                        </a>
                     </div>
-                <div class="tourkp__text">
-                    <a href="#">Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nước</a>
-                </div>
+                    <div class="tourkp__text">
+                        <a href="#">Tự hào nét Việt: Ưu đãi kích cầu du lịch trong nước</a>
+                    </div>
                 </div>
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
-                    <a href="">
-                        <img class="w-100" src="@/../public/images/tourkp/kp2.jpg" alt="Đến Úc trượt tuyết mùa hè">
-                    </a>
+                        <a href="">
+                            <img class="w-100" src="@/../public/images/tourkp/kp2.jpg" alt="Đến Úc trượt tuyết mùa hè">
+                        </a>
                     </div>
-                <div class="tourkp__text">
-                    <a href="#">Đến Úc trượt tuyết mùa hè</a>
-                </div>
+                    <div class="tourkp__text">
+                        <a href="#">Đến Úc trượt tuyết mùa hè</a>
+                    </div>
                 </div>
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
-                    <a href="">
-                        <img class="w-100" src="@/../public/images/tourkp/kp3.jpg" alt="TLễ hội Pháo hoa Quốc tế Đà Nẵng 2023">
-                    </a>
+                        <a href="">
+                            <img class="w-100" src="@/../public/images/tourkp/kp3.jpg"
+                                alt="TLễ hội Pháo hoa Quốc tế Đà Nẵng 2023">
+                        </a>
                     </div>
-                <div class="tourkp__text">
-                    <a href="#">Lễ hội Pháo hoa Quốc tế Đà Nẵng 2023</a>
-                </div>
+                    <div class="tourkp__text">
+                        <a href="#">Lễ hội Pháo hoa Quốc tế Đà Nẵng 2023</a>
+                    </div>
                 </div>
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
-                    <a href="">
-                        <img class="w-100" src="@/../public/images/tourkp/tourkp4.jpg" alt="Dưới bầu trời Tây Âu thơ mộng">
-                    </a>
+                        <a href="">
+                            <img class="w-100" src="@/../public/images/tourkp/tourkp4.jpg"
+                                alt="Dưới bầu trời Tây Âu thơ mộng">
+                        </a>
                     </div>
-                <div class="tourkp__text">
-                    <a href="#">Dưới bầu trời Tây Âu thơ mộng</a>
-                </div>
+                    <div class="tourkp__text">
+                        <a href="#">Dưới bầu trời Tây Âu thơ mộng</a>
+                    </div>
                 </div>
                 <div class="tourkp__card col-12 col-lg-2">
                     <div class="tourkp__img">
-                    <a href="">
-                        <img class="w-100" src="@/../public/images/tourkp/kp4.jpg" alt="[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao">
-                    </a>
+                        <a href="">
+                            <img class="w-100" src="@/../public/images/tourkp/kp4.jpg"
+                                alt="[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao">
+                        </a>
                     </div>
-                <div class="tourkp__text">
-                    <a href="#">[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao</a>
-                </div>
+                    <div class="tourkp__text">
+                        <a href="#">[ MỚI ] Tour trải nghiệm độc lạ, sự kiện, thể thao</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -218,8 +224,8 @@
                     <div class="card">
                         <div class="img">
                             <a href="">
-                                <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top" width="100%"
-                                    :alt="card.name">
+                                <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top"
+                                    width="100%" :alt="card.name">
                             </a>
                             <div class="img-icon">
                                 <a href="">
@@ -259,7 +265,7 @@
                             <div class="price">
                                 <p class="price-old">
                                     Giá: <span class="text-decoration-line-through">{{ formatter.format(card.price)
-                                    }}</span>
+                                        }}</span>
                                 </p>
                                 <div class="price-now">
                                     <span class="price-now-number">{{ formatter.format(card.discount) }}</span>
@@ -285,8 +291,8 @@
             </div>
             <div class="TourCard__btn text-end">
                 <router-link class="nav-link" :to="{ name: 'tours_page' }">
-                <button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i></button>
-            </router-link>
+                    <button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i></button>
+                </router-link>
                 <!-- <a href=""><button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i></button></a> -->
             </div>
         </div>
@@ -295,96 +301,96 @@
 
     <!-- ========== Start Tour Product ========== -->
     <div class="tour-product">
-            <div class="container-fluid">
-                <h2 class="product-title">Gói ưu đãi đặc biệt</h2>
-                <div class="product-item mb-5" v-for="(product, index) in products.slice(0, 3)" :key="index">
-                    <div class="row h-100">
-                        <div class="col-12 col-lg-3 product-item__image">
-                            <a href="!#">
-                                <img :src="require(`@/../public/images/product/${product.images}`)"
-                                    :alt="product.name">
-                            </a>
+        <div class="container-fluid">
+            <h2 class="product-title">Gói ưu đãi đặc biệt</h2>
+            <div class="product-item mb-5" v-for="(product, index) in products.slice(0, 3)" :key="index">
+                <div class="row h-100">
+                    <div class="col-12 col-lg-3 product-item__image">
+                        <a href="!#">
+                            <img :src="require(`@/../public/images/product/${product.images}`)" :alt="product.name">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6 product-item__details">
+                        <div class="product-item__category d-none p-2 d-lg-inline-block mt-4">
+                            <a href="#" rel="nofollow no-referrer" target="_blank">Xe + khách sạn</a>
                         </div>
-                        <div class="col-12 col-lg-6 product-item__details">
-                            <div class="product-item__category d-none p-2 d-lg-inline-block mt-4">
-                                <a href="#" rel="nofollow no-referrer" target="_blank">Xe + khách sạn</a>
-                            </div>
-                            <h3 class="product-item__title mt-3">
-                                <a href="!#">{{ product.name }}</a>
-                            </h3>
-                            <div class="product-item__rating">
-                                <div class="d-inline-block star-booking" v-for="star in product.rating" :key="star">
-                                    <i class="icon fa fa-star" aria-hidden="true"></i>
-                                </div>
-                            </div>
-
-                            <div class="product-item__price d-lg-none mt-3">
-                                <div class="card-text">Giá chỉ từ</div>
-                                <div class="card-price">
-                                    <div class="card-price__current--number">{{ formatter.format(product.price) }}</div>
-                                    <div class="card-price__current--text">/khách</div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-6">
-                                        <a href="#" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <label>Đặt ngay</label>
-                                        </a>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="btn ">
-                                            <label for="">Ngày khác</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-text">{{ product.date }}</div>
-                            </div>
-
-                            <p class="card-text hidden-sm text-muted">{{ product.desc }}</p>
-
-                            <div class="product-item__review mt-5">
-                                <span class="product-item__review--point">{{ product.point }}</span>
-                                <span class="product-item__review--feedback">{{ product.feedback }}</span>
-                            </div>
-
-                            <div class="product-item__location d-none d-lg-block mt-5">
-                                <i class="fa fa-location-dot"></i>
-                                <span>{{ product.location }}</span>
+                        <h3 class="product-item__title mt-3">
+                            <a href="!#">{{ product.name }}</a>
+                        </h3>
+                        <div class="product-item__rating">
+                            <div class="d-inline-block star-booking" v-for="star in product.rating" :key="star">
+                                <i class="icon fa fa-star" aria-hidden="true"></i>
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-3 product-item__summary">
-                            <div class="product-item__price d-none d-lg-block">
-                                <div class="card-text mb-2">Giá chỉ từ</div>
-                                <div class="card-price">
-                                    <div class="card-price__current mb-3">
-                                        <span class="card-price__current--number">{{ formatter.format(product.price) }}</span>
-                                        <span class="card-price__current--text">/khách</span>
+                        <div class="product-item__price d-lg-none mt-3">
+                            <div class="card-text">Giá chỉ từ</div>
+                            <div class="card-price">
+                                <div class="card-price__current--number">{{ formatter.format(product.price) }}</div>
+                                <div class="card-price__current--text">/khách</div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <a href="#" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <label>Đặt ngay</label>
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <div class="btn ">
+                                        <label for="">Ngày khác</label>
                                     </div>
                                 </div>
-                                <p class="card-date">{{ product.date }}</p>
-                                <div class="row mb-3 product-item__btn">
-                                    <div class="col-12">
-                                        <button class="btn">Ngày khác</button>
-                                    </div>
-                                    <div class="col-12">
-                                        <a href="!#" class="btn btn-primary btn-sm">
-                                            Đặt ngay
-                                        </a>
-                                    </div>
+                            </div>
+                            <div class="card-text">{{ product.date }}</div>
+                        </div>
+
+                        <p class="card-text hidden-sm text-muted">{{ product.desc }}</p>
+
+                        <div class="product-item__review mt-5">
+                            <span class="product-item__review--point">{{ product.point }}</span>
+                            <span class="product-item__review--feedback">{{ product.feedback }}</span>
+                        </div>
+
+                        <div class="product-item__location d-none d-lg-block mt-5">
+                            <i class="fa fa-location-dot"></i>
+                            <span>{{ product.location }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-3 product-item__summary">
+                        <div class="product-item__price d-none d-lg-block">
+                            <div class="card-text mb-2">Giá chỉ từ</div>
+                            <div class="card-price">
+                                <div class="card-price__current mb-3">
+                                    <span class="card-price__current--number">{{ formatter.format(product.price)
+                                        }}</span>
+                                    <span class="card-price__current--text">/khách</span>
+                                </div>
+                            </div>
+                            <p class="card-date">{{ product.date }}</p>
+                            <div class="row mb-3 product-item__btn">
+                                <div class="col-12">
+                                    <button class="btn">Ngày khác</button>
+                                </div>
+                                <div class="col-12">
+                                    <a href="!#" class="btn btn-primary btn-sm">
+                                        Đặt ngay
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="TourProduct__btn text-end">
-                <a href="#">
-                    <button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i>
-                    </button>
-                </a>
-            </div>
         </div>
+        <div class="TourProduct__btn text-end">
+            <a href="#">
+                <button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i>
+                </button>
+            </a>
+        </div>
+    </div>
     <!-- ========== End Tour Product ========== -->
 
     <!-- ========== Start Tour Place ========== -->
@@ -397,7 +403,8 @@
                 <div class="col card border border-0">
                     <div class="card-body">
                         <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/hanoi.jpg" class="card-img-top" alt="Hà Nội"></a>
+                            <a href=""><img src="@/../public/images/place/hanoi.jpg" class="card-img-top"
+                                    alt="Hà Nội"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -413,8 +420,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/haiphong.jpg" class="card-img-top" alt="Haỉ Phòng"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/haiphong.jpg" class="card-img-top"
+                                    alt="Haỉ Phòng"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -430,8 +438,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/danang.jpg" class="card-img-top" alt="Đà Nẵng"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/danang.jpg" class="card-img-top"
+                                    alt="Đà Nẵng"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -447,8 +456,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/dalat.jpg" class="card-img-top" alt="Đà Lạt"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/dalat.jpg" class="card-img-top"
+                                    alt="Đà Lạt"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -464,8 +474,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/chaua.jpg" class="card-img-top" alt="Châu Á"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/chaua.jpg" class="card-img-top"
+                                    alt="Châu Á"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -481,8 +492,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/chaumy.jpg" class="card-img-top" alt="Châu Mỹ"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/chaumy.jpg" class="card-img-top"
+                                    alt="Châu Mỹ"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -498,8 +510,9 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
-                            <a href=""><img src="@/../public/images/place/chauau.jpg" class="card-img-top" alt="Châu Âu"></a>
+                        <div class="TourPlace__content-img">
+                            <a href=""><img src="@/../public/images/place/chauau.jpg" class="card-img-top"
+                                    alt="Châu Âu"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
                         <div class="div">
@@ -515,7 +528,7 @@
                 </div>
                 <div class="col card border border-0">
                     <div class="card-body">
-                       <div class="TourPlace__content-img">
+                        <div class="TourPlace__content-img">
                             <a href=""><img src="@/../public/images/place/bi.jpg" class="card-img-top" alt="Bỉ"></a>
                             <a href=""><i class="fa-sharp fa-solid fa-tower-observation fa-3x"></i></a>
                         </div>
@@ -558,7 +571,7 @@
                     <h5 class="TourSelect_content-title">Giá cả</h5>
                     <p class="TourSelect_content-text">Luôn có mức giá tốt nhất</p>
                 </div>
-                <div class="col p-5" >
+                <div class="col p-5">
                     <i class="fa-solid fa-house fa-4x"></i>
                     <h5 class="TourSelect_content-title">Đặt tour</h5>
                     <p class="TourSelect_content-text">Dễ dàng & nhanh chóng chỉ với 3 bước</p>
@@ -577,7 +590,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- ========== End Tour .... ========== -->
 </template>
 <script>
@@ -626,49 +639,8 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/_tourMain.scss";
 @import "@/assets/scss/_tourProduct.scss";
+@import "@/assets/scss/_carousel.scss";
 
-/* Start Carousel */
-.carousel {
-    margin: 3rem 0;
-}
-
-.carousel-title {
-    font-size: 3rem;
-    color: #2d4271;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    padding: 0 10px;
-}
-
-.owl-carousel {
-    padding: 0 10px;
-}
-
-.owl-carousel .owl-item {
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.owl-carousel .owl-stage {
-    transition: all 0.7s ease-in-out !important;
-}
-
-.owl-dots button span {
-    background-color: rgb(0 100 182 / 25%);
-}
-
-.owl-theme .owl-dots .owl-dot.active span,
-.owl-theme .owl-dots .owl-dot:hover span {
-    background-color: #2d4271;
-}
-
-@media screen and (max-width: 992px) {
-    .owl-dots {
-        display: none;
-    }
-}
-
-/* End Carousel */
 
 /* Start Tourkp */
 .tourkp {

@@ -1,24 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
-    // {
-    //     path: '/',
-    //     name: 'HomePage',
-    //     component: () => import("@/Views/Page/HomePage.vue"),
-    //     meta: { title: 'Du Lịch Vietravel - Vietravel' }
-    // },
     {
         path: '/',
         name: 'HomePage',
-        component: () => import("@/Views/Page/TourDetails.vue"),
+        component: () => import("@/Views/Page/HomePage.vue"),
         meta: { title: 'Du Lịch Vietravel - Vietravel' }
     },
     {
-        path: '/contact',
+        path: '/order',
         name: 'contact',
-        component: () => import("@/Views/Page/Contact.vue"),
-        meta: { title: 'Contact - Vietravel ' }
+        component: () => import("@/Views/Page/TourOrder.vue"),
+        meta: { title: 'Thông tin - Vietravel ' }
     },
+    // {
+    //     path: '/contact',
+    //     name: 'contact',
+    //     component: () => import("@/Views/Page/Contact.vue"),
+    //     meta: { title: 'Contact - Vietravel ' }
+    // },
     {
         path: '/login',
         name: 'login_component',
@@ -42,6 +42,12 @@ const routes = [
     //     name: 'HomePage',
     //     component: () => import("@/Views/Page/TourSearch.vue"),
     //     meta: { title: '- Vietravel' }
+    // },
+    // {
+    //     path: '/tours/details',
+    //     name: 'details',
+    //     component: () => import("@/Views/Page/TourDetails.vue"),
+    //     meta: { title: 'Du Lịch Vietravel - Vietravel' }
     // },
 ]
 
