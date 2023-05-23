@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
+    // {
+    //     path: '/',
+    //     name: 'HomePage',
+    //     component: () => import("@/Views/Page/HomePage.vue"),
+    //     meta: { title: 'Du Lịch Vietravel - Vietravel' }
+    // },
     {
         path: '/',
         name: 'HomePage',
-        component: () => import("@/Views/Page/HomePage.vue"),
+        component: () => import("@/Views/Page/TourDetails.vue"),
         meta: { title: 'Du Lịch Vietravel - Vietravel' }
     },
     {
@@ -25,6 +31,18 @@ const routes = [
         component: () => import("@/components/TheRegister.vue"),
         meta: { title: 'Đăng ký - Vietravel' }
     },
+    {
+        path: '/tours',
+        name: 'tours_page',
+        component: () => import("@/Views/Page/TourPage.vue"),
+        meta: { title: 'Danh sách các Tour - Vietravel' }
+    },
+    // {
+    //     path: '/',
+    //     name: 'HomePage',
+    //     component: () => import("@/Views/Page/TourSearch.vue"),
+    //     meta: { title: '- Vietravel' }
+    // },
 ]
 
 
