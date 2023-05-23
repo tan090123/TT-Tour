@@ -1,0 +1,47 @@
+/* Start Carousel */
+.carousel {
+    margin: 3rem 0;
+}
+
+.carousel-title {
+    font-size: 3rem;
+    color: #2d4271;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    padding: 0 10px;
+}
+
+.owl-carousel {
+    padding: 0 10px;
+}
+
+.owl-carousel .owl-item {
+    border-radius: 10px;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+    }
+}
+
+.owl-carousel .owl-stage {
+    transition: all 0.7s ease-in-out !important;
+}
+
+.owl-dots button span {
+    background-color: rgb(0 100 182 / 25%);
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background-color: #2d4271;
+}
+
+@media screen and (max-width: 992px) {
+    .owl-dots {
+        display: none;
+    }
+}
+
+/* End Carousel */
