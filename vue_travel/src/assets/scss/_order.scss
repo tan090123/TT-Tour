@@ -320,6 +320,70 @@ $main-clr: #2d4271;
             }
 
         }
+        .group-sumary{
+            border: 1px solid #d5d5d5;
+            padding: 20px;
+            color: #2d4271;
+            h3{
+                font-size: 22px;
+                font-weight: 700;
+            }
+            .number{
+                font-size: 13px;
+            }
+            .group-product{
+                .img img{
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+                .title h4{
+                    font-size: 15px;
+                }
+            }
+            .group-go{
+                .start h4,.end h4{
+                    font-size: 13px;
+                    font-weight: 400;
+                }
+                .start p,.end p{
+                    font-size: 15px;
+                    font-weight: 700;
+                }
+            }
+            .group-tourist{
+                display: grid;
+                table tbody tr th,td{
+                    padding-top: 20px;
+                }
+                table tbody tr .total{
+                    color: #4d4aef;
+                    font-size: 25px;
+                    font-weight: 300;
+                }
+                table tbody tr .details{
+                    font-size: 11px;
+                    font-weight: 300;
+                }
+                table tbody tr :nth-child(odd){
+                    margin: 0;
+                }
+                table tbody tr :nth-child(even){
+                    text-align: end;
+                }
+                table tbody .price th{
+                    border-top: 1px solid #d5d5d5;
+                }
+                .price p{
+                    font-size: 22px;
+                    color: #fd5056;
+                    font-weight: 700;
+                }
+            }
+            .group-submit button{
+                margin: 15px 0;
+                border-radius: 10px;
+            }
+        }
     }
     // End Right
 }
