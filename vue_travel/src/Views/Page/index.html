@@ -1,4 +1,14 @@
-<template lang="">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
     <div class="TourOrder">
         <div class="container-fluid">
             <div class="TourOrder__card">
@@ -30,29 +40,27 @@
                     <div class="TourOrder__info--detail col-12 col-md-8">
                         <h2>Tổng quan về chuyến đi</h2>
                         <div class="customer-contact">
-                            <h3>Thông tin liên lạc</h3>
+                            <h5>Thông tin liên lạc</h5>
                             <form action="#">
-                                <div class="row">
-                                    <div class="name col-12 col-md-6">
+                                <div class="name">
                                     <label>Họ và Tên <b>*</b></label>
                                     <input class="form-control" id="contact_name" name="Fullname" type="text" value="">
                                 </div>
-                                <div class="mail col-12 col-md-6">
+                                <div class="mail">
                                     <label>Email <b>*</b></label>
                                     <input class="form-control" id="email" name="Email" type="text" value="">
                                 </div>
-                                <div class="phone col-12 col-md-6">
+                                <div class="phone">
                                     <label>Số điện thoại <b>*</b></label>
                                     <input class="form-control" id="mobilephone" name="Telephone" type="text" value="">
                                 </div>
-                                <div class="addess col-12 col-md-6">
+                                <div class="addess">
                                     <label>Địa chỉ</label>
                                     <input class="form-control" id="address" name="Address" type="text" value="">
                                 </div>
-                                </div>
                             </form>
                         </div>
-                        <h3>Hành khách</h3>
+                        <h5>Hành khách</h5>
                         <div class="customer-quantity">
                             <div class="change">
                                 <div class="change-title">
@@ -60,13 +68,11 @@
                                     <p>&gt; 12 tuổi</p>
                                 </div>
                                 <div class="change-number">
-                                    <span class="minus btn-click">
-                                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                                    </span>
+                                    <span class="minus btn-click"><i class="fal fa-minus-circle"
+                                            id="adultMinus"></i></span>
                                     <span class="number" id="adult">1</span>
-                                    <span class="plus btn-click">
-                                        <i class="fa fa-plus-circle" id="adultPlus"></i>
-                                        </span>
+                                    <span class="plus btn-click"><i class="fal fa-plus-circle"
+                                            id="adultPlus"></i></span>
                                 </div>
                             </div>
                             <div class="change">
@@ -75,10 +81,10 @@
                                     <p>Từ 5 - 11 tuổi</p>
                                 </div>
                                 <div class="change-number">
-                                    <span class="minus btn-click"><i class="fa fa-minus-circle"
+                                    <span class="minus btn-click"><i class="fal fa-minus-circle"
                                             id="childrenMinus"></i></span>
                                     <span class="number" id="children">0</span>
-                                    <span class="plus btn-click"><i class="fa fa-plus-circle"
+                                    <span class="plus btn-click"><i class="fal fa-plus-circle"
                                             id="childrenPlus"></i></span>
                                 </div>
                             </div>
@@ -88,10 +94,10 @@
                                     <p>Từ 2 - 4 tuổi</p>
                                 </div>
                                 <div class="change-number">
-                                    <span class="minus btn-click"><i class="fa fa-minus-circle"
+                                    <span class="minus btn-click"><i class="fal fa-minus-circle"
                                             id="smallchildrenMinus"></i></span>
                                     <span class="number" id="smallchildren">0</span>
-                                    <span class="plus btn-click"><i class="fa fa-plus-circle"
+                                    <span class="plus btn-click"><i class="fal fa-plus-circle"
                                             id="smallchildrenPlus"></i></span>
                                 </div>
                             </div>
@@ -101,10 +107,10 @@
                                     <p>Từ 0 - 2 tuổi</p>
                                 </div>
                                 <div class="change-number">
-                                    <span class="minus btn-click"><i class="fa fa-minus-circle"
+                                    <span class="minus btn-click"><i class="fal fa-minus-circle"
                                             id="babyMinus"></i></span>
                                     <span class="number" id="baby">0</span>
-                                    <span class="plus btn-click"><i class="fa fa-plus-circle" id="babyPlus"></i></span>
+                                    <span class="plus btn-click"><i class="fal fa-plus-circle" id="babyPlus"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +129,7 @@
                         </div>
 
                         <div class="customer-info">
-                            <h3>Thông tin hành khách</h3>
+                            <h2>Thông tin hành khách</h2>
                             <h5>Người lớn</h5>
                             <table>
                                 <thead>
@@ -154,38 +160,15 @@
                         </div>
                         <div class="customer-help">
                             <h5>Quý khách có ghi chú lưu ý gì, hãy nói với chúng tôi !</h5>
-                            <div class="help">
-                                <textarea rows="5" cols="20"
+                            <textarea rows="5" cols="20"
                                 placeholder="Vui lòng nhập nội dung lời nhắn bằng tiếng việt hoặc tiếng anh..."></textarea>
-                            </div>
                         </div>
                     </div>
-
-                    <div class="TourOrder__info--group col-12 col-md-4">
-                        <div class="group-support">
-                    <h5>Quý khách cần hỗ trợ?</h5>
-                    <div class="group-contact">
-                        <a href="#" class="phone d-flex">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <p>Gọi miễn phí qua internet</p>
-                        </a>
-                        <a href="#" class="mail d-flex">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <p>Gửi yêu cầu hỗ trợ ngay</p>
-                        </a>
-                    </div>
-                </div>
-                    </div>
+                    <div class="TourOrder__info--group col-12 col-md-4"></div>
                 </div>
             </div>
         </div>
     </div>
-</template>
-<script>
-export default {
+</body>
 
-}
-</script>
-<style lang="scss">
-@import '@/assets/scss/_order.scss';
-</style>
+</html>

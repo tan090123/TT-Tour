@@ -43,12 +43,12 @@ const routes = [
     //     component: () => import("@/Views/Page/TourSearch.vue"),
     //     meta: { title: '- Vietravel' }
     // },
-    // {
-    //     path: '/tours/details',
-    //     name: 'details',
-    //     component: () => import("@/Views/Page/TourDetails.vue"),
-    //     meta: { title: 'Du Lịch Vietravel - Vietravel' }
-    // },
+    {
+        path: '/tours/details',
+        name: 'details',
+        component: () => import("@/Views/Page/TourDetails.vue"),
+        meta: { title: 'Du Lịch Vietravel - Vietravel' }
+    },
 ]
 
 

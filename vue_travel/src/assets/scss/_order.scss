@@ -1,3 +1,326 @@
+$main-clr: #2d4271;
 .TourOrder {
-    margin-top: 6.7rem;
+    margin-top: 6.7rem + 8rem;
+    font-family: Roboto, sans-serif;
+
+    &__card {
+        background-color: #f9f9f9;
+        margin: 0 10px;
+        margin-bottom: 5rem;
+        border-radius: 10px;
+
+        .TourOrder__img {
+            padding-right: 2rem;
+
+            img {
+                width: 100%;
+                height: 30rem;
+                min-height: 30rem;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+        }
+    }
+
+    &__main {
+        padding: 0 2rem;
+    }
+
+    &__rating {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1.5rem 0;
+
+        &--point {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fdc432;
+            width: 4.5rem;
+            height: 3.5rem;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            color: #fff;
+            margin-right: 5px;
+            font-size: 2rem;
+            font-weight: bold;
+
+            &::before {
+                content: '';
+                position: absolute;
+                display: block;
+                top: 100%;
+                left: 0;
+                width: 0;
+                height: 0;
+                border-right: 10px solid transparent;
+                border-top: 10px solid #fdc432;
+            }
+        }
+
+        &--feedback {
+            margin-left: 4px;
+            color: $main-clr;
+            font-weight: bold;
+        }
+    }
+
+    &__title {
+        margin-bottom: 3rem;
+        h2 {
+            font-size: 2.4rem;
+            color: $main-clr;
+            font-weight: bold;
+        }
+    }
+
+    &__desc {
+        p {
+            font-size: 1.4rem;
+            color: $main-clr;
+            font-weight: 400;
+        }
+
+        span {
+            font-weight: bold;
+            padding-left: 8px;
+        }
+    }
 }
+
+.TourOrder__info {
+    // Start Left
+    padding: 0 10px;
+
+    h2 {
+        color: $main-clr;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+    }
+
+    h3 {
+        color: $main-clr;
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.6rem;
+        color: $main-clr;
+        font-weight: 600;
+    }
+
+    h5 {
+        color: $main-clr;
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .customer-contact {
+        margin-bottom: 2rem;
+        form {
+            background-color: #f9f9f9;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+        }
+
+        label {
+            font-size: 1.4rem;
+            color: $main-clr;
+            line-height: 1.5;
+            margin-bottom: 5px;
+
+            b {
+                color: #fd5056;
+            }
+        }
+
+        input {
+            background-color: #fff;
+            border: 1px solid #e7e7e7;
+            border-radius: 4px;
+            height: 4rem;
+            margin-bottom: 5px;
+        }
+    }
+
+    .customer-notify {
+        background-color: #f9f9f9;
+        padding: 4rem 2rem;
+        border-radius: 10px;
+        color: $main-clr;
+        margin-bottom: 3rem;
+
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .customer-info {
+        margin-bottom: 3rem;
+        table {
+            background-color: #f9f9f9;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        th,
+        td {
+            padding: 1.3rem 2rem;
+        }
+
+        th {
+            color: $main-clr;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f0f0f0;
+        }
+
+        input[type='text'],
+        select {
+            width: 100%;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 4rem;
+            font-size: 1.6rem;
+            color: $main-clr;
+        }
+
+        input[type='date'] {
+            width: 100%;
+            height: 4rem;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: $main-clr;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 5px;
+            }
+            input[type='date'] {
+                display: inline-block;
+                margin-top: 5px;
+            }
+        }
+    }
+
+    .customer-quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    
+    .change {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 48%;
+        border: 1px solid #e7e7e7;
+        border-radius: 10px;
+        margin-bottom: 13px;
+        padding: 10px 15px;
+    
+        .change-number {
+            i {
+                margin: 0 3px;
+                color: $main-clr;
+            }
+        }
+    }
+    }
+
+
+    .customer-help {
+        margin-bottom: 3rem;
+
+        .help {
+            background-color: #f9f9f9;
+            padding: 2rem;
+
+            textarea {
+                width: 100%;
+                padding: 2rem;
+                border: 1px solid #e7e7e7;
+                min-height: 15rem;
+                max-height: 26rem;
+            }
+
+            textarea:focus-visible {
+                outline: none;
+            }
+        }
+    }
+    // End Left
+
+    // Start Right
+    &--group {
+        padding-left: 5rem;
+
+        .group-support {
+            // text-align: center;
+            h5 {
+                font-size: 1.6rem;
+                color: $main-clr;
+                margin-top: 2rem;
+                font-weight: 400;
+                margin-bottom: 2rem;
+            }
+
+            .group-contact {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                border: 1px solid #4d4aef;
+                background-color: #fff;
+                max-width: 30rem;
+                border-radius: 1.5rem;
+                margin-bottom: 3rem;
+
+                i {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 1rem;
+                    font-size: 2rem;
+                }
+
+                p {
+                    margin: 5px 0;
+                }
+
+                .phone {
+                    height: auto;
+                    background-color: #4d4aef;
+                    border-radius: 1.5rem;
+                    color: #fff;
+                    padding: 5px 10px;
+                    font-size: 1.4rem;
+                }
+
+                .mail {
+                    padding: 5px 15px;
+                    font-size: 1.4rem;
+                }
+            }
+
+        }
+    }
+    // End Right
+}
+
