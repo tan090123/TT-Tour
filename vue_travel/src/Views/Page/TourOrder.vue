@@ -163,18 +163,93 @@
 
                     <div class="TourOrder__info--group col-12 col-md-4">
                         <div class="group-support">
-                    <h5>Quý khách cần hỗ trợ?</h5>
-                    <div class="group-contact">
-                        <a href="#" class="phone d-flex">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <p>Gọi miễn phí qua internet</p>
-                        </a>
-                        <a href="#" class="mail d-flex">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <p>Gửi yêu cầu hỗ trợ ngay</p>
-                        </a>
-                    </div>
-                </div>
+                            <h5>Quý khách cần hỗ trợ?</h5>
+                            <div class="group-contact">
+                                <a href="#" class="phone d-flex">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    <p>Gọi miễn phí qua internet</p>
+                                </a>
+                                <a href="#" class="mail d-flex">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <p>Gửi yêu cầu hỗ trợ ngay</p>
+                                </a>
+                            </div>
+                         </div>
+                         <div class="group-sumary">
+                            <h3>Tóm tắt chuyến đi</h3>
+                            <p>Dịch vụ tùy chọn <b>Xe suốt tuyến - khách sạn tương đương 4* và 5*</b></p>
+                            <p><b>Tour trọn gói </b><span class='number'>(9 khách)</span></p>
+                            <div class="group-product row my-4" >
+                                <div class="img col-md-4">
+                                    <img src="@/../public/images/card/mientay.jpg" width='100%' alt="Mien tay">
+                                </div>
+                                <div class="title col-md-8">
+                                    <h4>Miền Tây: Cần Thơ - Sóc Trăng - Bạc Liêu - Cà Mau - Đất Mũi</h4>
+                                </div>
+                            </div>
+                            <div class="group-go my-5">
+                                <div class="start">
+                                    <h4>Bắt đầu chuyến đi</h4>
+                                    <p>T7, 27 Tháng 5, 2023</p>
+                                </div>
+                                <div class="end">
+                                    <h4>Kết thúc chuyến đi</h4>
+                                    <p>T3, 30 Tháng 5, 2023</p>
+                                </div>
+                            </div>
+                            <div class="group-tourist">
+                                <table>
+                                    <tbody>
+                                            <tr>
+                                                <th>Hành khách</th>
+                                                <th>
+                                                    <div class="total d-flex justify-content-end">
+                                                        <i class="fa-sharp fa-solid fa-users"></i>
+                                                        <span class='mx-1'>1</span> người
+                                                    </div>
+                                                    
+                                                    <p class='details'><span class='mx-1'>1</span>người lớn</p>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td>Người lớn</td>
+                                                <th><span>1</span>x <span>4,390,000</span>đ</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Trẻ em</td>
+                                                <th><span></span> <span>0</span>đ</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Trẻ nhỏ</td>
+                                                <th><span></span> <span>0</span>đ</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Em bé</td>
+                                                <th><span></span> <span>0</span>đ</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Phụ thu phòng riêng</th>
+                                                <th><span>1,500,000</span>đ</th>
+
+                                            </tr>
+                                            <tr >
+                                                <th>Mã giảm giá</th>
+                                                <td class='pb-3'>
+                                                    <button class='btn btn-light fs-3 me-2'>Thêm Mã</button>
+                                                    <button class='btn btn-success fs-3'>Áp dụng</button>
+                                                </td>
+                                            </tr>
+                                            <tr class='price'>
+                                                <th>Tổng cộng</th>
+                                                <th><p><span>5,890,000</span>đ</p></th>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            </div>
+                            <div class="group-submit d-block">
+                                <button type='submit' class='btn btn-danger w-100 fs-2 py-3'>ĐẶT NGAY</button>
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
