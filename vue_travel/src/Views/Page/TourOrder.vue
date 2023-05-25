@@ -180,10 +180,10 @@
                             <p>Dịch vụ tùy chọn <b>Xe suốt tuyến - khách sạn tương đương 4* và 5*</b></p>
                             <p><b>Tour trọn gói </b><span class='number'>(9 khách)</span></p>
                             <div class="group-product row my-4" >
-                                <div class="img col-md-4">
+                                <div class="img col-4">
                                     <img src="@/../public/images/card/mientay.jpg" width='100%' alt="Mien tay">
                                 </div>
-                                <div class="title col-md-8">
+                                <div class="title col-8">
                                     <h4>Miền Tây: Cần Thơ - Sóc Trăng - Bạc Liêu - Cà Mau - Đất Mũi</h4>
                                 </div>
                             </div>

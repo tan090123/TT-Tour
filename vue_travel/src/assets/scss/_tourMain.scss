@@ -6,6 +6,8 @@ $fontNor: 18px roboto, sans-serif;
 .tourMain {
     position: relative;
     margin-top: 6.7rem;
+    z-index: 10;
+    min-height: auto;
     &__both {
         position: absolute;
         top: 30%;
@@ -16,7 +18,7 @@ $fontNor: 18px roboto, sans-serif;
         padding: 0;
         margin: 0;
         width: 100%;
-
+        min-height: auto;
         &-nav {
             background-color: rgb(45 66 113 / 80%);
             padding: 0px;
@@ -85,8 +87,11 @@ $fontNor: 18px roboto, sans-serif;
 
 
             }
+            
         }
-
+        #pills-home #tablist-tab .nav-item .nav-link.active {
+            background: tan;
+        }
         
     }
 }
