@@ -92,8 +92,143 @@
                                     </li>
                                 </ul>
                             </div>
+                            
 
                         </div>
+                        <div class="tab-content p-4">
+                            
+                                    <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    
+                                        <ul class="nav nav-tablist mb-3" id="tablist-tab" role="tablist">
+                                            <li class="nav-item me-3" role="presentation">
+                                                <button class="nav-link active" id="nav-package-tab" data-bs-toggle="tab" data-bs-target="#nav-package" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+                                                    Tour trọn gói
+                                                </button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nav-destination-tab" data-bs-toggle="tab" data-bs-target="#nav-destination" type="button" role="tab" aria-controls="nav-home" aria-selected="false">
+                                                    Dịch vụ điểm đến
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content p-4">
+                                            <div class="tab-pane active" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab">
+                                                <div class="row">
+                                                    <div class="col-6 row">
+                                                        <div class="col-5">
+                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Điểm đi</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <div class="col-2 text-center mt-3"><i class="fa-solid fa-right-left fa-2x"></i></div>
+                                                        <div class="col-5">
+                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Điểm đến</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Số ngày</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
+                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                        </button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="tab-pane" id="nav-destination" role="tabpanel" aria-labelledby="nav-destination-tab">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        
+                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Điểm đến</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                            
+                                                        
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="col-4">
+                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
+                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                        </button>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                        <div class="row">
+                                                    <div class="col-6 row">
+                                                        <div class="col-5">
+                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Điểm đi</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                        <div class="col-2 text-center mt-3"><i class="fa-solid fa-right-left fa-2x"></i></div>
+                                                        <div class="col-5">
+                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Điểm đến</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
+                                                                <option selected>Số ngày</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
+                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                        </button>
+                                                        
+                                                    </div>
+                                                </div>
+                                    </div>
+                                    
+    
+                                    
+                        </div>
+                        
                     </div>
 
                     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -220,13 +355,13 @@
         <div class="container-fluid">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
             <div class="TourCard__content row row-cols-lg-3 row-cols-1">
-                <div class="col mt-sm-auto" v-for="(card, index) in cards.slice(0, 3)" :key="index">
+                <div class="col mt-sm-auto" v-for="(card, index) in cards.slice(0,3)" :key="index">
                     <div class="card">
                         <div class="img">
-                            <a href="">
+                            <router-link :to="{name:'details',params:{id:index}}">
                                 <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top"
                                     width="100%" :alt="card.name">
-                            </a>
+                            </router-link>
                             <div class="img-icon">
                                 <a href="">
                                     <i class="fa-regular fa-heart fs-1"></i>
@@ -640,7 +775,6 @@ export default {
 @import "@/assets/scss/_tourMain.scss";
 @import "@/assets/scss/_tourProduct.scss";
 @import "@/assets/scss/_carousel.scss";
-
 
 /* Start Tourkp */
 .tourkp {
