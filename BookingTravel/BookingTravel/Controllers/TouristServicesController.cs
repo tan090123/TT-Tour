@@ -23,19 +23,19 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristServicesModel> SearchTouristSV([FromQuery] int searchID)
+        public List<TouristServicesModel> SearchTouristSV([FromQuery] int? searchID)
         {
             var tourFromDBs = _context.TouristServices.AsNoTracking();
             if (searchID != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.TouristID == searchID);
+                tourFromDBs = tourFromDBs.Where(x => x.ServicesID == searchID);
             }
 
             var touristSV = tourFromDBs.Select(x => new TouristServicesModel
             {
                 TouristID = x.TouristID,
                 ServicesID = x.ServicesID,
-                TServicesID = x.ServicesID,
+                TServicesID = x.TServicesID,
                
             }).ToList();
 
@@ -44,24 +44,24 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddTouristSV([FromBody] TouristServicesModel newTouristSV)
+        public async Task<ActionResult<AddTourResultModel>> AddTouristSV([FromBody] TouristServicesModel newTouristSV)
         {
             var response = new AddTourResultModel();
 
             var touristSV = new TouristServices
             {
-                TServicesID = newTouristSV.ServicesID,
-                TouristID = newTouristSV.ServicesID,
+                TServicesID = newTouristSV.TServicesID,
+                TouristID = newTouristSV.TouristID,
                 
             };
 
             _context.TouristServices.Add(touristSV);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             response.Result = true;
 
-            return response;
+            return Ok(touristSV);
         }
 
         // GET: api/ToursFromDb/id
@@ -83,8 +83,8 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateUser([FromRoute] int id, [FromBody] TouristServicesModel updateTouristSV)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateUser([FromRoute] int id, [FromBody] TouristServicesModel updateTouristSV)
         {
             var response = new UpdateTourResultModel();
 
@@ -103,19 +103,18 @@ namespace BookingTravel.Controllers
                 touristSV.TServicesID = updateTouristSV.TServicesID;
 
                 _context.Update(touristSV);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(touristSV);
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteTouristSV([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async  Task<ActionResult<UpdateTourResultModel>> DeleteTouristSV([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
-            var touristSV = _context.TouristServices.Where(x => x.ServicesID == id)
-                .FirstOrDefault();
+            var touristSV =await _context.TouristServices.FindAsync(id);
 
             if (touristSV == null)
             {
@@ -127,10 +126,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(touristSV);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(touristSV);
         }
     }
 }

@@ -22,7 +22,9 @@ namespace BookingTravel.Controllers
             _context = context;
         }
 
-        // GET: api/ToursFromDb
+
+
+        //GET: api/ToursFromDb
         [HttpGet]
         public List<TourModel> SearchTour([FromQuery] string? searchName)
         {
@@ -58,7 +60,7 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddTour([FromBody] TourModel newTour)
+        public async Task<ActionResult<AddTourResultModel>> AddTour([FromBody] TourModel newTour)
         {
             var response = new AddTourResultModel();
 
@@ -88,7 +90,7 @@ namespace BookingTravel.Controllers
 
             response.Result = true;
 
-            return response;
+            return Ok(tour);
         }
 
 
@@ -111,17 +113,17 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateTour([FromRoute] int TourID, [FromBody] TourModel updateTour)
+        [HttpPut("{id}")]
+        public UpdateTourResultModel UpdateTour([FromRoute] int id, [FromBody] TourModel updateTour)
         {
             var response = new UpdateTourResultModel();
 
-            var tour = _context.Tours!.Where(x => x.TourID == TourID).FirstOrDefault();
+            var tour = _context.Tours.Where(x => x.TourID == id).FirstOrDefault();
 
             if (tour == null)
             {
                 response.Result = false;
-                response.ErrorMessage = "Không có Id nào là #" + TourID;
+                response.ErrorMessage = "Không có Id nào là #" + id;
             }
             else
             {
@@ -145,33 +147,33 @@ namespace BookingTravel.Controllers
 
                 _context.Update(tour);
                 _context.SaveChanges();
+               
             }
 
             return response;
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteTour([FromRoute] int TourID)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteTour([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
-            var tour = _context.Tours!.Where(x => x.TourID == TourID)
-                .FirstOrDefault();
+            var tour = await _context.Tours.FindAsync(id) ;
 
             if (tour == null)
             {
                 response.Result = false;
-                response.ErrorMessage = "Không có Id nào là #" + TourID;
+                response.ErrorMessage = "Không có Id nào là #" + id;
             }
             else
             {
                 response.Result = true;
 
-                _context.Remove(tour);
-                _context.SaveChanges();
+                _context.Tours.Remove(tour);
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(tour);
         }
     }
 }

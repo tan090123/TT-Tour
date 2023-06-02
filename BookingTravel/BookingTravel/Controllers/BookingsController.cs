@@ -56,7 +56,7 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddBookings([FromBody] BookingsModel newBookings)
+        public async Task<ActionResult<AddTourResultModel>> AddBookings([FromBody] BookingsModel newBookings)
         {
             var response = new AddTourResultModel();
 
@@ -81,11 +81,11 @@ namespace BookingTravel.Controllers
 
             _context.Bookings.Add(booking);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             response.Result = true;
 
-            return response;
+            return Ok(booking);
         }
 
         // GET: api/ToursFromDb/id
@@ -107,12 +107,12 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateBookings([FromRoute] int id, [FromBody] BookingsModel updateBookings)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateBookings([FromRoute] int id, [FromBody] BookingsModel updateBookings)
         {
             var response = new UpdateTourResultModel();
 
-            var booking = _context.Bookings!.Where(x => x.BookingID == id).FirstOrDefault();
+            var booking = _context.Bookings.Where(x => x.BookingID == id).FirstOrDefault();
 
             if (booking == null)
             {
@@ -140,19 +140,18 @@ namespace BookingTravel.Controllers
 
 
                 _context.Update(booking);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(booking);
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteBookings([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteBookings([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
-            var booking = _context.Bookings.Where(x => x.BookingID == id)
-                .FirstOrDefault();
+            var booking = await _context.Bookings.FindAsync(id);
 
             if (booking == null)
             {
@@ -164,10 +163,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(booking);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(booking);
         }
     }
 }
