@@ -9,6 +9,7 @@ namespace BookingTravel.Data
         [Key]
         public int ImageID { get; set; }
         public string? Images { get; set; }
+        public int? TourID{ get; set; }
 
     }
 }

@@ -49,7 +49,6 @@ namespace BookingTravel.Controllers
                 TourCheckoutDays = x.TourCheckoutDays,
                 TourCode = x.TourCode,
                 TourImage = x.TourImage,
-                TourImageID = x.TourImageID,
                 TourTotalSit = x.TourTotalSit,
                 TourType = x.TourType,
             }).ToList();
@@ -71,7 +70,6 @@ namespace BookingTravel.Controllers
                 TourCode = newTour.TourCode,
                 TourType = newTour.TourType,
                 TourTotalSit = newTour.TourTotalSit,
-                TourImageID = newTour.TourImageID,
                 TourImage = newTour.TourImage,
                 TourCheckoutDays = newTour.TourCheckoutDays,
                 DiscountTour = newTour.DiscountTour,
@@ -132,7 +130,6 @@ namespace BookingTravel.Controllers
                 tour.TourName = updateTour.TourName;
                 tour.TourCheckinDays = updateTour.TourCheckinDays;
                 tour.TourCheckoutDays = updateTour.TourCheckoutDays;
-                tour.TourImageID = updateTour.TourImageID;
                 tour.TourImage = updateTour.TourImage;
                 tour.Departure = updateTour.Departure;
                 tour.TourID = updateTour.TourID;

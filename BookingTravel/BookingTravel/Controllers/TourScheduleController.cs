@@ -45,7 +45,7 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddSchedule([FromBody] TourScheduleModel newSchedule)
+        public async Task<ActionResult<AddTourResultModel>> AddSchedule([FromBody] TourScheduleModel newSchedule)
         {
             var response = new AddTourResultModel();
 
@@ -60,11 +60,11 @@ namespace BookingTravel.Controllers
 
             _context.TourSchedule.Add(schedule);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             response.Result = true;
 
-            return response;
+            return Ok(schedule);
         }
 
         // GET: api/ToursFromDb/id
