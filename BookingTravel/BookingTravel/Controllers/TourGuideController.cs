@@ -86,8 +86,8 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateTourGuide([FromRoute] int id, [FromBody] TourGuideModel updateTourGuide)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateTourGuide([FromRoute] int id, [FromBody] TourGuideModel updateTourGuide)
         {
             var response = new UpdateTourResultModel();
 
@@ -109,14 +109,14 @@ namespace BookingTravel.Controllers
 
 
                 _context.Update(tour_guide);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(tour_guide);
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteTourGuide([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteTourGuide([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
@@ -133,10 +133,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(tour_guide);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(tour_guide);
         }
     }
 }

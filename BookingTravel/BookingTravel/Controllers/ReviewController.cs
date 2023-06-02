@@ -91,7 +91,7 @@ namespace BookingTravel.Controllers
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateReview([FromRoute] int id, [FromBody] ReviewModel updateReview)
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateReview([FromRoute] int id, [FromBody] ReviewModel updateReview)
         {
             var response = new UpdateTourResultModel();
 
@@ -113,14 +113,14 @@ namespace BookingTravel.Controllers
                 review.ReviewDay = updateReview.ReviewDay;
                
                 _context.Update(review);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(review);
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteReview([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteReview([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
@@ -137,10 +137,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(review);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(review);
         }
     }
 }

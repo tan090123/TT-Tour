@@ -114,7 +114,7 @@ namespace BookingTravel.Controllers
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id}")]
-        public UpdateTourResultModel UpdateTour([FromRoute] int id, [FromBody] TourModel updateTour)
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateTour([FromRoute] int id, [FromBody] TourModel updateTour)
         {
             var response = new UpdateTourResultModel();
 
@@ -146,11 +146,11 @@ namespace BookingTravel.Controllers
                 tour.PromotionPrice = updateTour.PromotionPrice;
 
                 _context.Update(tour);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                
             }
 
-            return response;
+            return Ok(tour);
         }
 
         [HttpDelete("{id}")]

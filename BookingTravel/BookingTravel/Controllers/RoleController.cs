@@ -82,8 +82,8 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateRole([FromRoute] int id, [FromBody] RoleModel updateRole)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateRole([FromRoute] int id, [FromBody] RoleModel updateRole)
         {
             var response = new UpdateTourResultModel();
 
@@ -102,14 +102,14 @@ namespace BookingTravel.Controllers
                 role.RoleCode = updateRole.RoleCode;
                
                 _context.Update(role);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(role);
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteRole([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteRole([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
@@ -126,10 +126,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(role);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(role);
         }
     }
 }

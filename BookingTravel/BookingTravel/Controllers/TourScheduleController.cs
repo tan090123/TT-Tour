@@ -115,8 +115,8 @@ namespace BookingTravel.Controllers
             return response;
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteSchedule([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteSchedule([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
@@ -133,10 +133,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(schedule);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(schedule);
         }
     }
 }
