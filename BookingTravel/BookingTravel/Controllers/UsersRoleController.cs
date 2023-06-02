@@ -109,8 +109,8 @@ namespace BookingTravel.Controllers
             return response;
         }
 
-        [HttpDelete("{id:int}")]
-        public UpdateTourResultModel DeleteUsersRole([FromRoute] int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteUsersRole([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
@@ -127,10 +127,10 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 _context.Remove(usersrole);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(usersrole);
         }
     }
 }
