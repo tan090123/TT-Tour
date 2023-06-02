@@ -23,12 +23,12 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristModel> SearchTourist([FromQuery] int searchID)
+        public List<TouristModel> SearchTourist([FromQuery] int? searchID)
         {
             var tourFromDBs = _context.Tourist.AsNoTracking();
             if (searchID != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.TourID == searchID);
+                tourFromDBs = tourFromDBs.Where(x => x.TouristID == searchID);
             }
 
             var tourist = tourFromDBs.Select(x => new TouristModel
@@ -49,7 +49,7 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddTourist([FromBody] TouristModel newToursit)
+        public async Task<ActionResult<AddTourResultModel>> AddTourist([FromBody] TouristModel newToursit)
         {
             var response = new AddTourResultModel();
 
@@ -67,11 +67,11 @@ namespace BookingTravel.Controllers
 
             _context.Tourist.Add(tourist);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             response.Result = true;
 
-            return response;
+            return Ok(tourist);
         }
 
         // GET: api/ToursFromDb/id
@@ -93,8 +93,8 @@ namespace BookingTravel.Controllers
         }
 
         // PUT: api/ToursFromDb/5
-        [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateTourist([FromRoute] int id, [FromBody] TouristModel updateTourist)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateTourist([FromRoute] int id, [FromBody] TouristModel updateTourist)
         {
             var response = new UpdateTourResultModel();
 
@@ -119,19 +119,18 @@ namespace BookingTravel.Controllers
 
 
                 _context.Update(tourist);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
-            return response;
+            return Ok(tourist);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public UpdateTourResultModel DeleteTourist([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
-            var tourist = _context.Tourist.Where(x => x.TouristID == id)
-                .FirstOrDefault();
+            var tourist = _context.Tourist.Find(id);
 
             if (tourist == null)
             {

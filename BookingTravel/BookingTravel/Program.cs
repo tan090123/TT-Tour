@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BookingTravel.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TourContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TourContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TourConn")));
 
 // Add services to the container.
 

@@ -8,7 +8,7 @@ namespace BookingTravel.Data
     {
         [Key]
         public int ServicesID { get; set; }
-        public int TouristID { get; set; }
-        public int TServicesID { get; set; }
+        public int? TouristID { get; set; }
+        public int? TServicesID { get; set; }
     }
 }
