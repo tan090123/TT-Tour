@@ -6,7 +6,6 @@
         public string? TourCode { get; set; }
         public string? TourName { get; set; }
         public string? TourImage { get; set; }
-        public int? TourImageID { get; set; }
         public string? Departure { get; set; }
         public int? Price { get; set; }
         public int? PromotionPrice { get; set; }

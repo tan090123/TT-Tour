@@ -36,6 +36,8 @@ namespace BookingTravel.Controllers
                 TouristID = x.TouristID,
                 TourID = x.TourID,
                 ServicesPrice = x.ServicesPrice,
+                TouristName = x.TouristName,
+
                 TouristDate = x.TouristDate,
                 TouristNote = x.TouristNote,
                 TouristPrice = x.TouristPrice,
@@ -57,6 +59,7 @@ namespace BookingTravel.Controllers
             {
                 ServicesPrice = newToursit.ServicesPrice,
                 TouristType = newToursit.TouristType,
+                TouristName= newToursit.TouristName,
                 TouristSex = newToursit.TouristSex,
                 TouristPrice = newToursit.TouristPrice,
                 TouristNote = newToursit.TouristNote,
@@ -111,6 +114,7 @@ namespace BookingTravel.Controllers
 
                 tourist.TouristDate = updateTourist.TouristDate;
                 tourist.TouristNote = updateTourist.TouristNote;
+                tourist.TouristName = updateTourist.TouristName;
                 tourist.TouristPrice = updateTourist.TouristPrice;
                 tourist.TouristSex = updateTourist.TouristSex;
                 tourist.TourID = updateTourist.TourID;

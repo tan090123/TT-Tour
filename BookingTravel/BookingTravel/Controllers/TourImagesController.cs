@@ -35,6 +35,7 @@ namespace BookingTravel.Controllers
             {
                 ImageID = x.ImageID,
                 Images = x.Images,
+                TourID = x.TourID,
             }).ToList();
 
             return tourimages;
@@ -48,7 +49,7 @@ namespace BookingTravel.Controllers
             var tourimages = new TourImages
             {
                 Images = newImages.Images,
-
+                TourID=newImages.TourID,
             };
 
             _context.TourImages.Add(tourimages);
@@ -96,6 +97,7 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 tourimages.Images = updateImages.Images;
+                tourimages.TourID=updateImages.TourID;
 
                 _context.Update(tourimages);
                 _context.SaveChanges();
