@@ -12,8 +12,8 @@
                 <div class="card">
                     <div class="img">
                         <a href="">
-                            <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top" width="100%"
-                                :alt="card.name">
+                            <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
+                                width="100%" :alt="card.tourName">
                         </a>
                         <div class="img-icon">
                             <a href="">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="img-sumary">
                             <div class="img-sumary--ratting">
-                                <span>{{ card.point }}</span>
+                                <span>{{ card.tourType }}</span>
                             </div>
                             <div class="img-sumary--review">
                                 <h3 class="fw-bold">{{ feedback }}</h3>
@@ -41,27 +41,27 @@
                         <p class="p-date">{{ card.date }}</p>
                         <p class="p-title">
                             <a href="">
-                                {{ card.name }}
+                                {{ card.tourName }}
                             </a>
                         </p>
                         <div class="code">
                             <p>Mã tour:</p>
                             <p><i class="fa-solid fa-ticket"></i>
-                                {{ card.code_tour }}</p>
+                                {{ card.tourCode }}</p>
                         </div>
-                        <p class="p-startPlace">Nơi khởi hành: {{ card.starting_gate }}</p>
+                        <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
                         <div class="price">
                             <p class="price-old">
                                 Giá: <span class="text-decoration-line-through">{{ formatter.format(card.price)
                                 }}</span>
                             </p>
                             <div class="price-now">
-                                <span class="price-now-number">{{ formatter.format(card.discount) }}</span>
-                                <span class="price-now-discount">{{ card.preferential }}% GIẢM</span>
+                                <span class="price-now-number">{{ formatter.format(card.promotionPrice) }}</span>
+                                <span class="price-now-discount">{{ card.discountTour }} GIẢM</span>
                             </div>
                         </div>
                         <div class="timer">
-                            <span>{{ card.date }}</span>
+                            <span>{{ card.tourCheckinDays }}</span>
                         </div>
                         <div class="addList-numberSit">
                             <div class="addList">
@@ -70,30 +70,93 @@
                             </div>
                             <div class="numberSit d-flex align-items-center justify-content-center">
                                 <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.num_seats }}</p>
+                                <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourTotalSit }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <nav aria-label="pagination">
+            <ul class="pagination">
+                <li>
+                    <a href="" @click.prevent="previousPage" :disabled="currentPage === 1">
+                        <span aria-hidden="true">«</span><span class="visuallyhidden">previous</span>
+                    </a>
+                </li>
+
+                <li v-for="(card, index) in currentPageData" :key="card.id">
+                    <a href="">
+                        <span class="visuallyhidden">page </span>{{ index + 1 }}
+                    </a>
+                </li>
+
+                <li>
+                    <a href="" @click.prevent="nextPage" :disabled="currentPage === totalPages">
+                        <span class="visuallyhidden">next</span><span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
     </div>
 </template>
 <script>
-import cardData from "@/data/cardData.js";
+// import cardData from "@/data/cardData.js";
 export default {
     data() {
         return {
-            cards: cardData,
+            // cards: cardData,
+            cards: [],
             formatter: new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
             }),
+            currentPage: 1,
+            pageSize: 4,
         };
     },
+    created() {
+        // eslint-disable-next-line
+        axios.get('/api/Tour')
+            .then((response) => {
+                // handle success
+                this.cards = response.data;
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            });
+    },
+    computed: {
+        totalPages() {
+            return Math.ceil(this.cards.length / this.pageSize);
+        },
+        currentPageData() {
+            const startIndex = (this.currentPage - 1) * this.pageSize;
+            const endIndex = startIndex + this.pageSize;
+            return this.cards.slice(startIndex, endIndex);
+        },
+    },
+    methods: {
+        previousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+            }
+        },
+    }
 }
 </script>
 <style lang="scss">
+@import "@/assets/scss/_card.scss";
+
 .tours_card {
     margin-top: 6.7rem;
     padding: 0 10px;
