@@ -1,4 +1,5 @@
 const admin = [
+    { path: '/admin', redirect: '/admin/dashboard' },
     {
         path: '/admin',
         name: 'HomeAdmin',
@@ -6,7 +7,7 @@ const admin = [
         meta: { title: 'Trang admin - Vietravel' },
         children: [
             {
-                path: '/admin',
+                path: 'dashboard',
                 name: 'HomeAdmin',
                 component: () => import("@/pages/admin/AdminHome.vue"),
                 meta: { title: 'Trang admin - Vietravel' }
