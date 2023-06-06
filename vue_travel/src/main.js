@@ -5,7 +5,6 @@ import router from '@/router/index.js';
 import axios from 'axios';
 window.axios = axios;
 
-
 import "@/assets/scss/_reset.scss";
 
 createApp(App)

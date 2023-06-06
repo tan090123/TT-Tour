@@ -3,13 +3,35 @@
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminTravel</a>
 		<ul class="side-menu">
-			<li><a href="#" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li class="divider" data-text="main">Main</li>
 			<li>
-				<a href="#"><i class='bx bxs-inbox icon'></i> Elements <i
+				<router-link class="active" :to="{ name: 'HomeAdmin' }">
+					<i class='bx bxs-dashboard icon'></i>Dashboard
+				</router-link>
+				<!-- <a href="#" class="active"><i class='bx bxs-dashboard icon'></i>Dashboard</a> -->
+			</li>
+			<li class="divider" data-text="main">Main</li>
+			<!-- <li>
+				<a href="#"><i class='bx bxs-briefcase icon'></i>List<i
 						class='bx bx-chevron-right icon-right'></i></a>
 				<ul class="side-dropdown">
-					<li><a href="#">Alert</a></li>
+					<li>
+						<router-link :to="{ name: '' }">...</router-link>
+					</li>
+					<li><a href="#">Badges</a></li>
+					<li><a href="#">Breadcrumbs</a></li>
+					<li><a href="#">Button</a></li>
+				</ul>
+			</li> -->
+			<li>
+				<a href="#">
+					<i class='bx bxs-briefcase icon'></i>
+					<span>Tour</span>
+					<i class='bx bx-chevron-right icon-right'></i>
+					</a>
+				<ul class="side-dropdown">
+					<li>
+						<router-link :to="{ name: 'tour-admin' }">List Tour</router-link>
+					</li>
 					<li><a href="#">Badges</a></li>
 					<li><a href="#">Breadcrumbs</a></li>
 					<li><a href="#">Button</a></li>
@@ -40,6 +62,13 @@
 </template>
 <script>
 export default {
+	methods: {
+		navigate(route) {
+			this.$router.push(route).then(() => {
+				window.location.reload();
+			});
+		}
+	}
 
 }
 </script>
