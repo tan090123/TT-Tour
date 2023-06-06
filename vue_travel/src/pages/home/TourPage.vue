@@ -86,7 +86,7 @@
                     </a>
                 </li>
 
-                <li v-for="(card, index) in currentPageData" :key="card.id">
+                <li v-for="(card, index) in currentPageData" :key="card.index">
                     <a href="">
                         <span class="visuallyhidden">page </span>{{ index + 1 }}
                     </a>

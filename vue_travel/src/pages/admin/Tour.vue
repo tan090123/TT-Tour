@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in displayedItems" :key="item.id">
+                        <tr v-for="item in displayedItems" :key="item.tourID">
                             <td>{{ item.tourID }}</td>
                             <td>{{ item.tourCode }}</td>
                             <td>{{ item.tourName }}</td>
@@ -51,7 +51,7 @@
                             <td style="padding: 0 10px; width: 100px;">
                                 <button class="btn btn-success" style="padding: 10px 15px; margin-right: 5px;"
                                     type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i
-                                        class="fa fa-edit"></i></button>
+                                        class="fa fa-edit" ></i></button>
                                 <button class="btn btn-danger" style="padding: 10px 15px;" type="button"
                                     @click="Confirm('Bạn có chắc chắn muốn xóa không ?') ? deleteItem(item.tourID) : '' "
                                     data-toggle="tooltip" data-placement="top" title="Delete">
@@ -144,6 +144,7 @@ export default {
                     console.error(error);
                 });
         },
+        
     }
 }
 

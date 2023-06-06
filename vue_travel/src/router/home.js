@@ -57,7 +57,7 @@ const home = [
             // },
             {
                 path: '/tours/details/:id',
-                name: 'details',
+                name: 'details-id',
                 component: () => import("@/pages/home/TourDetails.vue"),
                 meta: { title: 'Du Lịch Vietravel - Vietravel' }
             },
