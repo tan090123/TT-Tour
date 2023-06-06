@@ -355,12 +355,12 @@
         <div class="container-fluid">
             <h1 class="TourCard__title">Ưu đãi tour giờ chót</h1>
             <div class="TourCard__content row row-cols-lg-3 row-cols-1">
-                <div class="col mt-sm-auto" v-for="(card, index) in cards.slice(0,3)" :key="index">
+                <div class="col mt-sm-auto" v-for="card in cards.slice(0,3)" :key="card.tourID">
                     <div class="card">
                         <div class="img">
-                            <router-link :to="{name:'details',params:{id:index}}">
-                                <img :src="require(`@/../public/images/card/${card.images}`)" class="card-img-top"
-                                    width="100%" :alt="card.name">
+                            <router-link :to="{name:'details-id',params:{id:card.tourID}}">
+                                <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
+                                    width="100%" :alt="card.tourName">
                             </router-link>
                             <div class="img-icon">
                                 <a href="">
@@ -375,40 +375,40 @@
                             </div>
                             <div class="img-sumary">
                                 <div class="img-sumary--ratting">
-                                    <span>{{ card.point }}</span>
+                                    <span>5</span>
                                 </div>
                                 <div class="img-sumary--review">
-                                    <h3 class="fw-bold">{{ feedback }}</h3>
+                                    <h3 class="fw-bold">Rất tốt</h3>
                                     <p class="fw-lighter">358 quan tâm</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="body card-body">
-                            <p class="p-date">{{ card.date }}</p>
+                            <p class="p-date">{{ card.tourCheckinDays }}</p>
                             <p class="p-title">
                                 <a href="">
-                                    {{ card.name }}
+                                    {{ card.tourName }}
                                 </a>
                             </p>
                             <div class="code">
                                 <p>Mã tour:</p>
                                 <p><i class="fa-solid fa-ticket"></i>
-                                    {{ card.code_tour }}</p>
+                                    {{ card.tourCode }}</p>
                             </div>
-                            <p class="p-startPlace">Nơi khởi hành: {{ card.starting_gate }}</p>
+                            <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
                             <div class="price">
                                 <p class="price-old">
                                     Giá: <span class="text-decoration-line-through">{{ formatter.format(card.price)
                                         }}</span>
                                 </p>
                                 <div class="price-now">
-                                    <span class="price-now-number">{{ formatter.format(card.discount) }}</span>
-                                    <span class="price-now-discount">{{ card.preferential }}% GIẢM</span>
+                                    <span class="price-now-number">{{ formatter.format(card.promotionPrice) }}</span>
+                                    <span class="price-now-discount">{{ card.discountTour }} GIẢM</span>
                                 </div>
                             </div>
                             <div class="timer">
-                                <span>{{ card.date }}</span>
+                                <span>{{ card.tourCheckoutDays }}</span>
                             </div>
                             <div class="addList-numberSit">
                                 <div class="addList">
@@ -417,7 +417,7 @@
                                 </div>
                                 <div class="numberSit d-flex align-items-center justify-content-center">
                                     <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                    <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.num_seats }}</p>
+                                    <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourAvailableSit }}</p>
                                 </div>
                             </div>
                         </div>
@@ -729,12 +729,12 @@
     <!-- ========== End Tour .... ========== -->
 </template>
 <script>
-import cardData from "@/data/cardData.js";
+// import cardData from "@/data/cardData.js";
 import productData from "@/data/productData.js";
 export default {
     data() {
         return {
-            cards: cardData,
+            cards: [],
             products: productData,
             formatter: new Intl.NumberFormat("vi-VN", {
                 style: "currency",
@@ -767,7 +767,22 @@ export default {
                 autoplayHoverPause: true,
             });
         });
+        this.getAllProduct();
     },
+    methods:{
+        getAllProduct() {
+            // eslint-disable-next-line
+            axios.get('api/Tour')
+                .then((response) => {
+                    // handle success
+                    this.cards = response.data;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+    }
 };
 </script>
 

@@ -7,6 +7,7 @@ window.axios = axios;
 
 import "@/assets/scss/_reset.scss";
 
-createApp(App)
-    .use(router)
-    .mount('#app')
+const app=createApp(App);
+app.config.globalProperties.URL='https://localhost:44363';
+app.use(router)
+app.mount('#app')
