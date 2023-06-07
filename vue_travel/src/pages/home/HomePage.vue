@@ -424,7 +424,7 @@
                     </div>
                 </div>
             </div>
-            <div class="TourCard__btn text-end">
+            <div class="TourCard__btn d-block-inline text-end">
                 <router-link class="nav-link" :to="{ name: 'tours_page' }">
                     <button>Xem tất cả <i class="fa-sharp fa-solid fa-arrow-right-long ms-2"></i></button>
                 </router-link>
