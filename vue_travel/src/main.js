@@ -7,6 +7,6 @@ window.axios = axios;
 
 import "@/assets/scss/_reset.scss";
 
-const app=createApp(App);
+const app = createApp(App);
 app.use(router)
 app.mount('#app')

@@ -1,7 +1,7 @@
 <template lang="">
     <div class="create-tour">
         <div class="container-fluid">
-            <h2 class="tour-title text-center">Tạo danh sách Tour</h2>
+            <h2 class="tour-title text-center">Sửa danh sách Tour</h2>
             <form @submit.prevent="onSubmit">
                 <div class="form-group">
                     <label for="code">Code:</label>
@@ -41,23 +41,23 @@
                 </div>
                 <div class="form-group">
                     <label for="checkinDays">Checkin Days:</label>
-                    <input type="datetime-local" id="checkinDays" name="checkinDays" v-model="tourCheckinDays">
+                    <input type="datetime-local" id="checkinDays" name="tourCheckinDays" v-model="tourCheckinDays">
                 </div>
                 <div class="form-group">
                     <label for="checkoutDays">Checkout Days:</label>
-                    <input type="datetime-local" id="checkoutDays" name="checkoutDays" v-model="tourCheckoutDays">
+                    <input type="datetime-local" id="checkoutDays" name="tourCheckoutDays" v-model="tourCheckoutDays">
                 </div>
                 <div class="form-group">
                     <label for="totalSit">Total Sit:</label>
-                    <input type="number" id="totalSit" name="totalSit" v-model="tourTotalSit">
+                    <input type="number" id="totalSit" name="tourTotalSit" v-model="tourTotalSit">
                 </div>
                 <div class="form-group">
                     <label for="availableSit">Available Sit:</label>
-                    <input type="number" id="availableSit" name="availableSit" v-model="tourAvailableSit">
+                    <input type="number" id="availableSit" name="tourAvailableSit" v-model="tourAvailableSit">
                 </div>
                 <div class="form-group">
                     <label for="type">Type:</label>
-                    <select id="type" name="type" v-model="tourType">
+                    <select id="type" v-model="tourType">
                         <option v-for="tintype in types" :value="tintype.typeID" :key="tintype.typeID">{{
                             tintype.typeID
                             }}</option>
@@ -85,14 +85,41 @@ export default {
             tourTotalSit: '',
             tourAvailableSit: '',
             tourType: '',
-            file: null,
             types: []
         }
     },
     mounted() {
+        const tourID = this.$route.query.id;
+        this.fetchDataTour(tourID);
         this.fetchDataType();
     },
     methods: {
+        fetchDataTour(tourID) {
+            // eslint-disable-next-line
+            axios.get(`/api/Tour/${tourID}`)
+                .then((response) => {
+                    // handle success
+                    const tourData = response.data;
+                    this.tourCode = tourData.tourCode;
+                    this.tourName = tourData.tourName;
+                    this.departure = tourData.departure;
+                    this.destination = tourData.destination;
+                    this.description = tourData.description;
+                    this.price = tourData.price;
+                    this.promotionPrice = tourData.promotionPrice;
+                    this.discountTour = tourData.discountTour;
+                    this.tourCheckinDays = tourData.tourCheckinDays;
+                    this.tourCheckoutDays = tourData.tourCheckoutDays;
+                    this.tourTotalSit = tourData.tourTotalSit;
+                    this.tourAvailableSit = tourData.tourAvailableSit;
+                    this.tourType = tourData.tourType;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+
         fetchDataType() {
             // eslint-disable-next-line
             axios.get('/api/TourType')
@@ -106,18 +133,19 @@ export default {
                 });
         },
         onSubmit() {
-            this.onCreateTour();
+            const tourID = this.$route.query.id;
+            this.onEditTour(tourID);
         },
         handleFileChange(event) {
             this.file = event.target.files[0];
         },
 
-        onCreateTour() {
+        onEditTour(tourID) {
             const fileInput = document.getElementById('upload');
             const file = fileInput.files[0];
             const fileName = file.name; // Lấy tên file
             // eslint-disable-next-line
-            axios.post('/api/Tour', {
+            axios.put(`/api/Tour/${tourID}`, {
                 tourCode: this.tourCode,
                 tourName: this.tourName,
                 departure: this.departure,
@@ -131,18 +159,18 @@ export default {
                 tourTotalSit: this.tourTotalSit,
                 tourAvailableSit: this.tourAvailableSit,
                 tourType: this.tourType,
-                tourimage: fileName,
+                tourimage: fileName
             }).then(response => {
                 // Xử lý kết quả thành công
                 console.table(response.data);
-                alert('Tạo thành công');
+                alert('Sửa thành công !!');
                 // Chuyển hướng đến trang danh sách tour
                 window.location.href = '/admin/tour';
             })
                 .catch(error => {
                     // Xử lý lỗi
                     console.error(error);
-                    alert('Tạo thất bại !!')
+                    alert('Sửa thất bại !!');
                 });
         }
     }

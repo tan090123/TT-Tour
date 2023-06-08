@@ -28,7 +28,14 @@ const admin = [
                 path: 'tour/create',
                 name: 'create-tour',
                 component: () => import("@/pages/admin/CreateTour.vue"),
-                meta: { title: 'Trang tạo tour - Vietravel ' }
+                meta: { title: 'Trang tạo Tour - Vietravel ' }
+            },
+            {
+                path: 'tour/edit',
+                name: 'edit-tour',
+                component: () => import("@/pages/admin/EditTour.vue"),
+                meta: { title: 'Trang sửa Tour - Vietravel ' },
+                props: route => ({ tourID: route.query.id })
             },
         ]
     }
