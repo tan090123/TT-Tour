@@ -2,7 +2,9 @@
 <template lang="">
     <div class="contact">
         <h2>Day la contact</h2>
+
     </div>
+    
 </template>
 <script>
 export default {

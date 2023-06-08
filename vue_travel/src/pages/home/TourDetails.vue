@@ -1,14 +1,14 @@
 <template lang="">
   <div class="TourDetails">
-    <div class="container-fluid" v-for="item in products" :key="item.tourID">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="TourDetails__ticket">
             <i class="fa fa-ticket" aria-hidden="true"></i>
-            <span>{{ item.tourCode }}</span>
+            <span>{{ products.tourCode }}</span>
           </div>
           <div class="TourDetails__title">
-            <p>{{ item.tourName }}</p>
+            <p>{{ products.tourName }}</p>
           </div>
           <div class="TourDetails__rating">
             <span class="TourDetails__rating--point">9</span>
@@ -20,13 +20,13 @@
             <div class="col-6 col-md-9">
               <div class="TourDetails__discount">
                 <p>
-                  Giá <span>{{ formatter.format(item.price) }}</span
+                  Giá <span>{{ formatter.format(products.price) }}</span
                   >/ khách
                 </p>
               </div>
               <div class="TourDetails__price">
                 <p>
-                  <span>{{ formatter.format(item.promotionPrice) }}</span
+                  <span>{{ formatter.format(products.promotionPrice) }}</span
                   >/ khách
                 </p>
               </div>
@@ -34,10 +34,15 @@
 
             <div class="col-6 col-md-3">
               <div class="TourDetails__cart">
-                <a class="cart" href="#">
+                <button
+                  type="button"
+                  class="cart"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                >
                   <i class="fa fa-cart-shopping" aria-hidden="true"></i>
-                  <span>Đặt ngay</span>
-                </a>
+                  <span> Đặt ngay </span>
+                </button>
                 <a class="group" href="#">Liên hệ tư vấn</a>
               </div>
             </div>
@@ -100,15 +105,15 @@
           <div class="TourDetails__section--detail row">
             <div class="col-12 col-md-8">
               <p class="text">
-                Khởi hành: <span>{{ item.tourCheckinDays }}</span>
+                Khởi hành: <span>{{ products.tourCheckinDays }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
               <p class="text">Thời gian <span>6 ngày</span></p>
               <p class="text">
-                Nơi khởi hành <span>{{ item.departure }}</span>
+                Nơi khởi hành <span>{{ products.departure }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận <span>{{ item.tourAvailableSit }}</span>
+                Số chỗ còn nhận <span>{{ products.tourAvailableSit }}</span>
               </p>
             </div>
             <div class="col-12 col-md-4 text-end">
@@ -667,6 +672,77 @@
       </div>
     </div>
   </div>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-3">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title py-3">DANH SÁCH DỊCH VỤ</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body py-3">
+          <h2 class='text-primary'>Danh sách lựa chọn</h2>
+          <div class="col-12 my-2">
+            <table class="table caption-top">
+              <tbody>
+                <tr>
+                  <td colspan="2" class='fs-4 fst-italic'>
+                    <span id="OptionName_1">
+                      {{products.tourName}}
+                    </span>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td class="d-flex justify-content-end">
+                    <span class="px-2 fs-4 fst-italic" id="optionPrice_1">{{ formatter.format(products.price) }}</span>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        checked=""
+                        type="radio"
+                        value="4990000"
+                        name="flexRadioDefault"
+                        id="option_1"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer py-5 border border-0">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end fw-bold">
+                <span class="px-4">Thành tiền :</span>
+                <span class="px-2" id="TotalPriceService">{{ formatter.format(products.price) }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button
+              type="submit"
+              id="btn-order"
+              class="btn btn-danger text-uppercase btn-lg"
+            >
+              Đặt ngay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -705,7 +781,7 @@ export default {
       });
     });
     this.getAllItem(this.$route.params.id);
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
   },
   methods: {
     getAllItem(id) {

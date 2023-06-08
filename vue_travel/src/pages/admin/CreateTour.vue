@@ -69,123 +69,122 @@
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                tourCode: '',
-                tourName: '',
-                departure: '',
-                destination: '',
-                description: '',
-                price: '',
-                promotionPrice: '',
-                discountTour: '',
-                tourCheckinDays: '',
-                tourCheckoutDays: '',
-                tourTotalSit: '',
-                tourAvailableSit: '',
-                tourType: '',
-                file: null,
-                types: []
-            }
-        },
-        mounted() {
-            this.fetchDataType();
-        },
-        methods: {
-            fetchDataType() {
-                // eslint-disable-next-line
-                axios.get('/api/TourType')
-                    .then((response) => {
-                        // handle success
-                        this.types = response.data;
-                    })
-                    .catch((error) => {
-                        // handle error
-                        console.log(error);
-                    });
-            },
-            onSubmit() {
-                this.onCreateTour();
-            },
-            handleFileChange(event) {
-                this.file = event.target.files[0];
-            },
-
-            onCreateTour() {
-                const fileInput = document.getElementById('upload');
-                const file = fileInput.files[0];
-                const fileName = file.name; // Lấy tên file
-                // eslint-disable-next-line
-                axios.post('/api/Tour', {
-                    tourCode: this.tourCode,
-                    tourName: this.tourName,
-                    departure: this.departure,
-                    destination: this.destination,
-                    description: this.description,
-                    price: this.price,
-                    promotionPrice: this.promotionPrice,
-                    discountTour: this.discountTour,
-                    tourCheckinDays: this.tourCheckinDays,
-                    tourCheckoutDays: this.tourCheckoutDays,
-                    tourTotalSit: this.tourTotalSit,
-                    tourAvailableSit: this.tourAvailableSit,
-                    tourType: this.tourType,
-                    tourimage: fileName,
-                }).then(response => {
-                    // Xử lý kết quả thành công
-                    console.table(response.data);
-                    alert('Tạo thành công');
-                    // Chuyển hướng đến trang danh sách tour
-                    window.location.href = '/admin/tour';
+export default {
+    data() {
+        return {
+            tourCode: '',
+            tourName: '',
+            departure: '',
+            destination: '',
+            description: '',
+            price: '',
+            promotionPrice: '',
+            discountTour: '',
+            tourCheckinDays: '',
+            tourCheckoutDays: '',
+            tourTotalSit: '',
+            tourAvailableSit: '',
+            tourType: '',
+            file: null,
+            types: []
+        }
+    },
+    mounted() {
+        this.fetchDataType();
+    },
+    methods: {
+        fetchDataType() {
+            // eslint-disable-next-line
+            axios.get('/api/TourType')
+                .then((response) => {
+                    // handle success
+                    this.types = response.data;
                 })
-                    .catch(error => {
-                        // Xử lý lỗi
-                        console.error(error);
-                        alert('Tạo thất bại !!')
-                    });
-            }
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+        onSubmit() {
+            this.onCreateTour();
+        },
+        handleFileChange(event) {
+            this.file = event.target.files[0];
+        },
+
+        onCreateTour() {
+            const fileInput = document.getElementById('upload');
+            const file = fileInput.files[0];
+            const fileName = file.name; // Lấy tên file
+            // eslint-disable-next-line
+            axios.post('/api/Tour', {
+                tourCode: this.tourCode,
+                tourName: this.tourName,
+                departure: this.departure,
+                destination: this.destination,
+                description: this.description,
+                price: this.price,
+                promotionPrice: this.promotionPrice,
+                discountTour: this.discountTour,
+                tourCheckinDays: this.tourCheckinDays,
+                tourCheckoutDays: this.tourCheckoutDays,
+                tourTotalSit: this.tourTotalSit,
+                tourAvailableSit: this.tourAvailableSit,
+                tourType: this.tourType,
+                tourimage: fileName,
+            }).then(response => {
+                // Xử lý kết quả thành công
+                console.table(response.data);
+                alert('Tạo thành công');
+                // Chuyển hướng đến trang danh sách tour
+                window.location.href = '/admin/tour';
+            })
+                .catch(error => {
+                    // Xử lý lỗi
+                    console.error(error);
+                    alert('Tạo thất bại !!')
+                });
         }
     }
+}
 </script>
 <style lang="scss">
-    .create-tour {
-        margin-bottom: 3rem;
-    }
+.create-tour {
+    margin-bottom: 3rem;
+}
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+.form-group {
+    margin-bottom: 15px;
+}
 
-    .tour-title {
-        font-size: 3rem;
-        font-weight: 600;
-        padding: 2rem 0;
-    }
+.tour-title {
+    font-size: 3rem;
+    font-weight: 600;
+    padding: 2rem 0;
+}
 
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-    form {
-        margin: 0 5rem;
-    }
+form {
+    margin: 0 5rem;
+}
 
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    select {
-        width: 100%;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-    button[type="submit"] {
-        padding: 10px 20px;
-        background-color: #4caf;
-    }
-
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf;
+}
 </style>

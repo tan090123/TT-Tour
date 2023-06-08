@@ -11,10 +11,10 @@
             <div class="col mb-5" v-for="card in displayedCarts" :key="card.tourID">
                 <div class="card">
                     <div class="img">
-                        <a href="">
-                            <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
-                                width="100%" :alt="card.tourName">
-                        </a>
+                        <router-link :to="{name:'details-id',params:{id:card.tourID}}">
+                                <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
+                                    width="100%" :alt="card.tourName">
+                        </router-link>
                         <div class="img-icon">
                             <a href="">
                                 <i class="fa-regular fa-heart fs-1"></i>
@@ -31,7 +31,7 @@
                                 <span>{{ card.tourType }}</span>
                             </div>
                             <div class="img-sumary--review">
-                                <h3 class="fw-bold">{{ feedback }}</h3>
+                                <h3 class="fw-bold">Tuyệt vời</h3>
                                 <p class="fw-lighter">358 quan tâm</p>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="numberSit d-flex align-items-center justify-content-center">
                                 <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourTotalSit }}</p>
+                                <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourAvailableSit }}</p>
                             </div>
                         </div>
                     </div>
