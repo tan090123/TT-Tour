@@ -8,7 +8,7 @@
             đổi từ công ty lữ hành uy tín nhất Việt Nam.
         </p>
         <div class="TourCard__content row row-cols-lg-3 row-cols-1 p-2">
-            <div class="col mb-5" v-for="(card, index) in cards" :key="index">
+            <div class="col mb-5" v-for="card in displayedCarts" :key="card.tourID">
                 <div class="card">
                     <div class="img">
                         <a href="">
@@ -78,44 +78,29 @@
             </div>
         </div>
 
-        <nav aria-label="pagination">
-            <ul class="pagination">
-                <li>
-                    <a href="" @click.prevent="previousPage" :disabled="currentPage === 1">
-                        <span aria-hidden="true">«</span><span class="visuallyhidden">previous</span>
-                    </a>
-                </li>
-
-                <li v-for="(card, index) in currentPageData" :key="card.index">
-                    <a href="">
-                        <span class="visuallyhidden">page </span>{{ index + 1 }}
-                    </a>
-                </li>
-
-                <li>
-                    <a href="" @click.prevent="nextPage" :disabled="currentPage === totalPages">
-                        <span class="visuallyhidden">next</span><span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <Nagination :current-page="currentPage" :total-pages="totalPages" @page-change="changePage" />
 
 
     </div>
 </template>
 <script>
 // import cardData from "@/data/cardData.js";
+import Nagination from "@/components/ThePagination.vue";
+
 export default {
+    name: "TourPage",
+    components: {
+        Nagination,
+    },
     data() {
         return {
-            // cards: cardData,
             cards: [],
             formatter: new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
             }),
             currentPage: 1,
-            pageSize: 4,
+            perPage: 6,
         };
     },
     created() {
@@ -132,30 +117,27 @@ export default {
     },
     computed: {
         totalPages() {
-            return Math.ceil(this.cards.length / this.pageSize);
+            return Math.ceil(this.cards.length / this.perPage);
         },
-        currentPageData() {
-            const startIndex = (this.currentPage - 1) * this.pageSize;
-            const endIndex = startIndex + this.pageSize;
-            return this.cards.slice(startIndex, endIndex);
+        displayedCarts() {
+            const start = (this.currentPage - 1) * this.perPage;
+            const end = start + this.perPage;
+            return this.cards.slice(start, end);
         },
     },
     methods: {
-        previousPage() {
-            if (this.currentPage > 1) {
-                this.currentPage--;
-            }
-        },
-        nextPage() {
-            if (this.currentPage < this.totalPages) {
-                this.currentPage++;
-            }
+        changePage(page) {
+            this.currentPage = page;
         },
     }
 }
 </script>
 <style lang="scss">
 @import "@/assets/scss/_card.scss";
+
+.TourCard {
+    margin: 5rem 0;
+}
 
 .tours_card {
     margin-top: 6.7rem;

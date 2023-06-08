@@ -50,8 +50,10 @@
                             <td>{{ item.tourType }}</td>
                             <td style="padding: 0 10px; width: 100px;">
                                 <button class="btn btn-success" style="padding: 10px 15px; margin-right: 5px;"
-                                    type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i
-                                        class="fa fa-edit" ></i></button>
+                                    type="button" @click="editItem(item.tourID)" data-toggle="tooltip"
+                                    data-placement="top" title="Edit">
+                                    <i class="fa fa-edit"></i>
+                                </button>
                                 <button class="btn btn-danger" style="padding: 10px 15px;" type="button"
                                     @click="Confirm('Bạn có chắc chắn muốn xóa không ?') ? deleteItem(item.tourID) : '' "
                                     data-toggle="tooltip" data-placement="top" title="Delete">
@@ -62,29 +64,17 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- Start Pagination -->
-            <section class="pagination">
-                <ul class="pagination">
-                    <li class="page-item" :class="{ 'disabled': currentPage === 1 }">
-                        <a class="page-link visuallyhidden" @click="currentPage--">«</a>
-                    </li>
-                    <li class="page-item" v-for="pageNumber in totalPages" :key="pageNumber"
-                        :class="{ 'active': currentPage === pageNumber }">
-                        <a class="page-link visuallyhidden" @click="currentPage = pageNumber">{{ pageNumber }}</a>
-                    </li>
-                    <li class="page-item" :class="{ 'disabled': currentPage === totalPages }">
-                        <a class="page-link visuallyhidden" @click="currentPage++">»</a>
-                    </li>
-                </ul>
-            </section>
-            <!-- End Pagination -->
+            <Nagination :current-page="currentPage" :total-pages="totalPages" @page-change="changePage"/>
         </div>
     </div>
 </template>
 <script>
+import Nagination from '@/components/ThePagination.vue';
 export default {
     name: 'tour-admin',
+    components: {
+        Nagination,
+    },
     data() {
         return {
             perPage: 4,
@@ -109,8 +99,12 @@ export default {
 
     mounted() {
         this.getAllItem();
+
     },
     methods: {
+        changePage(page) {
+            this.currentPage = page;
+        },
         getAllItem() {
             // eslint-disable-next-line
             axios.get('/api/Tour')
@@ -136,22 +130,31 @@ export default {
                     console.log(response.data);
 
                     // Sau khi xóa thành công, cập nhật lại danh sách hiển thị
-                    this.items = this.items.filter(item => item.tourID !== itemId);
-                    // Window.location.reload();
+                    // this.items = this.items.filter(item => item.tourID !== itemId);
+                    window.location.href = '/admin/tour';
                 })
                 .catch(error => {
                     // Xử lý lỗi
                     console.error(error);
                 });
         },
-        
+
+        editItem(tourID) {
+            // Lưu thông tin tour vào localStorage
+            const tourData = this.displayedItems.find(item => item.tourID === tourID);
+            localStorage.setItem('editTourData', JSON.stringify(tourData));
+
+            // Chuyển sang trang chỉnh sửa
+            this.$router.push({ path: '/admin/tour/edit', query: { id: tourID } });
+        }
+
     }
 }
 
 </script>
 <style lang="scss" scoped>
 .tour-table {
-    padding: 0 3rem;
+    margin: 3rem;
 }
 
 .table-h2 {

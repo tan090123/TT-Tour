@@ -132,7 +132,6 @@ namespace BookingTravel.Controllers
                 tour.TourCheckoutDays = updateTour.TourCheckoutDays;
                 tour.TourImage = updateTour.TourImage;
                 tour.Departure = updateTour.Departure;
-                tour.TourID = updateTour.TourID;
                 tour.Description = updateTour.Description;
                 tour.Destination = updateTour.Destination;
                 tour.DiscountTour = updateTour.DiscountTour;

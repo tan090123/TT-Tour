@@ -1,7 +1,7 @@
 <template lang="">
    <!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand"><i class='bx bxs-smile icon'></i> AdminTravel</a>
+		<a href="/admin" class="brand"><i class='bx bxs-smile icon'></i> AdminTravel</a>
 		<ul class="side-menu">
 			<li>
 				<router-link class="active" :to="{ name: 'HomeAdmin' }">
@@ -10,7 +10,7 @@
 				<!-- <a href="#" class="active"><i class='bx bxs-dashboard icon'></i>Dashboard</a> -->
 			</li>
 			<li class="divider" data-text="main">Main</li>
-			<!-- <li>
+			<li>
 				<a href="#"><i class='bx bxs-briefcase icon'></i>List<i
 						class='bx bx-chevron-right icon-right'></i></a>
 				<ul class="side-dropdown">
@@ -21,21 +21,12 @@
 					<li><a href="#">Breadcrumbs</a></li>
 					<li><a href="#">Button</a></li>
 				</ul>
-			</li> -->
+			</li>
 			<li>
-				<a href="#">
-					<i class='bx bxs-briefcase icon'></i>
-					<span>Tour</span>
-					<i class='bx bx-chevron-right icon-right'></i>
-					</a>
-				<ul class="side-dropdown">
-					<li>
-						<router-link :to="{ name: 'tour-admin' }">List Tour</router-link>
-					</li>
-					<li><a href="#">Badges</a></li>
-					<li><a href="#">Breadcrumbs</a></li>
-					<li><a href="#">Button</a></li>
-				</ul>
+				<router-link :to="{ name: 'tour-admin' }"><i class='bx bxs-briefcase icon'></i>Quản lý tour</router-link>
+			</li>
+			<li>
+				<router-link :to="{ name: 'user-admin' }"><i class='bx bxs-briefcase icon'></i>Quản lý user</router-link>
 			</li>
 			<li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
 			<li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
