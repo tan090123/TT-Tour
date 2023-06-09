@@ -66,21 +66,24 @@ namespace BookingTravel.Controllers
         }
 
         // GET: api/ToursFromDb/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ServicesTour>> GetServicesTour(int id)
+        [HttpGet]
+        [Route("id")]
+        public async Task<ActionResult<ServicesTourModel>> GetSerivicesTour([FromQuery] int? tourID)
         {
             if (_context.ServicesTour == null)
             {
                 return NotFound();
             }
-            var services_tour = await _context.ServicesTour.FindAsync(id);
+            var tour = await _context.Tours.FindAsync(tourID);
+            var tour_services = _context.ServicesTour.Where(x => x.TourID == tour.TourID).ToList();
 
-            if (services_tour == null)
+
+            if (tour_services == null)
             {
                 return NotFound();
             }
 
-            return services_tour;
+            return Ok(tour_services);
         }
 
         // PUT: api/ToursFromDb/5

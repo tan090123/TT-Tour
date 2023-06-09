@@ -52,12 +52,12 @@
                         <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
                         <div class="price">
                             <p class="price-old">
-                                Giá: <span class="text-decoration-line-through">{{ formatter.format(card.price)
+                                Giá: <span class="text-decoration-line-through" v-if="card.price!=card.promotionPrice">{{ formatter.format(card.price)
                                 }}</span>
                             </p>
                             <div class="price-now">
                                 <span class="price-now-number">{{ formatter.format(card.promotionPrice) }}</span>
-                                <span class="price-now-discount">{{ card.discountTour }} GIẢM</span>
+                                <span class="price-now-discount" v-if="card.discountTour!=0">{{ card.discountTour }} GIẢM</span>
                             </div>
                         </div>
                         <div class="timer">

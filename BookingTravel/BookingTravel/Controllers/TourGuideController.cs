@@ -55,7 +55,7 @@ namespace BookingTravel.Controllers
                 GuidePhone = newTourGuide.GuidePhone,
                 GuideAddress = newTourGuide.GuideAddress,
                 TourID = newTourGuide.TourID,
-                
+
             };
 
             _context.TourGuide.Add(tour_guide);
@@ -68,21 +68,23 @@ namespace BookingTravel.Controllers
         }
 
         // GET: api/ToursFromDb/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TourGuide>> GetTourGuide(int id)
+        [HttpGet]
+        [Route("id")]
+        public async Task<ActionResult<TourGuide>> GetTourGuide([FromQuery]int? tourID)
         {
             if (_context.TourGuide == null)
             {
                 return NotFound();
             }
-            var tour_guide = await _context.TourGuide.FindAsync(id);
+            var tour = await _context.Tours.FindAsync(tourID);
+            var tour_guide = _context.TourGuide.Where(x => x.TourID == tour.TourID).FirstOrDefault();
 
             if (tour_guide == null)
             {
                 return NotFound();
             }
 
-            return tour_guide;
+            return Ok(tour_guide);
         }
 
         // PUT: api/ToursFromDb/5

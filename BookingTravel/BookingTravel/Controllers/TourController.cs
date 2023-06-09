@@ -110,6 +110,7 @@ namespace BookingTravel.Controllers
             return tour;
         }
 
+
         // PUT: api/ToursFromDb/5
         [HttpPut("{id}")]
         public async Task<ActionResult<UpdateTourResultModel>> UpdateTour([FromRoute] int id, [FromBody] TourModel updateTour)

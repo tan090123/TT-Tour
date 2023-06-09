@@ -62,21 +62,24 @@ namespace BookingTravel.Controllers
         }
 
         // GET: api/ToursFromDb/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TourImages>> GetImages(int id)
+        [HttpGet]
+        [Route("id")]
+        public async Task<ActionResult<TourImagesModel>> GetTourImage([FromQuery] int? tourID)
         {
             if (_context.TourImages == null)
             {
                 return NotFound();
             }
-            var tourimages = await _context.TourImages.FindAsync(id);
+            var tour = await _context.Tours.FindAsync(tourID);
+            var tour_img = _context.TourImages.Where(x => x.TourID == tour.TourID).ToList();
 
-            if (tourimages == null)
+
+            if (tour_img == null)
             {
                 return NotFound();
             }
 
-            return tourimages;
+            return Ok(tour_img);
         }
 
         // PUT: api/ToursFromDb/5
