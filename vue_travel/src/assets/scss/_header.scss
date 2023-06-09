@@ -28,6 +28,16 @@ nav {
         box-shadow: none !important;
     }
 
+    .nav-full {
+        position: static;
+        top: 0;
+
+        div {
+            width: 100%;
+            height: 30rem;
+        }
+    }
+
     .navbar-nav {
         li {
             margin: 0 10px;

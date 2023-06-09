@@ -23,75 +23,75 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown nav-full">
                         <a class="nav-link dropdown-toggle" href="#" id="navlink-du-lich" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Du lịch
                         </a>
-                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-du-lich">
+                        <div class="dropdown-menu" aria-labelledby="navlink-du-lich">
                             <!-- Menu items here -->
-                            <li>
-                                <a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Tour du lịch
-                                    trong nước</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Tour du lịch
+                            trong nước</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" target="_blank" rel="nofollow">Vietravel
-                            MICE</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navlink-van-chuyen" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Vận chuyển
-                        </a>
-                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-van-chuyen">
-                            <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Thuê xe</a></li>
-                            <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Vé máy bay</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navlink-tin-tuc" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Tin tức
-                        </a>
-                        <ul class="dropdown-menu mt-3" aria-labelledby="navlink-tin-tuc">
-                            <li><a class="dropdown-item" href="#">Tin mới</a></li>
-                            <li><a class="dropdown-item" href="#">Tin tức du lịch</a></li>
-                            <li><a class="dropdown-item" href="#">Cẩm nang du lịch</a>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Kinh nghiệm du
-                                    lịch</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#khuyen-mai-modal">Khuyến
-                            mãi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="!#">VietravelPlus</a>
-                    </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link" :to="{ name: 'contact' }">Liên hệ</router-link>
-                        <!-- <a class="nav-link" href="/contact">Liên hệ</a> -->
+            </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" target="_blank" rel="nofollow">Vietravel
+                    MICE</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navlink-van-chuyen" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Vận chuyển
+                </a>
+                <ul class="dropdown-menu mt-3" aria-labelledby="navlink-van-chuyen">
+                    <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Thuê xe</a></li>
+                    <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Vé máy bay</a>
                     </li>
                 </ul>
-            </div>
-
-            <ul class="navbar-nav ms-auto nav-right">
-                <form class="d-flex">
-                    <input class="form-control" type="text" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
-                    <button class="form-btn btn" type="submit">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
-                </form>
-                <li class="nav-item">
-                    <router-link class="nav-link" :to="{ name: 'login_component' }">
-                        <i class="fa-regular fa-user" @click="showLogin = true"></i>
-                    </router-link>
-                </li>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navlink-tin-tuc" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Tin tức
+                </a>
+                <ul class="dropdown-menu mt-3" aria-labelledby="navlink-tin-tuc">
+                    <li><a class="dropdown-item" href="#">Tin mới</a></li>
+                    <li><a class="dropdown-item" href="#">Tin tức du lịch</a></li>
+                    <li><a class="dropdown-item" href="#">Cẩm nang du lịch</a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Kinh nghiệm du
+                            lịch</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#khuyen-mai-modal">Khuyến
+                    mãi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="!#">VietravelPlus</a>
+            </li>
+            <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'contact' }">Liên hệ</router-link>
+                <!-- <a class="nav-link" href="/contact">Liên hệ</a> -->
+            </li>
             </ul>
+        </div>
+
+        <ul class="navbar-nav ms-auto nav-right">
+            <form class="d-flex">
+                <input class="form-control" type="text" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
+                <button class="form-btn btn" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </form>
+            <li class="nav-item">
+                <router-link class="nav-link" :to="{ name: 'login_component' }">
+                    <i class="fa-regular fa-user" @click="showLogin = true"></i>
+                </router-link>
+            </li>
+        </ul>
         </div>
     </nav>
 </template>

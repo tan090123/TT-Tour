@@ -92,143 +92,176 @@
                                     </li>
                                 </ul>
                             </div>
-                            
+
 
                         </div>
                         <div class="tab-content p-4">
-                            
-                                    <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    
-                                        <ul class="nav nav-tablist mb-3" id="tablist-tab" role="tablist">
-                                            <li class="nav-item me-3" role="presentation">
-                                                <button class="nav-link active" id="nav-package-tab" data-bs-toggle="tab" data-bs-target="#nav-package" type="button" role="tab" aria-controls="nav-home" aria-selected="true">
-                                                    Tour trọn gói
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="nav-destination-tab" data-bs-toggle="tab" data-bs-target="#nav-destination" type="button" role="tab" aria-controls="nav-home" aria-selected="false">
-                                                    Dịch vụ điểm đến
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content p-4">
-                                            <div class="tab-pane active" id="nav-package" role="tabpanel" aria-labelledby="nav-package-tab">
-                                                <div class="row">
-                                                    <div class="col-6 row">
-                                                        <div class="col-5">
-                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Điểm đi</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                            
-                                                        </div>
-                                                        <div class="col-2 text-center mt-3"><i class="fa-solid fa-right-left fa-2x"></i></div>
-                                                        <div class="col-5">
-                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Điểm đến</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Số ngày</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
-                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
-                                                        </button>
-                                                        
-                                                    </div>
+
+                            <div class="tab-pane active" id="pills-home" role="tabpanel"
+                                aria-labelledby="pills-home-tab">
+
+                                <ul class="nav nav-tablist mb-3" id="tablist-tab" role="tablist">
+                                    <li class="nav-item me-3" role="presentation">
+                                        <button class="nav-link active" id="nav-package-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-package" type="button" role="tab"
+                                            aria-controls="nav-home" aria-selected="true">
+                                            Tour trọn gói
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="nav-destination-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-destination" type="button" role="tab"
+                                            aria-controls="nav-home" aria-selected="false">
+                                            Dịch vụ điểm đến
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content p-4">
+                                    <div class="tab-pane active" id="nav-package" role="tabpanel"
+                                        aria-labelledby="nav-package-tab">
+                                        <div class="row">
+                                            <div class="col-6 row">
+                                                <div class="col-5">
+                                                    <select
+                                                        class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                        aria-label="Default select example">
+                                                        <option selected>Điểm đi</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-2 text-center mt-3"><i
+                                                        class="fa-solid fa-right-left fa-2x"></i></div>
+                                                <div class="col-5">
+                                                    <select
+                                                        class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                        aria-label="Default select example">
+                                                        <option selected>Điểm đến</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
                                                 </div>
                                             </div>
-        
-                                            <div class="tab-pane" id="nav-destination" role="tabpanel" aria-labelledby="nav-destination-tab">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        
-                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Điểm đến</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                            
-                                                        
-                                                        
-                                                    </div>
-                                                    
-                                                    <div class="col-4">
-                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
-                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
-                                                        </button>
-                                                        
-                                                    </div>
-                                                </div>
+                                            <div class="col-3">
+                                                <input type="date"
+                                                    class='w-100 h-100 p-3 border border-warning border-5 text-center'
+                                                    name="" id="">
                                             </div>
-                                            
+                                            <div class="col-2">
+                                                <select
+                                                    class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                    aria-label="Default select example">
+                                                    <option selected>Số ngày</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-1">
+                                                <router-link :to="{ name: 'tours_search' }" type='submit'
+                                                    class='btn btn-primary w-100 h-100'>
+                                                    <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                </router-link>
+                                                <!-- <button type='submit' class='btn btn-primary w-100 h-100'>
+                                                    <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                </button> -->
+
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                                    <div class="tab-pane" id="nav-destination" role="tabpanel"
+                                        aria-labelledby="nav-destination-tab">
                                         <div class="row">
-                                                    <div class="col-6 row">
-                                                        <div class="col-5">
-                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Điểm đi</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                            
-                                                        </div>
-                                                        <div class="col-2 text-center mt-3"><i class="fa-solid fa-right-left fa-2x"></i></div>
-                                                        <div class="col-5">
-                                                            <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Điểm đến</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <input type="date" class='w-100 h-100 p-3 border border-warning border-5 text-center' name="" id="">
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <select class="form-select text-center fs-3 border border-warning border-5 p-3" aria-label="Default select example">
-                                                                <option selected>Số ngày</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <button type='submit' class='btn btn-primary w-100 h-100'>
-                                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
-                                                        </button>
-                                                        
-                                                    </div>
-                                                </div>
+                                            <div class="col-4">
+
+                                                <select
+                                                    class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                    aria-label="Default select example">
+                                                    <option selected>Điểm đến</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+
+
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <input type="date"
+                                                    class='w-100 h-100 p-3 border border-warning border-5 text-center'
+                                                    name="" id="">
+                                            </div>
+                                            <div class="col-4">
+                                                <button type='submit' class='btn btn-primary w-100 h-100'>
+                                                    <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                                </button>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                    
-    
-                                    
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="pills-profile" role="tabpanel"
+                                aria-labelledby="pills-profile-tab">
+                                <div class="row">
+                                    <div class="col-6 row">
+                                        <div class="col-5">
+                                            <select
+                                                class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                aria-label="Default select example">
+                                                <option selected>Điểm đi</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="col-2 text-center mt-3"><i class="fa-solid fa-right-left fa-2x"></i>
+                                        </div>
+                                        <div class="col-5">
+                                            <select
+                                                class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                                aria-label="Default select example">
+                                                <option selected>Điểm đến</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="date"
+                                            class='w-100 h-100 p-3 border border-warning border-5 text-center' name=""
+                                            id="">
+                                    </div>
+                                    <div class="col-2">
+                                        <select class="form-select text-center fs-3 border border-warning border-5 p-3"
+                                            aria-label="Default select example">
+                                            <option selected>Số ngày</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type='submit' class='btn btn-primary w-100 h-100'>
+                                            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                         </div>
-                        
+
                     </div>
 
                     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -399,12 +432,14 @@
                             <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
                             <div class="price">
                                 <p class="price-old">
-                                    Giá: <span class="text-decoration-line-through" v-if="card.price!=card.promotionPrice" >{{ formatter.format(card.price)
+                                    Giá: <span class="text-decoration-line-through"
+                                        v-if="card.price!=card.promotionPrice">{{ formatter.format(card.price)
                                         }}</span>
                                 </p>
                                 <div class="price-now">
-                                    <span class="price-now-number" >{{ formatter.format(card.promotionPrice) }}</span>
-                                    <span class="price-now-discount" v-if="card.price!=card.promotionPrice">{{ card.discountTour }} GIẢM</span>
+                                    <span class="price-now-number">{{ formatter.format(card.promotionPrice) }}</span>
+                                    <span class="price-now-discount" v-if="card.price!=card.promotionPrice">{{
+                                        card.discountTour }} GIẢM</span>
                                 </div>
                             </div>
                             <div class="timer">
@@ -417,7 +452,8 @@
                                 </div>
                                 <div class="numberSit d-flex align-items-center justify-content-center">
                                     <p class="text-decoration-underline me-2">Số chỗ còn</p>
-                                    <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourAvailableSit }}</p>
+                                    <p class="text-danger fw-bold" style="font-size: 22px;">{{ card.tourAvailableSit }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -729,202 +765,203 @@
     <!-- ========== End Tour .... ========== -->
 </template>
 <script>
-// import cardData from "@/data/cardData.js";
-import productData from "@/data/productData.js";
-export default {
-    data() {
-        return {
-            cards: [],
-            products: productData,
-            formatter: new Intl.NumberFormat("vi-VN", {
-                style: "currency",
-                currency: "VND",
-            }),
-        };
-    },
-
-    mounted() {
-        // eslint-disable-next-line no-undef
-        $(document).ready(function () {
-            // eslint-disable-next-line no-undef
-            $(".owl-carousel").owlCarousel({
-                center: true,
-                loop: true,
-                margin: 20,
-                responsive: {
-                    0: {
-                        items: 2,
-                    },
-                    600: {
-                        items: 2,
-                    },
-                    1000: {
-                        items: 3,
-                    },
-                },
-                autoplay: true,
-                autoplayTimeout: 4000,
-                autoplayHoverPause: true,
-            });
-        });
-        this.getAllProduct();
-    },
-    methods:{
-        getAllProduct() {
-            // eslint-disable-next-line
-            axios.get('api/Tour')
-                .then((response) => {
-                    // handle success
-                    this.cards = response.data;
-                })
-                .catch((error) => {
-                    // handle error
-                    console.log(error);
-                });
+    // import cardData from "@/data/cardData.js";
+    import productData from "@/data/productData.js";
+    export default {
+        data() {
+            return {
+                cards: [],
+                products: productData,
+                formatter: new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }),
+            };
         },
-    }
-};
+
+        mounted() {
+            // eslint-disable-next-line no-undef
+            $(document).ready(function () {
+                // eslint-disable-next-line no-undef
+                $(".owl-carousel").owlCarousel({
+                    center: true,
+                    loop: true,
+                    margin: 20,
+                    responsive: {
+                        0: {
+                            items: 2,
+                        },
+                        600: {
+                            items: 2,
+                        },
+                        1000: {
+                            items: 3,
+                        },
+                    },
+                    autoplay: true,
+                    autoplayTimeout: 4000,
+                    autoplayHoverPause: true,
+                });
+            });
+            this.getAllProduct();
+        },
+        methods: {
+            getAllProduct() {
+                // eslint-disable-next-line
+                axios.get('api/Tour')
+                    .then((response) => {
+                        // handle success
+                        this.cards = response.data;
+                    })
+                    .catch((error) => {
+                        // handle error
+                        console.log(error);
+                    });
+            },
+        }
+    };
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/_tourMain.scss";
-@import "@/assets/scss/_tourProduct.scss";
-@import "@/assets/scss/_carousel.scss";
-@import "@/assets/scss/_card.scss";
+    @import "@/assets/scss/_tourMain.scss";
+    @import "@/assets/scss/_tourProduct.scss";
+    @import "@/assets/scss/_carousel.scss";
+    @import "@/assets/scss/_card.scss";
 
-/* Start Tourkp */
-.tourkp {
-    padding: 0 10px;
-    margin-bottom: 2rem;
-    cursor: pointer;
-    border-radius: 10px;
-}
+    /* Start Tourkp */
+    .tourkp {
+        padding: 0 10px;
+        margin-bottom: 2rem;
+        cursor: pointer;
+        border-radius: 10px;
+    }
 
-.tourkp h2 {
-    font: 30px roboto, sans-serif;
-    font-weight: 700;
-    color: #2d4271;
-    margin-bottom: 24px;
-}
+    .tourkp h2 {
+        font: 30px roboto, sans-serif;
+        font-weight: 700;
+        color: #2d4271;
+        margin-bottom: 24px;
+    }
 
-.tourkp__card {
-    position: relative;
-    padding-right: 0;
-    margin-bottom: 3rem;
-}
+    .tourkp__card {
+        position: relative;
+        padding-right: 0;
+        margin-bottom: 3rem;
+    }
 
-.tourkp__img {
-    width: 100%;
-}
+    .tourkp__img {
+        width: 100%;
+    }
 
-.tourkp__img img {
-    height: 28rem;
-    object-fit: cover;
-    border-radius: 10px;
-    width: 100%;
-}
+    .tourkp__img img {
+        height: 28rem;
+        object-fit: cover;
+        border-radius: 10px;
+        width: 100%;
+    }
 
-.tourkp__text a {
-    position: absolute;
-    bottom: 0rem;
-    color: #fff;
-    padding: 4rem 2rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 10px;
-    background-image: linear-gradient(180deg,
-            rgba(45, 66, 113, 0) 0%,
-            #2d4271 100%);
-    width: 97%;
-}
+    .tourkp__text a {
+        position: absolute;
+        bottom: 0rem;
+        color: #fff;
+        padding: 4rem 2rem;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 10px;
+        background-image: linear-gradient(180deg,
+                rgba(45, 66, 113, 0) 0%,
+                #2d4271 100%);
+        width: 97%;
+    }
 
-/* End Tourkp */
+    /* End Tourkp */
 
 
-/* Start Tour Place */
-.TourPlace {
-    padding: 0 10px;
-}
+    /* Start Tour Place */
+    .TourPlace {
+        padding: 0 10px;
+    }
 
-.TourPlace__title h1 {
-    font: 30px roboto, sans-serif;
-    font-weight: 700;
-    color: #2d4271;
-    margin-bottom: 24px;
-}
+    .TourPlace__title h1 {
+        font: 30px roboto, sans-serif;
+        font-weight: 700;
+        color: #2d4271;
+        margin-bottom: 24px;
+    }
 
-.TourPlace__content .div {
-    padding: 16px;
-}
+    .TourPlace__content .div {
+        padding: 16px;
+    }
 
-.TourPlace__content-img img {
-    filter: brightness(0.75);
-    min-height: 18em;
-    object-fit: cover;
-    border-radius: 10px;
-    position: relative;
-}
+    .TourPlace__content-img img {
+        filter: brightness(0.75);
+        min-height: 18em;
+        object-fit: cover;
+        border-radius: 10px;
+        position: relative;
+    }
 
-.TourPlace__content-img i {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -40%);
-    color: #ffff;
-}
+    .TourPlace__content-img i {
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -40%);
+        color: #ffff;
+    }
 
-.TourPlace__content-place a {
-    font: 17px roboto, sans-serif;
-    color: #2d4271;
-    font-weight: 700;
-    line-height: 1.2em;
-}
+    .TourPlace__content-place a {
+        font: 17px roboto, sans-serif;
+        color: #2d4271;
+        font-weight: 700;
+        line-height: 1.2em;
+    }
 
-.TourPlace__content-desc p {
-    font: 13px roboto, sans-serif;
-    color: #2d4271;
-}
+    .TourPlace__content-desc p {
+        font: 13px roboto, sans-serif;
+        color: #2d4271;
+    }
 
-/* End Tour Place */
+    /* End Tour Place */
 
-/*  Start: Tour Select */
-.TourSelect {
-    padding: 0 10px;
-}
+    /*  Start: Tour Select */
+    .TourSelect {
+        padding: 0 10px;
+    }
 
-.TourSelect__title h2 {
-    font: 30px roboto, sans-serif;
-    font-weight: 700;
-    color: #2d4271;
-    margin-bottom: 24px;
-}
+    .TourSelect__title h2 {
+        font: 30px roboto, sans-serif;
+        font-weight: 700;
+        color: #2d4271;
+        margin-bottom: 24px;
+    }
 
-.TourSelect_content {
-    text-align: center;
-}
+    .TourSelect_content {
+        text-align: center;
+    }
 
-.TourSelect_content-title {
-    font: 17px roboto, sans-serif;
-    color: #2d4271;
-    font-weight: 700;
-    line-height: 24px;
-    margin-bottom: 16px;
-}
+    .TourSelect_content-title {
+        font: 17px roboto, sans-serif;
+        color: #2d4271;
+        font-weight: 700;
+        line-height: 24px;
+        margin-bottom: 16px;
+    }
 
-.TourSelect_content i {
-    background: linear-gradient(180deg, #4d4aef, #adabff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
-}
+    .TourSelect_content i {
+        background: linear-gradient(180deg, #4d4aef, #adabff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 16px;
+    }
 
-.TourSelect_content-text {
-    font: 15px roboto, sans-serif;
-    color: #2d4271;
-    font-weight: 400;
-    line-height: 24px;
-}
+    .TourSelect_content-text {
+        font: 15px roboto, sans-serif;
+        color: #2d4271;
+        font-weight: 400;
+        line-height: 24px;
+    }
 
-/*  End: Tour Select */
+    /*  End: Tour Select */
+
 </style>

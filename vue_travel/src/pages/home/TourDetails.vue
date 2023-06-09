@@ -52,19 +52,65 @@
           </div>
         </div>
       </div>
-      <div class="carousel mt-5">
+      <!-- <div class="carousel mt-5">
         <div class="owl-carousel owl-theme p-0">
           <div class="item" v-for="(tourimg, index) in tourImage" :key="index">
             <a href="#">
+               <img :src="'/images/details/' + tourimg.images" alt="TQ1" />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
               <img
-                :src="require(`@/../public/images/details/${tourimg.images}`)"
+                src="@/../public/images/details/tq_1.jpg"
+                alt="TQ1"
+              />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
+              <img
+                src="@/../public/images/details/tq_1.jpg"
+                alt="TQ1"
+              />
+            </a>
+          </div>
+          <div class="item">
+            <a href="#">
+              <img
+                src="@/../public/images/details/tq_1.jpg"
                 alt="TQ1"
               />
             </a>
           </div>
         </div>
-      </div>
-
+      </div> -->
+      <!-- Images -->
+      <section class="tour-images">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-7 left">
+              <img src="@/../public/images/details/tq_1.jpg" alt="">
+            </div>
+            <div class="col-12 col-md-12 col-lg-5 right">
+              <div class="row gy-4">
+                <div class="col-12 col-md-12 small">
+                  <div class="row">
+                    <div class="col-6">
+                      <img src="@/../public/images/details/tq_1.jpg" alt="">
+                    </div>
+                    <div class="col-6">
+                      <img src="@/../public/images/details/tq_2.jpg" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-12 big">
+                  <img src="@/../public/images/details/tq_3.jpg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <!-- End images -->
       <div class="TourDetails__section row">
         <div class="col-12 col-md-5">
           <div class="TourDetails__section--detail row">
@@ -660,7 +706,7 @@ export default {
   data() {
     return {
       products: [
-        
+
       ],
       tourGuide: [],
       tourServices: [],
@@ -673,8 +719,7 @@ export default {
     };
   },
   mounted() {
-    // eslint-disable-next-line no-undef
-    $(document).ready(function () {
+    this.$nextTick(() => {
       // eslint-disable-next-line no-undef
       $(".owl-carousel").owlCarousel({
         center: true,
@@ -703,9 +748,9 @@ export default {
     this.getTourScheduleByID(this.$route.params.id);
   },
   methods: {
-    submitBooking(){
-      this.$router.push({name:'booking-id',params:{id:this.products.tourID}})
-      window.location.href=`/booking/tourBooking/tourID=${this.products.tourID}`;
+    submitBooking() {
+      this.$router.push({ name: 'booking-id', params: { id: this.products.tourID } })
+      window.location.href = `/booking/tourBooking/tourID=${this.products.tourID}`;
       // window.location.href=`/booking/${this.products.tourID}`;
     },
     getProductsByID(id) {
@@ -778,7 +823,18 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/_details.scss";
 @import "@/assets/scss/_carousel.scss";
+
+.tour-images {
+  margin: 3rem 0;
+
+  img {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
 </style>
