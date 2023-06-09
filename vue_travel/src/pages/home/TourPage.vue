@@ -11,9 +11,9 @@
             <div class="col mb-5" v-for="card in displayedCarts" :key="card.tourID">
                 <div class="card">
                     <div class="img">
-                        <router-link :to="{name:'details-id',params:{id:card.tourID}}">
-                                <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
-                                    width="100%" :alt="card.tourName">
+                        <router-link :to="{ name: 'details-id', params: { id: card.tourID } }">
+                            <img :src="require(`@/../public/images/card/${card.tourImage}`)" class="card-img-top"
+                                width="100%" :alt="card.tourName">
                         </router-link>
                         <div class="img-icon">
                             <a href="">
@@ -40,9 +40,9 @@
                     <div class="body card-body">
                         <p class="p-date">{{ card.date }}</p>
                         <p class="p-title">
-                            <a href="">
+                            <router-link :to="{ name: 'details-id', params: { id: card.tourID } }">
                                 {{ card.tourName }}
-                            </a>
+                            </router-link>
                         </p>
                         <div class="code">
                             <p>Mã tour:</p>
@@ -52,12 +52,14 @@
                         <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
                         <div class="price">
                             <p class="price-old">
-                                Giá: <span class="text-decoration-line-through" v-if="card.price!=card.promotionPrice">{{ formatter.format(card.price)
+                                Giá: <span class="text-decoration-line-through" v-if="card.price != card.promotionPrice">{{
+                                    formatter.format(card.price)
                                 }}</span>
                             </p>
                             <div class="price-now">
                                 <span class="price-now-number">{{ formatter.format(card.promotionPrice) }}</span>
-                                <span class="price-now-discount" v-if="card.discountTour!=0">{{ card.discountTour }} GIẢM</span>
+                                <span class="price-now-discount" v-if="card.discountTour != 0">{{ card.discountTour }}
+                                    GIẢM</span>
                             </div>
                         </div>
                         <div class="timer">

@@ -43,18 +43,12 @@ const home = [
                 component: () => import("@/pages/home/TourPage.vue"),
                 meta: { title: 'Danh sách các Tour - Vietravel' }
             },
-            // {
-            //     path: '/',
-            //     name: 'HomePage',
-            //     component: () => import("@/pages/home/TourSearch.vue"),
-            //     meta: { title: '- Vietravel' }
-            // },
-            // {
-            //     path: '/tours/details',
-            //     name: 'details',
-            //     component: () => import("@/pages/home/TourDetails.vue"),
-            //     meta: { title: 'Du Lịch Vietravel - Vietravel' }
-            // },
+            {
+                path: '/search',
+                name: 'tours_search',
+                component: () => import("@/pages/home/TourSearch.vue"),
+                meta: { title: 'Kết quả tìm kiếm - Vietravel' }
+            },
             {
                 path: '/tours/details/:id',
                 name: 'details-id',
