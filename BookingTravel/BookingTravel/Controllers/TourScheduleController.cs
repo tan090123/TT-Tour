@@ -68,26 +68,29 @@ namespace BookingTravel.Controllers
         }
 
         // GET: api/ToursFromDb/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TourSchedule>> GetSchedule(int id)
+        [HttpGet]
+        [Route("id")]
+        public async Task<ActionResult<TourScheduleModel>> GetTourSchedule([FromQuery] int? tourID)
         {
             if (_context.TourSchedule == null)
             {
                 return NotFound();
             }
-            var schedule = await _context.TourSchedule.FindAsync(id);
+            var tour = await _context.Tours.FindAsync(tourID);
+            var tour_schedule = _context.TourSchedule.Where(x => x.TourID == tour.TourID).ToList();
 
-            if (schedule == null)
+
+            if (tour_schedule == null)
             {
                 return NotFound();
             }
 
-            return schedule;
+            return Ok(tour_schedule);
         }
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateSchedule([FromRoute] int id, [FromBody] UserModel updateSchedule)
+        public UpdateTourResultModel UpdateSchedule([FromRoute] int id, [FromBody] TourScheduleModel updateSchedule)
         {
             var response = new UpdateTourResultModel();
 
@@ -102,10 +105,10 @@ namespace BookingTravel.Controllers
             {
                 response.Result = true;
 
-                schedule.ScheduleNote = schedule.ScheduleNote;
-                schedule.TourID = schedule.TourID;
-                schedule.ScheduleName = schedule.ScheduleName;
-                schedule.ScheduleDesc = schedule.ScheduleDesc;
+                schedule.ScheduleNote = updateSchedule.ScheduleNote;
+                schedule.TourID = updateSchedule.TourID;
+                schedule.ScheduleName = updateSchedule.ScheduleName;
+                schedule.ScheduleDesc = updateSchedule.ScheduleDesc;
 
                
                 _context.Update(schedule);

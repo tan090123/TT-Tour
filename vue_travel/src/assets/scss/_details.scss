@@ -257,6 +257,16 @@ $main-clr: #2d4271;
             padding: 5px;
         }
     }
+    &--short {
+        background-color: #f9f9f9;
+        padding: 3rem;
+        color: $main-clr;
+
+        li {
+            list-style-type: circle;
+            padding: 5px;
+        }
+    }
 }
 
 .TourDetails__info {

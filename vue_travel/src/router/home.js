@@ -14,17 +14,17 @@ const home = [
                 meta: { title: 'Du Lịch Vietravel - Vietravel' }
             },
             {
-                path: '/order',
-                name: 'contact',
+                path: '/booking/tourBooking/tourID=:id',
+                name: 'booking-id',
                 component: () => import("@/pages/home/TourOrder.vue"),
                 meta: { title: 'Thông tin - Vietravel ' }
             },
-            // {
-            //     path: '/contact',
-            //     name: 'contact',
-            //     component: () => import("@/pages/home/Contact.vue"),
-            //     meta: { title: 'Contact - Vietravel ' }
-            // },
+            {
+                path: '/contact',
+                name: 'contact',
+                component: () => import("@/pages/home/Contact.vue"),
+                meta: { title: 'Contact - Vietravel ' }
+            },
             {
                 path: '/login',
                 name: 'login_component',

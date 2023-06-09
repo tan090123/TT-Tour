@@ -59,7 +59,7 @@
                     <label for="type">Type:</label>
                     <select id="type" name="type" v-model="tourType">
                         <option v-for="tintype in types" :value="tintype.typeID" :key="tintype.typeID">{{
-                            tintype.typeID
+                            tintype.typeName
                             }}</option>
                     </select>
                 </div>

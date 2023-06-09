@@ -18,7 +18,10 @@
         <div class="col-12 col-md-6 text-end mt-5">
           <div class="row">
             <div class="col-6 col-md-9">
-              <div class="TourDetails__discount">
+              <div
+                class="TourDetails__discount"
+                v-if="products.price != products.promotionPrice"
+              >
                 <p>
                   Giá <span>{{ formatter.format(products.price) }}</span
                   >/ khách
@@ -49,51 +52,13 @@
           </div>
         </div>
       </div>
-
       <div class="carousel mt-5">
         <div class="owl-carousel owl-theme p-0">
-          <div class="item">
-            <a href="#">
-              <img src="@/../public/images/details/tq_1.jpg" alt="TQ1" />
-            </a>
-          </div>
-          <div class="item">
+          <div class="item" v-for="(tourimg, index) in tourImage" :key="index">
             <a href="#">
               <img
-                src="@/../public/images/details/tq_2.jpg"
-                alt="Dai hoi han quoc"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_3.jpg"
-                alt="Dai hoi han quoc 4 ngay 3 dem"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_4.jpg"
-                alt="Trai nghiem mua he nuoc uc"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_5.jpg"
-                alt="Trai nghiem mua he nuoc uc"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_6.jpg"
-                alt="Trai nghiem mua he nuoc uc"
+                :src="require(`@/../public/images/details/${tourimg.images}`)"
+                alt="TQ1"
               />
             </a>
           </div>
@@ -140,69 +105,17 @@
         <div class="col-12 col-md-7">
           <div class="TourDetails__section--icon">
             <div class="row">
-              <div class="col-12 col-md-3 mb-3">
+              <div
+                class="col-12 col-md-3 mb-3"
+                v-for="tourService in tourServices"
+                :key="tourService.tourID"
+              >
                 <img
                   src="@/../public/images/icon/thoi_gian.png"
                   alt="Thời gian"
                 />
-                <h5>Thời gian</h5>
-                <p>6 ngày 5 đêm</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/phuong_tien_di_chuyen.png"
-                  alt="Phương tiện di chuyển"
-                />
-                <h5>Phương tiện di chuyển</h5>
-                <p>Máy bay, Xe du lịch</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/map.png"
-                  alt="Điểm tham quan"
-                />
-                <h5>Điểm tham quan</h5>
-                <p>
-                  Trung Quốc, Trương Gia Giới, Phượng Hoàng Cổ Trấn, Thiên Môn
-                  Sơn, Bảo Phong Hồ
-                </p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img src="@/../public/images/icon/am_thuc.png" alt="Ẩm thực" />
-                <h5>Ẩm thực</h5>
-                <p>Buffet sáng, Theo thực đơn</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/khach_san.png"
-                  alt="Khách sạn"
-                />
-                <h5>Khách sạn</h5>
-                <p>Khách sạn 4 sao</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/thoi_gian_ly_tuong.png"
-                  alt="Thời gian lý tưởng"
-                />
-                <h5>Thời gian lý tưởng</h5>
-                <p>Quanh năm</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/doi_tuong_thich_hop.png"
-                  alt="Đối tượng thích "
-                />
-                <h5>Đối tượng thích hợp</h5>
-                <p>Cặp đôi, Gia đình nhiều thế hệ, Thanh niên</p>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <img
-                  src="@/../public/images/icon/doi_tuong_thich_hop.png"
-                  alt="Đối tượng thích "
-                />
-                <h5>Ưu đãi</h5>
-                <p>Đã bao gồm ưu đãi trong giá tour</p>
+                <h5>{{ tourService.servicesTourName }}</h5>
+                <p>{{ tourService.servicesTourDesc }}</p>
               </div>
             </div>
           </div>
@@ -211,47 +124,39 @@
     </div>
   </div>
 
-  <div class="TourDetails__desc">
-    <h3>Điểm nhấn</h3>
-    <div class="TourDetails__desc--desc">
+  <div class="TourDetails__desc row my-5 py-5">
+    <h3 class="text-center">Lịch Trình</h3>
+    <div class="TourDetails__desc--short col-3">
+      <div
+        class="d-flex justify-content-between align-items-center row mt-2"
+        v-for="(tourSche, index) in tourSchedule"
+        :key="index"
+      >
+        <div class="date-left col-1">
+          <span>Ngày</span>
+        </div>
+        <div
+          class="date-center bg-danger rounded-circle text-center ms-3 col-2 text-light pt-2"
+          style="width: 2em; height: 2em"
+        >
+          {{ index + 1 }}
+        </div>
+        <div class="date-right ms-3 col-9">
+          <span class="fs-5">11/06/2023</span>
+          <h4 class="fs-4 fw-bold">
+            {{ tourSche.scheduleName }}
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="TourDetails__desc--desc col-9 border border-0 border-start border-success">
       <div class="container-fluid">
-        <p>
-          Phượng Hoàng Cổ Trấn nay đã không còn xa lạ với tín đồ yêu thích du
-          lịch tại Việt Nam. Với vẻ đẹp huyền ảo như lạc vào cõi mộng Phượng
-          Hoàng Cổ Trấn từ lâu đã là một địa điểm du lịch nổi tiếng của Trung
-          Quốc và cũng là “Thiên Đường Sống Ảo” của các bạn trẻ Việt với nét cổ
-          kính và trầm mặc cùng năm tháng không lẫn vào đâu. Lạc bước giữa
-          Trương Gia Giới – cảnh sắc khiến du khách như lạc vào chốn bồng lai
-          tiên cảnh và là phim trường của Tây Du Ký, Avatar nổi tiếng toàn thế
-          giới, du khách sẽ trầm trồ trước khung cảnh hùng tráng của thiên nhiên
-          nơi đây hay thử lòng can đảm khi dạo bước trên hành lang kính trong
-          suốt bên dưới là vực sâu đầy thú vị. Đặc biệt đây là hành trình chuyến
-          bay thẳng từ Tp Hồ Chí Minh đến Trương Gia Giới giúp tiết kiệm thời
-          gian quá cảnh từ 4 – 6 tiếng so với hành trình thông thường.
-        </p>
-        <p class="mb-0">Điểm nhấn</p>
-        <ul>
-          <li>
-            Khách sạn 5* theo chuẩn địa phương với tour khởi hành trong tháng 04
-            & 05.
-          </li>
-          <li>Tham quan Thiên Môn Sơn cung đường với 99 khúc cua ngoạn mục.</li>
-          <li>
-            Cảm nhận vẻ đẹp hùng vĩ của Hành lang Quỷ Cốc, khám phá động Thiên
-            Môn, chinh phục con đường 99 khúc quanh.
-          </li>
-          <li>Tham quan Núi Thiên Tử đây là một kỳ quan của Trương Gia giới</li>
-          <li>
-            Tham quan Khu bảo tồn quốc gia Trương Gia Giới (Viên Gia Giới + Núi
-            Thiên Tử)
-          </li>
-          <li>Trải nghiệm đi thuyền ngắm cảnh hai bên dòng sông Đà Giang.</li>
-          <li>Ngồi tàu lửa tham quan Thập Lý Họa Lang</li>
-          <li>
-            Thăm Hồ Bảo Phong là một hồ nước ngọt trên núi nằm trong khu thắng
-            cảnh Vũ Lăng Nguyên
-          </li>
-        </ul>
+        <div class="div" v-for="(tourSche, index) in tourSchedule" :key="index">
+          <h3 class="fs-2">Ngày {{ index + 1 }} - {{ tourSche.scheduleName }}</h3>
+          <p class="ps-5">
+            {{ tourSche.scheduleDesc }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -260,7 +165,7 @@
         <h2>Lịch trình</h2>
     </div> -->
 
-  <div class="TourDetails__info">
+  <div class="TourDetails__info my-5">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-6">
@@ -298,13 +203,13 @@
           <h2>Thông tin hướng dẫn viên</h2>
           <div class="TourDetails__info--item">
             <p class="title">
-              HDV dẫn đoàn
-              <span>TẤT VĂN CƠ</span>
+              HDV dẫn đoàn:
+              <span>{{ tourGuide.guideName }}</span>
             </p>
             <p class="address">
-              190 Pasteur, Vo Thi Sau Ward, District 3, HCM City, Viet Nam
+              Địa chỉ : {{ tourGuide.guideAddress }}
             </p>
-            <p class="mobile">0903704682</p>
+            <p class="mobile">Số đt : {{ tourGuide.guidePhone }}</p>
             <div class="desc">Đang cập nhật</div>
           </div>
         </div>
@@ -689,20 +594,22 @@
 
         <!-- Modal body -->
         <div class="modal-body py-3">
-          <h2 class='text-primary'>Danh sách lựa chọn</h2>
+          <h2 class="text-primary">Danh sách lựa chọn</h2>
           <div class="col-12 my-2">
             <table class="table caption-top">
               <tbody>
                 <tr>
-                  <td colspan="2" class='fs-4 fst-italic'>
+                  <td colspan="2" class="fs-4 fst-italic">
                     <span id="OptionName_1">
-                      {{products.tourName}}
+                      {{ products.tourName }}
                     </span>
                   </td>
                   <td></td>
                   <td></td>
                   <td class="d-flex justify-content-end">
-                    <span class="px-2 fs-4 fst-italic" id="optionPrice_1">{{ formatter.format(products.price) }}</span>
+                    <span class="px-2 fs-4 fst-italic" id="optionPrice_1">{{
+                      formatter.format(products.price)
+                    }}</span>
                     <div class="form-check">
                       <input
                         class="form-check-input"
@@ -726,7 +633,9 @@
             <div class="row">
               <div class="col-12 d-flex justify-content-end fw-bold">
                 <span class="px-4">Thành tiền :</span>
-                <span class="px-2" id="TotalPriceService">{{ formatter.format(products.price) }}</span>
+                <span class="px-2" id="TotalPriceService">{{
+                  formatter.format(products.price)
+                }}</span>
               </div>
             </div>
           </div>
@@ -735,6 +644,7 @@
               type="submit"
               id="btn-order"
               class="btn btn-danger text-uppercase btn-lg"
+              @click="submitBooking()"
             >
               Đặt ngay
             </button>
@@ -749,7 +659,13 @@ export default {
   name: "details-id",
   data() {
     return {
-      products: [],
+      products: [
+        
+      ],
+      tourGuide: [],
+      tourServices: [],
+      tourImage: [],
+      tourSchedule: [],
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -780,18 +696,78 @@ export default {
         autoplayHoverPause: true,
       });
     });
-    this.getAllItem(this.$route.params.id);
-    // console.log(this.$route.params.id);
+    this.getProductsByID(this.$route.params.id);
+    this.getTourGuideByID(this.$route.params.id);
+    this.getServicesTourByID(this.$route.params.id);
+    this.getTourImageByID(this.$route.params.id);
+    this.getTourScheduleByID(this.$route.params.id);
   },
   methods: {
-    getAllItem(id) {
+    submitBooking(){
+      this.$router.push({name:'booking-id',params:{id:this.products.tourID}})
+      window.location.href=`/booking/tourBooking/tourID=${this.products.tourID}`;
+      // window.location.href=`/booking/${this.products.tourID}`;
+    },
+    getProductsByID(id) {
       // eslint-disable-next-line
       axios
         .get(`/api/Tour/${id}`)
         .then((response) => {
           // handle success
           this.products = response.data;
-          console.log(this.products);
+
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    getTourGuideByID(id) {
+      // eslint-disable-next-line no-undef
+      axios
+        .get(`/api/TourGuide/id?tourID=${id}`)
+        .then((res) => {
+          this.tourGuide = res.data;
+          // console.log(this.tourGuide);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    getServicesTourByID(id) {
+      // eslint-disable-next-line no-undef
+      axios
+        .get(`/api/ServicesTour/id?tourID=${id}`)
+        .then((res) => {
+          this.tourServices = res.data;
+          // console.log(this.tourServices);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    getTourImageByID(id) {
+      // eslint-disable-next-line no-undef
+      axios
+        .get(`/api/TourImages/id?tourID=${id}`)
+        .then((res) => {
+          this.tourImage = res.data;
+          // console.log(this.tourImage);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    getTourScheduleByID(id) {
+      // eslint-disable-next-line no-undef
+      axios
+        .get(`/api/TourSchedule/id?tourID=${id}`)
+        .then((res) => {
+          this.tourSchedule = res.data;
+          console.log(this.tourSchedule);
         })
         .catch((error) => {
           // handle error
