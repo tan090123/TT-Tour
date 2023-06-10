@@ -601,7 +601,8 @@
                 <p>Mã tour:</p>
                 <p><i class="fa-solid fa-ticket"></i> {{ card.tourCode }}</p>
               </div>
-              <p class="p-startPlace">Nơi khởi hành: {{ card.departure }}</p>
+              <p class="p-startPlace">Nơi khởi hành: <span class="fw-bold">{{ card.departure }}</span> </p>
+              <p class="p-startPlace">Nơi đến: <span class="fw-bold">{{ card.destination }}</span></p>
               <div class="price">
                 <p class="price-old">
                   Giá:
