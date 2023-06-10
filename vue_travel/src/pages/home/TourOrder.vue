@@ -4,11 +4,10 @@
       <div class="TourOrder__card">
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
-            {{ products.tourImage }}
-            <!-- <img
-                :src="require(`@/../public/images/card/${products.tourImage}`)"
-                alt="TQ1"
-              /> -->
+            <img
+              :src="'/images/card/' + products.tourImage"
+              alt="{{ products.tourName }}"
+            />
             <!-- <img
               :src="require(`@/../public/images/card/${products.tourImage}`)"
               class="card-img-top"
@@ -213,9 +212,9 @@
                       <select class="form-control" name="" id="">
                         <option value="">Không sử dụng</option>
                         <option
-                        v-for="tService in TServices"
-                        :key="tService.tServicesID"
-                        value=""
+                          v-for="tService in TServices"
+                          :key="tService.tServicesID"
+                          value=""
                         >
                           {{ tService.servicesName }} -
                           {{ formatter.format(tService.servicesPrice) }}
@@ -260,16 +259,17 @@
               </p>
               <p>
                 <b>Tour trọn gói </b
-                ><span class="number">({{ products.tourAvailableSit }} khách)</span>
+                ><span class="number"
+                  >({{ products.tourAvailableSit }} khách)</span
+                >
               </p>
               <div class="group-product row my-4">
                 <div class="img col-4">
-                  <!-- <img
-                    :src="require(`@/../public/images/card/${products.tourImage}`)"
-                    width="100%"
-                    alt="Mien tay"
-                  /> -->
-                  {{ products.tourImage }}
+                  <img
+                    :src="'/images/card/' + products.tourImage"
+                    alt="{{ products.tourName }}"
+                    class='w-100'
+                  />
                 </div>
                 <div class="title col-8">
                   <h4>

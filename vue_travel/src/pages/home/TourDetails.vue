@@ -87,28 +87,32 @@
       </div> -->
       <!-- Images -->
       <section class="tour-images">
-          <div class="row">
-            <div class="col-12 col-md-12 col-lg-7 left">
-              <img src="@/../public/images/details/tq_1.jpg" alt="">
-            </div>
-            <div class="col-12 col-md-12 col-lg-5 right">
-              <div class="row gy-4">
-                <div class="col-12 col-md-12 small">
-                  <div class="row">
-                    <div class="col-6">
-                      <img src="@/../public/images/details/tq_1.jpg" alt="">
-                    </div>
-                    <div class="col-6">
-                      <img src="@/../public/images/details/tq_2.jpg" alt="">
-                    </div>
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-7 left">
+            <img
+              :src="'/images/card/' + products.tourImage"
+              style="object-fit: cover; width: 100%"
+              alt=""
+            />
+          </div>
+          <div class="col-12 col-md-12 col-lg-5 right">
+            <div class="row gy-4">
+              <div class="col-12 col-md-12 small">
+                <div class="row">
+                  <div class="col-6">
+                    <img src="@/../public/images/details/tq_1.jpg" alt="" />
+                  </div>
+                  <div class="col-6">
+                    <img src="@/../public/images/details/tq_2.jpg" alt="" />
                   </div>
                 </div>
-                <div class="col-12 col-md-12 big">
-                  <img src="@/../public/images/details/tq_3.jpg" alt="">
-                </div>
+              </div>
+              <div class="col-12 col-md-12 big">
+                <img src="@/../public/images/details/tq_3.jpg" alt="" />
               </div>
             </div>
           </div>
+        </div>
       </section>
       <!-- End images -->
       <div class="TourDetails__section row">
@@ -195,10 +199,14 @@
         </div>
       </div>
     </div>
-    <div class="TourDetails__desc--desc col-9 border border-0 border-start border-success">
+    <div
+      class="TourDetails__desc--desc col-9 border border-0 border-start border-success"
+    >
       <div class="container-fluid">
         <div class="div" v-for="(tourSche, index) in tourSchedule" :key="index">
-          <h3 class="fs-2">Ngày {{ index + 1 }} - {{ tourSche.scheduleName }}</h3>
+          <h3 class="fs-2">
+            Ngày {{ index + 1 }} - {{ tourSche.scheduleName }}
+          </h3>
           <p class="ps-5">
             {{ tourSche.scheduleDesc }}
           </p>
@@ -252,9 +260,7 @@
               HDV dẫn đoàn:
               <span>{{ tourGuide.guideName }}</span>
             </p>
-            <p class="address">
-              Địa chỉ : {{ tourGuide.guideAddress }}
-            </p>
+            <p class="address">Địa chỉ : {{ tourGuide.guideAddress }}</p>
             <p class="mobile">Số đt : {{ tourGuide.guidePhone }}</p>
             <div class="desc">Đang cập nhật</div>
           </div>
@@ -705,9 +711,7 @@ export default {
   name: "details-id",
   data() {
     return {
-      products: [
-
-      ],
+      products: [],
       tourGuide: [],
       tourServices: [],
       tourImage: [],
@@ -749,9 +753,12 @@ export default {
   },
   methods: {
     submitBooking() {
-      this.$router.push({ name: 'booking-id', params: { id: this.products.tourID } })
+      
+      this.$router.push({
+        name: "booking-id",
+        params: { id: this.products.tourID },
+      });
       window.location.href = `/booking/tourBooking/tourID=${this.products.tourID}`;
-      // window.location.href=`/booking/${this.products.tourID}`;
     },
     getProductsByID(id) {
       // eslint-disable-next-line
@@ -760,7 +767,6 @@ export default {
         .then((response) => {
           // handle success
           this.products = response.data;
-
         })
         .catch((error) => {
           // handle error
@@ -799,7 +805,7 @@ export default {
         .get(`/api/TourImages/id?tourID=${id}`)
         .then((res) => {
           this.tourImage = res.data;
-          // console.log(this.tourImage);
+          console.log(this.tourImage);
         })
         .catch((error) => {
           // handle error
