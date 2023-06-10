@@ -86,8 +86,9 @@
                 type="date"
                 class="form-control"
                 id=""
-                name=""
+                name="tourCheckoutDays"
                 autocomplete="off"
+                
               />
             </div>
 
@@ -213,6 +214,12 @@
         <div class="TourCard tours_card col-12 col-md-6 col-lg-9">
           <div class="TourCard__content row row-cols-lg-3 row-cols-1 p-2">
             <div
+              class="my-5 text-danger text-center"
+              v-if="this.products.length <= 0"
+            >
+              <h2 class="fst-italic">Không tìm thấy sản phẩm nào phù hợp</h2>
+            </div>
+            <div
               class="col mb-5"
               v-for="product in displayedCarts"
               :key="product.tourID"
@@ -272,7 +279,11 @@
                     </p>
                   </div>
                   <p class="p-startPlace">
-                    Nơi khởi hành: {{ product.departure }}
+                    Nơi khởi hành:
+                    <span class="fw-bold">{{ product.departure }}</span>
+                  </p>
+                  <p class="p-startPlace">
+                    Nơi đến: <span class="fw-bold">{{ product.destination }}</span>
                   </p>
                   <div class="price">
                     <p class="price-old">
@@ -419,32 +430,48 @@ export default {
     };
   },
   mounted() {
-    this.SearchByDeparture(this.$route.params.departure);
+    this.SearchByDeparture(
+      this.$route.params.departure,
+      this.$route.params.destination
+    );
   },
   methods: {
-    SearchByDeparture(departure) {
-      if (departure == 0) {
+    SearchByDeparture(departure, destination) {
+      if (departure != 0 && destination != 0) {
         // eslint-disable-next-line
         axios
-          .get(`/api/Tour`)
+          .get(`/api/Search?departure=${departure}&destination=${destination}`)
           .then((response) => {
             // handle success
             this.products = response.data;
-            console.log(this.products);
+            // console.log(this.products);
           })
-      }
-      // eslint-disable-next-line
-      axios
-        .get(`/api/Tour?searchDeparture=${departure}`)
-        .then((response) => {
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } else if (departure != 0) {
+        // eslint-disable-next-line
+        axios.get(`/api/Search?departure=${departure}`).then((response) => {
           // handle success
           this.products = response.data;
           // console.log(this.products);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
         });
+      } else if (destination != 0) {
+        // eslint-disable-next-line
+        axios.get(`/api/Search?destination=${destination}`).then((response) => {
+          // handle success
+          this.products = response.data;
+          // console.log(this.products);
+        });
+      } else {
+        // eslint-disable-next-line
+        axios.get(`/api/Search`).then((response) => {
+          // handle success
+          this.products = response.data;
+          // console.log(this.products);
+        });
+      }
     },
     changePage(page) {
       this.currentPage = page;

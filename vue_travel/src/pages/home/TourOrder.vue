@@ -214,7 +214,7 @@
                         <option
                           v-for="tService in TServices"
                           :key="tService.tServicesID"
-                          value=""
+                          :value="tService.tServicesID"
                         >
                           {{ tService.servicesName }} -
                           {{ formatter.format(tService.servicesPrice) }}
