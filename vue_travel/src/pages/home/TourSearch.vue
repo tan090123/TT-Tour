@@ -14,20 +14,34 @@
                 <option value="2">Tour gia đình</option>
               </select>
               <h5 class="l-title">Điểm đi</h5>
-              <select class="form-control" name="" id="">
-                <option selected value="0">--- Tất cả ---</option>
-                <option value="1">Bình Dương</option>
-                <option value="2">TP. Hồ Chí Minh</option>
-                <option value="3">Hà Nội</option>
-                <option value="3">Vũng Tàu</option>
+              <select
+                class="form-control"
+                v-model="SelectedDeparture"
+                v-on:change="GetChangeByDeparture(this.SelectedDeparture)"
+              >
+                <option value="All">All</option>
+                <option
+                  :value="card.departure"
+                  v-for="(card, index) in uniqueDeparture"
+                  :key="index"
+                >
+                  {{ card.departure }}
+                </option>
               </select>
               <h5 class="l-title">Điểm đến</h5>
-              <select class="form-control" name="" id="">
-                <option selected value="0">--- Tất cả ---</option>
-                <option value="1">Bình Dương</option>
-                <option value="2">TP. Hồ Chí Minh</option>
-                <option value="3">Hà Nội</option>
-                <option value="3">Vũng Tàu</option>
+              <select
+                class="form-control"
+                v-model="SelectedDestination"
+                v-on:change="GetChangeByDestination(this.SelectedDestination)"
+              >
+                <option value="All">All</option>
+                <option
+                  :value="card.destination"
+                  v-for="(card, index) in uniqueDestination"
+                  :key="index"
+                >
+                  {{ card.destination }}
+                </option>
               </select>
             </div>
 
@@ -86,8 +100,11 @@
                 type="date"
                 class="form-control"
                 id=""
-                name=""
+                name="tourCheckoutDays"
                 autocomplete="off"
+                v-model="SelectedTime"
+                :min="minDate"
+                v-on:change="GetChangeByDateTime(this.SelectedTime)"
               />
             </div>
 
@@ -211,6 +228,19 @@
 
         <!----------------------------------------------->
         <div class="TourCard tours_card col-12 col-md-6 col-lg-9">
+          <div class="mb-5 text-center">
+            <h2 class="fst-italic text-danger" v-if="this.products.length <= 0">
+              Không tìm thấy sản phẩm nào phù hợp
+            </h2>
+            <h2 class="fw-lighter" v-else>
+              Chúng tôi tìm thấy
+              <span class="fw-bold fst-italic text-danger">{{
+                this.products.length
+              }}</span>
+              Tours cho quý khách
+            </h2>
+          </div>
+
           <div class="TourCard__content row row-cols-lg-3 row-cols-1 p-2">
             <div
               class="col mb-5"
@@ -254,7 +284,7 @@
                 </div>
 
                 <div class="body card-body">
-                  <p class="p-date">{{ product.date }}</p>
+                  <p class="p-date">{{ product.tourCheckinDays }}</p>
                   <p class="p-title">
                     <router-link
                       :to="{
@@ -272,7 +302,12 @@
                     </p>
                   </div>
                   <p class="p-startPlace">
-                    Nơi khởi hành: {{ product.departure }}
+                    Nơi khởi hành:
+                    <span class="fw-bold">{{ product.departure }}</span>
+                  </p>
+                  <p class="p-startPlace">
+                    Nơi đến:
+                    <span class="fw-bold">{{ product.destination }}</span>
                   </p>
                   <div class="price">
                     <p class="price-old">
@@ -314,13 +349,13 @@
                 </div>
               </div>
             </div>
-            <Nagination
-              v-if="this.products.length > this.perPage"
-              :current-page="currentPage"
-              :total-pages="totalPages"
-              @page-change="changePage"
-            />
           </div>
+          <Nagination
+            v-if="this.products.length > this.perPage"
+            :current-page="currentPage"
+            :total-pages="totalPages"
+            @page-change="changePage"
+          />
 
           <!-------------------------------->
           <div class="TourSearch__right">
@@ -410,6 +445,12 @@ export default {
   data() {
     return {
       products: [],
+      allItems: [],
+      SelectedDeparture: this.$route.params.departure,
+      SelectedDestination: this.$route.params.destination,
+      SelectedNumberDay: this.$route.params.numberDay,
+      SelectedTime: this.$route.params.datetime,
+      minDate: "",
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -419,35 +460,87 @@ export default {
     };
   },
   mounted() {
-    this.SearchByDeparture(this.$route.params.departure);
+    this.GetSearch(
+      this.$route.params.departure,
+      this.$route.params.destination,
+      this.$route.params.datetime
+    );
+    this.getAllProduct();
+    this.setMinDate();
   },
   methods: {
-    SearchByDeparture(departure) {
-      if (departure == 0) {
-        // eslint-disable-next-line
-        axios
-          .get(`/api/Tour`)
-          .then((response) => {
-            // handle success
-            this.products = response.data;
-            console.log(this.products);
-          })
-      }
+    getAllProduct() {
       // eslint-disable-next-line
       axios
-        .get(`/api/Tour?searchDeparture=${departure}`)
+        .get(`/api/Search`)
         .then((response) => {
           // handle success
-          this.products = response.data;
-          // console.log(this.products);
+          this.allItems = response.data;
+          //   this.cards.departure=response.data.departure;
         })
         .catch((error) => {
           // handle error
           console.log(error);
         });
     },
+    GetSearch(departure, destination, datetime) {
+      if (departure != "All" && destination != "All") {
+        // eslint-disable-next-line
+        axios
+          .get(
+            `/api/Search?departure=${departure}&destination=${destination}&datetime=${datetime}`
+          )
+          .then((response) => {
+            // handle success
+            this.products = response.data;
+            console.log(this.products);
+          })
+          .catch((error) => {
+            // handle error
+            console.log(error);
+          });
+      } else if (departure != "All") {
+        // eslint-disable-next-line
+        axios
+          .get(`/api/Search?departure=${departure}&datetime=${datetime}`)
+          .then((response) => {
+            // handle success
+            this.products = response.data;
+            // console.log(this.products);
+          });
+      } else if (destination != "All") {
+        // eslint-disable-next-line
+        axios
+          .get(`/api/Search?destination=${destination}&datetime=${datetime}`)
+          .then((response) => {
+            // handle success
+            this.products = response.data;
+            // console.log(this.products);
+          });
+      }
+      // eslint-disable-next-line
+      axios.get(`/api/Search?&datetime=${datetime}`).then((response) => {
+        // handle success
+        this.products = response.data;
+        this.allItems = this.products;
+        // console.log(this.allItems);
+      });
+    },
     changePage(page) {
       this.currentPage = page;
+    },
+    GetChangeByDeparture(departure) {
+      window.location.href = `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
+    },
+    GetChangeByDestination(destination) {
+      window.location.href = `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
+    },
+    GetChangeByDateTime(datetime) {
+      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}`;
+    },
+    setMinDate() {
+      const currentDate = new Date().toISOString().split("T")[0];
+      this.minDate = currentDate;
     },
   },
   computed: {
@@ -458,6 +551,32 @@ export default {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
       return this.products.slice(start, end);
+    },
+    uniqueDeparture() {
+      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
+      const uniquedepartures = new Set(
+        this.allItems.map((obj) => obj.departure)
+      );
+
+      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
+      const uniqueObjects = Array.from(uniquedepartures).map((departure) => {
+        return this.allItems.find((obj) => obj.departure === departure);
+      });
+      return uniqueObjects;
+    },
+    uniqueDestination() {
+      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
+      const uniqueDestinations = new Set(
+        this.allItems.map((obj) => obj.destination)
+      );
+
+      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
+      const uniqueObjects = Array.from(uniqueDestinations).map(
+        (destination) => {
+          return this.allItems.find((obj) => obj.destination === destination);
+        }
+      );
+      return uniqueObjects;
     },
   },
 };
