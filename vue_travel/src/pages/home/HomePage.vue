@@ -593,9 +593,9 @@
             <div class="body card-body">
               <p class="p-date">{{ card.tourCheckinDays }}</p>
               <p class="p-title">
-                <a href="">
+                <router-link :to="{ name: 'details-id', params: { id: card.tourID } }">
                   {{ card.tourName }}
-                </a>
+                </router-link>
               </p>
               <div class="code">
                 <p>Mã tour:</p>
@@ -1030,7 +1030,7 @@ export default {
       SelectedDestination: "0",
       SelectedNumberDay: "0",
       SelectedTime: "",
-      minDate:"",
+      minDate: "",
       products: productData,
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -1178,11 +1178,9 @@ export default {
   font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
-  background-image: linear-gradient(
-    180deg,
-    rgba(45, 66, 113, 0) 0%,
-    #2d4271 100%
-  );
+  background-image: linear-gradient(180deg,
+      rgba(45, 66, 113, 0) 0%,
+      #2d4271 100%);
   width: 97%;
 }
 
