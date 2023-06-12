@@ -14,7 +14,7 @@ const home = [
                 meta: { title: 'Du Lịch Vietravel - Vietravel' }
             },
             {
-                path: '/booking/tourBooking/tourID=:id',
+                path: '/booking/tourID=:id',
                 name: 'booking-id',
                 component: () => import("@/pages/home/TourOrder.vue"),
                 meta: { title: 'Thông tin - Vietravel ' }
