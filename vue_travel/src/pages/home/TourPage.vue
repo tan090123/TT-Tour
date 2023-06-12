@@ -46,7 +46,8 @@
           </div>
 
           <div class="body card-body">
-            <p class="p-date">{{ card.date }}</p>
+            <p class="p-date">{{ card.tourCheckinDays }}</p>
+
             <p class="p-title">
               <router-link
                 :to="{ name: 'details-id', params: { id: card.tourID } }"

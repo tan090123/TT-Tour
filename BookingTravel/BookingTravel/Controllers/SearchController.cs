@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookingTravel.Data;
 using BookingTravel.Models;
 using System.Globalization;
+using NuGet.Versioning;
 
 namespace BookingTravel.Controllers
 {
@@ -24,6 +25,7 @@ namespace BookingTravel.Controllers
         }
 
         [HttpGet]
+     
         public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, int? numberDay)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
@@ -32,6 +34,11 @@ namespace BookingTravel.Controllers
             {
                 tourFromDBs = tourFromDBs.Where(x => x.Departure.ToLower().Contains(departure.ToLower()));
                
+            }
+            if (datetime != null)
+            {
+                tourFromDBs = tourFromDBs.Where(x=>x.TourCheckinDays >= datetime);
+
             }
             if (destination != null)
             {

@@ -209,7 +209,7 @@
                             aria-label="Default select example"
                             v-model="SelectedDeparture"
                           >
-                            <option value="0">Điểm đi</option>
+                            <option value="All">Điểm đi</option>
                             <option
                               :value="card.departure"
                               v-for="(card, index) in uniqueDeparture"
@@ -229,8 +229,9 @@
                             class="form-select text-center fs-3 border border-warning border-5 p-3"
                             aria-label="Default select example"
                             v-model="SelectedDestination"
+                            
                           >
-                            <option value="0">Điểm đến</option>
+                            <option value="All">Điểm đến</option>
                             <option
                               :value="card.destination"
                               v-for="(card, index) in uniqueDestination"
@@ -255,8 +256,8 @@
                           aria-label="Default select example"
                           v-model="SelectedNumberDay"
                         >
-                          <option value="0">Số ngày</option>
-                          <option value="1">One</option>
+                          <option value="All">Số ngày</option>
+                          <option value="1">1-3 Ngày</option>
                           <option value="2">Two</option>
                           <option value="3">Three</option>
                         </select>
@@ -301,6 +302,8 @@
                           class="w-100 h-100 p-3 border border-warning border-5 text-center"
                           name=""
                           id=""
+                          v-model="SelectedTime"
+                          :min="minDate"
                         />
                       </div>
                       <div class="col-4">
@@ -355,6 +358,8 @@
                       class="w-100 h-100 p-3 border border-warning border-5 text-center"
                       name=""
                       id=""
+                      v-model="SelectedTime"
+                          :min="minDate"
                     />
                   </div>
                   <div class="col-2">
@@ -1027,9 +1032,9 @@ export default {
   data() {
     return {
       cards: [],
-      SelectedDeparture: "0",
-      SelectedDestination: "0",
-      SelectedNumberDay: "0",
+      SelectedDeparture: "All",
+      SelectedDestination: "All",
+      SelectedNumberDay: "All",
       SelectedTime: "",
       minDate:"",
       products: productData,
