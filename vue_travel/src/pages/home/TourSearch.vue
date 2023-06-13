@@ -52,20 +52,23 @@
                   <div class="col-6">
                     <button
                       type="button"
-                      id="SoNgay1_3"
-                      value="1-3"
+                      v-for="button in SelectedNumberDays"
+                      :key="button.id"
                       class="btn w-100"
-                      checked
+                      :class="{ active: activeButton === button.id }"
+                      @click="GetChangeByNumberDay(button.id)"
                     >
-                      1-3 ngày
+                      {{ button.name }}
                     </button>
                   </div>
-                  <div class="col-6">
+                  <!-- <div class="col-6">
                     <button
                       type="button"
                       id="SoNgay4_7"
                       value="4-7"
                       class="btn w-100"
+                      :class="{active: active}"
+                      @click="GetChangeByNumberDay('4-7')"
                     >
                       4-7 ngày
                     </button>
@@ -75,7 +78,9 @@
                       type="button"
                       id="SoNgay8_14"
                       value="8-14"
-                      class="btn w-100"
+                      class=" btn w-100"
+                      
+                      @click="GetChangeByNumberDay('8-14')"
                     >
                       8-14 ngày
                     </button>
@@ -84,12 +89,14 @@
                     <button
                       type="button"
                       id="SoNgay14"
-                      value="15-31"
-                      class="btn w-100"
+                      value="15-"
+                      class=" btn w-100"
+                     
+                      @click="GetChangeByNumberDay('15-')"
                     >
                       Trên 14 ngày
                     </button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -446,10 +453,17 @@ export default {
     return {
       products: [],
       allItems: [],
+      active: this.$route.params.numberDay,
       SelectedDeparture: this.$route.params.departure,
       SelectedDestination: this.$route.params.destination,
-      SelectedNumberDay: this.$route.params.numberDay,
       SelectedTime: this.$route.params.datetime,
+      SelectedNumberDays: [
+        { id: "1-3", name: "1-3 Ngày" },
+        { id: "4-7", name: "4-7 Ngày" },
+        { id: "8-14", name: "8-14 Ngày" },
+        { id: "15-30", name: "Trên 14 Ngày" },
+      ],
+      activeButton: null,
       minDate: "",
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -463,16 +477,18 @@ export default {
     this.GetSearch(
       this.$route.params.departure,
       this.$route.params.destination,
-      this.$route.params.datetime
+      this.$route.params.datetime,
+      this.$route.params.numberDay
     );
     this.getAllProduct();
     this.setMinDate();
+    // console.log(window.location.href);
   },
   methods: {
     getAllProduct() {
       // eslint-disable-next-line
       axios
-        .get(`/api/Search`)
+        .get(`/api/Tour`)
         .then((response) => {
           // handle success
           this.allItems = response.data;
@@ -483,57 +499,48 @@ export default {
           console.log(error);
         });
     },
-    GetSearch(departure, destination, datetime) {
-      if (departure != "All" && destination != "All") {
-        // eslint-disable-next-line
-        axios
-          .get(
-            `/api/Search?departure=${departure}&destination=${destination}&datetime=${datetime}`
-          )
-          .then((response) => {
-            // handle success
-            this.products = response.data;
-            console.log(this.products);
-          })
-          .catch((error) => {
-            // handle error
-            console.log(error);
-          });
-      } else if (departure != "All") {
-        // eslint-disable-next-line
-        axios
-          .get(`/api/Search?departure=${departure}&datetime=${datetime}`)
-          .then((response) => {
-            // handle success
-            this.products = response.data;
-            // console.log(this.products);
-          });
-      } else if (destination != "All") {
-        // eslint-disable-next-line
-        axios
-          .get(`/api/Search?destination=${destination}&datetime=${datetime}`)
-          .then((response) => {
-            // handle success
-            this.products = response.data;
-            // console.log(this.products);
-          });
-      }
+    GetSearch(departure, destination, datetime, numberDay) {
       // eslint-disable-next-line
-      axios.get(`/api/Search?&datetime=${datetime}`).then((response) => {
-        // handle success
-        this.products = response.data;
-        this.allItems = this.products;
-        // console.log(this.allItems);
-      });
+      axios
+        .get(`/api/Search/${departure}/${destination}/${datetime}/${numberDay}`)
+        .then((response) => {
+          // handle success
+          this.products = response.data;
+          // console.log(this.products);
+        })
+        .catch((error) => {
+          // handle error
+          console.error(error);
+        });
     },
     changePage(page) {
       this.currentPage = page;
     },
     GetChangeByDeparture(departure) {
+      // this.$router.replace({
+      //   path:
+      //     `/Search/`+`${departure}`+`/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+      // });
       window.location.href = `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
     },
     GetChangeByDestination(destination) {
       window.location.href = `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
+    },
+    GetChangeByNumberDay(numberDay) {
+      this.activeButton = numberDay;
+      // window.history.replaceState(
+      //   {},
+      //   "",
+      //   `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/` +
+      //     `${numberDay}`
+      // );
+      // window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}`;
+      this.$router.replace({
+        path:
+          `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/` +
+          `${numberDay}`,
+      });
+      // console.log(`${numberDay}`);
     },
     GetChangeByDateTime(datetime) {
       window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}`;
@@ -577,6 +584,23 @@ export default {
         }
       );
       return uniqueObjects;
+    },
+  },
+  watch: {
+    "$route.params.numberDay": {
+      immediate: true,
+      handler(newNumberDay) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.numberDay = newNumberDay;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearch(
+          this.$route.params.departure,
+          this.$route.params.destination,
+          this.$route.params.datetime,
+          newNumberDay
+        );
+      }
     },
   },
 };

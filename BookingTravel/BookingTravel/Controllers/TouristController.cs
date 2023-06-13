@@ -34,7 +34,6 @@ namespace BookingTravel.Controllers
             var tourist = tourFromDBs.Select(x => new TouristModel
             {
                 TouristID = x.TouristID,
-                TourID = x.TourID,
                 ServicesPrice = x.ServicesPrice,
                 TouristName = x.TouristName,
 
@@ -64,7 +63,6 @@ namespace BookingTravel.Controllers
                 TouristPrice = newToursit.TouristPrice,
                 TouristNote = newToursit.TouristNote,
                 TouristDate = newToursit.TouristDate,
-                TourID = newToursit.TourID,
                 
             };
 
@@ -117,7 +115,6 @@ namespace BookingTravel.Controllers
                 tourist.TouristName = updateTourist.TouristName;
                 tourist.TouristPrice = updateTourist.TouristPrice;
                 tourist.TouristSex = updateTourist.TouristSex;
-                tourist.TourID = updateTourist.TourID;
                 tourist.ServicesPrice = updateTourist.ServicesPrice;
                 tourist.TouristType = updateTourist.TouristType;
 

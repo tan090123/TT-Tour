@@ -24,25 +24,46 @@ namespace BookingTravel.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("{departure}/{destination}/{datetime}/{numberDay}")]
      
-        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, int? numberDay)
+        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
 
-            if (departure != null )
+            if (departure == "All" && destination == "All" && numberDay == "All")
             {
-                tourFromDBs = tourFromDBs.Where(x => x.Departure.ToLower().Contains(departure.ToLower()));
-               
+                return Ok(await _context.Tours.ToListAsync());
             }
-            if (datetime != null)
+            else
             {
-                tourFromDBs = tourFromDBs.Where(x=>x.TourCheckinDays >= datetime);
+                if (departure != "All")
+                {
+                    tourFromDBs = tourFromDBs.Where(x => x.Departure.ToLower().Contains(departure.ToLower()));
 
-            }
-            if (destination != null)
-            {
-                tourFromDBs = tourFromDBs.Where(x => x.Destination.ToLower().Contains(destination.ToLower()));
+                }
+                if (datetime != null)
+                {
+                    tourFromDBs = tourFromDBs.Where(x => x.TourCheckinDays >= datetime);
+
+                }
+                if (destination != "All")
+                {
+                    tourFromDBs = tourFromDBs.Where(x => x.Destination.ToLower().Contains(destination.ToLower()));
+
+                }
+                if (numberDay != "All")
+                {
+                    int Fsearch;
+                    int Lsearch;
+                    int index = numberDay.IndexOf("-");
+                    string firstPart = numberDay.Substring(0, index);
+                    string secondPart = numberDay.Substring(index + 1);
+                    int.TryParse(firstPart, out Fsearch);
+                    int.TryParse(secondPart, out Lsearch);
+                    
+                        tourFromDBs = tourFromDBs.Where(x => x.tour_NumberDays >= Fsearch && x.tour_NumberDays <= Lsearch);
+                    
+                }
 
             }
 
@@ -63,6 +84,8 @@ namespace BookingTravel.Controllers
                 TourImage = x.TourImage,
                 TourTotalSit = x.TourTotalSit,
                 TourType = x.TourType,
+                tour_AvalablePeople = x.tour_AvalablePeople,
+                tour_NumberDays = x.tour_NumberDays
             }).ToList();
 
             return Ok(search);

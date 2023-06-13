@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookingTravel.Data;
 using BookingTravel.Models;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BookingTravel.Controllers
 {
@@ -29,8 +30,11 @@ namespace BookingTravel.Controllers
         public List<TourModel> SearchTour([FromQuery] string? searchName)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
+
+
             if (searchName != null)
             {
+
                 tourFromDBs = tourFromDBs.Where(x => x.TourName.ToLower().Contains(searchName.ToLower()));
             }
 
@@ -51,6 +55,8 @@ namespace BookingTravel.Controllers
                 TourImage = x.TourImage,
                 TourTotalSit = x.TourTotalSit,
                 TourType = x.TourType,
+                tour_AvalablePeople = x.tour_AvalablePeople,
+                tour_NumberDays = x.tour_NumberDays
             }).ToList();
 
 
@@ -79,7 +85,9 @@ namespace BookingTravel.Controllers
                 Price = newTour.Price,
                 PromotionPrice = newTour.PromotionPrice,
                 TourAvailableSit = newTour.TourAvailableSit,
-                TourCheckinDays = newTour.TourCheckinDays
+                TourCheckinDays = newTour.TourCheckinDays,
+                tour_AvalablePeople=newTour.tour_AvalablePeople,
+                tour_NumberDays=newTour.tour_NumberDays
             };
 
 
@@ -141,6 +149,8 @@ namespace BookingTravel.Controllers
                 tour.TourType = updateTour.TourType;
                 tour.TourAvailableSit = updateTour.TourAvailableSit;
                 tour.PromotionPrice = updateTour.PromotionPrice;
+                tour.tour_NumberDays = updateTour.tour_NumberDays;
+                tour.tour_AvalablePeople=updateTour.tour_AvalablePeople;
 
                 _context.Update(tour);
                 await _context.SaveChangesAsync();

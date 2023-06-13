@@ -18,5 +18,9 @@
         public int? TourAvailableSit { get; set; }
         public int? TourType { get; set; }
 
+        public int? tour_NumberDays { get; set; }
+
+        public int? tour_AvalablePeople { get; set; }
+
     }
 }
