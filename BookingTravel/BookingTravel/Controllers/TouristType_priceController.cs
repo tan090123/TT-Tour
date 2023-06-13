@@ -12,29 +12,31 @@ namespace BookingTravel.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TouristTypeController : ControllerBase
+    public class TouristType_priceController : ControllerBase
     {
         private readonly TourContext _context;
 
-        public TouristTypeController(TourContext context)
+        public TouristType_priceController(TourContext context)
         {
             _context = context;
         }
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristTypeModel> SearchTouristType([FromQuery] string? searchName)
+        public List<TouristType_priceModel> SearchTouristType([FromQuery] string? searchName)
         {
-            var tourFromDBs = _context.TouristType!.AsNoTracking();
+            var tourFromDBs = _context.TouristType_price.AsNoTracking();
             if (searchName != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.TypeName.ToLower().Contains(searchName.ToLower()));
+                tourFromDBs = tourFromDBs.Where(x => x.TouristTypeName.ToLower().Contains(searchName.ToLower()));
             }
 
-            var tourist_type = tourFromDBs.Select(x => new TouristTypeModel
+            var tourist_type = tourFromDBs.Select(x => new TouristType_priceModel
             {
-               TypeID = x.TypeID,
-               TypeName = x.TypeName,
+                TypeID = x.TypeID,
+                TouristTypeName = x.TouristTypeName,
+                tourID=x.tourID,
+                touristType_Prices=x.touristType_Prices,
             }).ToList();
 
             return tourist_type;
@@ -42,16 +44,16 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddUser([FromBody] TouristTypeModel newTouristType)
+        public AddTourResultModel AddUser([FromBody] TouristType_priceModel newTouristType)
         {
             var response = new AddTourResultModel();
 
-            var tourist_type = new TouristType
+            var tourist_type = new TouristType_price
             {
-                TypeName = newTouristType.TypeName,
+                TouristTypeName = newTouristType.TouristTypeName,
             };
 
-            _context.TouristType!.Add(tourist_type);
+            _context.TouristType_price.Add(tourist_type);
 
             _context.SaveChanges();
 
@@ -62,13 +64,13 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<TouristType>> GetTouristType(int id)
+        public async Task<ActionResult<TouristType_price>> GetTouristType(int id)
         {
-            if (_context.TouristType == null)
+            if (_context.TouristType_price == null)
             {
                 return NotFound();
             }
-            var tourist_type = await _context.TouristType.FindAsync(id);
+            var tourist_type = await _context.TouristType_price.FindAsync(id);
 
             if (tourist_type == null)
             {
@@ -80,11 +82,11 @@ namespace BookingTravel.Controllers
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateTouristType([FromRoute] int id, [FromBody] TouristTypeModel updateTouristType)
+        public UpdateTourResultModel UpdateTouristType([FromRoute] int id, [FromBody] TouristType_priceModel updateTouristType)
         {
             var response = new UpdateTourResultModel();
 
-            var tourist_type = _context.TouristType!.Where(x => x.TypeID == id).FirstOrDefault();
+            var tourist_type = _context.TouristType_price.Where(x => x.TypeID == id).FirstOrDefault();
 
             if (tourist_type == null)
             {
@@ -95,7 +97,7 @@ namespace BookingTravel.Controllers
             {
                 response.Result = true;
 
-                tourist_type.TypeName = updateTouristType.TypeName;
+                tourist_type.TouristTypeName = updateTouristType.TouristTypeName;
 
 
                 _context.Update(tourist_type);
@@ -110,7 +112,7 @@ namespace BookingTravel.Controllers
         {
             var response = new UpdateTourResultModel();
 
-            var tourist_type = _context.TouristType.Where(x => x.TypeID == id)
+            var tourist_type = _context.TouristType_price.Where(x => x.TypeID == id)
                 .FirstOrDefault();
 
             if (tourist_type == null)

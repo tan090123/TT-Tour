@@ -45,10 +45,15 @@
         cursor: pointer;
         transition: all 0.25s ease-in-out;
 
-        &:hover {
+        &:hover{
             background-color: #4d4aef;
             color: #fff;
         }
+        &.active{
+            background-color: #4d4aef;
+            color: #fff;
+        }
+        
     }
 
     &--departure {

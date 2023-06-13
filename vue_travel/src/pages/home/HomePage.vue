@@ -257,9 +257,10 @@
                           v-model="SelectedNumberDay"
                         >
                           <option value="All">Số ngày</option>
-                          <option value="1">1-3 Ngày</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option value="1-3">1-3 ngày</option>
+                          <option value="4-7">4-7 ngày</option>
+                          <option value="8-14">8-14 ngày</option>
+                          <option value="15-30">Trên 14 ngày</option>
                         </select>
                       </div>
                       <div class="col-1">
