@@ -44,7 +44,7 @@ const home = [
                 meta: { title: 'Danh sách các Tour - Vietravel' }
             },
             {
-                path: '/search/:departure/:destination/:datetime/:numberDay',
+                path: '/search/:departure/:destination/:datetime/:numberDay/tourtype=:tourtype',
                 name: 'tours_search',
                 component: () => import("@/pages/home/TourSearch.vue"),
                 meta: { title: 'Kết quả tìm kiếm - Vietravel' }

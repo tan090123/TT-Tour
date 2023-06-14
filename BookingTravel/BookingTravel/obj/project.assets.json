@@ -10902,7 +10902,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\minhq\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -10910,11 +10910,11 @@
       "projectUniqueName": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
       "projectName": "BookingTravel",
       "projectPath": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\BookingTravel.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\minhq\\.nuget\\packages\\",
       "outputPath": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\minhq\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10989,13 +10989,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\TT-Tour\\BookingTravel\\BookingTravel\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

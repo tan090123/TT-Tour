@@ -123,7 +123,7 @@
                 Khởi hành: <span>{{ products.tourCheckinDays }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
-              <p class="text">Thời gian <span>6 ngày</span></p>
+              <p class="text">Thời gian <span>{{ products.tour_NumberDays }} ngày</span></p>
               <p class="text">
                 Nơi khởi hành <span>{{ products.departure }}</span>
               </p>
@@ -728,11 +728,7 @@ export default {
     };
   },
   mounted() {
-    this.getProductsByID(this.$route.params.id);
-    this.getTourGuideByID(this.$route.params.id);
-    this.getServicesTourByID(this.$route.params.id);
-    this.getTourImageByID(this.$route.params.id);
-    this.getTourScheduleByID(this.$route.params.id);
+    this.getProductDetails(this.$route.params.id);
   },
   methods: {
     submitBooking() {
@@ -742,7 +738,9 @@ export default {
       });
       window.location.href = `/booking/tourID=${this.products.tourID}`;
     },
-    getProductsByID(id) {
+    getProductDetails(id) {
+      
+      //---------------------Get TourDetail-------------
       // eslint-disable-next-line
       axios
         .get(`/api/Tour/${id}`)
@@ -754,9 +752,10 @@ export default {
           // handle error
           console.log(error);
         });
-    },
-    getTourGuideByID(id) {
-      // eslint-disable-next-line no-undef
+
+      //---------------------Get TourGuide-------------
+
+        // eslint-disable-next-line no-undef
       axios
         .get(`/api/TourGuide/id?tourID=${id}`)
         .then((res) => {
@@ -767,9 +766,9 @@ export default {
           // handle error
           console.log(error);
         });
-    },
-    getServicesTourByID(id) {
-      // eslint-disable-next-line no-undef
+
+      //---------------------Get TourServices-------------
+        // eslint-disable-next-line no-undef
       axios
         .get(`/api/ServicesTour/id?tourID=${id}`)
         .then((res) => {
@@ -780,27 +779,27 @@ export default {
           // handle error
           console.log(error);
         });
-    },
-    getTourImageByID(id) {
-      // eslint-disable-next-line no-undef
+
+      //--------------------Get TourSchedule-------------
+        // eslint-disable-next-line no-undef
       axios
-        .get(`/api/TourImages/id?tourID=${id}`)
+        .get(`/api/TourSchedule/id?tourID=${id}`)
         .then((res) => {
-          this.tourImage = res.data;
-          console.log(this.tourImage);
+          this.tourSchedule = res.data;
+          // console.log(this.tourSchedule);
         })
         .catch((error) => {
           // handle error
           console.log(error);
         });
-    },
-    getTourScheduleByID(id) {
-      // eslint-disable-next-line no-undef
+
+      //-------------------Get TourImages-------------
+        // eslint-disable-next-line no-undef
       axios
-        .get(`/api/TourSchedule/id?tourID=${id}`)
+        .get(`/api/TourImages/id?tourID=${id}`)
         .then((res) => {
-          this.tourSchedule = res.data;
-          console.log(this.tourSchedule);
+          this.tourImage = res.data;
+          // console.log(this.tourImage);
         })
         .catch((error) => {
           // handle error

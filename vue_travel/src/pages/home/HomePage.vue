@@ -1037,6 +1037,7 @@ export default {
       SelectedDestination: "All",
       SelectedNumberDay: "All",
       SelectedTime: "",
+      SelectedTourType: 0,
       minDate: "",
       products: productData,
       formatter: new Intl.NumberFormat("vi-VN", {
@@ -1076,7 +1077,7 @@ export default {
   },
   methods: {
     GetTime() {
-      var currentTime = new Date().toISOString().slice(0, 10);
+      var currentTime = new Date().toISOString().slice(0,10);
       this.SelectedTime = currentTime;
     },
     setMinDate() {
@@ -1105,6 +1106,7 @@ export default {
           destination: this.SelectedDestination,
           datetime: this.SelectedTime,
           numberDay: this.SelectedNumberDay,
+          tourtype:this.SelectedTourType
         },
       });
     },

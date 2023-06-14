@@ -27,17 +27,17 @@
             </div>
             <div class="TourOrder__desc">
               <p class="text">
-                Mã Tour <span>{{ products.tourCode }}</span>
+                Mã Tour: <span>{{ products.tourCode }}</span>
               </p>
               <p class="text">
-                Khởi hành <span>{{ products.tourCheckinDays }}</span>
+                Khởi hành: <span>{{ products.tourCheckinDays }}</span>
               </p>
-              <p class="text">Thời gian <span>4 ngày</span></p>
+              <p class="text">Thời gian: <span>{{ products.tour_NumberDays }} ngày</span></p>
               <p class="text">
-                Nơi khởi hành <span>{{ products.departure }}</span>
+                Nơi khởi hành: <span>{{ products.departure }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận <span>{{ products.tourAvailableSit }}</span>
+                Số chỗ còn nhận: <span>{{ products.tourAvailableSit }}</span>
               </p>
             </div>
           </div>
@@ -284,7 +284,7 @@
                 </div>
                 <div class="end">
                   <h4>Kết thúc chuyến đi</h4>
-                  <p>{{ products.tourCheckinDays }}</p>
+                  <p>{{ products.tourCheckoutDays }}</p>
                 </div>
               </div>
               <div class="group-tourist">

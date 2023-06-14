@@ -8,10 +8,19 @@
 
             <div class="TourSearch__left--select">
               <h5 class="l-title">Loại hình tour</h5>
-              <select class="form-control" name="" id="">
-                <option selected value="0">--- Tất cả ---</option>
-                <option value="1">Tour trọn gói</option>
-                <option value="2">Tour gia đình</option>
+              <select
+                class="form-control"
+                v-model="SelectedTourType"
+                v-on:change="GetChangeByTourType(this.SelectedTourType)"
+              >
+                <option value="0">All</option>
+                <option
+                  :value="type.typeID"
+                  v-for="type in TourType"
+                  :key="type.typeID"
+                >
+                  {{ type.typeName }}
+                </option>
               </select>
               <h5 class="l-title">Điểm đi</h5>
               <select
@@ -49,11 +58,13 @@
               <h5 class="l-title">Số ngày</h5>
               <div class="TourSearch__btn">
                 <div class="row g-2">
-                  <div class="col-6">
+                  <div
+                    class="col-6"
+                    v-for="button in SelectedNumberDays"
+                    :key="button.id"
+                  >
                     <button
                       type="button"
-                      v-for="button in SelectedNumberDays"
-                      :key="button.id"
                       class="btn w-100"
                       :class="{ active: activeButton === button.id }"
                       @click="GetChangeByNumberDay(button.id)"
@@ -61,42 +72,6 @@
                       {{ button.name }}
                     </button>
                   </div>
-                  <!-- <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNgay4_7"
-                      value="4-7"
-                      class="btn w-100"
-                      :class="{active: active}"
-                      @click="GetChangeByNumberDay('4-7')"
-                    >
-                      4-7 ngày
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNgay8_14"
-                      value="8-14"
-                      class=" btn w-100"
-                      
-                      @click="GetChangeByNumberDay('8-14')"
-                    >
-                      8-14 ngày
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNgay14"
-                      value="15-"
-                      class=" btn w-100"
-                     
-                      @click="GetChangeByNumberDay('15-')"
-                    >
-                      Trên 14 ngày
-                    </button>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -291,7 +266,10 @@
                 </div>
 
                 <div class="body card-body">
-                  <p class="p-date">{{ product.tourCheckinDays }}</p>
+                  <p class="p-date">
+                    {{ product.tourCheckinDays }} -
+                    {{ product.tour_NumberDays }} Ngày
+                  </p>
                   <p class="p-title">
                     <router-link
                       :to="{
@@ -463,6 +441,8 @@ export default {
         { id: "8-14", name: "8-14 Ngày" },
         { id: "15-30", name: "Trên 14 Ngày" },
       ],
+      TourType: [],
+      SelectedTourType: this.$route.params.tourtype,
       activeButton: null,
       minDate: "",
       formatter: new Intl.NumberFormat("vi-VN", {
@@ -474,15 +454,9 @@ export default {
     };
   },
   mounted() {
-    this.GetSearch(
-      this.$route.params.departure,
-      this.$route.params.destination,
-      this.$route.params.datetime,
-      this.$route.params.numberDay
-    );
     this.getAllProduct();
     this.setMinDate();
-    // console.log(window.location.href);
+    this.getTourType();
   },
   methods: {
     getAllProduct() {
@@ -492,21 +466,33 @@ export default {
         .then((response) => {
           // handle success
           this.allItems = response.data;
-          //   this.cards.departure=response.data.departure;
         })
         .catch((error) => {
           // handle error
           console.log(error);
         });
     },
-    GetSearch(departure, destination, datetime, numberDay) {
+    getTourType() {
       // eslint-disable-next-line
       axios
-        .get(`/api/Search/${departure}/${destination}/${datetime}/${numberDay}`)
+        .get(`/api/TourType`)
+        .then((response) => {
+          // handle success
+          this.TourType = response.data;
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
+    },
+    GetSearch(departure, destination, datetime, numberDay,tourtype) {
+      // eslint-disable-next-line
+      axios
+        .get(`/api/Search/${departure}/${destination}/${datetime}/${numberDay}?tourtype=${tourtype}`)
         .then((response) => {
           // handle success
           this.products = response.data;
-          // console.log(this.products);
+          console.log(this.products);
         })
         .catch((error) => {
           // handle error
@@ -517,33 +503,24 @@ export default {
       this.currentPage = page;
     },
     GetChangeByDeparture(departure) {
-      // this.$router.replace({
-      //   path:
-      //     `/Search/`+`${departure}`+`/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-      // });
-      window.location.href = `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
+      window.location.href = `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
     },
     GetChangeByDestination(destination) {
-      window.location.href = `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`;
+      window.location.href = `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
     },
     GetChangeByNumberDay(numberDay) {
       this.activeButton = numberDay;
-      // window.history.replaceState(
-      //   {},
-      //   "",
-      //   `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/` +
-      //     `${numberDay}`
-      // );
-      // window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}`;
       this.$router.replace({
         path:
           `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/` +
-          `${numberDay}`,
+          `${numberDay}`+`/tourtype=${this.$route.params.tourtype}`,
       });
-      // console.log(`${numberDay}`);
     },
     GetChangeByDateTime(datetime) {
-      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}`;
+      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
+    },
+    GetChangeByTourType(tourtype) {
+      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`;
     },
     setMinDate() {
       const currentDate = new Date().toISOString().split("T")[0];
@@ -598,9 +575,10 @@ export default {
           this.$route.params.departure,
           this.$route.params.destination,
           this.$route.params.datetime,
-          newNumberDay
+          newNumberDay,
+          this.$route.params.tourtype
         );
-      }
+      },
     },
   },
 };
