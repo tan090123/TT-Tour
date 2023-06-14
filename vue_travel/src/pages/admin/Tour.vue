@@ -25,6 +25,8 @@
                             <th>CheckoutDays</th>
                             <th>TotalSit</th>
                             <th>AvailableSit</th>
+                            <th>NumberDays</th>
+                            <th>AvailablePeople</th>
                             <th>Type</th>
                         </tr>
                     </thead>
@@ -47,6 +49,8 @@
                             <td>{{ item.tourCheckoutDays }}</td>
                             <td>{{ item.tourTotalSit }}</td>
                             <td>{{ item.tourAvailableSit }}</td>
+                            <td>{{ item.tour_NumberDays }}</td>
+                            <td>{{ item.tour_AvalablePeople }}</td>
                             <td>{{ item.tourType }}</td>
                             <td style="padding: 0 10px; width: 100px;">
                                 <button class="btn btn-success" style="padding: 10px 15px; margin-right: 5px;"

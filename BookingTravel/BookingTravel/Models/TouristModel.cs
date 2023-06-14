@@ -3,7 +3,6 @@
     public class TouristModel
     {
         public int TouristID { get; set; }
-        public int? TourID { get; set; }
         public int? TouristType { get; set; }
         public string? TouristName { get; set; }
 

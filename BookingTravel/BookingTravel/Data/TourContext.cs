@@ -22,7 +22,7 @@ namespace BookingTravel.Data
         public DbSet<TouristServices> TouristServices { get; set; }
         public DbSet<TourGuide> TourGuide { get; set; }
         public DbSet<TourType> TourType { get; set; }
-        public DbSet<TouristType> TouristType { get; set; }
+        public DbSet<TouristType_price> TouristType_price { get; set; }
         public DbSet<Bookings> Bookings { get; set; }
         public DbSet<TourImages> TourImages { get; set; }
         public DbSet<TourSchedule> TourSchedule { get; set; }
