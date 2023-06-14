@@ -23,6 +23,46 @@ namespace BookingTravel.Controllers
             _context = context;
         }
 
+        /// POST: api/ToursFromDb
+        [HttpPost]
+        public async Task<ActionResult<AddTourModel>> AddTour([FromForm] TourAddModel newTour, IFormFile file)
+        {
+            var response = new AddTourModel();
+
+            // Gửi yêu cầu tải lên hình ảnh đến UploadController
+            var uploadController = new UploadController();
+            var uploadResultTask = uploadController.Upload(file);
+            var uploadResult = await uploadResultTask;
+
+            var tour = new Tours
+                {
+                    TourName = newTour.TourName,
+                    TourCode = newTour.TourCode,
+                    TourType = newTour.TourType,
+                    TourTotalSit = newTour.TourTotalSit,
+                    TourImage = uploadResult.fileName,
+                    TourCheckoutDays = newTour.TourCheckoutDays,
+                    DiscountTour = newTour.DiscountTour,
+                    Departure = newTour.Departure,
+                    Description = newTour.Description,
+                    Destination = newTour.Destination,
+                    Price = newTour.Price,
+                    PromotionPrice = newTour.PromotionPrice,
+                    TourAvailableSit = newTour.TourAvailableSit,
+                    TourCheckinDays = newTour.TourCheckinDays,
+                    tour_AvalablePeople = newTour.tour_AvalablePeople,
+                    tour_NumberDays = newTour.tour_NumberDays
+                };
+
+                _context.Tours.Add(tour);
+                _context.SaveChanges();
+
+                response.Result = true;
+
+            return response;
+        }
+
+
 
 
         //GET: api/ToursFromDb
@@ -62,42 +102,6 @@ namespace BookingTravel.Controllers
 
             return tours;
         }
-
-        //// POST: api/ToursFromDb
-        [HttpPost]
-        public async Task<ActionResult<AddTourResultModel>> AddTour([FromBody] TourAddModel newTour)
-        {
-            var response = new AddTourResultModel();
-
-            var tour = new Tours
-            {
-                TourName = newTour.TourName,
-                TourCode = newTour.TourCode,
-                TourType = newTour.TourType,
-                TourTotalSit = newTour.TourTotalSit,
-                TourImage = newTour.TourImage,
-                TourCheckoutDays = newTour.TourCheckoutDays,
-                DiscountTour = newTour.DiscountTour,
-                Departure = newTour.Departure,
-                Description = newTour.Description,
-                Destination = newTour.Destination,
-                Price = newTour.Price,
-                PromotionPrice = newTour.PromotionPrice,
-                TourAvailableSit = newTour.TourAvailableSit,
-                TourCheckinDays = newTour.TourCheckinDays,
-                tour_AvalablePeople=newTour.tour_AvalablePeople,
-                tour_NumberDays=newTour.tour_NumberDays
-            };
-
-
-            _context.Tours.Add(tour);
-            _context.SaveChanges();
-
-            response.Result = true;
-
-            return response;
-        }
-
 
         // GET: api/ToursFromDb/id
         [HttpGet("{id}")]
