@@ -10,7 +10,7 @@ namespace BookingTravel.Data
         public int TourID { get; set; }
         public string? TourCode { get; set; }
         public string? TourName { get; set; }
-        public IFormFile? TourImage { get; set; }
+        public string? TourImage { get; set; }
         public string? Departure { get; set; }
         public int? Price { get; set; }
         public int? PromotionPrice { get; set; }
@@ -23,7 +23,6 @@ namespace BookingTravel.Data
         public int? TourAvailableSit { get; set; }
         public int? TourType { get; set; }
         public int? tour_NumberDays { get; set; }
-
         public int? tour_AvalablePeople { get; set; }
 
 
