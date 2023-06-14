@@ -26,11 +26,11 @@ namespace BookingTravel.Controllers
 
         [HttpGet("{departure}/{destination}/{datetime}/{numberDay}")]
      
-        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay)
+        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay,[FromQuery] int tourtype)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
 
-            if (departure == "All" && destination == "All" && numberDay == "All")
+            if (departure == "All" && destination == "All" && numberDay == "All" && tourtype==0)
             {
                 return Ok(await _context.Tours.ToListAsync());
             }
@@ -63,6 +63,11 @@ namespace BookingTravel.Controllers
                     
                         tourFromDBs = tourFromDBs.Where(x => x.tour_NumberDays >= Fsearch && x.tour_NumberDays <= Lsearch);
                     
+                }
+                if (tourtype != 0)
+                {
+                    tourFromDBs = tourFromDBs.Where(x => x.TourType.Equals(tourtype));
+
                 }
 
             }
