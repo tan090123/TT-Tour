@@ -11,11 +11,11 @@
 			</li>
 			<li class="divider" data-text="main">Main</li>
 			<li>
-				<a href="#"><i class='bx bxs-briefcase icon'></i>List<i
+				<a href="#"><i class='bx bxs-briefcase icon'></i>Quản lý tour<i
 						class='bx bx-chevron-right icon-right'></i></a>
 				<ul class="side-dropdown">
 					<li>
-						<router-link :to="{ name: '' }">...</router-link>
+						<router-link :to="{ name: 'tour-admin' }">Danh sách Tour</router-link>
 					</li>
 					<li><a href="#">Badges</a></li>
 					<li><a href="#">Breadcrumbs</a></li>
@@ -23,12 +23,30 @@
 				</ul>
 			</li>
 			<li>
-				<router-link :to="{ name: 'tour-admin' }"><i class='bx bxs-briefcase icon'></i>Quản lý tour</router-link>
+				<a href="#"><i class='bx bxs-briefcase icon'></i>Quản lý user<i
+						class='bx bx-chevron-right icon-right'></i></a>
+				<ul class="side-dropdown">
+					<li>
+						<router-link :to="{ name: 'user-admin' }">Danh sách user</router-link>
+					</li>
+					<li><a href="#">Badges</a></li>
+					<li><a href="#">Breadcrumbs</a></li>
+					<li><a href="#">Button</a></li>
+				</ul>
 			</li>
 			<li>
-				<router-link :to="{ name: 'user-admin' }"><i class='bx bxs-briefcase icon'></i>Quản lý user</router-link>
+				<a href="#"><i class='bx bxs-briefcase icon'></i>Quản lý order<i
+						class='bx bx-chevron-right icon-right'></i></a>
+				<ul class="side-dropdown">
+					<li>
+						<router-link :to="{ name: '' }">Danh sách order</router-link>
+					</li>
+					<li><a href="#">Badges</a></li>
+					<li><a href="#">Breadcrumbs</a></li>
+					<li><a href="#">Button</a></li>
+				</ul>
 			</li>
-			<li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
+			<!-- <li><a href="#"><i class='bx bxs-chart icon'></i> Charts</a></li>
 			<li><a href="#"><i class='bx bxs-widget icon'></i> Widgets</a></li>
 			<li class="divider" data-text="table and forms">Table and forms</li>
 			<li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
@@ -40,14 +58,8 @@
 					<li><a href="#">Checkbox</a></li>
 					<li><a href="#">Radio</a></li>
 				</ul>
-			</li>
+			</li> -->
 		</ul>
-		<!-- <div class="ads">
-			<div class="wrapper">
-				<a href="#" class="btn-upgrade">Upgrade</a>
-				<p>Become a <span>PRO</span> member and enjoy <span>All Features</span></p>
-			</div>
-		</div> -->
 	</section>
 	<!-- SIDEBAR -->
 </template>
