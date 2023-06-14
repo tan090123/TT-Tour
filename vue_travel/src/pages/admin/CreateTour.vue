@@ -2,7 +2,7 @@
     <div class="create-tour">
         <div class="container-fluid">
             <h2 class="tour-title text-center">Tạo danh sách Tour</h2>
-            <form @submit.prevent="onSubmit">
+            <form @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="code">Code:</label>
                     <input type="text" id="code" name="tourCode" v-model="tourCode">
@@ -148,6 +148,7 @@
                     .catch(error => {
                         // Xử lý lỗi
                         console.error(error);
+                        // eslint-disable-next-line no-undef
                         Swal.fire({
                             title: 'Thất bại',
                             text: 'Bạn đã sửa thất bại!!!',

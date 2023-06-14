@@ -59,13 +59,12 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public async Task<ActionResult<AddTourResultModel>> AddTour([FromBody] TourModel newTour)
+        public async Task<ActionResult<AddTourResultModel>> AddTour([FromBody] TourAddModel newTour)
         {
             var response = new AddTourResultModel();
 
             var tour = new Tours
             {
-                TourID = newTour.TourID,
                 TourName = newTour.TourName,
                 TourCode = newTour.TourCode,
                 TourType = newTour.TourType,
@@ -88,7 +87,7 @@ namespace BookingTravel.Controllers
 
             response.Result = true;
 
-            return Ok(tour);
+            return response;
         }
 
 
