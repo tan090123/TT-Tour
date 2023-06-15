@@ -13,7 +13,7 @@
                 v-model="SelectedTourType"
                 v-on:change="GetChangeByTourType(this.SelectedTourType)"
               >
-                <option value="0">All</option>
+                <option value="0">---Tất cả---</option>
                 <option
                   :value="type.typeID"
                   v-for="type in TourType"
@@ -28,7 +28,7 @@
                 v-model="SelectedDeparture"
                 v-on:change="GetChangeByDeparture(this.SelectedDeparture)"
               >
-                <option value="All">All</option>
+                <option value="All">---Tất cả---</option>
                 <option
                   :value="card.departure"
                   v-for="(card, index) in uniqueDeparture"
@@ -43,7 +43,7 @@
                 v-model="SelectedDestination"
                 v-on:change="GetChangeByDestination(this.SelectedDestination)"
               >
-                <option value="All">All</option>
+                <option value="All">---Tất cả---</option>
                 <option
                   :value="card.destination"
                   v-for="(card, index) in uniqueDestination"
@@ -66,7 +66,7 @@
                     <button
                       type="button"
                       class="btn w-100"
-                      :class="{ active: activeButton === button.id }"
+                      :class="{ active: activeButton1 === button.id }"
                       @click="GetChangeByNumberDay(button.id)"
                     >
                       {{ button.name }}
@@ -94,45 +94,19 @@
               <h5 class="l-title">Số người</h5>
               <div class="TourSearch__btn">
                 <div class="row g-2">
-                  <div class="col-6">
+                  <div
+                    class="col-6"
+                    v-for="button in SelectedPeople"
+                    :key="button.id"
+                  >
                     <button
                       type="button"
-                      id="SoNguoi1"
-                      value="1"
                       class="btn w-100"
-                      checked
+                      :value="button.id"
+                      :class="{ active: activeButton2 === button.id }"
+                      @click="GetChangeByPeople(button.id)"
                     >
-                      1 người
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNguoi2"
-                      value="2"
-                      class="btn w-100"
-                    >
-                      2 người
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNguoi3-5"
-                      value="3-5"
-                      class="btn w-100"
-                    >
-                      3-5 người
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="SoNguoi5"
-                      value="5"
-                      class="btn w-100"
-                    >
-                      5+ người
+                      {{ button.name }}
                     </button>
                   </div>
                 </div>
@@ -210,17 +184,34 @@
 
         <!----------------------------------------------->
         <div class="TourCard tours_card col-12 col-md-6 col-lg-9">
-          <div class="mb-5 text-center">
-            <h2 class="fst-italic text-danger" v-if="this.products.length <= 0">
-              Không tìm thấy sản phẩm nào phù hợp
-            </h2>
-            <h2 class="fw-lighter" v-else>
-              Chúng tôi tìm thấy
-              <span class="fw-bold fst-italic text-danger">{{
-                this.products.length
-              }}</span>
-              Tours cho quý khách
-            </h2>
+          <div class="d-flex justify-content-between my-4 px-3">
+            <div class="text-center">
+              <h2
+                class="fst-italic text-danger"
+                v-if="this.products.length <= 0"
+              >
+                Không tìm thấy sản phẩm nào phù hợp
+              </h2>
+              <h2 class="fw-lighter" v-else>
+                Chúng tôi tìm thấy
+                <span class="fw-bold fst-italic text-danger">{{
+                  this.products.length
+                }}</span>
+                Tours cho quý khách
+              </h2>
+            </div>
+            <div class="w-25 d-flex justify-content-center align-items-center" v-if="this.products.length > 0">
+              <h2 class="w-75 fw-lighter">Sắp xếp theo:</h2>
+              <select
+                class="form-control fs-3 m-0"
+                
+              >
+                <option value="-1">--- Chọn ---</option>
+                <option value="0">Theo giá thấp -&gt; cao</option>
+                <option value="1">Theo giá cao -&gt; thấp</option>
+                <option value="2">Giảm giá nhiều nhất</option>
+              </select>
+            </div>
           </div>
 
           <div class="TourCard__content row row-cols-lg-3 row-cols-1 p-2">
@@ -268,7 +259,8 @@
                 <div class="body card-body">
                   <p class="p-date">
                     {{ product.tourCheckinDays }} -
-                    {{ product.tour_NumberDays }} Ngày
+                    {{ product.tour_NumberDays }} Ngày -
+                    {{ product.tour_AvalablePeople }} Người
                   </p>
                   <p class="p-title">
                     <router-link
@@ -441,9 +433,16 @@ export default {
         { id: "8-14", name: "8-14 Ngày" },
         { id: "15-30", name: "Trên 14 Ngày" },
       ],
+      SelectedPeople: [
+        { id: "1", name: "1 Người" },
+        { id: "2", name: "2 Người" },
+        { id: "3-5", name: "3-5 Người" },
+        { id: "5", name: "5+ Người" },
+      ],
       TourType: [],
       SelectedTourType: this.$route.params.tourtype,
-      activeButton: null,
+      activeButton1: null,
+      activeButton2: null,
       minDate: "",
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
@@ -485,42 +484,69 @@ export default {
           console.log(error);
         });
     },
-    GetSearch(departure, destination, datetime, numberDay,tourtype) {
+    GetSearch(departure, destination, datetime, numberDay, tourtype) {
       // eslint-disable-next-line
       axios
-        .get(`/api/Search/${departure}/${destination}/${datetime}/${numberDay}?tourtype=${tourtype}`)
+        .get(
+          `/api/Search/${departure}/${destination}/${datetime}/${numberDay}/${tourtype}`
+        )
         .then((response) => {
           // handle success
           this.products = response.data;
-          console.log(this.products);
         })
         .catch((error) => {
           // handle error
           console.error(error);
         });
     },
+    GetSearchByPeople(people) {
+      // eslint-disable-next-line
+      axios
+        .get(
+          `/api/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/${this.$route.params.tourtype}?people=${people}`
+        )
+        .then((response) => {
+          // handle success
+          this.products = response.data;
+        })
+        .catch((error) => {
+          // handle error
+          console.error(error);
+        });
+    },
+
     changePage(page) {
       this.currentPage = page;
     },
     GetChangeByDeparture(departure) {
-      window.location.href = `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
+      this.$router.replace({
+        path: `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      });
     },
     GetChangeByDestination(destination) {
-      window.location.href = `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
+      this.$router.replace({
+        path: `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      });
     },
     GetChangeByNumberDay(numberDay) {
-      this.activeButton = numberDay;
       this.$router.replace({
-        path:
-          `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/` +
-          `${numberDay}`+`/tourtype=${this.$route.params.tourtype}`,
+        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}/tourtype=${this.$route.params.tourtype}`,
+      });
+    },
+    GetChangeByPeople(avalablePeople) {
+      this.$router.replace({
+        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}/SoNguoi=${avalablePeople}`,
       });
     },
     GetChangeByDateTime(datetime) {
-      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`;
+      this.$router.replace({
+        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      });
     },
     GetChangeByTourType(tourtype) {
-      window.location.href = `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`;
+      this.$router.replace({
+        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`,
+      });
     },
     setMinDate() {
       const currentDate = new Date().toISOString().split("T")[0];
@@ -569,6 +595,7 @@ export default {
       handler(newNumberDay) {
         // Cập nhật giá trị của biến this.$route.params.numberDay
         this.$route.params.numberDay = newNumberDay;
+        this.activeButton1 = newNumberDay;
 
         // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
         this.GetSearch(
@@ -578,6 +605,87 @@ export default {
           newNumberDay,
           this.$route.params.tourtype
         );
+      },
+    },
+    "$route.params.departure": {
+      immediate: true,
+      handler(newDeparture) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.departure = newDeparture;
+        this.activeButton1 = this.$route.params.numberDay;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearch(
+          newDeparture,
+          this.$route.params.destination,
+          this.$route.params.datetime,
+          this.$route.params.numberDay,
+          this.$route.params.tourtype
+        );
+      },
+    },
+    "$route.params.destination": {
+      immediate: true,
+      handler(newDestination) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.destination = newDestination;
+        this.activeButton1 = this.$route.params.numberDay;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearch(
+          this.$route.params.departure,
+          newDestination,
+          this.$route.params.datetime,
+          this.$route.params.numberDay,
+          this.$route.params.tourtype
+        );
+      },
+    },
+    "$route.params.tourtype": {
+      immediate: true,
+      handler(newTourType) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.tourtype = newTourType;
+        this.activeButton1 = this.$route.params.numberDay;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearch(
+          this.$route.params.departure,
+          this.$route.params.destination,
+          this.$route.params.datetime,
+          this.$route.params.numberDay,
+          newTourType
+        );
+        // console.log(newTourType);
+      },
+    },
+    "$route.params.datetime": {
+      immediate: true,
+      handler(newDatetime) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.datetime = newDatetime;
+        this.activeButton1 = this.$route.params.numberDay;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearch(
+          this.$route.params.departure,
+          this.$route.params.destination,
+          newDatetime,
+          this.$route.params.numberDay,
+          this.$route.params.tourtype
+        );
+      },
+    },
+    "$route.params.people": {
+      immediate: true,
+      handler(newPeople) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.params.people = newPeople;
+        this.activeButton1 = this.$route.params.numberDay;
+        this.activeButton2 = newPeople;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearchByPeople(newPeople);
       },
     },
   },

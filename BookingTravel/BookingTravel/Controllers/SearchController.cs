@@ -24,13 +24,14 @@ namespace BookingTravel.Controllers
             _context = context;
         }
 
-        [HttpGet("{departure}/{destination}/{datetime}/{numberDay}")]
+        [HttpGet("{departure}/{destination}/{datetime}/{numberDay}/{tourtype}")]
      
-        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay,[FromQuery] int tourtype)
+        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay, int tourtype, [FromQuery] string? people)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
+            DateTime current=DateTime.Now;
 
-            if (departure == "All" && destination == "All" && numberDay == "All" && tourtype==0)
+            if (departure == "All" && destination == "All" && numberDay == "All" && datetime == current && tourtype==0)
             {
                 return Ok(await _context.Tours.ToListAsync());
             }
@@ -69,6 +70,45 @@ namespace BookingTravel.Controllers
                     tourFromDBs = tourFromDBs.Where(x => x.TourType.Equals(tourtype));
 
                 }
+                if (people != null)
+                {
+                    if (people == "3-5")
+                    {
+                        int Fsearch;
+                        int Lsearch;
+                        int index = people.IndexOf("-");
+                        string firstPart = people.Substring(0, index);
+                        string secondPart = people.Substring(index + 1);
+                        int.TryParse(firstPart, out Fsearch);
+                        int.TryParse(secondPart, out Lsearch);
+                        tourFromDBs = tourFromDBs.Where(x => x.tour_AvalablePeople >= Fsearch && x.tour_AvalablePeople <= Lsearch);
+                    }
+                    else
+                    {
+                        int check;
+                        int.TryParse(people, out check);
+
+                        switch (check)
+                        {
+                            case 1:
+
+                                tourFromDBs = tourFromDBs.Where(x => x.tour_AvalablePeople.Equals(check)); 
+                                break;
+
+                            case 2:
+                                
+                                tourFromDBs = tourFromDBs.Where(x => x.tour_AvalablePeople.Equals(check));
+                                break;
+                            
+                            case 5:
+                
+                                tourFromDBs = tourFromDBs.Where(x => x.tour_AvalablePeople > check);
+                                break;
+                        }
+                    }
+                    
+                }
+                
 
             }
 
