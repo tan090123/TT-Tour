@@ -2,8 +2,7 @@
   <div class="create-tour">
     <div class="container-fluid">
       <h2 class="tour-title text-center">Tạo danh sách Tour</h2>
-      <form @submit.prevent="onSubmit">
-        <!-- enctype="multipart/form-data" -->
+      <form @submit.prevent="onSubmit" enctype="multipart/form-data">
         <div class="form-group">
           <label for="code">Code:</label>
           <input type="text" id="code" name="tourCode" v-model="tourCode" />
@@ -14,7 +13,7 @@
         </div>
         <div class="form-group">
           <label for="upload">Upload Image:</label>
-          <input type="file" id="upload" name="upload" @change="handleFileChange" />
+          <input type="file" id="upload" name="upload" @change="onFileChange" />
         </div>
         <div class="form-group">
           <label for="departure">Departure:</label>
@@ -57,6 +56,14 @@
           <input type="number" id="availableSit" name="availableSit" v-model="tourAvailableSit" />
         </div>
         <div class="form-group">
+          <label for="NumberDays">NumberDays:</label>
+          <input type="number" id="numberDays" name="numberDays" v-model="tour_NumberDays" />
+        </div>
+        <div class="form-group">
+          <label for="AvalablePeople">AvalablePeople:</label>
+          <input type="number" id="AvalablePeople" name="AvalablePeople" v-model="tour_AvalablePeople" />
+        </div>
+        <div class="form-group">
           <label for="type">Type:</label>
           <select id="type" name="type" v-model="tourType">
             <option v-for="tintype in types" :value="tintype.typeID" :key="tintype.typeID">
@@ -86,6 +93,9 @@
         tourTotalSit: "",
         tourAvailableSit: "",
         tourType: "",
+        tour_AvalablePeople: "",
+        tour_NumberDays: "",
+        tourImage: "",
         file: null,
         types: [],
       };
@@ -110,50 +120,51 @@
       onSubmit() {
         this.onCreateTour();
       },
-      handleFileChange(event) {
+
+      onFileChange(event) {
         this.file = event.target.files[0];
       },
 
       onCreateTour() {
-        const fileInput = document.getElementById('upload');
-        const file = fileInput.files[0];
-        const fileName = file.name; // Lấy tên file
+        // Tạo FormData mới để gửi dữ liệu và tệp lên máy chủ
+        const formData = new FormData();
+        formData.append('tourCode', this.tourCode);
+        formData.append('tourName', this.tourName);
+        formData.append('departure', this.departure);
+        formData.append('destination', this.destination);
+        formData.append('description', this.description);
+        formData.append('price', this.price);
+        formData.append('promotionPrice', this.promotionPrice);
+        formData.append('discountTour', this.discountTour);
+        formData.append('tourCheckinDays', this.tourCheckinDays);
+        formData.append('tourCheckoutDays', this.tourCheckoutDays);
+        formData.append('tourTotalSit', this.tourTotalSit);
+        formData.append('tourAvailableSit', this.tourAvailableSit);
+        formData.append('tourType', this.tourType);
+        formData.append('tourImage', this.file);
+
         // eslint-disable-next-line
-        axios.post('/api/Tour', {
-          tourCode: this.tourCode,
-          tourName: this.tourName,
-          departure: this.departure,
-          destination: this.destination,
-          description: this.description,
-          price: this.price,
-          promotionPrice: this.promotionPrice,
-          discountTour: this.discountTour,
-          tourCheckinDays: this.tourCheckinDays,
-          tourCheckoutDays: this.tourCheckoutDays,
-          tourTotalSit: this.tourTotalSit,
-          tourAvailableSit: this.tourAvailableSit,
-          tourType: this.tourType,
-          tourimage: fileName,
-        }).then(response => {
-          // Xử lý kết quả thành công
-          console.table(response.data);
-          // eslint-disable-next-line no-undef
-          Swal.fire({
-            title: 'Thông báo thành công!',
-            text: 'Bạn đã tạo thành công thông báo xịn xò!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          });
-          // Chuyển hướng đến trang danh sách tour
-          window.location.href = '/admin/tour';
-        })
+        axios.post('/api/Tour', formData)
+          .then(response => {
+            // Xử lý kết quả thành công
+            console.table(response.data);
+            // eslint-disable-next-line no-undef
+            Swal.fire({
+              // title: 'Thông báo thành công!',
+              text: 'Bạn đã tạo thành công thông báo xịn xò!',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+            // Chuyển hướng đến trang danh sách tour
+            window.location.href = '/admin/tour';
+          })
           .catch(error => {
             // Xử lý lỗi
             console.error(error);
             // eslint-disable-next-line no-undef
             Swal.fire({
-              title: 'Thất bại',
-              text: 'Bạn đã sửa thất bại!!!',
+              // title: 'Thất bại',
+              text: 'Bạn đã tạo thất bại!!!',
               icon: 'error',
               confirmButtonText: 'OK',
             })

@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using BookingTravel.Data;
+using BookingTravel.Controllers;
+using Microsoft.AspNetCore.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TourContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TourConn")));
@@ -18,6 +21,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<UploadController>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +38,7 @@ app.UseHttpsRedirection();
 app.UseCors(option=>option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthorization();
+app.UseStaticFiles();
 
 app.MapControllers();
 
