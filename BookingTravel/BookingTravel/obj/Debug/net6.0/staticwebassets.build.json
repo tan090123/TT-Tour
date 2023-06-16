@@ -1,11 +1,71 @@
 {
   "Version": 1,
-  "Hash": "PYy4wW6Ga9emJaI2i0dN2ImASzV95wAbRiydT6uwPmg=",
+  "Hash": "K+5Ai//w5nKD81FuM5oiOBrCe3iDUMXuV1+K0KD+UVQ=",
   "Source": "BookingTravel",
   "BasePath": "_content/BookingTravel",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "BookingTravel\\wwwroot",
+      "Source": "BookingTravel",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\dalat.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "dalat.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dalat.jpg"
+    },
+    {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\danang.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "danang.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\danang.jpg"
+    },
+    {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\muine.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "muine.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\muine.jpg"
+    }
+  ]
 }

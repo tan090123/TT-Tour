@@ -9,6 +9,7 @@ using BookingTravel.Data;
 using BookingTravel.Models;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookingTravel.Controllers
 {
@@ -17,30 +18,34 @@ namespace BookingTravel.Controllers
     public class TourController : ControllerBase
     {
         private readonly TourContext _context;
+        private readonly UploadController _uploadController;
 
-        public TourController(TourContext context)
+        public TourController(TourContext context, UploadController uploadController)
         {
             _context = context;
+            _uploadController = uploadController;
         }
 
         /// POST: api/ToursFromDb
         [HttpPost]
-        public async Task<ActionResult<AddTourModel>> AddTour([FromForm] TourAddModel newTour, IFormFile file)
+        public async Task<ActionResult<AddTourModel>> AddTour([FromForm] TourAddModel newTour)
         {
             var response = new AddTourModel();
+            var imageResult = await _uploadController.UploadImage(newTour.TourImage);
 
-            // Gửi yêu cầu tải lên hình ảnh đến UploadController
-            var uploadController = new UploadController();
-            var uploadResultTask = uploadController.Upload(file);
-            var uploadResult = await uploadResultTask;
 
-            var tour = new Tours
+            if (imageResult is OkObjectResult result)
+            {
+                // Lưu trữ tên tệp tin hoặc đường dẫn/tên tệp tin đầy đủ vào cơ sở dữ liệu
+                var fileName = result.Value.ToString();
+                // Lưu thông tin sản phẩm vào cơ sở dữ liệu
+                var tour = new Tours
                 {
                     TourName = newTour.TourName,
                     TourCode = newTour.TourCode,
                     TourType = newTour.TourType,
                     TourTotalSit = newTour.TourTotalSit,
-                    TourImage = uploadResult.fileName,
+                    TourImage = fileName,
                     TourCheckoutDays = newTour.TourCheckoutDays,
                     DiscountTour = newTour.DiscountTour,
                     Departure = newTour.Departure,
@@ -53,16 +58,13 @@ namespace BookingTravel.Controllers
                     tour_AvalablePeople = newTour.tour_AvalablePeople,
                     tour_NumberDays = newTour.tour_NumberDays
                 };
-
                 _context.Tours.Add(tour);
                 _context.SaveChanges();
-
                 response.Result = true;
-
-            return response;
+                return Ok("Product created successfully.");
+            }
+           return BadRequest("Error uploading image.");
         }
-
-
 
 
         //GET: api/ToursFromDb
