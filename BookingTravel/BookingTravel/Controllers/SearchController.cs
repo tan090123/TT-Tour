@@ -26,7 +26,7 @@ namespace BookingTravel.Controllers
 
         [HttpGet("{departure}/{destination}/{datetime}/{numberDay}/{tourtype}")]
      
-        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay, int tourtype, [FromQuery] string? people)
+        public async Task<ActionResult<IEnumerable<Tours>>> Search(string? departure, string? destination, DateTime? datetime, string? numberDay, int tourtype, [FromQuery] string? people,int? orderby)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
             DateTime current=DateTime.Now;
@@ -107,6 +107,24 @@ namespace BookingTravel.Controllers
                         }
                     }
                     
+                }
+                if (orderby != null)
+                {
+                    switch (orderby)
+                    {
+                        case -1:
+                            break;
+                        case 0:
+                            var select0 = tourFromDBs.OrderBy(x => x.PromotionPrice).ToList();
+                            return select0;
+                        case 1:
+                            var select1 = tourFromDBs.OrderByDescending(x => x.PromotionPrice).ToList();
+                            return select1;
+                        case 2:
+                            var select2 = tourFromDBs.Where(x => x.DiscountTour.Length > 2).ToList();
+                            return select2;
+
+                    }
                 }
                 
 

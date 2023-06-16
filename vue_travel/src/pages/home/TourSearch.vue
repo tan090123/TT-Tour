@@ -114,53 +114,6 @@
             </div>
 
             <div class="TourSearch__left--tour">
-              <h5 class="l-title">Dòng tour</h5>
-              <div class="TourSearch__btn">
-                <div class="row g-2">
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="DongTour1"
-                      value="1"
-                      class="btn w-100"
-                      checked
-                    >
-                      Cao cấp
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="DongTour2"
-                      value="2"
-                      class="btn w-100"
-                    >
-                      Tiêu chuẩn
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="DongTour3"
-                      value="3"
-                      class="btn w-100"
-                    >
-                      Tiết kiệm
-                    </button>
-                  </div>
-                  <div class="col-6">
-                    <button
-                      type="button"
-                      id="DongTour4"
-                      value="4"
-                      class="btn w-100"
-                    >
-                      Giá tốt
-                    </button>
-                  </div>
-                </div>
-              </div>
-
               <div class="TourSearch_viewer">
                 <h5 class="l-title">Hiện thị những chuyến đi có</h5>
                 <div class="mb-3">
@@ -200,11 +153,15 @@
                 Tours cho quý khách
               </h2>
             </div>
-            <div class="w-25 d-flex justify-content-center align-items-center" v-if="this.products.length > 0">
+            <div
+              class="w-25 d-flex justify-content-center align-items-center"
+              v-if="this.products.length > 0"
+            >
               <h2 class="w-75 fw-lighter">Sắp xếp theo:</h2>
               <select
-                class="form-control fs-3 m-0"
-                
+                class="form-control fs-3"
+                v-model="SelectedOrderBy"
+                v-on:change="GetChangeByOrderBy(this.SelectedOrderBy)"
               >
                 <option value="-1">--- Chọn ---</option>
                 <option value="0">Theo giá thấp -&gt; cao</option>
@@ -423,7 +380,6 @@ export default {
     return {
       products: [],
       allItems: [],
-      active: this.$route.params.numberDay,
       SelectedDeparture: this.$route.params.departure,
       SelectedDestination: this.$route.params.destination,
       SelectedTime: this.$route.params.datetime,
@@ -441,6 +397,7 @@ export default {
       ],
       TourType: [],
       SelectedTourType: this.$route.params.tourtype,
+      SelectedOrderBy: -1,
       activeButton1: null,
       activeButton2: null,
       minDate: "",
@@ -456,6 +413,7 @@ export default {
     this.getAllProduct();
     this.setMinDate();
     this.getTourType();
+    console.log(this.$route.query.OrderBy);
   },
   methods: {
     getAllProduct() {
@@ -499,11 +457,11 @@ export default {
           console.error(error);
         });
     },
-    GetSearchByPeople(people) {
+    GetSearchBy(people, order) {
       // eslint-disable-next-line
       axios
         .get(
-          `/api/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/${this.$route.params.tourtype}?people=${people}`
+          `/api/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/${this.$route.params.tourtype}?people=${people}&orderby=${order}`
         )
         .then((response) => {
           // handle success
@@ -520,32 +478,42 @@ export default {
     },
     GetChangeByDeparture(departure) {
       this.$router.replace({
-        path: `/Search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+        path: `/search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
       });
     },
     GetChangeByDestination(destination) {
       this.$router.replace({
-        path: `/Search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+        path: `/search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
       });
     },
     GetChangeByNumberDay(numberDay) {
       this.$router.replace({
-        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}/tourtype=${this.$route.params.tourtype}`,
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}/tourtype=${this.$route.params.tourtype}`,
       });
     },
     GetChangeByPeople(avalablePeople) {
-      this.$router.replace({
-        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}/SoNguoi=${avalablePeople}`,
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+        query: {
+          SoNguoi: `${avalablePeople}`,
+          OrderBy: `${this.$route.query.OrderBy}`,
+        },
       });
     },
     GetChangeByDateTime(datetime) {
       this.$router.replace({
-        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
       });
     },
     GetChangeByTourType(tourtype) {
       this.$router.replace({
-        path: `/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`,
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`,
+      });
+    },
+    GetChangeByOrderBy(order) {
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+        query: { SoNguoi: `${this.$route.query.SoNguoi}`, OrderBy: `${order}` },
       });
     },
     setMinDate() {
@@ -605,6 +573,10 @@ export default {
           newNumberDay,
           this.$route.params.tourtype
         );
+        // this.SelectedOrderBy = this.$route.query.OrderBy;
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+
+        this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
       },
     },
     "$route.params.departure": {
@@ -622,6 +594,8 @@ export default {
           this.$route.params.numberDay,
           this.$route.params.tourtype
         );
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+        this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
       },
     },
     "$route.params.destination": {
@@ -639,6 +613,8 @@ export default {
           this.$route.params.numberDay,
           this.$route.params.tourtype
         );
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+        this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
       },
     },
     "$route.params.tourtype": {
@@ -656,7 +632,8 @@ export default {
           this.$route.params.numberDay,
           newTourType
         );
-        // console.log(newTourType);
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+        this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
       },
     },
     "$route.params.datetime": {
@@ -674,18 +651,35 @@ export default {
           this.$route.params.numberDay,
           this.$route.params.tourtype
         );
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+        this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
+
+        // this.SelectedOrderBy=-1;
       },
     },
-    "$route.params.people": {
+    "$route.query.SoNguoi": {
       immediate: true,
       handler(newPeople) {
         // Cập nhật giá trị của biến this.$route.params.numberDay
-        this.$route.params.people = newPeople;
+        this.$route.query.SoNguoi = newPeople;
         this.activeButton1 = this.$route.params.numberDay;
         this.activeButton2 = newPeople;
 
         // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
-        this.GetSearchByPeople(newPeople);
+        this.GetSearchBy(newPeople, this.$route.query.OrderBy);
+        this.$route.query.OrderBy = this.SelectedOrderBy;
+      },
+    },
+    "$route.query.OrderBy": {
+      immediate: true,
+      handler(newOrder) {
+        // Cập nhật giá trị của biến this.$route.params.numberDay
+        this.$route.query.OrderBy = newOrder;
+        this.activeButton1 = this.$route.params.numberDay;
+        this.activeButton2 = this.$route.query.SoNguoi;
+
+        // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
+        this.GetSearchBy(this.$route.query.SoNguoi, newOrder);
       },
     },
   },
