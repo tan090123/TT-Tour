@@ -67,7 +67,7 @@ namespace BookingTravel.Controllers
 
         //GET: api/ToursFromDb
         [HttpGet]
-        public List<TourModel> SearchTour([FromQuery] int? searchName)
+        public List<TourModel> SearchTour([FromQuery] string? searchName)
         {
             var tourFromDBs = _context.Tours.AsNoTracking();
 
@@ -75,7 +75,8 @@ namespace BookingTravel.Controllers
             if (searchName != null)
             {
 
-                tourFromDBs = tourFromDBs.Where(x => x.tour_AvalablePeople.Equals(searchName));
+                tourFromDBs = tourFromDBs.Where(x => x.TourName.ToLower().Contains(searchName.ToLower()));
+
             }
 
             var tours = tourFromDBs.Select(x => new TourModel

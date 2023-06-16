@@ -52,7 +52,13 @@ const home = [
                     {
                         path: 'SoNguoi=:people',
                         name: 'tours_search',
-                    }
+                        // 
+                    },
+                    {
+                        path: 'OrderBy=:order',
+                        name: 'tours_search',
+                        
+                    },
                 ]
             },
             {
