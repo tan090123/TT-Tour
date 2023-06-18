@@ -14,10 +14,18 @@ const home = [
                 meta: { title: 'Du Lịch Vietravel - Vietravel' }
             },
             {
-                path: '/booking/tourID=:id',
+                path: '/booking',
                 name: 'booking-id',
                 component: () => import("@/pages/home/TourOrder.vue"),
-                meta: { title: 'Thông tin - Vietravel ' }
+                meta: { title: 'Thông tin - Vietravel ' },
+                children:[
+                    {
+                        path: 'tourID=:tourID',
+                        name: 'tours_search',
+                        // 
+                    },
+                    
+                ]
             },
             {
                 path: '/contact',
@@ -44,21 +52,29 @@ const home = [
                 meta: { title: 'Danh sách các Tour - Vietravel' }
             },
             {
-                path: '/search/:departure/:destination/:datetime/:numberDay/tourtype=:tourtype',
+                path: '/search/:departure/:destination/:datetime/:numberDay',
                 name: 'tours_search',
                 component: () => import("@/pages/home/TourSearch.vue"),
                 meta: { title: 'Kết quả tìm kiếm - Vietravel' },
                 children:[
                     {
-                        path: 'SoNguoi=:people',
+                        path: 'tourtype=:tourtype',
                         name: 'tours_search',
-                        // 
+                        children:[
+                            {
+                                path: 'SoNguoi=:people',
+                                name: 'tours_search',
+                                // 
+                            },
+                            {
+                                path: 'SoNguoi=:people',
+                                name: 'tours_search',
+                                // 
+                            },
+                            
+                        ]
                     },
-                    {
-                        path: 'OrderBy=:order',
-                        name: 'tours_search',
-                        
-                    },
+                    
                 ]
             },
             {

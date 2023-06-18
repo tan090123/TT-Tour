@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\china.jpg",
+      "PackagePath": "staticwebassets\\china.jpg"
+    },
+    {
       "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\dalat.jpg",
       "PackagePath": "staticwebassets\\dalat.jpg"
     },
@@ -9,8 +13,16 @@
       "PackagePath": "staticwebassets\\danang.jpg"
     },
     {
+      "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\maldives.jpg",
+      "PackagePath": "staticwebassets\\maldives.jpg"
+    },
+    {
       "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\muine.jpg",
       "PackagePath": "staticwebassets\\muine.jpg"
+    },
+    {
+      "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\phuquoc5sao.jpg",
+      "PackagePath": "staticwebassets\\phuquoc5sao.jpg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BookingTravel.Microsoft.AspNetCore.StaticWebAssets.props",

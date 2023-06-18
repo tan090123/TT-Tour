@@ -365,7 +365,7 @@ export default {
     };
   },
   mounted() {
-    this.getProductByID(this.$route.params.id);
+    this.getProductByID(this.$route.query.tourID);
     this.getServicesTourist();
   },
   methods: {
@@ -376,7 +376,7 @@ export default {
         .then((response) => {
           // handle success
           this.products = response.data;
-          //   console.log(this.products);
+            // console.log(this.products);
         })
         .catch((error) => {
           // handle error
@@ -390,7 +390,7 @@ export default {
         .then((response) => {
           // handle success
           this.TServices = response.data;
-          console.log(this.TServices);
+          // console.log(this.TServices);
         })
         .catch((error) => {
           // handle error
@@ -398,6 +398,7 @@ export default {
         });
     },
   },
+ 
 };
 </script>
 <style lang="scss">

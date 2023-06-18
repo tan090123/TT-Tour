@@ -209,13 +209,12 @@
                             aria-label="Default select example"
                             v-model="SelectedDeparture"
                           >
-                            <option value="All">Điểm đi</option>
                             <option
-                              :value="card.departure"
-                              v-for="(card, index) in uniqueDeparture"
-                              :key="index"
+                              :value="depart.id"
+                              v-for="depart in Departure"
+                              :key="depart.id"
                             >
-                              {{ card.departure }}
+                              {{ depart.name}}
                             </option>
                             <!-- <option value="2">Two</option>
                                                         <option value="3">Three</option> -->
@@ -229,16 +228,16 @@
                             class="form-select text-center fs-3 border border-warning border-5 p-3"
                             aria-label="Default select example"
                             v-model="SelectedDestination"
-                            
                           >
-                            <option value="All">Điểm đến</option>
                             <option
-                              :value="card.destination"
-                              v-for="(card, index) in uniqueDestination"
-                              :key="index"
+                              :value="des.id"
+                              v-for="des in Destination"
+                              :key="des.id"
                             >
-                              {{ card.destination }}
+                              {{ des.name}}
                             </option>
+                            <!-- <option value="2">Two</option>
+                                                        <option value="3">Three</option> -->
                           </select>
                         </div>
                       </div>
@@ -1033,8 +1032,58 @@ export default {
   data() {
     return {
       cards: [],
-      SelectedDeparture: "All",
-      SelectedDestination: "All",
+      SelectedDeparture:"All",
+      Departure: [
+        { id: "All", name: "Điểm đi" },
+        { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
+        { id: "Hà Nội", name: "Hà Nội" },
+        { id: "Đà Nẵng", name: "Đà Nẵng" },
+        { id: "Cần Thơ", name: "Cần Thơ" },
+        { id: "Hải Phòng", name: "Hải Phòng" },
+        { id: "Bình Dương", name: "Bình Dương" },
+        { id: "Nha Trang", name: "Nha Trang" },
+        { id: "Huế", name: "Huế" },
+        { id: "Quy Nhơn", name: "Quy Nhơn" },
+        { id: "Long Xuyên", name: "Long Xuyên" },
+        { id: "Quảng Ngãi", name: "Quảng Ngãi" },
+        { id: "Vũng Tàu", name: "Vũng Tàu" },
+        { id: "Quảng Ninh", name: "Quảng Ninh" },
+        { id: "Buôn Ma Thuột", name: "Buôn Ma Thuột" },
+        { id: "Phú Quốc", name: "Phú Quốc" },
+        { id: "Vinh", name: "Vinh" },
+        { id: "Cà Mau", name: "Cà Mau" },
+        { id: "Rạch Giá", name: "Rạch Giá" },
+        { id: "Đà Lạt", name: "Đà Lạt" },
+        { id: "Thanh Hóa", name: "Thanh Hóa" },
+      ],
+      SelectedDestination:"All",
+      Destination: [
+        { id: "All", name: "Điểm đến" },
+        { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
+        { id: "Bà Rịa - Vũng Tàu", name: "Bà Rịa - Vũng Tàu" },
+        { id: "Bắc Cạn", name: "Bắc Cạn" },
+        { id: "Côn Đảo", name: "Côn Đảo" },
+        { id: "Bắc Ninh", name: "Bắc Ninh" },
+        { id: "Bình Dương", name: "Bình Dương" },
+        { id: "Nha Trang", name: "Nha Trang" },
+        { id: "Huế", name: "Huế" },
+        { id: "Bến Tre", name: "Bến Tre" },
+        { id: "Long Xuyên", name: "Long Xuyên" },
+        { id: "Mũi Né", name: "Mũi Né" },
+        { id: "Phú Quốc", name: "Phú Quốc" },
+        { id: "Sapa", name: "Sapa" },
+        { id: "Hạ long", name: "Hạ long" },
+        { id: "Quảng Ngãi", name: "Quảng Ngãi" },
+        { id: "Vũng Tàu", name: "Vũng Tàu" },
+        { id: "Hà Nội", name: "Hà Nội" },
+        { id: "Buôn Ma Thuột", name: "Buôn Ma Thuột" },
+        { id: "Cao Bằng", name: "Cao Bằng" },
+        { id: "Ninh Bình", name: "Ninh Bình" },
+        { id: "Thái Bình", name: "Thái Bình" },
+        { id: "Phan Thiết", name: "Phan Thiết" },
+        { id: "Đà Lạt", name: "Đà Lạt" },
+        { id: "Thanh Hóa", name: "Thanh Hóa" },
+      ],
       SelectedNumberDay: "All",
       SelectedTime: "",
       SelectedTourType: 0,
@@ -1106,36 +1155,13 @@ export default {
           destination: this.SelectedDestination,
           datetime: this.SelectedTime,
           numberDay: this.SelectedNumberDay,
-          tourtype:this.SelectedTourType
         },
+        query:{tourtype: this.SelectedTourType}
       });
     },
   },
   computed: {
-    uniqueDeparture() {
-      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
-      const uniquedepartures = new Set(this.cards.map((obj) => obj.departure));
-
-      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
-      const uniqueObjects = Array.from(uniquedepartures).map((departure) => {
-        return this.cards.find((obj) => obj.departure === departure);
-      });
-      return uniqueObjects;
-    },
-    uniqueDestination() {
-      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
-      const uniqueDestinations = new Set(
-        this.cards.map((obj) => obj.destination)
-      );
-
-      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
-      const uniqueObjects = Array.from(uniqueDestinations).map(
-        (destination) => {
-          return this.cards.find((obj) => obj.destination === destination);
-        }
-      );
-      return uniqueObjects;
-    },
+    
   },
 };
 </script>
