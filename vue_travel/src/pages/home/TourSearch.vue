@@ -13,13 +13,12 @@
                 v-model="SelectedTourType"
                 v-on:change="GetChangeByTourType(this.SelectedTourType)"
               >
-                <option value="0">---Tất cả---</option>
                 <option
-                  :value="type.typeID"
+                  :value="type.id"
                   v-for="type in TourType"
-                  :key="type.typeID"
+                  :key="type.id"
                 >
-                  {{ type.typeName }}
+                  {{ type.name }}
                 </option>
               </select>
               <h5 class="l-title">Điểm đi</h5>
@@ -28,13 +27,12 @@
                 v-model="SelectedDeparture"
                 v-on:change="GetChangeByDeparture(this.SelectedDeparture)"
               >
-                <option value="All">---Tất cả---</option>
                 <option
-                  :value="card.departure"
-                  v-for="(card, index) in uniqueDeparture"
-                  :key="index"
+                  :value="depart.id"
+                  v-for="depart in Departure"
+                  :key="depart.id"
                 >
-                  {{ card.departure }}
+                  {{ depart.name }}
                 </option>
               </select>
               <h5 class="l-title">Điểm đến</h5>
@@ -43,13 +41,12 @@
                 v-model="SelectedDestination"
                 v-on:change="GetChangeByDestination(this.SelectedDestination)"
               >
-                <option value="All">---Tất cả---</option>
                 <option
-                  :value="card.destination"
-                  v-for="(card, index) in uniqueDestination"
-                  :key="index"
+                  :value="des.id"
+                  v-for="des in Destination"
+                  :key="des.id"
                 >
-                  {{ card.destination }}
+                  {{ des.name }}
                 </option>
               </select>
             </div>
@@ -379,9 +376,58 @@ export default {
   data() {
     return {
       products: [],
-      allItems: [],
       SelectedDeparture: this.$route.params.departure,
+      Departure: [
+        { id: "All", name: "---Tất cả---" },
+        { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
+        { id: "Hà Nội", name: "Hà Nội" },
+        { id: "Đà Nẵng", name: "Đà Nẵng" },
+        { id: "Cần Thơ", name: "Cần Thơ" },
+        { id: "Hải Phòng", name: "Hải Phòng" },
+        { id: "Bình Dương", name: "Bình Dương" },
+        { id: "Nha Trang", name: "Nha Trang" },
+        { id: "Huế", name: "Huế" },
+        { id: "Quy Nhơn", name: "Quy Nhơn" },
+        { id: "Long Xuyên", name: "Long Xuyên" },
+        { id: "Quảng Ngãi", name: "Quảng Ngãi" },
+        { id: "Vũng Tàu", name: "Vũng Tàu" },
+        { id: "Quảng Ninh", name: "Quảng Ninh" },
+        { id: "Buôn Ma Thuột", name: "Buôn Ma Thuột" },
+        { id: "Phú Quốc", name: "Phú Quốc" },
+        { id: "Vinh", name: "Vinh" },
+        { id: "Cà Mau", name: "Cà Mau" },
+        { id: "Rạch Giá", name: "Rạch Giá" },
+        { id: "Đà Lạt", name: "Đà Lạt" },
+        { id: "Thanh Hóa", name: "Thanh Hóa" },
+      ],
       SelectedDestination: this.$route.params.destination,
+      Destination: [
+        { id: "All", name: "---Tất cả---" },
+        { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
+        { id: "Bà Rịa - Vũng Tàu", name: "Bà Rịa - Vũng Tàu" },
+        { id: "Bắc Cạn", name: "Bắc Cạn" },
+        { id: "Côn Đảo", name: "Côn Đảo" },
+        { id: "Bắc Ninh", name: "Bắc Ninh" },
+        { id: "Bình Dương", name: "Bình Dương" },
+        { id: "Nha Trang", name: "Nha Trang" },
+        { id: "Huế", name: "Huế" },
+        { id: "Bến Tre", name: "Bến Tre" },
+        { id: "Long Xuyên", name: "Long Xuyên" },
+        { id: "Mũi Né", name: "Mũi Né" },
+        { id: "Phú Quốc", name: "Phú Quốc" },
+        { id: "Sapa", name: "Sapa" },
+        { id: "Hạ long", name: "Hạ long" },
+        { id: "Quảng Ngãi", name: "Quảng Ngãi" },
+        { id: "Vũng Tàu", name: "Vũng Tàu" },
+        { id: "Hà Nội", name: "Hà Nội" },
+        { id: "Buôn Ma Thuột", name: "Buôn Ma Thuột" },
+        { id: "Cao Bằng", name: "Cao Bằng" },
+        { id: "Ninh Bình", name: "Ninh Bình" },
+        { id: "Thái Bình", name: "Thái Bình" },
+        { id: "Phan Thiết", name: "Phan Thiết" },
+        { id: "Đà Lạt", name: "Đà Lạt" },
+        { id: "Thanh Hóa", name: "Thanh Hóa" },
+      ],
       SelectedTime: this.$route.params.datetime,
       SelectedNumberDays: [
         { id: "1-3", name: "1-3 Ngày" },
@@ -395,8 +441,12 @@ export default {
         { id: "3-5", name: "3-5 Người" },
         { id: "5", name: "5+ Người" },
       ],
-      TourType: [],
-      SelectedTourType: this.$route.params.tourtype,
+      TourType: [
+        { id: 0, name: "---Tất cả---" },
+        { id: 3, name: "Tour trọn gói" },
+        { id: 4, name: "Tour gia đình" },
+      ],
+      SelectedTourType: this.$route.query.tourtype,
       SelectedOrderBy: -1,
       activeButton1: null,
       activeButton2: null,
@@ -410,38 +460,9 @@ export default {
     };
   },
   mounted() {
-    this.getAllProduct();
     this.setMinDate();
-    this.getTourType();
-    console.log(this.$route.query.OrderBy);
   },
   methods: {
-    getAllProduct() {
-      // eslint-disable-next-line
-      axios
-        .get(`/api/Tour`)
-        .then((response) => {
-          // handle success
-          this.allItems = response.data;
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-    },
-    getTourType() {
-      // eslint-disable-next-line
-      axios
-        .get(`/api/TourType`)
-        .then((response) => {
-          // handle success
-          this.TourType = response.data;
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-    },
     GetSearch(departure, destination, datetime, numberDay, tourtype) {
       // eslint-disable-next-line
       axios
@@ -461,7 +482,7 @@ export default {
       // eslint-disable-next-line
       axios
         .get(
-          `/api/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/${this.$route.params.tourtype}?people=${people}&orderby=${order}`
+          `/api/Search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/${this.$route.query.tourtype}?people=${people}&orderby=${order}`
         )
         .then((response) => {
           // handle success
@@ -477,43 +498,46 @@ export default {
       this.currentPage = page;
     },
     GetChangeByDeparture(departure) {
-      this.$router.replace({
-        path: `/search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      this.$router.push({
+        path: `/search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+        query:{tourtype: this.$route.query.tourtype}
       });
     },
     GetChangeByDestination(destination) {
-      this.$router.replace({
-        path: `/search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+        query:{tourtype: this.$route.query.tourtype}
       });
     },
     GetChangeByNumberDay(numberDay) {
-      this.$router.replace({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}/tourtype=${this.$route.params.tourtype}`,
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}`,
+        query:{tourtype: this.$route.query.tourtype}
       });
     },
     GetChangeByPeople(avalablePeople) {
       this.$router.push({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
-        query: {
-          SoNguoi: `${avalablePeople}`,
-          OrderBy: `${this.$route.query.OrderBy}`,
-        },
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+        query: { tourtype: this.$route.query.tourtype,SoNguoi: `${avalablePeople}`, OrderBy: `${this.$route.query.OrderBy}` },
+
       });
     },
     GetChangeByDateTime(datetime) {
-      this.$router.replace({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}`,
+        query:{tourtype: this.$route.query.tourtype}
       });
     },
     GetChangeByTourType(tourtype) {
-      this.$router.replace({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${tourtype}`,
+      this.$router.push({
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+        query:{tourtype: tourtype}
       });
     },
     GetChangeByOrderBy(order) {
       this.$router.push({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}/tourtype=${this.$route.params.tourtype}`,
-        query: { SoNguoi: `${this.$route.query.SoNguoi}`, OrderBy: `${order}` },
+        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
+        query: { tourtype: this.$route.query.tourtype,SoNguoi: `${this.$route.query.SoNguoi}`, OrderBy: `${order}` },
       });
     },
     setMinDate() {
@@ -530,32 +554,6 @@ export default {
       const end = start + this.perPage;
       return this.products.slice(start, end);
     },
-    uniqueDeparture() {
-      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
-      const uniquedepartures = new Set(
-        this.allItems.map((obj) => obj.departure)
-      );
-
-      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
-      const uniqueObjects = Array.from(uniquedepartures).map((departure) => {
-        return this.allItems.find((obj) => obj.departure === departure);
-      });
-      return uniqueObjects;
-    },
-    uniqueDestination() {
-      // Tạo một Set để lưu trữ các giá trị duy nhất của thuộc tính name
-      const uniqueDestinations = new Set(
-        this.allItems.map((obj) => obj.destination)
-      );
-
-      // Tạo một mảng mới chứa các đối tượng duy nhất theo thuộc tính name
-      const uniqueObjects = Array.from(uniqueDestinations).map(
-        (destination) => {
-          return this.allItems.find((obj) => obj.destination === destination);
-        }
-      );
-      return uniqueObjects;
-    },
   },
   watch: {
     "$route.params.numberDay": {
@@ -571,7 +569,7 @@ export default {
           this.$route.params.destination,
           this.$route.params.datetime,
           newNumberDay,
-          this.$route.params.tourtype
+          this.$route.query.tourtype
         );
         // this.SelectedOrderBy = this.$route.query.OrderBy;
         this.$route.query.OrderBy = this.SelectedOrderBy;
@@ -592,7 +590,7 @@ export default {
           this.$route.params.destination,
           this.$route.params.datetime,
           this.$route.params.numberDay,
-          this.$route.params.tourtype
+          this.$route.query.tourtype
         );
         this.$route.query.OrderBy = this.SelectedOrderBy;
         this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
@@ -611,17 +609,17 @@ export default {
           newDestination,
           this.$route.params.datetime,
           this.$route.params.numberDay,
-          this.$route.params.tourtype
+          this.$route.query.tourtype
         );
         this.$route.query.OrderBy = this.SelectedOrderBy;
         this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);
       },
     },
-    "$route.params.tourtype": {
+    "$route.query.tourtype": {
       immediate: true,
       handler(newTourType) {
         // Cập nhật giá trị của biến this.$route.params.numberDay
-        this.$route.params.tourtype = newTourType;
+        this.$route.query.tourtype = newTourType;
         this.activeButton1 = this.$route.params.numberDay;
 
         // Thực hiện các tác vụ khác dựa trên giá trị mới của numberDay
@@ -649,7 +647,7 @@ export default {
           this.$route.params.destination,
           newDatetime,
           this.$route.params.numberDay,
-          this.$route.params.tourtype
+          this.$route.query.tourtype
         );
         this.$route.query.OrderBy = this.SelectedOrderBy;
         this.GetSearchBy(this.$route.query.SoNguoi, this.$route.query.OrderBy);

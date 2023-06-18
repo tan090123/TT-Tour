@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "K+5Ai//w5nKD81FuM5oiOBrCe3iDUMXuV1+K0KD+UVQ=",
+  "Hash": "WRk52omXdAS6nSKf/60roJ0IQB3V8qJT7bqTpDRIw4s=",
   "Source": "BookingTravel",
   "BasePath": "_content/BookingTravel",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\china.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "china.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\china.jpg"
+    },
     {
       "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\dalat.jpg",
       "SourceId": "BookingTravel",
@@ -51,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\danang.jpg"
     },
     {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\maldives.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "maldives.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\maldives.jpg"
+    },
+    {
       "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\muine.jpg",
       "SourceId": "BookingTravel",
       "SourceType": "Discovered",
@@ -66,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\muine.jpg"
+    },
+    {
+      "Identity": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\phuquoc5sao.jpg",
+      "SourceId": "BookingTravel",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\",
+      "BasePath": "_content/BookingTravel",
+      "RelativePath": "phuquoc5sao.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\phuquoc5sao.jpg"
     }
   ]
 }

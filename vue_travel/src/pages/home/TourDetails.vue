@@ -123,7 +123,9 @@
                 Khởi hành: <span>{{ products.tourCheckinDays }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
-              <p class="text">Thời gian <span>{{ products.tour_NumberDays }} ngày</span></p>
+              <p class="text">
+                Thời gian <span>{{ products.tour_NumberDays }} ngày</span>
+              </p>
               <p class="text">
                 Nơi khởi hành <span>{{ products.departure }}</span>
               </p>
@@ -729,17 +731,18 @@ export default {
   },
   mounted() {
     this.getProductDetails(this.$route.params.id);
+   
   },
   methods: {
     submitBooking() {
       this.$router.push({
-        name: "booking-id",
-        params: { id: this.products.tourID },
+        path: `/booking`,
+        query: { tourID: this.products.tourID },
       });
-      window.location.href = `/booking/tourID=${this.products.tourID}`;
+     
+      window.location.href = `/booking?tourID=${this.products.tourID}`;
     },
     getProductDetails(id) {
-      
       //---------------------Get TourDetail-------------
       // eslint-disable-next-line
       axios
@@ -755,7 +758,7 @@ export default {
 
       //---------------------Get TourGuide-------------
 
-        // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       axios
         .get(`/api/TourGuide/id?tourID=${id}`)
         .then((res) => {
@@ -768,7 +771,7 @@ export default {
         });
 
       //---------------------Get TourServices-------------
-        // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       axios
         .get(`/api/ServicesTour/id?tourID=${id}`)
         .then((res) => {
@@ -781,7 +784,7 @@ export default {
         });
 
       //--------------------Get TourSchedule-------------
-        // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       axios
         .get(`/api/TourSchedule/id?tourID=${id}`)
         .then((res) => {
@@ -794,7 +797,7 @@ export default {
         });
 
       //-------------------Get TourImages-------------
-        // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       axios
         .get(`/api/TourImages/id?tourID=${id}`)
         .then((res) => {
