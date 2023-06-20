@@ -44,33 +44,6 @@ namespace BookingTravel.Controllers
             return users;
         }
 
-        //// POST: api/ToursFromDb
-        [HttpPost]
-        public async Task<ActionResult<AddTourResultModel>> AddUser([FromBody] AddUserModel newUser)
-        {
-            var response = new AddTourResultModel();
-
-            var user = new Users
-            {
-                UserID = newUser.UserID,
-                Address = newUser.Address,
-                Email = newUser.Email,
-                Username= newUser.Username,
-                PhoneNumber = newUser.PhoneNumber,
-                Fullname = newUser.Fullname,
-                Password = newUser.Password
-                
-            };
-
-            _context.Users.Add(user);
-
-            await _context.SaveChangesAsync();
-
-            response.Result = true;
-
-            return Ok(user);
-        }
-
         // GET: api/ToursFromDb/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Users>> GetUser(int id)
