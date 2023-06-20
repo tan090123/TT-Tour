@@ -866,3 +866,4 @@ D:\TT-Tour\BookingTravel\BookingTravel\obj\Debug\net6.0\BookingTravel.pdb
 D:\TT-Tour\BookingTravel\BookingTravel\obj\Debug\net6.0\BookingTravel.genruntimeconfig.cache
 D:\TT-Tour\BookingTravel\BookingTravel\obj\Debug\net6.0\ref\BookingTravel.dll
 D:\TT-Tour\BookingTravel\BookingTravel\bin\Debug\net6.0\BookingTravel.staticwebassets.runtime.json
+D:\TT-Tour\BookingTravel\BookingTravel\bin\Debug\net6.0\BCrypt.Net-Next.dll
