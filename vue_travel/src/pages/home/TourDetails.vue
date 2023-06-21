@@ -5,10 +5,10 @@
         <div class="col-12 col-md-6">
           <div class="TourDetails__ticket">
             <i class="fa fa-ticket" aria-hidden="true"></i>
-            <span>{{ products.tourCode }}</span>
+            <span>{{ tour.tourCode }}</span>
           </div>
           <div class="TourDetails__title">
-            <p>{{ products.tourName }}</p>
+            <p>{{ tour.tourName }}</p>
           </div>
           <div class="TourDetails__rating">
             <span class="TourDetails__rating--point">9</span>
@@ -20,16 +20,16 @@
             <div class="col-6 col-md-9">
               <div
                 class="TourDetails__discount"
-                v-if="products.price != products.promotionPrice"
+                v-if="tour.price != tour.promotionPrice"
               >
                 <p>
-                  Giá <span>{{ formatter.format(products.price) }}</span
+                  Giá <span>{{ formatter.format(tour.price) }}</span
                   >/ khách
                 </p>
               </div>
               <div class="TourDetails__price">
                 <p>
-                  <span>{{ formatter.format(products.promotionPrice) }}</span
+                  <span>{{ formatter.format(tour.promotionPrice) }}</span
                   >/ khách
                 </p>
               </div>
@@ -90,7 +90,7 @@
         <div class="row">
           <div class="col-12 col-md-12 col-lg-7 left">
             <img
-              :src="'/images/card/' + products.tourImage"
+              :src="'/images/card/' + tour.tourImage"
               style="object-fit: cover; width: 100%"
               alt=""
             />
@@ -120,17 +120,17 @@
           <div class="TourDetails__section--detail row">
             <div class="col-12 col-md-8">
               <p class="text">
-                Khởi hành: <span>{{ products.tourCheckinDays }}</span>
+                Khởi hành: <span>{{ tour.tourCheckinDays }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
               <p class="text">
-                Thời gian <span>{{ products.tour_NumberDays }} ngày</span>
+                Thời gian <span>{{ tour.tour_NumberDays }} ngày</span>
               </p>
               <p class="text">
-                Nơi khởi hành <span>{{ products.departure }}</span>
+                Nơi khởi hành <span>{{ tour.departure }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận <span>{{ products.tourAvailableSit }}</span>
+                Số chỗ còn nhận <span>{{ tour.tourAvailableSit }}</span>
               </p>
             </div>
             <div class="col-12 col-md-4 text-end">
@@ -159,7 +159,7 @@
             <div class="row">
               <div
                 class="col-12 col-md-3 mb-3"
-                v-for="tourService in tourServices"
+                v-for="tourService in ServicesTour"
                 :key="tourService.tourID"
               >
                 <img
@@ -181,7 +181,7 @@
     <div class="TourDetails__desc--short col-3">
       <div
         class="d-flex justify-content-between align-items-center row mt-2"
-        v-for="(tourSche, index) in tourSchedule"
+        v-for="(tourSche, index) in TourSchedule"
         :key="index"
       >
         <div class="date-left col-1">
@@ -205,7 +205,7 @@
       class="TourDetails__desc--desc col-9 border border-0 border-start border-success"
     >
       <div class="container-fluid">
-        <div class="div" v-for="(tourSche, index) in tourSchedule" :key="index">
+        <div class="div" v-for="(tourSche, index) in TourSchedule" :key="index">
           <h3 class="fs-2">
             Ngày {{ index + 1 }} - {{ tourSche.scheduleName }}
           </h3>
@@ -256,10 +256,10 @@
           <div class="TourDetails__info--item">
             <p class="title">
               HDV dẫn đoàn:
-              <span>{{ tourGuide.guideName }}</span>
+              <span>{{ TourGuide.guideName }}</span>
             </p>
-            <p class="address">Địa chỉ : {{ tourGuide.guideAddress }}</p>
-            <p class="mobile">Số đt : {{ tourGuide.guidePhone }}</p>
+            <p class="address">Địa chỉ : {{ TourGuide.guideAddress }}</p>
+            <p class="mobile">Số đt : {{ TourGuide.guidePhone }}</p>
             <div class="desc">Đang cập nhật</div>
           </div>
         </div>
@@ -651,7 +651,7 @@
                 <tr>
                   <td colspan="2" class="fs-4 fst-italic">
                     <span id="OptionName_1">
-                      {{ products.tourName }}
+                      {{ tour.tourName }}
                     </span>
                   </td>
                   <td></td>
@@ -659,9 +659,9 @@
                   <td class="d-flex justify-content-end">
                     <span class="px-2 fs-4 fst-italic" id="optionPrice_1">
                       {{
-                        products.promotionPrice
-                          ? formatter.format(products.promotionPrice)
-                          : formatter.format(products.price)
+                        tour.promotionPrice
+                          ? formatter.format(tour.promotionPrice)
+                          : formatter.format(tour.price)
                       }}
                     </span>
                     <div class="form-check">
@@ -689,9 +689,9 @@
                 <span class="px-4">Thành tiền :</span>
                 <span class="px-2" id="TotalPriceService">
                   {{
-                    products.promotionPrice
-                      ? formatter.format(products.promotionPrice)
-                      : formatter.format(products.price)
+                    tour.promotionPrice
+                      ? formatter.format(tour.promotionPrice)
+                      : formatter.format(tour.price)
                   }}
                 </span>
               </div>
@@ -713,16 +713,11 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 export default {
   name: "details-id",
   data() {
     return {
-      products: [],
-      tourGuide: [],
-      tourServices: [],
-      tourImage: [],
-      tourSchedule: [],
-      additionalImages: [],
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -730,86 +725,24 @@ export default {
     };
   },
   mounted() {
-    this.getProductDetails(this.$route.params.id);
-   
+    this.$store.dispatch("fetchTourDetails", { id: this.$route.params.id });
   },
   methods: {
     submitBooking() {
       this.$router.push({
         path: `/booking`,
-        query: { tourID: this.products.tourID },
+        query: { tourID: this.tour.tourID },
       });
-     
-      window.location.href = `/booking?tourID=${this.products.tourID}`;
-    },
-    getProductDetails(id) {
-      //---------------------Get TourDetail-------------
-      // eslint-disable-next-line
-      axios
-        .get(`/api/Tour/${id}`)
-        .then((response) => {
-          // handle success
-          this.products = response.data;
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
 
-      //---------------------Get TourGuide-------------
-
-      // eslint-disable-next-line no-undef
-      axios
-        .get(`/api/TourGuide/id?tourID=${id}`)
-        .then((res) => {
-          this.tourGuide = res.data;
-          // console.log(this.tourGuide);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-
-      //---------------------Get TourServices-------------
-      // eslint-disable-next-line no-undef
-      axios
-        .get(`/api/ServicesTour/id?tourID=${id}`)
-        .then((res) => {
-          this.tourServices = res.data;
-          // console.log(this.tourServices);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-
-      //--------------------Get TourSchedule-------------
-      // eslint-disable-next-line no-undef
-      axios
-        .get(`/api/TourSchedule/id?tourID=${id}`)
-        .then((res) => {
-          this.tourSchedule = res.data;
-          // console.log(this.tourSchedule);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-
-      //-------------------Get TourImages-------------
-      // eslint-disable-next-line no-undef
-      axios
-        .get(`/api/TourImages/id?tourID=${id}`)
-        .then((res) => {
-          this.tourImage = res.data;
-          // console.log(this.tourImage);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
+      window.location.href = `/booking?tourID=${this.tour.tourID}`;
     },
   },
+  computed:{
+    ...mapState(["tour"]),
+    ...mapState(["TourSchedule"]),
+    ...mapState(["TourGuide"]),
+    ...mapState(["ServicesTour"]),
+  }
 };
 </script>
 

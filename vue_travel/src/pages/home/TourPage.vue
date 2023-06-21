@@ -113,6 +113,8 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+
 // import cardData from "@/data/cardData.js";
 import Nagination from "@/components/ThePagination.vue";
 
@@ -123,7 +125,6 @@ export default {
   },
   data() {
     return {
-      cards: [],
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -133,26 +134,17 @@ export default {
     };
   },
   created() {
-    // eslint-disable-next-line
-    axios
-      .get("/api/Tour")
-      .then((response) => {
-        // handle success
-        this.cards = response.data;
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      });
+    this.$store.dispatch("fetchTours");
   },
   computed: {
+    ...mapState(["tours"]),
     totalPages() {
-      return Math.ceil(this.cards.length / this.perPage);
+      return Math.ceil(this.tours.length / this.perPage);
     },
     displayedCarts() {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
-      return this.cards.slice(start, end);
+      return this.tours.slice(start, end);
     },
   },
   methods: {

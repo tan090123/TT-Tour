@@ -64,21 +64,24 @@ namespace BookingTravel.Controllers
         }
 
         // GET: api/ToursFromDb/id
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TouristType_price>> GetTouristType(int id)
+        [HttpGet]
+        [Route("id")]
+        public async Task<ActionResult<TouristType_priceModel>> GetTourSchedule([FromQuery] int? tourID)
         {
             if (_context.TouristType_price == null)
             {
                 return NotFound();
             }
-            var tourist_type = await _context.TouristType_price.FindAsync(id);
+            var tour = await _context.Tours.FindAsync(tourID);
+            var TouristType_price = _context.TouristType_price.Where(x => x.tourID == tour.TourID).ToList();
 
-            if (tourist_type == null)
+
+            if (TouristType_price == null)
             {
                 return NotFound();
             }
 
-            return tourist_type;
+            return Ok(TouristType_price);
         }
 
         // PUT: api/ToursFromDb/5
