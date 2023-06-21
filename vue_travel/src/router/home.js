@@ -21,7 +21,7 @@ const home = [
                 children:[
                     {
                         path: 'tourID=:tourID',
-                        name: 'tours_search',
+                        name: 'booking-id',
                         // 
                     },
                     

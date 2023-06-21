@@ -214,7 +214,7 @@
                               v-for="depart in Departure"
                               :key="depart.id"
                             >
-                              {{ depart.name}}
+                              {{ depart.name }}
                             </option>
                             <!-- <option value="2">Two</option>
                                                         <option value="3">Three</option> -->
@@ -234,7 +234,7 @@
                               v-for="des in Destination"
                               :key="des.id"
                             >
-                              {{ des.name}}
+                              {{ des.name }}
                             </option>
                             <!-- <option value="2">Two</option>
                                                         <option value="3">Three</option> -->
@@ -310,6 +310,7 @@
                         <button
                           type="submit"
                           class="btn btn-primary w-100 h-100"
+                           @click="SearchDiemDen()"
                         >
                           <i class="fa-solid fa-magnifying-glass fa-3x"></i>
                         </button>
@@ -359,7 +360,7 @@
                       name=""
                       id=""
                       v-model="SelectedTime"
-                          :min="minDate"
+                      :min="minDate"
                     />
                   </div>
                   <div class="col-2">
@@ -558,7 +559,7 @@
       <div class="TourCard__content row row-cols-lg-3 row-cols-1">
         <div
           class="col mt-sm-auto"
-          v-for="card in cards.slice(0, 3)"
+          v-for="card in tours.slice(0,3)"
           :key="card.tourID"
         >
           <div class="card">
@@ -598,7 +599,9 @@
             <div class="body card-body">
               <p class="p-date">{{ card.tourCheckinDays }}</p>
               <p class="p-title">
-                <router-link :to="{ name: 'details-id', params: { id: card.tourID } }">
+                <router-link
+                  :to="{ name: 'details-id', params: { id: card.tourID } }"
+                >
                   {{ card.tourName }}
                 </router-link>
               </p>
@@ -606,8 +609,12 @@
                 <p>Mã tour:</p>
                 <p><i class="fa-solid fa-ticket"></i> {{ card.tourCode }}</p>
               </div>
-              <p class="p-startPlace">Nơi khởi hành: <span class="fw-bold">{{ card.departure }}</span> </p>
-              <p class="p-startPlace">Nơi đến: <span class="fw-bold">{{ card.destination }}</span></p>
+              <p class="p-startPlace">
+                Nơi khởi hành: <span class="fw-bold">{{ card.departure }}</span>
+              </p>
+              <p class="p-startPlace">
+                Nơi đến: <span class="fw-bold">{{ card.destination }}</span>
+              </p>
               <div class="price">
                 <p class="price-old">
                   Giá:
@@ -1026,13 +1033,13 @@
   <!-- ========== End Tour .... ========== -->
 </template>
 <script>
+import { mapState } from "vuex";
 // import cardData from "@/data/cardData.js";
 import productData from "@/data/productData.js";
 export default {
   data() {
     return {
-      cards: [],
-      SelectedDeparture:"All",
+      SelectedDeparture: "All",
       Departure: [
         { id: "All", name: "Điểm đi" },
         { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
@@ -1056,7 +1063,7 @@ export default {
         { id: "Đà Lạt", name: "Đà Lạt" },
         { id: "Thanh Hóa", name: "Thanh Hóa" },
       ],
-      SelectedDestination:"All",
+      SelectedDestination: "All",
       Destination: [
         { id: "All", name: "Điểm đến" },
         { id: "TP. Hồ Chí Minh", name: "TP. Hồ Chí Minh" },
@@ -1086,7 +1093,8 @@ export default {
       ],
       SelectedNumberDay: "All",
       SelectedTime: "",
-      SelectedTourType: 0,
+      SelectedTourType0: 0,
+      SelectedTourType3: 3,
       minDate: "",
       products: productData,
       formatter: new Intl.NumberFormat("vi-VN", {
@@ -1120,32 +1128,18 @@ export default {
         autoplayHoverPause: true,
       });
     });
-    this.getAllProduct();
+    this.$store.dispatch("fetchTours");
     this.GetTime();
     this.setMinDate();
   },
   methods: {
     GetTime() {
-      var currentTime = new Date().toISOString().slice(0,10);
+      var currentTime = new Date().toISOString().slice(0, 10);
       this.SelectedTime = currentTime;
     },
     setMinDate() {
-      const currentDate = new Date().toISOString().split('T')[0];
+      const currentDate = new Date().toISOString().split("T")[0];
       this.minDate = currentDate;
-    },
-    getAllProduct() {
-      // eslint-disable-next-line
-      axios
-        .get("api/Tour")
-        .then((response) => {
-          // handle success
-          this.cards = response.data;
-          //   this.cards.departure=response.data.departure;
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
     },
     SearchTronGoi() {
       this.$router.push({
@@ -1156,12 +1150,24 @@ export default {
           datetime: this.SelectedTime,
           numberDay: this.SelectedNumberDay,
         },
-        query:{tourtype: this.SelectedTourType}
+        query: { tourtype: this.SelectedTourType3 },
+      });
+    },
+    SearchDiemDen() {
+      this.$router.push({
+        name: "tours_search",
+        params: {
+          departure: this.SelectedDeparture,
+          destination: this.SelectedDestination,
+          datetime: this.SelectedTime,
+          numberDay: this.SelectedNumberDay,
+        },
+        query: { tourtype: this.SelectedTourType0 },
       });
     },
   },
   computed: {
-    
+    ...mapState(["tours"]),
   },
 };
 </script>
@@ -1213,9 +1219,11 @@ export default {
   font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
-  background-image: linear-gradient(180deg,
-      rgba(45, 66, 113, 0) 0%,
-      #2d4271 100%);
+  background-image: linear-gradient(
+    180deg,
+    rgba(45, 66, 113, 0) 0%,
+    #2d4271 100%
+  );
   width: 97%;
 }
 

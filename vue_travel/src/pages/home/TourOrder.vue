@@ -5,11 +5,11 @@
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
             <img
-              :src="'/images/card/' + products.tourImage"
-              alt="{{ products.tourName }}"
+              :src="'/images/card/' + tour.tourImage"
+              alt="{{ tour.tourName }}"
             />
             <!-- <img
-              :src="require(`@/../public/images/card/${products.tourImage}`)"
+              :src="require(`@/../public/images/card/${tours.tourImage}`)"
               class="card-img-top"
               width="100%"
               :alt="products.tourName"
@@ -22,22 +22,24 @@
             </div>
             <div class="TourOrder__title">
               <h2>
-                {{ products.tourName }}
+                {{ tour.tourName }}
               </h2>
             </div>
             <div class="TourOrder__desc">
               <p class="text">
-                Mã Tour: <span>{{ products.tourCode }}</span>
+                Mã Tour: <span>{{ tour.tourCode }}</span>
               </p>
               <p class="text">
-                Khởi hành: <span>{{ products.tourCheckinDays }}</span>
-              </p>
-              <p class="text">Thời gian: <span>{{ products.tour_NumberDays }} ngày</span></p>
-              <p class="text">
-                Nơi khởi hành: <span>{{ products.departure }}</span>
+                Khởi hành: <span>{{ tour.tourCheckinDays }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận: <span>{{ products.tourAvailableSit }}</span>
+                Thời gian: <span>{{ tour.tour_NumberDays }} ngày</span>
+              </p>
+              <p class="text">
+                Nơi khởi hành: <span>{{ tour.departure }}</span>
+              </p>
+              <p class="text">
+                Số chỗ còn nhận: <span>{{ tour.tourAvailableSit }}</span>
               </p>
             </div>
           </div>
@@ -209,7 +211,22 @@
                       <input type="date" name="" id="" />
                     </td>
                     <td>
-                      <select class="form-control" name="" id="">
+                      <div
+                        v-for="tService in TServices"
+                        :key="tService.tServicesID"
+                        
+                      >
+                        <input
+                          type="checkbox"
+                          :value="tService.tServicesID"
+                          v-model="Selected_SerPrice"
+
+                        />{{ tService.servicesName }}
+                        
+                      </div>
+                      
+
+                      <!-- <select class="form-control" name="" id="">
                         <option value="">Không sử dụng</option>
                         <option
                           v-for="tService in TServices"
@@ -219,7 +236,7 @@
                           {{ tService.servicesName }} -
                           {{ formatter.format(tService.servicesPrice) }}
                         </option>
-                      </select>
+                      </select> -->
                     </td>
                   </tr>
                 </tbody>
@@ -259,32 +276,30 @@
               </p>
               <p>
                 <b>Tour trọn gói </b
-                ><span class="number"
-                  >({{ products.tourAvailableSit }} khách)</span
-                >
+                ><span class="number">({{ tour.tourAvailableSit }} khách)</span>
               </p>
               <div class="group-product row my-4">
                 <div class="img col-4">
                   <img
-                    :src="'/images/card/' + products.tourImage"
-                    alt="{{ products.tourName }}"
-                    class='w-100'
+                    :src="'/images/card/' + tour.tourImage"
+                    alt="{{ tour.tourName }}"
+                    class="w-100"
                   />
                 </div>
                 <div class="title col-8">
                   <h4>
-                    {{ products.tourName }}
+                    {{ tour.tourName }}
                   </h4>
                 </div>
               </div>
               <div class="group-go my-5">
                 <div class="start">
                   <h4>Bắt đầu chuyến đi</h4>
-                  <p>{{ products.tourCheckinDays }}</p>
+                  <p>{{ tour.tourCheckinDays }}</p>
                 </div>
                 <div class="end">
                   <h4>Kết thúc chuyến đi</h4>
-                  <p>{{ products.tourCheckoutDays }}</p>
+                  <p>{{ tour.tourCheckoutDays }}</p>
                 </div>
               </div>
               <div class="group-tourist">
@@ -303,9 +318,13 @@
                         </p>
                       </th>
                     </tr>
+                    <!-- <tr v-for="tristtype_price in TristType_price" :key="tristtype_price.typeID">
+                      <td>{{tristtype_price.touristTypeName}}</td>
+                      <th><span>1</span>x <span>{{tristtype_price.touristType_Prices}}</span>đ</th>
+                    </tr> -->
                     <tr>
                       <td>Người lớn</td>
-                      <th><span>1</span>x <span>4,390,000</span>đ</th>
+                      <th><span></span> <span>4,390,000</span>đ</th>
                     </tr>
                     <tr>
                       <td>Trẻ em</td>
@@ -343,6 +362,7 @@
                 <button type="submit" class="btn btn-danger w-100 fs-2 py-3">
                   ĐẶT NGAY
                 </button>
+                <p></p>
               </div>
             </div>
           </div>
@@ -352,12 +372,13 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+// import {mapState} from "vuex"
 export default {
   name: "booking-id",
   data() {
     return {
-      products: [],
-      TServices: [],
+      Selected_SerPrice: "",
       formatter: new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
@@ -365,40 +386,16 @@ export default {
     };
   },
   mounted() {
-    this.getProductByID(this.$route.query.tourID);
-    this.getServicesTourist();
+    this.$store.dispatch("fetchTourOrder", { id: this.$route.query.tourID });
+    this.$store.dispatch("fetchTServices");
+    console.log(this.TristType_price);
   },
-  methods: {
-    getProductByID(id) {
-      // eslint-disable-next-line
-      axios
-        .get(`/api/Tour/${id}`)
-        .then((response) => {
-          // handle success
-          this.products = response.data;
-            // console.log(this.products);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-    },
-    getServicesTourist() {
-      // eslint-disable-next-line
-      axios
-        .get(`/api/TServices`)
-        .then((response) => {
-          // handle success
-          this.TServices = response.data;
-          // console.log(this.TServices);
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        });
-    },
+  computed: {
+    ...mapState(["tour"]),
+    ...mapState(["TServices"]),
+    ...mapState(["TristType_price"]),
+
   },
- 
 };
 </script>
 <style lang="scss">
