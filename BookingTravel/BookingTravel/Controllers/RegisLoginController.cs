@@ -9,6 +9,8 @@ using BookingTravel.Data;
 using BookingTravel.Models;
 using NuGet.Protocol.Plugins;
 using System.Net;
+using System.Net.Mail;
+using BookingTravel.Models.Result;
 
 namespace BookingTravel.Controllers
 {
@@ -28,11 +30,11 @@ namespace BookingTravel.Controllers
         public async Task<AddTourResultModel> SignUp(RegisterModel newUser)
         {
             var response = new AddTourResultModel();
-            var User_Exists = _context.Users.Where(x => x.Email == newUser.Email).FirstOrDefault();
+            var User_Exists = _context.Users.Where(x => (x.Email == newUser.Email || x.Username == newUser.Username)).FirstOrDefault();
             if (User_Exists != null)
             {
                 response.Result = false;
-                response.ErrorMessage = "Email đã được sử dụng";
+                response.ErrorMessage = "Email hoặc tên người dùng đã được sử dụng";
                 return response;
             }
             else
@@ -65,9 +67,9 @@ namespace BookingTravel.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<AddTourResultModel> Login(LoginModel loginInfo)
+        public async Task<ForgotResult> Login(LoginModel loginInfo)
         {
-            var response = new AddTourResultModel();
+            var response = new ForgotResult();
 
             var user = await _context.Users.FirstOrDefaultAsync(x => (x.Email == loginInfo.Value || x.Username == loginInfo.Value));
 
@@ -92,6 +94,75 @@ namespace BookingTravel.Controllers
 
             return response;
         }
+
+        [HttpPost("forgot-password")]
+        public async Task<ForgotResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            var response = new ForgotResult();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == model.Email);
+
+            if (user == null)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Email không tồn tại";
+                return response;
+            }
+
+            // Tạo mật khẩu mới
+            string newPassword = GenerateRandomPassword();
+
+            // Hash mật khẩu mới
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword, salt);
+
+            // Cập nhật mật khẩu mới cho người dùng
+            user.Password = hashedPassword;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            // Gửi email chứa mật khẩu mới
+            SendPasswordResetEmail(user.Email, newPassword);
+
+            response.Result = true;
+            response.ErrorMessage = "Mật khẩu mới đã được gửi qua email";
+
+            return response;
+        }
+
+        private string GenerateRandomPassword()
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var password = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+            return password;
+        }
+
+        private void SendPasswordResetEmail(string email, string newPassword)
+        {
+            // Thông tin cấu hình SMTP của bạn
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "contact.doanminhtan@gmail.com";
+            string smtpPassword = "jivoznqkjnjhuovo";
+
+            // Địa chỉ email gửi đi và địa chỉ email người nhận
+            string senderEmail = "contact.doanminhtan@gmail.com";
+            string recipientEmail = email;
+
+            // Tạo đối tượng MailMessage
+            MailMessage mailMessage = new MailMessage(senderEmail, recipientEmail);
+
+            // Cấu hình thông tin email
+            mailMessage.Subject = "Reset Password";
+            mailMessage.Body = "Mật khẩu mới của bạn là: " + newPassword;
+
+            // Tạo đối tượng SmtpClient và gửi email
+            SmtpClient smtpClient = new SmtpClient(smtpServer, smtpPort);
+            smtpClient.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+            smtpClient.EnableSsl = true;
+            smtpClient.Send(mailMessage);
+        }
+
 
     }
 }
