@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookingTravel.Data;
 using BookingTravel.Models;
+using BookingTravel.Models.Result;
 
 namespace BookingTravel.Controllers
 {

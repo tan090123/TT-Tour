@@ -1,6 +1,6 @@
-﻿namespace BookingTravel.Models
+﻿namespace BookingTravel.Models.Result
 {
-    public class AddTourResultModel
+    public class ForgotResult
     {
         public bool Result { get; set; }
         public string ErrorMessage { get; set; }

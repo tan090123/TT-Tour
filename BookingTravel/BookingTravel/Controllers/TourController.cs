@@ -10,6 +10,7 @@ using BookingTravel.Models;
 using System.Globalization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using BookingTravel.Models.Result;
 
 namespace BookingTravel.Controllers
 {

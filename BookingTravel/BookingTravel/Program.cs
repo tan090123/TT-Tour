@@ -8,14 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TourContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TourConn")));
 
-//Add Cors
+// Add Cors
 builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -34,12 +33,22 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//Use COrs
-app.UseCors(option=>option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+// Use Cors
+app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseAuthorization();
 app.UseStaticFiles();
 
-app.MapControllers();
+app.UseRouting(); // Add UseRouting here
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action}/{id?}");
+    endpoints.MapControllerRoute(
+        name: "api",
+        pattern: "api/{controller}/{action}/{id?}");
+});
 
 app.Run();

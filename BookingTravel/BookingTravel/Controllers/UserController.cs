@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookingTravel.Data;
 using BookingTravel.Models;
+using BookingTravel.Models.Result;
 
 namespace BookingTravel.Controllers
 {
@@ -61,6 +62,52 @@ namespace BookingTravel.Controllers
 
             return user;
         }
+
+
+        [HttpPut("changepassword/{id:int}")]
+        public async Task<UpdateTourResultModel> ChangePassword([FromRoute] int id, [FromBody] ChangePasswordModel changePasswordInfo)
+        {
+            var response = new UpdateTourResultModel();
+
+            var user = _context.Users!.Where(x => x.UserID == id).FirstOrDefault();
+
+            if (user == null)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Người dùng không tồn tại";
+                return response;
+            }
+
+            bool passwordMatches = BCrypt.Net.BCrypt.Verify(changePasswordInfo.Password, user.Password);
+
+            if (!passwordMatches)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Mật khẩu cũ không chính xác";
+                return response;
+            }
+
+            // Kiểm tra xem mật khẩu mới và mật khẩu xác nhận có khớp nhau không
+            if (changePasswordInfo.NewPassword != changePasswordInfo.ConfirmNewPassword)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Mật khẩu mới và mật khẩu xác nhận không khớp";
+                return response;
+            }
+
+            // Hash và lưu trữ mật khẩu mới
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hash = BCrypt.Net.BCrypt.HashPassword(changePasswordInfo.NewPassword, salt);
+            user.Password = hash;
+
+            await _context.SaveChangesAsync();
+
+            response.Result = true;
+            response.ErrorMessage = "Thay đổi mật khẩu thành công";
+
+            return response;
+        }
+
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id:int}")]
