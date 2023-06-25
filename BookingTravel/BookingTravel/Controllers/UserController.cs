@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookingTravel.Data;
 using BookingTravel.Models;
 using BookingTravel.Models.Result;
+using System.Security.Policy;
 
 namespace BookingTravel.Controllers
 {
@@ -26,7 +27,7 @@ namespace BookingTravel.Controllers
         [HttpGet]
         public List<UserModel> SearchUser([FromQuery] string? searchName)
         {
-            var tourFromDBs = _context.Users!.AsNoTracking();
+            var tourFromDBs = _context.Users.AsNoTracking();
             if (searchName != null)
             {
                 tourFromDBs = tourFromDBs.Where(x => x.Fullname.ToLower().Contains(searchName.ToLower()));
@@ -35,11 +36,9 @@ namespace BookingTravel.Controllers
             var users = tourFromDBs.Select(x => new UserModel
             {
                 UserID = x.UserID,
-                Address = x.Address,
                 Email = x.Email,
                 Fullname = x.Fullname,
                 PhoneNumber = x.PhoneNumber,
-                Username = x.Username
             }).ToList();
 
             return users;
@@ -126,11 +125,9 @@ namespace BookingTravel.Controllers
             {
                 response.Result = true;
 
-                user.Username = updateUser.Username;
                 user.PhoneNumber = updateUser.PhoneNumber;
                 user.Fullname = updateUser.Fullname;
                 user.Email = updateUser.Email;
-                user.Address = updateUser.Address;
                
                 _context.Update(user);
                 _context.SaveChanges();

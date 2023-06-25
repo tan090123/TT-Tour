@@ -265,13 +265,13 @@
                     <div class="newsletter">
                         <h4 class="newsletter__title">Newsletter</h4>
                         <form action="" class="newsletter__form-email">
-                            <input type="email" name="" class="form-control w-75" placeholder="Email của quý khách" id="">
+                            <input type="email" name="" class="form-control w-75" placeholder="Email của quý khách" id="email1">
                             <button type="submit" class="form-control w-25"><i
                                     class="fa-regular fa-envelope fa-2x"></i></button>
                         </form>
                         <h4 class="newsletter__title">Tìm Kiếm Thông Tin</h4>
                         <form action="" class="newsletter__form-search">
-                            <input type="text" name="" class="form-control w-75" placeholder="Tour du lịch, điểm đến" id="">
+                            <input type="text" name="" class="form-control w-75" placeholder="Tour du lịch, điểm đến" id="email2">
                             <button type="submit" class="form-control w-25"><i
                                     class="fa-solid fa-magnifying-glass fa-2x"></i></button>
                         </form>
