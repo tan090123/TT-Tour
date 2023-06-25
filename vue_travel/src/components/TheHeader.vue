@@ -80,7 +80,7 @@
         </div>
 
         <ul class="navbar-nav ms-auto nav-right">
-            <form class="d-flex">
+            <form class="d-flex" v-if="!userEmail">
                 <input class="form-control" type="text" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
                 <button class="form-btn btn" type="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -88,8 +88,16 @@
             </form>
             <li class="nav-item">
                 <router-link class="nav-link" :to="{ name: 'login_component' }">
-                    <i class="fa-regular fa-user" @click="showLogin = true"></i>
+                    <i class="fa-regular fa-user" @click="showLogin = true" v-if="!userEmail" ></i>
                 </router-link>
+            </li>
+            <li class="nav-item">
+                <span v-if="userEmail"  class="user-email nav-link">{{ userEmail }}</span>
+            </li>
+            <li  class="nav-item">
+                <p v-if="userEmail" class="logout nav-link" @click="logout">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </p>
             </li>
         </ul>
         </div>
@@ -99,6 +107,23 @@
 <script>
 export default {
     name: 'header-component',
+    data() {
+        return {
+            userEmail: '',
+        }
+    },
+    mounted() {
+    // Lấy email từ localStorage hoặc sessionStorage
+    this.userEmail = localStorage.getItem('userEmail');
+  },
+  methods: {
+    logout() {
+      // Xóa email từ localStorage hoặc sessionStorage
+      localStorage.removeItem('userEmail');
+      // Điều hướng đến trang đăng nhập hoặc trang chủ
+      window.location.href = '/login';
+    }
+    }
 }
 </script>
 
