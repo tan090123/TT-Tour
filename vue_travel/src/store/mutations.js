@@ -20,7 +20,10 @@ export default {
   setTristType_price(state, newTristType_price) {
     state.TristType_price = newTristType_price;
   },
-  getInfoContact(state, newInfoContact) {
-    state.infoContact = newInfoContact;
+  SET_INFO_CONTACT(state, infoContact) {
+    state.infoContact = infoContact;
+  },
+  SET_Tourist(state, tourist) {
+    state.Tourist = tourist;
   },
 };

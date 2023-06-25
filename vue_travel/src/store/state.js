@@ -1,14 +1,25 @@
-const state = () => {
-  return {
-    tour: null,
-    tours: null,
-    TServices: null,
-    TourSchedule: null,
-    TourGuide: null,
-    ServicesTour:null,
-    TristType_price:null,
-    infoContact:null,
-  };
+export default {
+  tour: null,
+  tours: null,
+  TServices: null,
+  TourSchedule: null,
+  TourGuide: null,
+  ServicesTour: null,
+  TristType_price: null,
+  infoContact: {
+    TourID: "",
+    ContactName: "",
+    ContactEmail: "",
+    ContactPhone: "",
+    ContactAddress: "",
+  },
+  Tourist: {
+    touristType: "",
+    touristName: "",
+    touristSex: "",
+    touristDate: "",
+    touristPrice: "",
+    touristNote: "",
+    servicesPrice: "",
+  },
 };
-
-export default state;
