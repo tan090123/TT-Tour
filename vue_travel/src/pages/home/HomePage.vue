@@ -559,7 +559,7 @@
       <div class="TourCard__content row row-cols-lg-3 row-cols-1">
         <div
           class="col mt-sm-auto"
-          v-for="card in tours.slice(0,3)"
+          v-for="card in tours.slice(0, 3)"
           :key="card.tourID"
         >
           <div class="card">

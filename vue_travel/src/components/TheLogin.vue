@@ -11,18 +11,20 @@
 
                 <div class="login-form bg-white">
                     <h2 class="text-center">Đăng nhập</h2>
-                    <form action="#">
+                    <form action="#" @submit.prevent="submitForm">
                         <div class="mb-3">
-                            <label for="email" class="form-label fw-bold">Số điện thoại hoặc email</label>
+                            <label for="email" class="form-label fw-bold">Số điện thoại hoặc email:</label>
                             <span class="text-danger">*</span>
-                            <input class="fomr-control" v-model="inputValue" @blur="validateInput" type="text" name="email" id="email" placeholder="Tài khoản">
-                            <p v-if="isError" class="error-message">{{ errorMessage }}</p>
+                            <input class="form-control" v-model="taikhoan" type="text" name="email" id="email" placeholder="Nhập email hoặc số điện thoại"  @input="error_Taikhoan"  @blur="error_Taikhoan" >
+                           <span v-if="errors.taikhoan" class="text-danger">{{ errors.taikhoan }}</span>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">Mật khẩu</label>
                             <span class="text-danger">*</span>
-                            <input class="fomr-control" type="text" name="email" id="email" placeholder="Mật khẩu">
+                            <input class="form-control" type="password" name="password" id="password" placeholder="Nhập mật khẩu" v-model="password"  @blur="error_Password"  @input="error_Password"  >
+                            <span v-if="errors.password" class="text-danger">{{ errors.password }}</span>
+
                             <div class="text-end">
                                 <router-link :to="{name: 'register_component'}" target="_blank" rel="nofollow no-referrer">Đăng ký</router-link>
                                 <span>hoặc</span>
@@ -63,53 +65,96 @@ export default {
     name: "login_component",
     data() {
         return {
-
-            inputValue: "",
-            isError: false,
-            errorMessage: "",
+            taikhoan: '',
+            password: '',
+            types: [],
+            status: false,
+            errors: {
+                taikhoan: '',
+                password: '',
+            },
         }
     },
     methods: {
-        validateInput() {
-            // Kiểm tra nếu giá trị rỗng
-            if (this.inputValue === "") {
-                this.isError = true;
-                this.errorMessage = "Vui lòng nhập giá trị.";
-            }
-            // Kiểm tra định dạng số điện thoại
-            else if (this.isPhoneNumber(this.inputValue)) {
-                this.isError = false;
-                this.errorMessage = "";
-            }
-            // Kiểm tra định dạng email
-            else if (this.isEmail(this.inputValue)) {
-                this.isError = false;
-                this.errorMessage = "";
-            }
-            // Nếu không phù hợp với cả số điện thoại và email
-            else {
-                this.isError = true;
-                this.errorMessage = "Vui lòng nhập số điện thoại hoặc email hợp lệ.";
+        // validatePass(password) {
+        //     const passRegex = /^(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z])(?=\D*\d)[A-Za-z0-9!#%]{6,12}$/;
+        //     return passRegex.test(password);
+        // },
+        error_Taikhoan() {
+            if (this.taikhoan.trim() === "") {
+                this.errors.taikhoan = "Tài khoản không được để trống";
+                this.status = false;
+                this.status = false;
+            } else {
+                this.errors.taikhoan = "";
+                this.status = true;
             }
         },
-        isPhoneNumber(value) {
-            // Sử dụng biểu thức chính quy để kiểm tra định dạng số điện thoại
-            // Ví dụ: kiểm tra xem giá trị có 10 chữ số và bắt đầu bằng số 0 hay không
-            const phoneNumberRegex = /^0\d{9}$/;
-            return phoneNumberRegex.test(value);
+        error_Password() {
+            if (this.password.trim() === "") {
+                this.errors.password = "Mật khẩu không để trống";
+                this.status = false;
+            } else {
+                this.errors.password = '';
+                this.status = true;
+            }
         },
-        isEmail(value) {
-            // Sử dụng biểu thức chính quy để kiểm tra định dạng email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(value);
+        submitForm() {
+            this.onLogin();
+        },
+        onLogin() {
+            if (this.status) {
+                console.log(this.status);
+                // eslint-disable-next-line no-undef
+                axios.post('/api/RegisLogin/login', {
+                    value: this.taikhoan,
+                    password: this.password
+                })
+                    .then(response => {
+                        // Xử lý kết quả
+                        const result = response.data.result;
+                        if (result) {
+                            console.table(response.data);
+                            // eslint-disable-next-line no-undef
+                            Swal.fire({
+                                title: 'Đăng nhập thành công',
+                                text: '💜',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                // Lưu email vào localStorage hoặc sessionStorage
+                                localStorage.setItem('userEmail', this.taikhoan);
+
+                                // Chuyển hướng đến trang chủ
+                                window.location.href = '/';
+                            });
+                        } else {
+                            const errorMessage = response.data.errorMessage;
+                            console.table(response.data);
+                            // eslint-disable-next-line no-undef
+                            Swal.fire({
+                                title: 'Đăng nhập thất bại !!',
+                                text: errorMessage,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        // Xử lý lỗi
+                        console.error(error);
+                        // eslint-disable-next-line no-undef
+                        Swal.fire({
+                            text: 'Đăng nhập thất bại !!',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                        });
+                    });
+            }
         },
     },
 }
 </script>
 <style lang="scss">
 @import "@/assets/scss/_login.scss";
-
-.error-message {
-    color: red;
-}
 </style>

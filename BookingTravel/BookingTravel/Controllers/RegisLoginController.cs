@@ -30,14 +30,19 @@ namespace BookingTravel.Controllers
         public async Task<AddTourResultModel> SignUp(RegisterModel newUser)
         {
             var response = new AddTourResultModel();
-            var User_Exists = _context.Users.Where(x => (x.Email == newUser.Email || x.Username == newUser.Username)).FirstOrDefault();
+            var User_Exists = _context.Users.Where(x => (x.Email == newUser.Email || x.PhoneNumber == newUser.PhoneNumber)).FirstOrDefault();
             if (User_Exists != null)
             {
                 response.Result = false;
-                response.ErrorMessage = "Email hoặc tên người dùng đã được sử dụng";
+                response.ErrorMessage = "Email hoặc số điện thoại đã được sử dụng";
                 return response;
             }
-            else
+            else if(newUser.Password != newUser.ConfirmPassword)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Mật khẩu và xác nhận mật khẩu không khớp";
+                return response;
+            } else
             {
                 string salt = BCrypt.Net.BCrypt.GenerateSalt();
 
@@ -48,9 +53,7 @@ namespace BookingTravel.Controllers
                 {
                     Email = newUser.Email,
                     Password = hash,
-                    Username = newUser.Username,
                     Fullname = newUser.Fullname,
-                    Address = newUser.Address,
                     PhoneNumber = newUser.PhoneNumber
                 };
 
@@ -71,12 +74,12 @@ namespace BookingTravel.Controllers
         {
             var response = new ForgotResult();
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => (x.Email == loginInfo.Value || x.Username == loginInfo.Value));
+            var user = await _context.Users.FirstOrDefaultAsync(x => (x.Email == loginInfo.Value || x.PhoneNumber == loginInfo.Value));
 
             if (user == null)
             {
                 response.Result = false;
-                response.ErrorMessage = "Email hoặc tên người dùng không tồn tại";
+                response.ErrorMessage = "Email hoặc số điện thoại không tồn tại";
                 return response;
             }
 
