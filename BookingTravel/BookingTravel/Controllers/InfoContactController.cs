@@ -39,6 +39,7 @@ namespace BookingTravel.Controllers
                 ContactEmail = x.ContactEmail,
                 ContactPhone = x.ContactPhone,
                 ContactAddress = x.ContactAddress,
+                ContactNote = x.ContactNote,
                 TourID = x.TourID,
                 
             }).ToList();
@@ -59,6 +60,8 @@ namespace BookingTravel.Controllers
                ContactName = newContact.ContactName,
                ContactEmail = newContact.ContactEmail,
                ContactPhone = newContact.ContactPhone,
+                ContactNote = newContact.ContactNote,
+
             };
 
             _context.InfoContact.Add(contact);
@@ -110,6 +113,7 @@ namespace BookingTravel.Controllers
                 contact.ContactPhone = updateContact.ContactPhone;
                 contact.ContactName = updateContact.ContactName;
                 contact.ContactAddress = updateContact.ContactAddress;
+                contact.ContactNote = updateContact.ContactNote;
                
                 _context.Update(contact);
                 _context.SaveChanges();

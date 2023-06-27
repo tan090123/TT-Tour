@@ -39,7 +39,7 @@ namespace BookingTravel.Controllers
                 TouristName = x.TouristName,
 
                 TouristDate = x.TouristDate,
-                TouristNote = x.TouristNote,
+ 
                 TouristPrice = x.TouristPrice,
                 TouristSex = x.TouristSex,
                 TouristType = x.TouristType
@@ -62,7 +62,6 @@ namespace BookingTravel.Controllers
                 TouristName= newToursit.TouristName,
                 TouristSex = newToursit.TouristSex,
                 TouristPrice = newToursit.TouristPrice,
-                TouristNote = newToursit.TouristNote,
                 TouristDate = newToursit.TouristDate,
                 
             };
@@ -112,7 +111,6 @@ namespace BookingTravel.Controllers
                 response.Result = true;
 
                 tourist.TouristDate = updateTourist.TouristDate;
-                tourist.TouristNote = updateTourist.TouristNote;
                 tourist.TouristName = updateTourist.TouristName;
                 tourist.TouristPrice = updateTourist.TouristPrice;
                 tourist.TouristSex = updateTourist.TouristSex;

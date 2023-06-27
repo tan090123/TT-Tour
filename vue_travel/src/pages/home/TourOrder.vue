@@ -263,7 +263,7 @@
                   rows="5"
                   cols="20"
                   placeholder="Vui lòng nhập nội dung lời nhắn bằng tiếng việt hoặc tiếng anh..."
-                  v-model="customers.touristNote"
+                  v-model="infoContact.ContactNote"
                 ></textarea>
               </div>
             </div>
@@ -290,7 +290,7 @@
                 <b>Xe suốt tuyến - khách sạn tương đương 4* và 5*</b>
               </p>
               <p>
-                <b>Tour trọn gói </b
+                <b>{{TourType.typeName}} </b
                 ><span class="number">({{ tour.tourAvailableSit }} khách)</span>
               </p>
               <div class="group-product row my-4">
@@ -325,65 +325,92 @@
                       <th>
                         <div class="total d-flex justify-content-end">
                           <i class="fa-sharp fa-solid fa-users"></i>
-                          <span class="mx-1">{{
-                            adults + children + young + baby
-                          }}</span>
+                          <span class="mx-1">{{ TotalSit }}</span>
                           người
                         </div>
 
-                        <p class="details" v-for="people,index in customers" :key="index">
-                          <span class="mx-1">{{people.TypeName}}</span>
+                        <p class="details">
+                          <span class="mx-1">{{ adults }}</span
+                          >Người lớn
+                        </p>
+                        <p class="details">
+                          <span class="mx-1">{{ children }}</span
+                          >Trẻ em
+                        </p>
+                        <p class="details">
+                          <span class="mx-1">{{ young }}</span
+                          >Trẻ nhỏ
+                        </p>
+                        <p class="details">
+                          <span class="mx-1">{{ baby }}</span
+                          >Em bé
                         </p>
                       </th>
                     </tr>
-                    <tr
-                      v-for="tristtype_price in TristType_price"
-                      :key="tristtype_price.typeID"
-                    >
-                      <td>{{ tristtype_price.touristTypeName }}</td>
+                    <tr>
+                      <td>Người lớn</td>
                       <th>
-                        <span>{{ adults }}</span
-                        >x
+                        <span>{{ adults }}</span> x
                         <span>{{
-                          formatter.format(tristtype_price.touristType_Prices)
+                          formatter.format(FilterTristType_price.touristPrice)
                         }}</span>
                       </th>
                     </tr>
-                    <!-- <tr>
-                      <td>Người lớn</td>
-                      <th><span></span> <span>4,390,000</span>đ</th>
-                    </tr>
                     <tr>
                       <td>Trẻ em</td>
-                      <th><span></span> <span>0</span>đ</th>
+                      <th>
+                        <span>{{ children }}</span> x
+                        <span v-if="children == 0">0đ</span>
+                        <span v-else>{{
+                          formatter.format(childrenPrice)
+                        }}</span>
+                      </th>
                     </tr>
                     <tr>
                       <td>Trẻ nhỏ</td>
-                      <th><span></span> <span>0</span>đ</th>
+                      <th>
+                        <span>{{ young }}</span> x
+                        <span v-if="young == 0">0đ</span>
+                        <span v-else>{{ formatter.format(youngPrice) }}</span>
+                      </th>
                     </tr>
                     <tr>
                       <td>Em bé</td>
-                      <th><span></span> <span>0</span>đ</th>
-                    </tr> -->
+                      <th>
+                        <span>{{ baby }}</span> x
+                        <span v-if="baby == 0">0đ</span>
+                        <span v-else>{{ formatter.format(babyPrice) }}</span>
+                      </th>
+                    </tr>
                     <tr>
                       <th>Phụ thu Dịch Vụ</th>
                       <th>
-                        <span v-if="customers.servicesPrice == 0">0đ</span>
-                        <span v-else>{{
-                          formatter.format(totaltouristPrice)
-                        }}</span>
+                        <span>{{ formatter.format(totaltouristPrice) }}</span>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Số chỗ</th>
+                      <th>
+                        <span
+                          >còn {{ TotalSit }}/{{
+                            tour.tourAvailableSit
+                          }}
+                          chỗ</span
+                        >
                       </th>
                     </tr>
                     <tr class="price">
                       <th>Tổng cộng</th>
                       <th>
-                        <p><span>5,890,000</span>đ</p>
+                        <p>
+                          <span>{{ formatter.format(TotalPrice) }}</span>
+                        </p>
                       </th>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="group-submit d-block">
+              <div class="group-submit d-block py-3">
                 <button
                   type="submit"
                   class="btn btn-danger w-100 fs-2 py-3"
@@ -391,7 +418,6 @@
                 >
                   ĐẶT NGAY
                 </button>
-                <p></p>
               </div>
             </div>
           </div>
@@ -419,18 +445,14 @@ export default {
           touristSex: "",
           touristDate: "",
           touristPrice: "",
-          touristNote: "",
           servicesPrice: [],
         },
       ],
     };
   },
   mounted() {
-    this.$store.dispatch("fetchTourOrder", { id: this.$route.query.tourID });
+    this.$store.dispatch("fetchTourOrder", { id: this.$route.query.tourID,tourtype:this.tour.tourType});
     this.customers[0] = this.FilterTristType_price;
-    console.log(this.Tourist);
-    console.log(this.customers);
-    console.log(this.TristType_price);
   },
   computed: {
     ...mapState([
@@ -439,8 +461,8 @@ export default {
       "TristType_price",
       "infoContact",
       "Tourist",
+      "TourType",
     ]),
-    // eslint-disable-next-line vue/return-in-computed-property
     totaltouristPrice() {
       let sum = 0;
       this.customers.forEach((customer) => {
@@ -448,7 +470,6 @@ export default {
       });
       return sum;
     },
-    // eslint-disable-next-line vue/return-in-computed-property
     FilterTristType_price() {
       for (const value of this.TristType_price) {
         if (value.touristTypeName == "Người lớn") {
@@ -460,7 +481,6 @@ export default {
             touristSex: "",
             touristDate: "",
             touristPrice: value.touristType_Prices,
-            touristNote: "",
             servicesPrice: [],
           };
         }
@@ -485,6 +505,46 @@ export default {
       return this.customers.filter((customer) => customer.TypeName === "Em bé")
         .length;
     },
+    // eslint-disable-next-line vue/return-in-computed-property
+    TotalSit() {
+      let total = this.adults + this.children + this.young + this.baby;
+
+      return total;
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    childrenPrice() {
+      for (const value of this.TristType_price) {
+        if (value.touristTypeName === "Trẻ em") {
+          return value.touristType_Prices;
+        }
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    youngPrice() {
+      for (const value of this.TristType_price) {
+        if (value.touristTypeName === "Trẻ nhỏ") {
+          return value.touristType_Prices;
+        }
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    babyPrice() {
+      for (const value of this.TristType_price) {
+        if (value.touristTypeName === "Em bé") {
+          return value.touristType_Prices;
+        }
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    TotalPrice() {
+      return (
+        this.children * this.childrenPrice +
+        this.young * this.youngPrice +
+        this.baby * this.babyPrice +
+        this.adults * this.FilterTristType_price.touristPrice +
+        this.totaltouristPrice
+      );
+    },
   },
   methods: {
     ...mapActions([
@@ -506,10 +566,12 @@ export default {
                 touristSex: "",
                 touristDate: "",
                 touristPrice: value.touristType_Prices,
-                touristNote: "",
                 servicesPrice: [],
               };
-              this.customers.push(newCustomer); // Thêm khách hàng mới vào mảng customers
+              //--Số lượng người tham gia < số lượng quy định của tour
+              if (this.customers.length < this.tour.tourAvailableSit) {
+                this.customers.push(newCustomer); // Thêm khách hàng mới vào mảng customers
+              }
             }
           }
           break;
@@ -544,6 +606,7 @@ export default {
         ContactEmail: this.infoContact.ContactEmail,
         ContactPhone: this.infoContact.ContactPhone,
         ContactAddress: this.infoContact.ContactAddress,
+        ContactNote: this.infoContact.ContactNote,
       }).then(() => {
         this.PlaceInfoContact()
           .then((response) => {
@@ -563,8 +626,7 @@ export default {
           touristSex: custum.touristSex,
           touristDate: custum.touristDate,
           touristPrice: custum.touristPrice,
-          touristNote: custum.touristNote,
-          servicesPrice: this.totaltouristPrice,
+          servicesPrice: this.EachtouristPrice(custum.servicesPrice),
         }).then(() => {
           this.PlaceTourist()
             .then((response) => {
@@ -576,9 +638,13 @@ export default {
               // Xử lý lỗi nếu có
             });
         });
-
-        // Xử lý phản hồi từ API sau khi đặt hàng thành công
       }
+    },
+    EachtouristPrice(array) {
+      return array.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      );
     },
   },
 };

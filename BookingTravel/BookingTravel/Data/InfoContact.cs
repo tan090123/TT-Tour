@@ -13,6 +13,8 @@ namespace BookingTravel.Data
         public string? ContactName { get; set; }
         public string? ContactPhone { get; set; }
         public string? ContactAddress { get; set; }
+        public string? ContactNote { get; set; }
+
 
     }
 }
