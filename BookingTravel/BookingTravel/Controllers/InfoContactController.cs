@@ -48,7 +48,7 @@ namespace BookingTravel.Controllers
 
         //// POST: api/ToursFromDb
         [HttpPost]
-        public AddTourResultModel AddContact([FromBody] InfoContactModel newContact)
+        public async Task<ActionResult<AddTourResultModel>> AddContact([FromBody] InfoContactModel newContact)
         {
             var response = new AddTourResultModel();
 
@@ -63,11 +63,11 @@ namespace BookingTravel.Controllers
 
             _context.InfoContact.Add(contact);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             response.Result = true;
 
-            return response;
+            return Ok(contact);
         }
 
         // GET: api/ToursFromDb/id
