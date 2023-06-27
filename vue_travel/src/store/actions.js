@@ -1,5 +1,5 @@
 export default {
-  fetchTourOrder({ commit }, { id }) {
+  fetchTourOrder({ commit }, { id,tourtype }) {
     //----------Product By ID-----------
     // eslint-disable-next-line
     axios
@@ -33,6 +33,19 @@ export default {
       .then((response) => {
         // handle success
         commit("setTServices", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+
+    //---------TourType------------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/TourType/${tourtype}`)
+      .then((response) => {
+        // handle success
+        commit("setTourType", response.data);
       })
       .catch((error) => {
         // handle error
@@ -89,6 +102,19 @@ export default {
         // handle error
         console.log(error);
       });
+
+    //----------TouristType_price-----------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/TouristType_price/id?tourID=${id}`)
+      .then((response) => {
+        // handle success
+        commit("setTristType_price", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
   },
   fetchTours({ commit }) {
     //----------Product By ID-----------
@@ -121,6 +147,7 @@ export default {
       ContactEmail: state.infoContact.ContactEmail,
       ContactPhone: state.infoContact.ContactPhone,
       ContactAddress: state.infoContact.ContactAddress,
+      ContactNote: state.infoContact.ContactNote,
     };
 
     // eslint-disable-next-line no-useless-catch
@@ -141,7 +168,6 @@ export default {
       touristSex: state.Tourist.touristSex,
       touristDate: state.Tourist.touristDate,
       touristPrice: state.Tourist.touristPrice,
-      touristNote: state.Tourist.touristNote,
       servicesPrice: state.Tourist.servicesPrice,
     };
 

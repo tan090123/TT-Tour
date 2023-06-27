@@ -9,7 +9,6 @@
         public string? TouristSex { get; set; }
         public DateTime? TouristDate { get; set; }
         public int? TouristPrice { get; set; }
-        public string? TouristNote { get; set; }
         public int? ServicesPrice { get; set; }
 
     }

@@ -4,6 +4,7 @@ export default {
   TServices: null,
   TourSchedule: null,
   TourGuide: null,
+  TourType:null,
   ServicesTour: null,
   TristType_price: null,
   infoContact: {
@@ -12,6 +13,7 @@ export default {
     ContactEmail: "",
     ContactPhone: "",
     ContactAddress: "",
+    ContactNote: "",
   },
   Tourist: {
     touristType: "",
@@ -19,7 +21,6 @@ export default {
     touristSex: "",
     touristDate: "",
     touristPrice: "",
-    touristNote: "",
     servicesPrice: "",
   },
 };

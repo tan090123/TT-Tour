@@ -231,21 +231,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Người lớn (Từ 12 tuổi trở lên)</td>
-                  <td class="price">16,990,000 đ</td>
-                </tr>
-                <tr>
-                  <td>Trẻ em (Từ 2 tuổi đến dưới 12 tuổi)</td>
-                  <td class="price">15,291,000 đ</td>
-                </tr>
-                <tr>
-                  <td>Em bé (Dưới 2 tuổi)</td>
-                  <td class="price">8,495,000 đ</td>
-                </tr>
-                <tr>
-                  <td>Phụ thu phòng đơn</td>
-                  <td class="price">0 đ</td>
+                <tr v-for="(trist_price,index) in TristType_price" :key="index">
+                  <td>{{trist_price.touristTypeName}}</td>
+                  <td class="price">{{formatter.format(trist_price.touristType_Prices)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -738,10 +726,7 @@ export default {
     },
   },
   computed:{
-    ...mapState(["tour"]),
-    ...mapState(["TourSchedule"]),
-    ...mapState(["TourGuide"]),
-    ...mapState(["ServicesTour"]),
+    ...mapState(["tour","TourSchedule","TourGuide","ServicesTour","TristType_price"]),
   }
 };
 </script>

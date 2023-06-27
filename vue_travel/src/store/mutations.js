@@ -14,6 +14,9 @@ export default {
   setTourGuide(state, newTourGuide) {
     state.TourGuide = newTourGuide;
   },
+  setTourType(state, newTourType) {
+    state.TourType = newTourType;
+  },
   setServicesTour(state, newServicesTour) {
     state.ServicesTour = newServicesTour;
   },
