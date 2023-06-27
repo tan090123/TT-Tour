@@ -30,7 +30,7 @@ namespace BookingTravel.Controllers
             var tourFromDBs = _context.Users.AsNoTracking();
             if (searchName != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.Fullname.ToLower().Contains(searchName.ToLower()));
+                tourFromDBs = tourFromDBs.Where(x => x.Email.ToLower().Contains(searchName.ToLower()));
             }
 
             var users = tourFromDBs.Select(x => new UserModel
@@ -39,6 +39,8 @@ namespace BookingTravel.Controllers
                 Email = x.Email,
                 Fullname = x.Fullname,
                 PhoneNumber = x.PhoneNumber,
+                Password = x.Password,
+                RoleID = x.RoleID,
             }).ToList();
 
             return users;
@@ -110,7 +112,7 @@ namespace BookingTravel.Controllers
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id:int}")]
-        public UpdateTourResultModel UpdateUser([FromRoute] int id, [FromBody] UserModel updateUser)
+        public UpdateTourResultModel UpdateUser([FromRoute] int id, [FromBody] UserUpdateModel updateUser)
         {
             var response = new UpdateTourResultModel();
 
@@ -128,6 +130,7 @@ namespace BookingTravel.Controllers
                 user.PhoneNumber = updateUser.PhoneNumber;
                 user.Fullname = updateUser.Fullname;
                 user.Email = updateUser.Email;
+                user.RoleID = updateUser.RoleID;
                
                 _context.Update(user);
                 _context.SaveChanges();

@@ -2,9 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import home from './home.js';
 import admin from './admin.js';
 
-
 const routes = [...home,...admin]
-
 
 const router = createRouter(
     {
