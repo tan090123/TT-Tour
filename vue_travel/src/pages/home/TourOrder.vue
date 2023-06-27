@@ -59,12 +59,19 @@
                     type="hidden"
                     v-model="infoContact.TourID"
                   />
+
                   <label>Họ và Tên <b>*</b></label>
                   <input
                     class="form-control"
                     type="text"
                     v-model="infoContact.ContactName"
+                    v-bind:class="{
+                      'is-invalid': error_infoContact.ContactName,
+                    }"
                   />
+                  <p class="text-danger">
+                    {{ error_infoContact.ContactName }}
+                  </p>
                 </div>
                 <div class="mail col-12 col-md-6">
                   <label>Email <b>*</b></label>
@@ -72,7 +79,13 @@
                     class="form-control"
                     type="text"
                     v-model="infoContact.ContactEmail"
+                    v-bind:class="{
+                      'is-invalid': error_infoContact.ContactEmail,
+                    }"
                   />
+                  <p class="text-danger">
+                    {{ error_infoContact.ContactEmail }}
+                  </p>
                 </div>
                 <div class="phone col-12 col-md-6">
                   <label>Số điện thoại <b>*</b></label>
@@ -80,7 +93,13 @@
                     class="form-control"
                     type="text"
                     v-model="infoContact.ContactPhone"
+                    v-bind:class="{
+                      'is-invalid': error_infoContact.ContactPhone,
+                    }"
                   />
+                  <p class="text-danger">
+                    {{ error_infoContact.ContactPhone }}
+                  </p>
                 </div>
                 <div class="addess col-12 col-md-6">
                   <label>Địa chỉ</label>
@@ -224,20 +243,41 @@
                           type="text"
                           placeholder="Vui lòng nhập Họ tên"
                           v-model="customer.touristName"
+                          v-bind:class="{
+                            'is-invalid': error_tourist.touristName,
+                          }"
                         />
+                        <p class="text-danger">
+                          {{ error_tourist.touristName }}
+                        </p>
                       </td>
                       <td>
                         <select
                           class="form-control"
                           v-model="customer.touristSex"
+                          v-bind:class="{
+                            'is-invalid': error_tourist.touristSex,
+                          }"
                         >
                           <option value="">Giới tính</option>
                           <option value="Nam">Nam</option>
                           <option value="Nu">Nữ</option>
                         </select>
+                        <p class="text-danger">
+                          {{ error_tourist.touristSex }}
+                        </p>
                       </td>
                       <td>
-                        <input type="date" v-model="customer.touristDate" />
+                        <input
+                          type="date"
+                          v-model="customer.touristDate"
+                          v-bind:class="{
+                            'is-invalid': error_tourist.touristDate,
+                          }"
+                        />
+                        <p class="text-danger">
+                          {{ error_tourist.touristDate }}
+                        </p>
                       </td>
                       <td>
                         <div
@@ -290,7 +330,7 @@
                 <b>Xe suốt tuyến - khách sạn tương đương 4* và 5*</b>
               </p>
               <p>
-                <b>{{TourType.typeName}} </b
+                <b>{{ TourType.typeName }} </b
                 ><span class="number">({{ tour.tourAvailableSit }} khách)</span>
               </p>
               <div class="group-product row my-4">
@@ -448,10 +488,25 @@ export default {
           servicesPrice: [],
         },
       ],
+      error_infoContact: {
+        ContactName: "",
+        ContactEmail: "",
+        ContactPhone: "",
+      },
+      isValid_infoContact: false,
+      error_tourist: {
+        touristName: "",
+        touristSex: "",
+        touristDate: "",
+      },
+      isValid_tourist: false,
     };
   },
   mounted() {
-    this.$store.dispatch("fetchTourOrder", { id: this.$route.query.tourID,tourtype:this.tour.tourType});
+    this.$store.dispatch("fetchTourOrder", {
+      id: this.$route.query.tourID,
+      tourtype: this.tour.tourType,
+    });
     this.customers[0] = this.FilterTristType_price;
   },
   computed: {
@@ -599,36 +654,19 @@ export default {
       }
     },
     async submitOrder() {
-      // Gọi action để cập nhật thông tin liên hệ trong Vuex store
-      await this.setInfoContact({
-        TourID: this.$route.query.tourID,
-        ContactName: this.infoContact.ContactName,
-        ContactEmail: this.infoContact.ContactEmail,
-        ContactPhone: this.infoContact.ContactPhone,
-        ContactAddress: this.infoContact.ContactAddress,
-        ContactNote: this.infoContact.ContactNote,
-      }).then(() => {
-        this.PlaceInfoContact()
-          .then((response) => {
-            console.log(response);
-            // Xử lý phản hồi từ API sau khi đặt hàng thành công
-          })
-          .catch((error) => {
-            console.error(error);
-            // Xử lý lỗi nếu có
-          });
-      });
-
-      for (const custum of this.customers) {
-        await this.setTourist({
-          touristType: custum.touristType,
-          touristName: custum.touristName,
-          touristSex: custum.touristSex,
-          touristDate: custum.touristDate,
-          touristPrice: custum.touristPrice,
-          servicesPrice: this.EachtouristPrice(custum.servicesPrice),
+      this.validate_infoContact();
+      this.validate_Tourist();
+      if (this.isValid_infoContact && this.isValid_tourist) {
+        // Gọi action để cập nhật thông tin liên hệ trong Vuex store
+        await this.setInfoContact({
+          TourID: this.$route.query.tourID,
+          ContactName: this.infoContact.ContactName,
+          ContactEmail: this.infoContact.ContactEmail,
+          ContactPhone: this.infoContact.ContactPhone,
+          ContactAddress: this.infoContact.ContactAddress,
+          ContactNote: this.infoContact.ContactNote,
         }).then(() => {
-          this.PlaceTourist()
+          this.PlaceInfoContact()
             .then((response) => {
               console.log(response);
               // Xử lý phản hồi từ API sau khi đặt hàng thành công
@@ -638,6 +676,39 @@ export default {
               // Xử lý lỗi nếu có
             });
         });
+
+        for (const custum of this.customers) {
+          await this.setTourist({
+            touristType: custum.touristType,
+            touristName: custum.touristName,
+            touristSex: custum.touristSex,
+            touristDate: custum.touristDate,
+            touristPrice: custum.touristPrice,
+            servicesPrice: this.EachtouristPrice(custum.servicesPrice),
+          }).then(() => {
+            this.PlaceTourist()
+              .then((response) => {
+                console.log(response);
+                // Xử lý phản hồi từ API sau khi đặt hàng thành công
+              })
+              .catch((error) => {
+                console.error(error);
+                // Xử lý lỗi nếu có
+              });
+          });
+        }
+
+        //-----------dang test--------------
+        // this.$router.push({
+        //   name: "TourPayment",
+        //   params: {
+        //     tourID: this.$route.query.tourID,
+        //   },
+        //   props: {
+        //     infoContact: this.infoContact,
+        //     customers: this.customers,
+        //   },
+        // });
       }
     },
     EachtouristPrice(array) {
@@ -645,6 +716,72 @@ export default {
         (accumulator, currentValue) => accumulator + currentValue,
         0
       );
+    },
+    validate_infoContact() {
+      if (!this.infoContact.ContactEmail) {
+        this.error_infoContact.ContactEmail = "Email không được để trống";
+        this.isValid_infoContact = false;
+      } else if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          this.infoContact.ContactEmail
+        )
+      ) {
+        this.error_infoContact.ContactEmail = "Vui lòng đúng định dạng email";
+        this.isValid_infoContact = false;
+      } else {
+        this.error_infoContact.ContactEmail = "";
+        this.isValid_infoContact = true;
+      }
+
+      if (!this.infoContact.ContactName) {
+        this.error_infoContact.ContactName = "Tên không được để trống";
+        this.isValid_infoContact = false;
+      } else {
+        this.error_infoContact.ContactName = "";
+        this.isValid_infoContact = true;
+      }
+
+      if (!this.infoContact.ContactPhone) {
+        this.error_infoContact.ContactPhone = "Sđt không được để trống";
+        this.isValid_infoContact = false;
+      } else if (
+        !/(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/.test(
+          this.infoContact.ContactPhone
+        )
+      ) {
+        this.error_infoContact.ContactPhone = "Vui lòng đúng định dạng Sđt";
+        this.isValid_infoContact = false;
+      } else {
+        this.error_infoContact.ContactPhone = "";
+        this.isValid_infoContact = true;
+      }
+    },
+    validate_Tourist() {
+      for (const customer of this.customers) {
+        if (customer.touristName.trim() === "") {
+          this.error_tourist.touristName = "Tên không được để trống";
+          this.isValid_tourist = false;
+        } else {
+          this.error_tourist.touristName = "";
+          this.isValid_tourist = true;
+        }
+
+        if (!customer.touristSex) {
+          this.error_tourist.touristSex = "Giới tính không được để trống";
+          this.isValid_tourist = false;
+        } else {
+          this.error_tourist.touristSex = "";
+          this.isValid_tourist = true;
+        }
+
+        if (!customer.touristDate) {
+          this.error_tourist.touristDate = "Năm sinh không được để trống";
+          this.isValid_tourist = false;
+        } else {
+          this.error_tourist.touristDate = "";
+          this.isValid_tourist = true;
+        }
+      }
     },
   },
 };
