@@ -46,6 +46,12 @@ const home = [
                 meta: { title: 'Đăng ký - Vietravel' }
             },
             {
+                path: '/forgot_password',
+                name: 'forgotPass_component',
+                component: () => import("@/components/ForgotPass.vue"),
+                meta: { title: 'Đăng ký - Vietravel' }
+            },
+            {
                 path: '/tours',
                 name: 'tours_page',
                 component: () => import("@/pages/home/TourPage.vue"),

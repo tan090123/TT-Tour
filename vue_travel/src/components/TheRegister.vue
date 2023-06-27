@@ -163,13 +163,6 @@ export default {
         },
         onSubmit() {
             if (this.isValid) {
-                const formData = new FormData;
-                formData.append('fullname', this.fullname);
-                formData.append('phoneNumber', this.phone_number);
-                formData.append('email', this.email);
-                formData.append('password', this.password);
-                formData.append('confirmPassword', this.confirm_password);
-
                 // eslint-disable-next-line no-undef
                 axios.post('/api/RegisLogin/register', {
                     fullname: this.fullname,
@@ -182,12 +175,13 @@ export default {
                     .then(response => {
                         // Xử lý kết quả
                         const result = response.data.result;
+                        const errorMessage = response.data.errorMessage;
                         if (result) {
                             console.table(response.data);
                             // eslint-disable-next-line no-undef
                             Swal.fire({
                                 title: 'Đăng ký thành công',
-                                text: '💜',
+                                text:  '💜',
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             }).then(() => {
@@ -195,7 +189,6 @@ export default {
                                 window.location.href = '/login';
                             });
                         } else {
-                            const errorMessage = response.data.errorMessage;
                             // console.table(response.data);
                             // eslint-disable-next-line no-undef
                             Swal.fire({
@@ -218,6 +211,13 @@ export default {
                             confirmButtonText: 'OK',
                         });
                     });
+            } else {
+                // eslint-disable-next-line no-undef
+                Swal.fire({
+                    title: 'Vui lòng điền đúng thông tin -.-',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                })
             }
         }
     }

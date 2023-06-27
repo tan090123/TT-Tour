@@ -21,9 +21,12 @@
             <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                 alt="">
             <ul class="profile-link">
+                <li><a href="#" v-if="adminEmail">
+                    <span>Xin chào admin: </span>
+                    <span class="fw-bold">{{ adminEmail }}</span></a></li>
                 <li><a href="#"><i class='bx bxs-user-circle icon'></i> Profile</a></li>
                 <li><a href="#"><i class='bx bxs-cog'></i> Settings</a></li>
-                <li><a href="#"><i class='bx bxs-log-out-circle'></i> Logout</a></li>
+                <li><a href="#" @click="logout"><i class='bx bxs-log-out-circle'></i>Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -31,7 +34,23 @@
 </template>
 <script>
 export default {
-
+    data() {
+        return {
+            adminEmail: '',
+        }
+    },
+    mounted() {
+    // Lấy email từ localStorage hoặc sessionStorage
+    this.adminEmail = localStorage.getItem('adminEmail');
+  },
+  methods: {
+    logout() {
+      // Xóa email từ localStorage hoặc sessionStorage
+      localStorage.removeItem('adminEmail');
+      // Điều hướng đến trang đăng nhập hoặc trang chủ
+      window.location.href = '/login';
+    }
+    }
 }
 </script>
 <style lang="scss" scoped>

@@ -28,7 +28,7 @@
                             <div class="text-end">
                                 <router-link :to="{name: 'register_component'}" target="_blank" rel="nofollow no-referrer">Đăng ký</router-link>
                                 <span>hoặc</span>
-                                <a href="!#" target="_blank" rel="nofollow no-referrer">Lấy lại mật khẩu</a>
+                                <router-link :to="{name: 'forgotPass_component'}" target="_blank" rel="nofollow no-referrer">Lấy lại mật khẩu</router-link>
                             </div>
                         </div>
 
@@ -103,6 +103,7 @@ export default {
             this.onLogin();
         },
         onLogin() {
+            const self = this;
             if (this.status) {
                 console.log(this.status);
                 // eslint-disable-next-line no-undef
@@ -122,12 +123,25 @@ export default {
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             }).then(() => {
-                                // Lưu email vào localStorage hoặc sessionStorage
-                                localStorage.setItem('userEmail', this.taikhoan);
+                                // eslint-disable-next-line no-undef
+                            axios.get(`/api/user?searchName=${self.taikhoan}`)
+                                .then(usersResponse => {
 
-                                // Chuyển hướng đến trang chủ
-                                window.location.href = '/';
-                            });
+                                    const users = usersResponse.data;
+                                    const user = users[0];
+                                    console.log(user);
+                                    const roleID = user.roleID;
+                                    const Fullname = user.fullname;
+                                    if (roleID === 4) {
+                                        localStorage.setItem('adminEmail', Fullname);
+                                        window.location.href = ('/admin');
+                                    } else if (roleID === 3) {
+                                        localStorage.setItem('userEmail', Fullname);
+                                        window.location.href = ('/');
+                                    }
+
+                                })
+                            })
                         } else {
                             const errorMessage = response.data.errorMessage;
                             console.table(response.data);
@@ -150,6 +164,13 @@ export default {
                             confirmButtonText: 'OK',
                         });
                     });
+            } else {
+                // eslint-disable-next-line no-undef
+                Swal.fire({
+                    title: 'Vui lòng điền đúng thông tin -.-',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                })
             }
         },
     },

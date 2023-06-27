@@ -4,7 +4,7 @@ const admin = [
         path: '/admin',
         name: 'admin',
         component: () => import("@/layout/Admin.vue"),
-        meta: { title: 'Trang chủ admin - Vietravel' },
+        meta: { title: 'Trang chủ admin - Vietravel', requiresAuth: true },
         children: [
             {
                 path: 'dashboard',
