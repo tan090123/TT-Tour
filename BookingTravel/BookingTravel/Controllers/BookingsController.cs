@@ -47,7 +47,7 @@ namespace BookingTravel.Controllers
                 TotalPrice  = x.TotalPrice,
                 TourCheckinDays = x.TourCheckinDays,
                 TourCheckoutDays = x.TourCheckoutDays,
-                TouristID = x.TouristID,
+                InfoContactID = x.InfoContactID,
                 UserID = x.UserID,
                 
             }).ToList();
@@ -75,7 +75,7 @@ namespace BookingTravel.Controllers
                 TotalPrice = newBookings.TotalPrice,
                 TourCheckinDays = newBookings.TourCheckinDays,
                 TourCheckoutDays = newBookings.TourCheckoutDays,
-                TouristID = newBookings.TouristID,
+                InfoContactID = newBookings.InfoContactID,
                 UserID = newBookings.UserID,
 
             };
@@ -127,7 +127,7 @@ namespace BookingTravel.Controllers
                 booking.Status = updateBookings.Status;
                 booking.TourCheckinDays = updateBookings.TourCheckinDays;
                 booking.TourCheckoutDays = updateBookings.TourCheckoutDays;
-                booking.TouristID = updateBookings.TouristID;
+                booking.InfoContactID = updateBookings.InfoContactID;
                 booking.TourID = updateBookings.TourID;
                 booking.CurrentPrice = updateBookings.CurrentPrice;
                 booking.Departure = updateBookings.Departure;

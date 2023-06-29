@@ -4,7 +4,7 @@
     {
         public int BookingID { get; set; }
         public int? TourID { get; set; }
-        public int? TouristID { get; set; }
+        public int? InfoContactID { get; set; }
         public int? UserID { get; set; }
         public int? ExtraPrice { get; set; }
         public int? CurrentPrice { get; set; }

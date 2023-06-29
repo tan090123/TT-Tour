@@ -29,4 +29,10 @@ export default {
   SET_Tourist(state, tourist) {
     state.Tourist = tourist;
   },
+  SET_Tourist_TouristServices(state, newTourist_TouristServices) {
+    state.Tourist_TouristServices = newTourist_TouristServices;
+  },
+  SET_Booking(state, booking) {
+    state.Booking = booking;
+  },
 };
