@@ -102,6 +102,12 @@ export default {
         submitForm() {
             this.onLogin();
         },
+        checkLoggedIn() {
+      const userEmail = localStorage.getItem('userEmail');
+      if (userEmail) {
+        window.location.href = ('/');
+      }
+    },
         onLogin() {
             const self = this;
             if (this.status) {
@@ -138,6 +144,7 @@ export default {
                                     } else if (roleID === 3) {
                                         localStorage.setItem('userEmail', Fullname);
                                         window.location.href = ('/');
+                                        this.checkLoggedIn();
                                     }
 
                                 })
@@ -173,6 +180,9 @@ export default {
                 })
             }
         },
+    },
+    mounted() {
+        this.checkLoggedIn()
     },
 }
 </script>

@@ -91,6 +91,12 @@ export default {
             isValid: false
         }
     },
+    mounted() {
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            window.location.href = ('/');
+        }
+    },
     methods: {
         validateEmail(email) {
             const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -181,7 +187,7 @@ export default {
                             // eslint-disable-next-line no-undef
                             Swal.fire({
                                 title: 'Đăng ký thành công',
-                                text:  '💜',
+                                text: '💜',
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             }).then(() => {
