@@ -1,9 +1,19 @@
 <template lang="">
-    <AdNav/>
+    <div v-if="isLogin">
+        <AdNav/>
     <section id="content">
-        <AdHeader/>
+        <AdHeader :isLogin="isLogin"/>
         <router-view></router-view>
     </section>
+    </div>
+    <div v-else class="login-message">
+        <div>
+            <p>Vui lòng 
+                <router-link class="nav-link" target="_blank" :to="{ name: 'login_component' }">Đăng nhập</router-link>
+             để truy cập vào trang quản trị này 🤓😎.</p>
+        </div>
+</div>
+
 </template>
 <script>
 import AdHeader from '@/components/AdHeader.vue';
@@ -16,171 +26,25 @@ export default {
         AdNav,
         AdHeader
     },
-    mounted() {
-        // SIDEBAR DROPDOWN
-        const allDropdown = document.querySelectorAll('#sidebar .side-dropdown');
-        const sidebar = document.getElementById('sidebar');
-
-        allDropdown.forEach(item => {
-            const a = item.parentElement.querySelector('a:first-child');
-            a.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                if (!this.classList.contains('active')) {
-                    allDropdown.forEach(i => {
-                        const aLink = i.parentElement.querySelector('a:first-child');
-
-                        aLink.classList.remove('active');
-                        i.classList.remove('show');
-                    })
-                }
-
-                this.classList.toggle('active');
-                item.classList.toggle('show');
-            })
-        })
-
-
-
-
-
-        // SIDEBAR COLLAPSE
-        const toggleSidebar = document.querySelector('nav .toggle-sidebar');
-        const allSideDivider = document.querySelectorAll('#sidebar .divider');
-
-        if (sidebar.classList.contains('hide')) {
-            allSideDivider.forEach(item => {
-                item.textContent = '-'
-            })
-            allDropdown.forEach(item => {
-                const a = item.parentElement.querySelector('a:first-child');
-                a.classList.remove('active');
-                item.classList.remove('show');
-            })
-        } else {
-            allSideDivider.forEach(item => {
-                item.textContent = item.dataset.text;
-            })
+    data() {
+        return {
+            isLogin: false,
         }
-
-        toggleSidebar.addEventListener('click', function () {
-            sidebar.classList.toggle('hide');
-
-            if (sidebar.classList.contains('hide')) {
-                allSideDivider.forEach(item => {
-                    item.textContent = '-'
-                })
-
-                allDropdown.forEach(item => {
-                    const a = item.parentElement.querySelector('a:first-child');
-                    a.classList.remove('active');
-                    item.classList.remove('show');
-                })
+    },
+    methods: {
+        checkLogin() {
+            const adminEmail = localStorage.getItem('adminEmail');
+            if (adminEmail) {
+                this.isLogin = true;
+                console.log(this.isLogin);
             } else {
-                allSideDivider.forEach(item => {
-                    item.textContent = item.dataset.text;
-                })
+                this.isLogin = false;
             }
-        })
+        },
 
-
-
-
-        sidebar.addEventListener('mouseleave', function () {
-            if (this.classList.contains('hide')) {
-                allDropdown.forEach(item => {
-                    const a = item.parentElement.querySelector('a:first-child');
-                    a.classList.remove('active');
-                    item.classList.remove('show');
-                })
-                allSideDivider.forEach(item => {
-                    item.textContent = '-'
-                })
-            }
-        })
-
-
-
-        sidebar.addEventListener('mouseenter', function () {
-            if (this.classList.contains('hide')) {
-                allDropdown.forEach(item => {
-                    const a = item.parentElement.querySelector('a:first-child');
-                    a.classList.remove('active');
-                    item.classList.remove('show');
-                })
-                allSideDivider.forEach(item => {
-                    item.textContent = item.dataset.text;
-                })
-            }
-        })
-
-
-
-
-        // PROFILE DROPDOWN
-        const profile = document.querySelector('nav .profile');
-        const imgProfile = profile.querySelector('img');
-        const dropdownProfile = profile.querySelector('.profile-link');
-
-        imgProfile.addEventListener('click', function () {
-            dropdownProfile.classList.toggle('show');
-        })
-
-
-
-
-        // MENU
-        const allMenu = document.querySelectorAll('main .content-data .head .menu');
-
-        allMenu.forEach(item => {
-            const icon = item.querySelector('.icon');
-            const menuLink = item.querySelector('.menu-link');
-
-            icon.addEventListener('click', function () {
-                menuLink.classList.toggle('show');
-            })
-        })
-
-
-
-        window.addEventListener('click', function (e) {
-            if (e.target !== imgProfile) {
-                if (e.target !== dropdownProfile) {
-                    if (dropdownProfile.classList.contains('show')) {
-                        dropdownProfile.classList.remove('show');
-                    }
-                }
-            }
-
-            allMenu.forEach(item => {
-                const icon = item.querySelector('.icon');
-                const menuLink = item.querySelector('.menu-link');
-
-                if (e.target !== icon) {
-                    if (e.target !== menuLink) {
-                        if (menuLink.classList.contains('show')) {
-                            menuLink.classList.remove('show')
-                        }
-                    }
-                }
-            })
-        })
-
-
-
-
-
-        // PROGRESSBAR
-        const allProgress = document.querySelectorAll('main .card .progress');
-
-        allProgress.forEach(item => {
-            item.style.setProperty('--value', item.dataset.value)
-        })
-
-
-
-
-
+    },
+    mounted() {
+        this.checkLogin();
 
         // // APEXCHART
         // var options = {
@@ -219,6 +83,29 @@ export default {
 
 }
 </script>
-<style lang="">
-    
+<style lang="scss" scoped>
+.login-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ef70fb;
+
+    div {
+        background-color: rgb(151, 32, 123);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 4px;
+    }
+
+    a {
+        display: inline-block;
+        color: #fff;
+        font-weight: bold;
+        margin: 0 -5px;
+    }
+}
 </style>

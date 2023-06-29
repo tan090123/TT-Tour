@@ -51,7 +51,7 @@
                             <td>{{ item.tourAvailableSit }}</td>
                             <td>{{ item.tour_NumberDays }}</td>
                             <td>{{ item.tour_AvalablePeople }}</td>
-                            <td>{{ item.tourType }}</td>
+                            <td>{{ getTourTypeName(item.tourType) }}</td>
                             <td style="padding: 0 10px; width: 100px;">
                                 <button class="btn btn-success" style="padding: 10px 15px; margin-right: 5px;"
                                     type="button" @click="editItem(item.tourID)" data-toggle="tooltip"
@@ -84,6 +84,7 @@ export default {
             perPage: 4,
             currentPage: 1,
             items: [],
+            type: [],
             formatter: new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
@@ -103,6 +104,7 @@ export default {
 
     mounted() {
         this.getAllItem();
+        this.getType();
 
     },
     methods: {
@@ -120,6 +122,24 @@ export default {
                     // handle error
                     console.log(error);
                 });
+        },
+        getType() {
+            // eslint-disable-next-line
+            axios.get('/api/TourType')
+                .then((response) => {
+                    // handle success
+                    this.type = response.data;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+
+        // Set name tour type
+        getTourTypeName(tourType) {
+            const tourTypes = this.type.find(type => type.typeID === tourType);
+            return tourTypes ? tourTypes.typeName : '';
         },
 
         Confirm(message) {

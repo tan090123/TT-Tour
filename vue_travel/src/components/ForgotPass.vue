@@ -22,6 +22,12 @@ export default {
             isForgot: false
         }
     },
+     mounted() {
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            window.location.href = ('/');
+        }
+    },
 
     methods: {
         validateEmail(email) {
