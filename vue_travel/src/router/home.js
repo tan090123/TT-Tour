@@ -85,14 +85,6 @@ const home = [
         meta: { title: "Du Lịch Vietravel - Vietravel" },
       },
 
-      //-----------dang test--------------
-      // {
-      //   path: "/order/payment/:tourID",
-      //   name: "TourPayment",
-      //   component: () => import("@/pages/home/TourPayment.vue"),
-      //   meta: { title: "Du Lịch Vietravel - Vietravel" },
-      //   props: true, // Cho phép nhận các params từ URL làm props
-      // },
     ],
   },
 ];

@@ -1,5 +1,5 @@
 export default {
-  fetchTourOrder({ commit }, { id,tourtype }) {
+  fetchTourOrder({ commit }, { id, tourtype }) {
     //----------Product By ID-----------
     // eslint-disable-next-line
     axios
@@ -140,8 +140,17 @@ export default {
   setTourist({ commit }, tourist) {
     commit("SET_Tourist", tourist);
   },
+  //-----Booking-------
+  setBooking({ commit }, booking) {
+    commit("SET_Booking", booking);
+  },
+  //---------Tourist_TouristServices--------
+  setTourist_TouristServices({ commit }, tourist_TouristServices) {
+    commit("SET_Tourist_TouristServices", tourist_TouristServices);
+  },
   async PlaceInfoContact({ state, commit }) {
     const InfoContactData = {
+      contactID: state.infoContact.contactID,
       TourID: state.infoContact.TourID,
       ContactName: state.infoContact.ContactName,
       ContactEmail: state.infoContact.ContactEmail,
@@ -163,6 +172,7 @@ export default {
   },
   async PlaceTourist({ state, commit }) {
     const TouristData = {
+      touristID: state.Tourist.touristID,
       touristType: state.Tourist.touristType,
       touristName: state.Tourist.touristName,
       touristSex: state.Tourist.touristSex,
@@ -177,6 +187,56 @@ export default {
       const Tourist = await axios.post(`/api/Tourist`, TouristData);
       // Xử lý phản hồi từ API sau khi đặt hàng thành công
       commit("SET_Tourist", Tourist.data);
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      throw error;
+    }
+  },
+  async PlaceBooking({ state, commit }) {
+    const BookingData = {
+      tourID: state.Booking.tourID,
+      infoContactID: state.Booking.infoContactID,
+      userID: state.Booking.userID,
+      extraPrice: state.Booking.extraPrice,
+      currentPrice: state.Booking.currentPrice,
+      totalPrice: state.Booking.totalPrice,
+      payment: state.Booking.payment,
+      status: state.Booking.status,
+      tourCheckinDays: state.Booking.tourCheckinDays,
+      tourCheckoutDays: state.Booking.tourCheckoutDays,
+      departure: state.Booking.departure,
+      destination: state.Booking.destination,
+      bookingName: state.Booking.bookingName,
+      bookingDay: state.Booking.bookingDay,
+    };
+
+    // eslint-disable-next-line no-useless-catch
+    try {
+      // eslint-disable-next-line
+      const Booking = await axios.post(`/api/Bookings`, BookingData);
+      // Xử lý phản hồi từ API sau khi đặt hàng thành công
+      commit("SET_Booking", Booking.data);
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      throw error;
+    }
+  },
+  async PlaceTourist_TouristServices({ state, commit }) {
+    const Tourist_TouristServicesData = {
+      servicesID: state.Tourist_TouristServices.servicesID,
+      touristID: state.Tourist_TouristServices.touristID,
+      tServicesID: state.Tourist_TouristServices.tServicesID,
+    };
+
+    // eslint-disable-next-line no-useless-catch
+    try {
+      // eslint-disable-next-line
+      const Tourist_TouristServices = await axios.post(
+        `/api/TouristServices`,
+        Tourist_TouristServicesData
+      );
+      // Xử lý phản hồi từ API sau khi đặt hàng thành công
+      commit("SET_Tourist_TouristServices", Tourist_TouristServices.data);
     } catch (error) {
       // Xử lý lỗi nếu có
       throw error;

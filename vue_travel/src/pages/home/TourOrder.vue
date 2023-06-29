@@ -48,12 +48,20 @@
 
       <div class="TourOrder__info">
         <div class="row">
-          <div class="TourOrder__info--detail col-12 col-md-8">
+          <div
+            class="TourOrder__info--detail col-12 col-md-8"
+            v-if="!tourPayment"
+          >
             <h2>Tổng quan về chuyến đi</h2>
             <div class="customer-contact">
               <h3>Thông tin liên lạc</h3>
               <div class="row">
                 <div class="name col-12 col-md-6">
+                  <input
+                    class="form-control"
+                    type="hidden"
+                    v-model="infoContact.contactID"
+                  />
                   <input
                     class="form-control"
                     type="hidden"
@@ -239,6 +247,7 @@
                   <tbody>
                     <tr>
                       <td>
+                        <input type="hidden" v-model="customer.touristID" />
                         <input
                           type="text"
                           placeholder="Vui lòng nhập Họ tên"
@@ -286,7 +295,10 @@
                         >
                           <input
                             type="checkbox"
-                            :value="tService.servicesPrice"
+                            :value="{
+                              id: tService.tServicesID,
+                              price: tService.servicesPrice,
+                            }"
                             v-model="customer.servicesPrice"
                           />{{ tService.servicesName }}
                         </div>
@@ -305,6 +317,237 @@
                   placeholder="Vui lòng nhập nội dung lời nhắn bằng tiếng việt hoặc tiếng anh..."
                   v-model="infoContact.ContactNote"
                 ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!------------------------------------------------------------------------------>
+          <div class="TourOrder__info--detail col-12 col-md-8" v-else>
+            <h2>Thanh toán</h2>
+            <div class="customer-contact">
+              <h3>Các hình thức thanh toán</h3>
+
+              <div id="accordion">
+                <div class="row">
+                  <div class="col-6">
+                    <div
+                      class="card bg-light col-12 px-5 py-4 mt-3"
+                      v-for="(payment, index) in payments.slice(
+                        0,
+                        Math.ceil(payments.length / 2)
+                      )"
+                      :key="index"
+                    >
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <h4 class="fs-2 fw-lighter">
+                          <i class="fa-sharp fa-solid fa-money-bill me-3"></i
+                          >{{ payment.name }}
+                        </h4>
+                        <input
+                          type="radio"
+                          data-bs-toggle="collapse"
+                          :href="payment.href"
+                          :id="payment.name"
+                          :value="payment.name"
+                          name="paymentMethod"
+                          v-model="SelectedPayment"
+                          :checked="index === 0"
+                        />
+                      </div>
+                      <div
+                        :id="'collapse' + index"
+                        :class="['collapse', { show: index === 0 }]"
+                        data-bs-parent="#accordion"
+                      >
+                        <p>
+                          {{ payment.content }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div
+                      class="card bg-light px-5 py-4 mt-3"
+                      v-for="(payment, index) in payments.slice(
+                        Math.ceil(payments.length / 2)
+                      )"
+                      :key="index + Math.ceil(payments.length / 2)"
+                    >
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <h4 class="fs-2 fw-lighter">
+                          <i class="fa-sharp fa-solid fa-money-bill me-3"></i>
+                          {{ payment.name }}
+                        </h4>
+                        <input
+                          type="radio"
+                          data-bs-toggle="collapse"
+                          :href="payment.href"
+                          :id="payment.name"
+                          :value="payment.name"
+                          name="paymentMethod"
+                          v-model="SelectedPayment"
+                        />
+                      </div>
+                      <div
+                        :id="
+                          'collapse' + (index + Math.ceil(payments.length / 2))
+                        "
+                        :class="['collapse', { show: index === 0 }]"
+                        data-bs-parent="#accordion"
+                      >
+                        <p>
+                          {{ payment.content }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <h3>Điều khoản bắt buộc khi đăng ký online</h3>
+                <div
+                  class="border border-2 border-light p-4"
+                  style="height: 25em; overflow-y: scroll"
+                >
+                  <h5 class="text-center fw-bold fs-4">
+                    NỘI DUNG ĐỌC, HIỂU VÀ ĐỒNG Ý TRƯỚC KHI ĐĂNG KÝ ONLINE CHƯƠNG
+                    TRÌNH DU LỊCH TRONG NƯỚC
+                  </h5>
+                  <p class="fw-bold fs-4">
+                    Tôi đã hiểu rõ và đồng ý với các nội dung liên quan đến
+                    chương trình tour trong giai đoạn bình thường mới và điều
+                    kiện bán tour như sau:
+                  </p>
+                  <p>
+                    1. Trường hợp tour di chuyển bằng xe/tàu hỏa/tàu thủy thì
+                    Khách phải đảm bảo đã hoàn thành tiêm 02 mũi vắc xin và có
+                    giấy xác nhận tiêm chủng (mũi thứ 02 từ 14 ngày trở lên và
+                    không quá 12 tháng) hoặc F0 đã khỏi bệnh COVID-19 trong vòng
+                    06 tháng có giấy xác nhận của bệnh viện tính đến thời điểm
+                    đi du lịch. Theo chính sách của cơ quan nhà nước, địa phương
+                    nơi điểm đi, điểm đến, các điều kiện trên có thể thay đổi
+                    tùy từng thời điểm cụ thể và Vietravel sẽ thông báo cho
+                    Khách hàng để bổ sung theo yêu cầu.
+                  </p>
+                  <p>
+                    2. Trẻ em (đi cùng ba mẹ) phải xét nghiệm COVID-19 và có
+                    giấy xác nhận âm tính của cơ sở Y tế trước ngày khởi hành
+                    24h (chi phí xét nghiệm tự túc).
+                  </p>
+                  <p>
+                    3. Thông tin kiểm soát dịch bệnh tại các địa phương sẽ thay
+                    đổi và Vietravel sẽ cập nhật phương án phòng chống dịch
+                    thường xuyên đến khách hàng (nếu có).
+                  </p>
+                  <p>
+                    4. Khách hàng sẽ phối hợp cùng Vietravel thực hiện đúng theo
+                    hướng dẫn phòng chống dịch hoặc các biện pháp cách ly theo
+                    chỉ đạo từ địa phương - nếu có với chi phí tự túc.
+                  </p>
+                  <p class="fw-bold fs-4">
+                    Tôi đã hiểu rõ và đồng ý với các nội dung liên quan đến
+                    chương trình tour trong giai đoạn bình thường mới và điều
+                    kiện bán tour như sau:
+                  </p>
+                  <p>
+                    1. Trường hợp tour di chuyển bằng xe/tàu hỏa/tàu thủy thì
+                    Khách phải đảm bảo đã hoàn thành tiêm 02 mũi vắc xin và có
+                    giấy xác nhận tiêm chủng (mũi thứ 02 từ 14 ngày trở lên và
+                    không quá 12 tháng) hoặc F0 đã khỏi bệnh COVID-19 trong vòng
+                    06 tháng có giấy xác nhận của bệnh viện tính đến thời điểm
+                    đi du lịch. Theo chính sách của cơ quan nhà nước, địa phương
+                    nơi điểm đi, điểm đến, các điều kiện trên có thể thay đổi
+                    tùy từng thời điểm cụ thể và Vietravel sẽ thông báo cho
+                    Khách hàng để bổ sung theo yêu cầu.
+                  </p>
+                  <p>
+                    2. Trẻ em (đi cùng ba mẹ) phải xét nghiệm COVID-19 và có
+                    giấy xác nhận âm tính của cơ sở Y tế trước ngày khởi hành
+                    24h (chi phí xét nghiệm tự túc).
+                  </p>
+                  <p>
+                    3. Thông tin kiểm soát dịch bệnh tại các địa phương sẽ thay
+                    đổi và Vietravel sẽ cập nhật phương án phòng chống dịch
+                    thường xuyên đến khách hàng (nếu có).
+                  </p>
+                  <p>
+                    4. Khách hàng sẽ phối hợp cùng Vietravel thực hiện đúng theo
+                    hướng dẫn phòng chống dịch hoặc các biện pháp cách ly theo
+                    chỉ đạo từ địa phương - nếu có với chi phí tự túc.
+                  </p>
+                  <p class="fw-bold fs-4">
+                    Tôi đã hiểu rõ và đồng ý với các nội dung liên quan đến
+                    chương trình tour trong giai đoạn bình thường mới và điều
+                    kiện bán tour như sau:
+                  </p>
+                  <p>
+                    1. Trường hợp tour di chuyển bằng xe/tàu hỏa/tàu thủy thì
+                    Khách phải đảm bảo đã hoàn thành tiêm 02 mũi vắc xin và có
+                    giấy xác nhận tiêm chủng (mũi thứ 02 từ 14 ngày trở lên và
+                    không quá 12 tháng) hoặc F0 đã khỏi bệnh COVID-19 trong vòng
+                    06 tháng có giấy xác nhận của bệnh viện tính đến thời điểm
+                    đi du lịch. Theo chính sách của cơ quan nhà nước, địa phương
+                    nơi điểm đi, điểm đến, các điều kiện trên có thể thay đổi
+                    tùy từng thời điểm cụ thể và Vietravel sẽ thông báo cho
+                    Khách hàng để bổ sung theo yêu cầu.
+                  </p>
+                  <p>
+                    2. Trẻ em (đi cùng ba mẹ) phải xét nghiệm COVID-19 và có
+                    giấy xác nhận âm tính của cơ sở Y tế trước ngày khởi hành
+                    24h (chi phí xét nghiệm tự túc).
+                  </p>
+                  <p>
+                    3. Thông tin kiểm soát dịch bệnh tại các địa phương sẽ thay
+                    đổi và Vietravel sẽ cập nhật phương án phòng chống dịch
+                    thường xuyên đến khách hàng (nếu có).
+                  </p>
+                  <p>
+                    4. Khách hàng sẽ phối hợp cùng Vietravel thực hiện đúng theo
+                    hướng dẫn phòng chống dịch hoặc các biện pháp cách ly theo
+                    chỉ đạo từ địa phương - nếu có với chi phí tự túc.
+                  </p>
+                  <p class="fw-bold fs-4">
+                    Tôi đã hiểu rõ và đồng ý với các nội dung liên quan đến
+                    chương trình tour trong giai đoạn bình thường mới và điều
+                    kiện bán tour như sau:
+                  </p>
+                  <p>
+                    1. Trường hợp tour di chuyển bằng xe/tàu hỏa/tàu thủy thì
+                    Khách phải đảm bảo đã hoàn thành tiêm 02 mũi vắc xin và có
+                    giấy xác nhận tiêm chủng (mũi thứ 02 từ 14 ngày trở lên và
+                    không quá 12 tháng) hoặc F0 đã khỏi bệnh COVID-19 trong vòng
+                    06 tháng có giấy xác nhận của bệnh viện tính đến thời điểm
+                    đi du lịch. Theo chính sách của cơ quan nhà nước, địa phương
+                    nơi điểm đi, điểm đến, các điều kiện trên có thể thay đổi
+                    tùy từng thời điểm cụ thể và Vietravel sẽ thông báo cho
+                    Khách hàng để bổ sung theo yêu cầu.
+                  </p>
+                  <p>
+                    2. Trẻ em (đi cùng ba mẹ) phải xét nghiệm COVID-19 và có
+                    giấy xác nhận âm tính của cơ sở Y tế trước ngày khởi hành
+                    24h (chi phí xét nghiệm tự túc).
+                  </p>
+                  <p>
+                    3. Thông tin kiểm soát dịch bệnh tại các địa phương sẽ thay
+                    đổi và Vietravel sẽ cập nhật phương án phòng chống dịch
+                    thường xuyên đến khách hàng (nếu có).
+                  </p>
+                  <p>
+                    4. Khách hàng sẽ phối hợp cùng Vietravel thực hiện đúng theo
+                    hướng dẫn phòng chống dịch hoặc các biện pháp cách ly theo
+                    chỉ đạo từ địa phương - nếu có với chi phí tự túc.
+                  </p>
+                </div>
+                <label class="d-flex align-items-center fs-3 mt-3">
+                  <input type="checkbox" class="me-3" v-model="condition" />
+                  Tôi đồng ý với các điều kiện trên
+                </label>
               </div>
             </div>
           </div>
@@ -500,6 +743,55 @@ export default {
         touristDate: "",
       },
       isValid_tourist: false,
+      tourPayment: false,
+      payments: [
+        {
+          href: "#collapse0",
+          name: "Tiền mặt",
+          content:
+            "Quý khách vui lòng thanh toán tại bất kỳ văn phòng Vietravel trên toàn quốc và các chi nhánh tại nước ngoài. Xem chi tiết.",
+        },
+        {
+          href: "#collapse1",
+          name: "Chuyển khoản",
+          content:
+            "Quý khách sau khi thực hiện việc chuyển khoản vui lòng gửi email đến contactcenter@vietravel.com hoặc gọi tổng đài 19001839 để được xác nhận từ công ty chúng tôi. Tên Tài Khoản : Công ty CP Du lịch và Tiếp thị GTVT Việt Nam – Vietravel Tên tài khoản viết tắt : VIETRAVEL Số Tài khoản : 111 6977 27979 Ngân hàng : Vietinbank - Chi nhánh 7",
+        },
+        {
+          href: "#collapse2",
+          name: "ATM / Internet Banking",
+          content:
+            "Vietravel chấp nhận thanh toán bằng thẻ ATM qua cổng thanh toán ZaloPay. Hãy đảm bảo Quý khách đang sử dụng thẻ ATM do ngân hàng trong nước phát hành và đã được kích hoạt chức năng thanh toán trực tuyến. Hướng dẫn thanh toán thẻ qua cồng ZaloPay Tại đây",
+        },
+        {
+          href: "#collapse3",
+          name: "Thanh toán bằng ZaloPay",
+          content: "Quý khách vui lòng thanh toán tại mã QR trong App ZaloPay.",
+        },
+        {
+          href: "#collapse4",
+          name: "Thẻ tín dụng",
+          content:
+            "Tất cả giao dịch của Quý khách được xử lý bảo mật theo giao thức SSL tại hệ thống của MasterCard. Vietravel không lưu giữ bất kì thông tin nào về thẻ của quý khách tại hệ thống của Vietravel. Do đó, quý khách có thể hoàn toàn an tâm rằng thông tin thẻ của Quý khách sẽ được bảo đảm an toàn tuyệt đối tại hệ thống của MasterCard và Ngân hàng Ngoại Thương Việt Nam (Vietcombank). Hiện tại hệ thống www.travel.com.vn chấp nhận cho Quý khách thanh toán bằng một trong các loại thẻ sau: VISA (Credit hoặc Debit), MasterCard (Credit), Diners Clup International (Credit), JCB (Credit) và American Express (Credit) của bất kỳ ngân hàng nào.",
+        },
+        {
+          href: "#collapse5",
+          name: "Thanh toán VNPAY",
+          content:
+            "Đây là cổng thanh toán cho phép Quý khách thanh toán từ tài khoản ngân hàng thông qua hình thức quét mã QR trên tính năng QR Pay trong ứng dụng Mobile Banking của các Ngân hàng. Sau khi Thông tin đặt tour của Quý khách được xác nhận, hệ thống sẽ hiển thị mã QR để Quý khách dùng thiết bị di động quét mã thanh toán.",
+        },
+        { href: "#collapse6", name: "Thanh toán bằng Momo", content: "" },
+        { href: "#collapse7", name: "Thanh toán bằng ShopeePay", content: "" },
+        {
+          href: "#collapse8",
+          name: "Thanh toán bằng MBbank",
+          content:
+            "Quý khách vui lòng thanh toán tại mã QR trong App MB Banking.",
+        },
+      ],
+      SelectedPayment: null,
+      condition: false,
+      isValid_payment: false,
     };
   },
   mounted() {
@@ -508,6 +800,7 @@ export default {
       tourtype: this.tour.tourType,
     });
     this.customers[0] = this.FilterTristType_price;
+    this.SelectedPayment = this.payments[0].name;
   },
   computed: {
     ...mapState([
@@ -517,11 +810,16 @@ export default {
       "infoContact",
       "Tourist",
       "TourType",
+      "Booking",
+      "Tourist_TouristServices",
     ]),
     totaltouristPrice() {
       let sum = 0;
       this.customers.forEach((customer) => {
-        sum += customer.servicesPrice.reduce((acc, val) => acc + val, 0);
+        var price = customer.servicesPrice;
+        for (const cus of price) {
+          sum += cus.price;
+        }
       });
       return sum;
     },
@@ -605,8 +903,12 @@ export default {
     ...mapActions([
       "setInfoContact",
       "setTourist",
+      "setBooking",
+      "setTourist_TouristServices",
       "PlaceInfoContact",
       "PlaceTourist",
+      "PlaceBooking",
+      "PlaceTourist_TouristServices",
     ]),
     ChangeCustomer(key, type) {
       switch (key) {
@@ -616,6 +918,7 @@ export default {
               // eslint-disable-next-line no-case-declarations, vue/no-side-effects-in-computed-properties
               const newCustomer = {
                 TypeName: value.touristTypeName,
+                touristID: this.Tourist.touristID++,
                 touristType: value.typeID,
                 touristName: "",
                 touristSex: "",
@@ -657,65 +960,84 @@ export default {
       this.validate_infoContact();
       this.validate_Tourist();
       if (this.isValid_infoContact && this.isValid_tourist) {
-        // Gọi action để cập nhật thông tin liên hệ trong Vuex store
-        await this.setInfoContact({
-          TourID: this.$route.query.tourID,
-          ContactName: this.infoContact.ContactName,
-          ContactEmail: this.infoContact.ContactEmail,
-          ContactPhone: this.infoContact.ContactPhone,
-          ContactAddress: this.infoContact.ContactAddress,
-          ContactNote: this.infoContact.ContactNote,
-        }).then(() => {
-          this.PlaceInfoContact()
-            .then((response) => {
-              console.log(response);
-              // Xử lý phản hồi từ API sau khi đặt hàng thành công
-            })
-            .catch((error) => {
-              console.error(error);
-              // Xử lý lỗi nếu có
-            });
-        });
-
-        for (const custum of this.customers) {
-          await this.setTourist({
-            touristType: custum.touristType,
-            touristName: custum.touristName,
-            touristSex: custum.touristSex,
-            touristDate: custum.touristDate,
-            touristPrice: custum.touristPrice,
-            servicesPrice: this.EachtouristPrice(custum.servicesPrice),
-          }).then(() => {
-            this.PlaceTourist()
-              .then((response) => {
-                console.log(response);
-                // Xử lý phản hồi từ API sau khi đặt hàng thành công
-              })
-              .catch((error) => {
-                console.error(error);
-                // Xử lý lỗi nếu có
+        this.tourPayment = true;
+        if (this.isValid_payment != this.condition) {
+          this.CheckedPayment();
+          if (this.isValid_payment) {
+            try {
+              // Gọi action để cập nhật thông tin liên hệ trong Vuex store
+              await this.setInfoContact({
+                contactID: this.infoContact.contactID,
+                TourID: this.$route.query.tourID,
+                ContactName: this.infoContact.ContactName,
+                ContactEmail: this.infoContact.ContactEmail,
+                ContactPhone: this.infoContact.ContactPhone,
+                ContactAddress: this.infoContact.ContactAddress,
+                ContactNote: this.infoContact.ContactNote,
               });
-          });
+              // await this.PlaceInfoContact();
+
+              await this.setBooking({
+                tourID: this.$route.query.tourID,
+                infoContactID: this.infoContact.contactID,
+                userID: 5,
+                extraPrice: this.totaltouristPrice,
+                currentPrice: this.tour.promotionPrice,
+                totalPrice: this.tour.promotionPrice + this.totaltouristPrice,
+                payment: this.SelectedPayment,
+                status: "Chưa thanh toán",
+                tourCheckinDays: this.tour.tourCheckinDays,
+                tourCheckoutDays: this.tour.tourCheckoutDays,
+                departure: this.tour.departure,
+                destination: this.tour.destination,
+                bookingName: this.tour.tourName,
+                bookingDay: new Date().toISOString(),
+              });
+
+              // await this.PlaceBooking();
+
+              for (const custum of this.customers) {
+                // for (const cus of custum.servicesPrice) {
+                //   console.log(cus.price);
+                // }
+                await this.setTourist({
+                  touristID: custum.touristID,
+                  touristType: custum.touristType,
+                  touristName: custum.touristName,
+                  touristSex: custum.touristSex,
+                  touristDate: custum.touristDate,
+                  touristPrice: custum.touristPrice,
+                  servicesPrice: this.EachtouristPrice(
+                    custum.servicesPrice
+                  ),
+                });
+                await this.PlaceTourist();
+
+                await this.setTourist_TouristServices({
+                  servicesID: this.Tourist_TouristServices.servicesID,
+                  touristID: this.Tourist.touristID,
+                  tServicesID: this.EachtouristID(custum.servicesPrice),
+                });
+
+                console.log(this.Tourist_TouristServices);
+                // await this.PlaceTourist_TouristServices();
+              }
+            } catch (error) {
+              console.error(error);
+            }
+          }
         }
 
-        //-----------dang test--------------
-        // this.$router.push({
-        //   name: "TourPayment",
-        //   params: {
-        //     tourID: this.$route.query.tourID,
-        //   },
-        //   props: {
-        //     infoContact: this.infoContact,
-        //     customers: this.customers,
-        //   },
-        // });
+        //--------------------
       }
     },
     EachtouristPrice(array) {
-      return array.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
-        0
-      );
+      return array.reduce((accumulator, item) => {
+        return accumulator + item.price;
+      }, 0);
+    },
+    EachtouristID(array) {
+      return array.map(item => item.id);
     },
     validate_infoContact() {
       if (!this.infoContact.ContactEmail) {
@@ -781,6 +1103,11 @@ export default {
           this.error_tourist.touristDate = "";
           this.isValid_tourist = true;
         }
+      }
+    },
+    CheckedPayment() {
+      if (this.condition) {
+        this.isValid_payment = true;
       }
     },
   },
