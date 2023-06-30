@@ -1,6 +1,7 @@
 <template lang="">
   <div class="TourOrder">
     <div class="container-fluid">
+      
       <div class="TourOrder__card">
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
@@ -975,7 +976,7 @@ export default {
                 ContactAddress: this.infoContact.ContactAddress,
                 ContactNote: this.infoContact.ContactNote,
               });
-              // await this.PlaceInfoContact();
+              await this.PlaceInfoContact();
 
               await this.setBooking({
                 tourID: this.$route.query.tourID,
@@ -994,12 +995,9 @@ export default {
                 bookingDay: new Date().toISOString(),
               });
 
-              // await this.PlaceBooking();
+              await this.PlaceBooking();
 
               for (const custum of this.customers) {
-                // for (const cus of custum.servicesPrice) {
-                //   console.log(cus.price);
-                // }
                 await this.setTourist({
                   touristID: custum.touristID,
                   touristType: custum.touristType,
@@ -1007,20 +1005,19 @@ export default {
                   touristSex: custum.touristSex,
                   touristDate: custum.touristDate,
                   touristPrice: custum.touristPrice,
-                  servicesPrice: this.EachtouristPrice(
-                    custum.servicesPrice
-                  ),
+                  servicesPrice: this.EachtouristPrice(custum.servicesPrice),
                 });
                 await this.PlaceTourist();
 
-                await this.setTourist_TouristServices({
-                  servicesID: this.Tourist_TouristServices.servicesID,
-                  touristID: this.Tourist.touristID,
-                  tServicesID: this.EachtouristID(custum.servicesPrice),
-                });
+                for (const cus of custum.servicesPrice) {
+                  await this.setTourist_TouristServices({
+                    servicesID: this.Tourist_TouristServices.servicesID,
+                    touristID: this.Tourist.touristID,
+                    tServicesID: cus.id,
+                  });
+                  await this.PlaceTourist_TouristServices();
+                }
 
-                console.log(this.Tourist_TouristServices);
-                // await this.PlaceTourist_TouristServices();
               }
             } catch (error) {
               console.error(error);
@@ -1035,9 +1032,6 @@ export default {
       return array.reduce((accumulator, item) => {
         return accumulator + item.price;
       }, 0);
-    },
-    EachtouristID(array) {
-      return array.map(item => item.id);
     },
     validate_infoContact() {
       if (!this.infoContact.ContactEmail) {
