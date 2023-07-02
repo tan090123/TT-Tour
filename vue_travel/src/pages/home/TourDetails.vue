@@ -90,7 +90,7 @@
         <div class="row">
           <div class="col-12 col-md-12 col-lg-7 left">
             <img
-              :src="'/images/card/' + tour.tourImage"
+              :src="tour.tourImage"
               style="object-fit: cover; width: 100%"
               alt=""
             />

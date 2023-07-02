@@ -31,9 +31,9 @@ namespace BookingTravel.Controllers
                 return BadRequest("Chưa upload ảnh.");
             }
 
-            var fileName = Path.GetFileName(TourImage.FileName);
-            //var fileName = Guid.NewGuid().ToString() + Path.GetExtension(TourImage.FileName);
-            var filePath = Path.Combine(_hostEnvironment.WebRootPath, fileName);
+            //var fileName = Path.GetFileName(TourImage.FileName);
+            var fileName = Guid.NewGuid().ToString().Substring(0, 8) + Path.GetExtension(TourImage.FileName);
+            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images" , fileName);
 
             // Kiểm tra nếu tệp tin đã tồn tại
             if (System.IO.File.Exists(filePath))
@@ -48,6 +48,19 @@ namespace BookingTravel.Controllers
             }
 
             return Ok(fileName);
+        }
+
+        [HttpGet("{fileName}")]
+        public IActionResult GetImage(string fileName)
+        {
+            var filePath = Path.Combine(_hostEnvironment.WebRootPath, "images", fileName);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "imagesz/jpeg");
         }
     }
 }

@@ -3,14 +3,14 @@
         <div class="container-fluid">
             <h2 class="table-h2 text-center">Danh sách người dùng</h2>
             <div class="table-container">
-                <table class="table-container">
+                <table class="table-container" style="width: 100rem;">
                     <thead>
                         <tr>
                             <th style="width: 5px;">ID</th>
                             <th style="width: 5px;">Email</th>
                             <th style="width: 5px;">Họ tên</th>
                             <th style="width: 5px;">Số điện thoại</th>
-                            <th style="width: 5px;">Role</th>
+                            <th style="width: 20px;">Role</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,7 +19,7 @@
                             <td>{{ item.email }}</td>
                             <td>{{ item.fullname }}</td>
                             <td>{{ item.phoneNumber }}</td>
-                            <td>{{ item.roleID }}</td>
+                            <td>{{ getRoleTypeName(item.roleID) }}</td>
                             <td style="padding: 0 10px; width: 50px;">
                                 <button class="btn btn-success" style="padding: 10px 15px; margin-right: 5px;"
                                     type="button" @click="editItem(item.userID)" data-toggle="tooltip"
@@ -37,11 +37,12 @@
                 </table>
             </div>
             <ThePagination :current-page="currentPage" :total-pages="totalPages" @page-change="changePage"/>
+            
         </div>
     </div>
 </template>
 <script>
-import { ThePagination } from "@/components/ThePagination.vue";
+import  ThePagination from "@/components/ThePagination.vue";
 export default {
     name: 'User-Admin',
     components: {
@@ -50,7 +51,8 @@ export default {
     data() {
         return {
             users: [],
-            perPage: 4,
+            roles: [],
+            perPage: 5,
             currentPage: 1,
         }
     },
@@ -66,6 +68,7 @@ export default {
     },
     mounted() {
         this.getUsers();
+        this.getRole();
     },
     methods: {
         changePage(page) {
@@ -89,9 +92,6 @@ export default {
                 .then(response => {
                     // Xử lý kết quả thành công
                     console.log(response.data);
-
-                    // Sau khi xóa thành công, cập nhật lại danh sách hiển thị
-                    // this.items = this.items.filter(item => item.tourID !== itemId);
                     window.location.href = '/admin/user';
                 })
                 .catch(error => {
@@ -99,13 +99,26 @@ export default {
                     console.error(error);
                 });
         },
-
-        editItem(userID) {
-            // Lưu thông tin tour vào localStorage
-            const userData = this.displayedItems.find(item => item.userID === userID);
-            localStorage.setItem('editTourData', JSON.stringify(userData));
-
-        }
+        getRole() {
+            // eslint-disable-next-line
+            axios.get('/api/Role')
+                .then((response) => {
+                    // handle success
+                    this.roles = response.data;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+        // Set name tour type
+        getRoleTypeName(roleID) {
+            const roleTypes = this.roles.find(roles => roles.roleID === roleID);
+            return roleTypes ? roleTypes.roleName : '';
+        },
+        Confirm(message) {
+            return confirm(message);
+        },
     },
 }
 </script>

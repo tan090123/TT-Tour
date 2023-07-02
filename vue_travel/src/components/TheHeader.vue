@@ -77,29 +77,50 @@
                 <!-- <a class="nav-link" href="/contact">Liên hệ</a> -->
             </li>
             </ul>
-        </div>
 
-        <ul class="navbar-nav ms-auto nav-right">
-            <form class="d-flex" v-if="!userEmail">
-                <input class="form-control" type="text" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
-                <button class="form-btn btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-            </form>
-            <li class="nav-item">
-                <router-link class="nav-link" :to="{ name: 'login_component' }">
-                    <i class="fa-regular fa-user" @click="showLogin = true" v-if="!userEmail" ></i>
-                </router-link>
+            <ul class="navbar-nav ms-auto mt-2 nav-right">
+                <form class="d-flex" v-if="!userEmail">
+                    <input class="form-control" type="text" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
+                    <button class="form-btn btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <li class="nav-item">
+                    <router-link class="nav-link" :to="{ name: 'login_component' }">
+                        <i class="fa-regular fa-user" @click="showLogin = true" v-if="!userEmail"></i>
+                    </router-link>
+                </li>
+                <li class="nav-item dropdown">
+                    <a v-if="userEmail" class="user nav-link dropdown-toggle" id="navlink-van-chuyen" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Xin chào <span class="fw-bold fs-4">{{ userEmail }}</span></a>
+                <ul class="dropdown-menu mt-3 user-link" aria-labelledby="navlink-van-chuyen">
+                    <li><a class="dropdown-item" href="#" target="_blank" rel="nofollow noreferrer">Thông tin cá nhân</a></li>
+                    <li><router-link :to="{ name: 'password' }" class="dropdown-item" href="#">Thay đổi mật khẩu</router-link>
+                    </li>
+                    <li>
+                        <p v-if="userEmail" class="logout nav-link" @click="logout">
+                            Đăng xuất
+                    </p>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item">
-                <span v-if="userEmail"  class="user-email nav-link">{{ userEmail }}</span>
-            </li>
-            <li  class="nav-item">
-                <p v-if="userEmail" class="logout nav-link" @click="logout">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </p>
-            </li>
-        </ul>
+                <!-- <li class="nav-item">
+                    <span v-if="userEmail" class="user nav-link">{{ userEmail }}</span>
+
+                    <ul class="user-link">
+                        <li><a href="#">Thông tin cá nhân</a></li>
+                        <li><a href="#">Thay đổi mật khẩu</a></li>
+                        <li><a href="#">Đăng xuất</a></li>
+                    </ul>
+
+                </li> -->
+                <!-- <li class="nav-item">
+                    <p v-if="userEmail" class="logout nav-link" @click="logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    </p>
+                </li> -->
+            </ul>
+        </div>
         </div>
     </nav>
 </template>
@@ -112,18 +133,18 @@ export default {
             userEmail: '',
         }
     },
+    methods: {
+        logout() {
+            // Xóa email từ localStorage hoặc sessionStorage
+            localStorage.removeItem('userEmail');
+            // Điều hướng đến trang đăng nhập hoặc trang chủ
+            window.location.href = '/login';
+        },
+    },
     mounted() {
-    // Lấy email từ localStorage hoặc sessionStorage
-    this.userEmail = localStorage.getItem('userEmail');
-  },
-  methods: {
-    logout() {
-      // Xóa email từ localStorage hoặc sessionStorage
-      localStorage.removeItem('userEmail');
-      // Điều hướng đến trang đăng nhập hoặc trang chủ
-      window.location.href = '/login';
-    }
-    }
+        // Lấy email từ localStorage hoặc sessionStorage
+        this.userEmail = localStorage.getItem('userEmail');
+    },
 }
 </script>
 

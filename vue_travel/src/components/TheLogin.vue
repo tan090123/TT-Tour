@@ -172,10 +172,13 @@ export default {
                     console.log(user);
                     const roleID = user.roleID;
                     const Fullname = user.fullname;
+                    const userID = user.userID;
                     if (roleID === 4) {
+                      localStorage.setItem("adminID", userID);
                       localStorage.setItem("adminEmail", Fullname);
                       window.location.href = "/admin";
                     } else if (roleID === 3) {
+                      localStorage.setItem("userID", userID);
                       localStorage.setItem("userEmail", Fullname);
                       window.location.href = "/";
                       this.checkLoggedIn();
