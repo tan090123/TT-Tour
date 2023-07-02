@@ -55,6 +55,12 @@ const home = [
         meta: { title: "Danh sách các Tour - Vietravel" },
       },
       {
+        path: "/user/password",
+        name: "password",
+        component: () => import("@/components/AppPassword.vue"),
+        meta: { title: "Thay đổi mật khẩu - Vietravel" },
+      },
+      {
         path: "/search/:departure/:destination/:datetime/:numberDay",
         name: "tours_search",
         component: () => import("@/pages/home/TourSearch.vue"),

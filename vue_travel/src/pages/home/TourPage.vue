@@ -17,7 +17,7 @@
               :to="{ name: 'details-id', params: { id: card.tourID } }"
             >
               <img
-                :src="require(`@/../public/images/card/${card.tourImage}`)"
+                :src="card.tourImage"
                 class="card-img-top"
                 width="100%"
                 :alt="card.tourName"

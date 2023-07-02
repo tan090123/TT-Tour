@@ -181,7 +181,7 @@
                   >
                     <img
                       :src="
-                        require(`@/../public/images/card/${product.tourImage}`)
+                        product.tourImage
                       "
                       class="card-img-top"
                       width="100%"

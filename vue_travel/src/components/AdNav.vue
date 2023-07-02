@@ -17,9 +17,8 @@
 					<li>
 						<router-link :to="{ name: 'tour-admin' }">Danh sách Tour</router-link>
 					</li>
-					<li><a href="#">Badges</a></li>
-					<li><a href="#">Breadcrumbs</a></li>
-					<li><a href="#">Button</a></li>
+					<li><a href="#">Chi tiết tour</a></li>
+					<li><a href="#">Hình ảnh tour</a></li>
 				</ul>
 			</li>
 			<li>

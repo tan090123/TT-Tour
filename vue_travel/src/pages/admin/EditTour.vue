@@ -2,7 +2,7 @@
     <div class="create-tour">
         <div class="container-fluid">
             <h2 class="tour-title text-center">Sửa danh sách Tour</h2>
-            <form @submit.prevent="onSubmit">
+            <form @submit.prevent="onSubmit" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="code">Code:</label>
                     <input type="text" id="code" name="tourCode" v-model="tourCode">
@@ -56,6 +56,14 @@
                     <input type="number" id="availableSit" name="tourAvailableSit" v-model="tourAvailableSit">
                 </div>
                 <div class="form-group">
+                    <label for="tour_NumberDays">NumberDays:</label>
+                    <input type="number" id="tour_NumberDays" name="tour_NumberDays" v-model="tour_NumberDays">
+                </div>
+                <div class="form-group">
+                    <label for="tour_AvalablePeople">AvailablePeople:</label>
+                    <input type="number" id="tour_AvalablePeople" name="tour_AvalablePeople" v-model="tour_AvalablePeople">
+                </div>
+                <div class="form-group">
                     <label for="type">Type:</label>
                     <select id="type" v-model="tourType">
                         <option v-for="tintype in types" :value="tintype.typeID" :key="tintype.typeID">{{
@@ -69,98 +77,109 @@
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                tourCode: '',
-                tourName: '',
-                departure: '',
-                destination: '',
-                description: '',
-                price: '',
-                promotionPrice: '',
-                discountTour: '',
-                tourCheckinDays: '',
-                tourCheckoutDays: '',
-                tourTotalSit: '',
-                tourAvailableSit: '',
-                tourType: '',
-                types: []
-            }
+export default {
+    data() {
+        return {
+            tourCode: '',
+            tourName: '',
+            tourImage: '',
+            departure: '',
+            destination: '',
+            description: '',
+            price: '',
+            promotionPrice: '',
+            discountTour: '',
+            tourCheckinDays: '',
+            tourCheckoutDays: '',
+            tourTotalSit: '',
+            tourAvailableSit: '',
+            tour_NumberDays: '',
+            tour_AvalablePeople: '',
+            tourType: '',
+            types: [],
+            file: null,
+        }
+    },
+    mounted() {
+        const tourID = this.$route.query.id;
+        this.fetchDataTour(tourID);
+        this.fetchDataType();
+    },
+    methods: {
+        fetchDataTour(tourID) {
+            // eslint-disable-next-line
+            axios.get(`/api/Tour/${tourID}`)
+                .then((response) => {
+                    // handle success
+                    const tourData = response.data;
+                    this.tourCode = tourData.tourCode;
+                    this.tourName = tourData.tourName;
+                    this.tourImage = tourData.tourImage;
+                    this.departure = tourData.departure;
+                    this.destination = tourData.destination;
+                    this.description = tourData.description;
+                    this.price = tourData.price;
+                    this.promotionPrice = tourData.promotionPrice;
+                    this.discountTour = tourData.discountTour;
+                    this.tourCheckinDays = tourData.tourCheckinDays;
+                    this.tourCheckoutDays = tourData.tourCheckoutDays;
+                    this.tourTotalSit = tourData.tourTotalSit;
+                    this.tourAvailableSit = tourData.tourAvailableSit;
+                    this.tour_NumberDays = tourData.tour_NumberDays;
+                    this.tour_AvalablePeople = tourData.tour_AvalablePeople;
+                    this.tourType = tourData.tourType;
+
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
         },
-        mounted() {
+
+        fetchDataType() {
+            // eslint-disable-next-line
+            axios.get('/api/TourType')
+                .then((response) => {
+                    // handle success
+                    this.types = response.data;
+                })
+                .catch((error) => {
+                    // handle error
+                    console.log(error);
+                });
+        },
+        onSubmit() {
             const tourID = this.$route.query.id;
-            this.fetchDataTour(tourID);
-            this.fetchDataType();
+            this.onEditTour(tourID);
         },
-        methods: {
-            fetchDataTour(tourID) {
-                // eslint-disable-next-line
-                axios.get(`/api/Tour/${tourID}`)
-                    .then((response) => {
-                        // handle success
-                        const tourData = response.data;
-                        this.tourCode = tourData.tourCode;
-                        this.tourName = tourData.tourName;
-                        this.departure = tourData.departure;
-                        this.destination = tourData.destination;
-                        this.description = tourData.description;
-                        this.price = tourData.price;
-                        this.promotionPrice = tourData.promotionPrice;
-                        this.discountTour = tourData.discountTour;
-                        this.tourCheckinDays = tourData.tourCheckinDays;
-                        this.tourCheckoutDays = tourData.tourCheckoutDays;
-                        this.tourTotalSit = tourData.tourTotalSit;
-                        this.tourAvailableSit = tourData.tourAvailableSit;
-                        this.tourType = tourData.tourType;
+        handleFileChange(event) {
+            this.file = event.target.files[0];
+        },
 
-                    })
-                    .catch((error) => {
-                        // handle error
-                        console.log(error);
-                    });
+        onEditTour(tourID) {
+            // eslint-disable-next-line
+            axios.put(`/api/Tour/${tourID}`, {
+                tourCode: this.tourCode,
+                tourName: this.tourName,
+                departure: this.departure,
+                destination: this.destination,
+                description: this.description,
+                price: this.price,
+                promotionPrice: this.promotionPrice,
+                discountTour: this.discountTour,
+                tourCheckinDays: this.tourCheckinDays,
+                tourCheckoutDays: this.tourCheckoutDays,
+                tourTotalSit: this.tourTotalSit,
+                tourAvailableSit: this.tourAvailableSit,
+                tour_NumberDays: this.tour_NumberDays,
+                tour_AvalablePeople: this.tour_AvalablePeople,
+                tourType: this.tourType,
+                tourimage: this.file
             },
-
-            fetchDataType() {
-                // eslint-disable-next-line
-                axios.get('/api/TourType')
-                    .then((response) => {
-                        // handle success
-                        this.types = response.data;
-                    })
-                    .catch((error) => {
-                        // handle error
-                        console.log(error);
-                    });
-            },
-            onSubmit() {
-                const tourID = this.$route.query.id;
-                this.onEditTour(tourID);
-            },
-            handleFileChange(event) {
-                this.file = event.target.files[0];
-            },
-
-            onEditTour(tourID) {
-                const fileInput = document.getElementById('upload');
-                const file = fileInput.files[0];
-                const fileName = file.name; // Lấy tên file
-                // eslint-disable-next-line
-                axios.put(`/api/Tour/${tourID}`, {
-                    tourCode: this.tourCode,
-                    tourName: this.tourName,
-                    departure: this.departure,
-                    destination: this.destination,
-                    description: this.description,
-                    price: this.price,
-                    promotionPrice: this.promotionPrice,
-                    discountTour: this.discountTour,
-                    tourCheckinDays: this.tourCheckinDays,
-                    tourCheckoutDays: this.tourCheckoutDays,
-                    tourTotalSit: this.tourTotalSit,
-                    tourAvailableSit: this.tourAvailableSit,
-                    tourType: this.tourType,
-                    tourimage: fileName
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 }).then(response => {
                     // Xử lý kết quả thành công
                     console.table(response.data);
@@ -170,21 +189,15 @@
                         text: 'Bạn đã sửa thành công!',
                         icon: 'success',
                         confirmButtonText: 'OK',
-                        // customClass: {
-                        //     container: 'custom-alert-container',
-                        //     popup: 'custom-alert-popup',
-                        //     title: 'custom-alert-title',
-                        //     content: 'custom-alert-content',
-                        //     confirmButton: 'custom-alert-confirm-button'
                         // }
                     }).then(() => {
                         window.location.href = '/admin/tour';
                     })
                 })
-                    .catch(error => {
-                        // Xử lý lỗi
-                        console.error(error);
-                        // eslint-disable-next-line no-undef
+                .catch(error => {
+                    // Xử lý lỗi
+                    console.error(error);
+                    // eslint-disable-next-line no-undef
                     Swal.fire({
                         title: 'Thất bại',
                         text: 'Bạn đã sửa thất bại!!!',
@@ -193,13 +206,13 @@
                     }).then(() => {
                         window.location.href = '/admin/tour';
                     })
-                    });
-            }
+                });
         }
     }
+}
 </script>
 <style lang="scss">
-    /* .custom-alert-popup {
+/* .custom-alert-popup {
         width: 500px;
         height: 280px;
     }
@@ -216,43 +229,42 @@
         font-size: 20px;
     } */
 
-    .create-tour {
-        margin-bottom: 3rem;
-    }
+.create-tour {
+    margin-bottom: 3rem;
+}
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+.form-group {
+    margin-bottom: 15px;
+}
 
-    .tour-title {
-        font-size: 3rem;
-        font-weight: 600;
-        padding: 2rem 0;
-    }
+.tour-title {
+    font-size: 3rem;
+    font-weight: 600;
+    padding: 2rem 0;
+}
 
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 1rem;
-    }
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-    form {
-        margin: 0 5rem;
-    }
+form {
+    margin: 0 5rem;
+}
 
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    select {
-        width: 100%;
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-    button[type="submit"] {
-        padding: 10px 20px;
-        background-color: #4caf;
-    }
-
+button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4caf;
+}
 </style>

@@ -8,7 +8,7 @@
                 </router-link>
             </p>
             <div class="table-container">
-                <table class="table-container" style="width: 220rem;">
+                <table class="table-container" style="width: 240rem;">
                     <thead>
                         <tr>
                             <th style="width: 12px;">ID</th>
@@ -35,8 +35,8 @@
                             <td>{{ item.tourID }}</td>
                             <td>{{ item.tourCode }}</td>
                             <td>{{ item.tourName }}</td>
-                            <td><img style="width: 120px;" :src="require(`@/../public/images/card/${item.tourImage}`)"
-                                    alt="Tour 1"></td>
+                            <td><img style="width: 150px; height: 120px" :src="item.tourImage"
+                                    :alt="item.destination"></td>
                             <td>{{ item.departure }}</td>
                             <td>{{ item.destination }}</td>
                             <td class="td-desc">{{ item.description }}</td>
@@ -74,6 +74,7 @@
 </template>
 <script>
 import Nagination from '@/components/ThePagination.vue';
+import { mapState } from "vuex";
 export default {
     name: 'tour-admin',
     components: {
@@ -92,36 +93,24 @@ export default {
         };
     },
     computed: {
+        ...mapState(["tours"]),
         totalPages() {
-            return Math.ceil(this.items.length / this.perPage);
+            return Math.ceil(this.tours.length / this.perPage);
         },
         displayedItems() {
             const start = (this.currentPage - 1) * this.perPage;
             const end = start + this.perPage;
-            return this.items.slice(start, end);
+            return this.tours.slice(start, end);
         },
     },
 
     mounted() {
-        this.getAllItem();
         this.getType();
 
     },
     methods: {
         changePage(page) {
             this.currentPage = page;
-        },
-        getAllItem() {
-            // eslint-disable-next-line
-            axios.get('/api/Tour')
-                .then((response) => {
-                    // handle success
-                    this.items = response.data;
-                })
-                .catch((error) => {
-                    // handle error
-                    console.log(error);
-                });
         },
         getType() {
             // eslint-disable-next-line

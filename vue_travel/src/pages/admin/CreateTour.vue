@@ -146,15 +146,27 @@
         // eslint-disable-next-line
         axios.post('/api/Tour', formData)
           .then(response => {
-            // Xử lý kết quả thành công
-            console.table(response.data);
+            const result = response.data.result;
+            if(result) {
+              // Xử lý kết quả thành công
+            // console.table(response.data);
             // eslint-disable-next-line no-undef
             Swal.fire({
               // title: 'Thông báo thành công!',
               text: 'Bạn đã tạo thành công thông báo xịn xò!',
               icon: 'success',
               confirmButtonText: 'OK'
-            });
+            })
+            } else {
+              // eslint-disable-next-line no-undef
+            Swal.fire({
+              title: 'Bạn đã tạo thất bại ',
+              text: 'Bạn đã tạo thất bại do tên ảnh hoặc vài lý do khác !! ',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            })
+            }
+          }).then(() => {
             // Chuyển hướng đến trang danh sách tour
             window.location.href = '/admin/tour';
           })

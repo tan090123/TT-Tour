@@ -6,7 +6,7 @@
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
             <img
-              :src="'/images/card/' + tour.tourImage"
+              :src="tour.tourImage"
               alt="{{ tour.tourName }}"
             />
             <!-- <img

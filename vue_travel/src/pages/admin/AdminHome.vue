@@ -2,7 +2,7 @@
    <!-- MAIN -->
 		<main>
 			<h1 class="title">Dashboard</h1>
-			<ul class="breadcrumbs">
+			<!-- <ul class="breadcrumbs">
 				<li><a href="#">Home</a></li>
 				<li class="divider">/</li>
 				<li><a href="#" class="active">Dashboard</a></li>
@@ -128,7 +128,7 @@
 						</div>
 					</form>
 				</div>
-			</div>
+			</div> -->
 		</main>
 		<!-- MAIN -->
 </template>

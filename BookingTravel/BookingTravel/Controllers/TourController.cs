@@ -128,7 +128,7 @@ namespace BookingTravel.Controllers
 
         // PUT: api/ToursFromDb/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<UpdateTourResultModel>> UpdateTour([FromRoute] int id, [FromBody] TourModel updateTour)
+        public async Task<ActionResult<UpdateTourResultModel>> UpdateTour([FromRoute] int id, [FromForm] TourAddModel updateTour)
         {
             var response = new UpdateTourResultModel();
 
@@ -138,34 +138,47 @@ namespace BookingTravel.Controllers
             {
                 response.Result = false;
                 response.ErrorMessage = "Không có Id nào là #" + id;
+                return NotFound(response);
             }
-            else
+
+            if (updateTour.TourImage != null && updateTour.TourImage.Length > 0)
             {
-                response.Result = true;
+                var imageResult = await _uploadController.UploadImage(updateTour.TourImage);
 
-                tour.TourName = updateTour.TourName;
-                tour.TourCheckinDays = updateTour.TourCheckinDays;
-                tour.TourCheckoutDays = updateTour.TourCheckoutDays;
-                tour.TourImage = updateTour.TourImage;
-                tour.Departure = updateTour.Departure;
-                tour.Description = updateTour.Description;
-                tour.Destination = updateTour.Destination;
-                tour.DiscountTour = updateTour.DiscountTour;
-                tour.TourCode = updateTour.TourCode;
-                tour.TourTotalSit = updateTour.TourTotalSit;
-                tour.TourType = updateTour.TourType;
-                tour.TourAvailableSit = updateTour.TourAvailableSit;
-                tour.PromotionPrice = updateTour.PromotionPrice;
-                tour.tour_NumberDays = updateTour.tour_NumberDays;
-                tour.tour_AvalablePeople=updateTour.tour_AvalablePeople;
-
-                _context.Update(tour);
-                await _context.SaveChangesAsync();
-               
+                if (imageResult is OkObjectResult result)
+                {
+                    var fileName = result.Value.ToString();
+                    tour.TourImage = fileName;
+                }
+                else
+                {
+                    return BadRequest("Error uploading image.");
+                }
             }
+
+            response.Result = true;
+
+            tour.TourName = updateTour.TourName;
+            tour.TourCheckinDays = updateTour.TourCheckinDays;
+            tour.TourCheckoutDays = updateTour.TourCheckoutDays;
+            tour.Departure = updateTour.Departure;
+            tour.Description = updateTour.Description;
+            tour.Destination = updateTour.Destination;
+            tour.DiscountTour = updateTour.DiscountTour;
+            tour.TourCode = updateTour.TourCode;
+            tour.TourTotalSit = updateTour.TourTotalSit;
+            tour.TourType = updateTour.TourType;
+            tour.TourAvailableSit = updateTour.TourAvailableSit;
+            tour.PromotionPrice = updateTour.PromotionPrice;
+            tour.tour_NumberDays = updateTour.tour_NumberDays;
+            tour.tour_AvalablePeople = updateTour.tour_AvalablePeople;
+
+            _context.Update(tour);
+            await _context.SaveChangesAsync();
 
             return Ok(tour);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<UpdateTourResultModel>> DeleteTour([FromRoute] int id)

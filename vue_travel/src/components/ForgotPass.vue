@@ -18,7 +18,7 @@
         <input type="submit" value="Gửi yêu cầu" />
       </div>
     </form>
-  </div>
+  </div>  
 </template>
 <script>
 export default {

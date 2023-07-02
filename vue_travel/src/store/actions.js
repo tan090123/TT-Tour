@@ -123,7 +123,11 @@ export default {
       .get(`/api/Tour/`)
       .then((response) => {
         // handle success
-        commit("setTours", response.data);
+        const tours = response.data;
+        tours.forEach((tour) => {
+          tour.tourImage = `http://localhost:8080/api/Upload/${tour.tourImage}`;
+        });
+        commit("setTours", tours);
       })
       .catch((error) => {
         // handle error
