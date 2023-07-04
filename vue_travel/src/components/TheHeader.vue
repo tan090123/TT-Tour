@@ -137,6 +137,7 @@ export default {
         logout() {
             // Xóa email từ localStorage hoặc sessionStorage
             localStorage.removeItem('userEmail');
+            localStorage.removeItem('userID');
             // Điều hướng đến trang đăng nhập hoặc trang chủ
             window.location.href = '/login';
         },

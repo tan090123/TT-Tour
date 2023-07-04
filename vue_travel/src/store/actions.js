@@ -26,19 +26,6 @@ export default {
         console.log(error);
       });
 
-    //---------TourServices------------
-    // eslint-disable-next-line
-    axios
-      .get(`/api/TServices`)
-      .then((response) => {
-        // handle success
-        commit("setTServices", response.data);
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-      });
-
     //---------TourType------------
     // eslint-disable-next-line
     axios
@@ -134,6 +121,72 @@ export default {
         console.log(error);
       });
   },
+  fetchBooking({ commit }, { bookingID, tourID, infoContactID }) {
+    // eslint-disable-next-line
+    axios
+      .get(`/api/Bookings/${bookingID}`)
+      .then((response) => {
+        // handle success
+        commit("SET_Booking", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+
+    //----------Product By ID-----------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/Tour/${tourID}`)
+      .then((response) => {
+        // handle success
+        commit("setTour", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+
+    //----------InfoContact ID-----------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/InfoContact/${infoContactID}`)
+      .then((response) => {
+        // handle success
+        commit("SET_INFO_CONTACT", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+
+    //----------TOurist ID-----------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/Tourist?bookingID=${bookingID}`)
+      .then((response) => {
+        // handle success
+        commit("SET_Tourist", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+
+    //----------TouristType_price-----------
+    // eslint-disable-next-line
+    axios
+      .get(`/api/TouristType_price/id?tourID=${tourID}`)
+      .then((response) => {
+        // handle success
+        commit("setTristType_price", response.data);
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      });
+  },
+
   //------------------------Order-----------------------
 
   //---Info Contact---------
@@ -151,6 +204,9 @@ export default {
   //---------Tourist_TouristServices--------
   setTourist_TouristServices({ commit }, tourist_TouristServices) {
     commit("SET_Tourist_TouristServices", tourist_TouristServices);
+  },
+  setTristType_price({ commit }, newTristType_price) {
+    commit("SET_TristType_price", newTristType_price);
   },
   async PlaceInfoContact({ state, commit }) {
     const InfoContactData = {
@@ -177,6 +233,7 @@ export default {
   async PlaceTourist({ state, commit }) {
     const TouristData = {
       touristID: state.Tourist.touristID,
+      bookingID: state.Tourist.bookingID,
       touristType: state.Tourist.touristType,
       touristName: state.Tourist.touristName,
       touristSex: state.Tourist.touristSex,
@@ -198,6 +255,7 @@ export default {
   },
   async PlaceBooking({ state, commit }) {
     const BookingData = {
+      bookingID: state.Booking.bookingID,
       tourID: state.Booking.tourID,
       infoContactID: state.Booking.infoContactID,
       userID: state.Booking.userID,

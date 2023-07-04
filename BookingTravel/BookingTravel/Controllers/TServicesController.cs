@@ -24,12 +24,12 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TServicesModel> SearchTServices([FromQuery] string? searchName)
+        public List<TServicesModel> SearchTServices([FromQuery] int? servicesPrice)
         {
             var tourFromDBs = _context.TServices.AsNoTracking();
-            if (searchName != null)
+            if (servicesPrice != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.ServicesName.ToLower().Contains(searchName.ToLower()));
+                tourFromDBs = tourFromDBs.Where(x => x.ServicesPrice == servicesPrice);
             }
 
             var services = tourFromDBs.Select(x => new TServicesModel
