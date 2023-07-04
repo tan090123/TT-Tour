@@ -1,14 +1,10 @@
 <template lang="">
   <div class="TourOrder">
     <div class="container-fluid">
-      
       <div class="TourOrder__card">
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
-            <img
-              :src="tour.tourImage"
-              alt="{{ tour.tourName }}"
-            />
+            <img :src="tour.tourImage" alt="{{ tour.tourName }}" />
             <!-- <img
               :src="require(`@/../public/images/card/${tours.tourImage}`)"
               class="card-img-top"
@@ -31,7 +27,7 @@
                 Mã Tour: <span>{{ tour.tourCode }}</span>
               </p>
               <p class="text">
-                Khởi hành: <span>{{ tour.tourCheckinDays }}</span>
+                Khởi hành: <span>{{ tour.tourCheckinDays.slice(0, 10) }}</span>
               </p>
               <p class="text">
                 Thời gian: <span>{{ tour.tour_NumberDays }} ngày</span>
@@ -271,7 +267,7 @@
                         >
                           <option value="">Giới tính</option>
                           <option value="Nam">Nam</option>
-                          <option value="Nu">Nữ</option>
+                          <option value="Nữ">Nữ</option>
                         </select>
                         <p class="text-danger">
                           {{ error_tourist.touristSex }}
@@ -594,11 +590,11 @@
               <div class="group-go my-5">
                 <div class="start">
                   <h4>Bắt đầu chuyến đi</h4>
-                  <p>{{ tour.tourCheckinDays }}</p>
+                  <p>{{ tour.tourCheckinDays.slice(0, 10) }}</p>
                 </div>
                 <div class="end">
                   <h4>Kết thúc chuyến đi</h4>
-                  <p>{{ tour.tourCheckoutDays }}</p>
+                  <p>{{ tour.tourCheckoutDays.slice(0, 10) }}</p>
                 </div>
               </div>
               <div class="group-tourist">
@@ -793,6 +789,7 @@ export default {
       SelectedPayment: null,
       condition: false,
       isValid_payment: false,
+      userID: "",
     };
   },
   mounted() {
@@ -802,6 +799,7 @@ export default {
     });
     this.customers[0] = this.FilterTristType_price;
     this.SelectedPayment = this.payments[0].name;
+    this.userID = localStorage.getItem("userID");
   },
   computed: {
     ...mapState([
@@ -979,9 +977,10 @@ export default {
               await this.PlaceInfoContact();
 
               await this.setBooking({
+                bookingID: this.Booking.bookingID,
                 tourID: this.$route.query.tourID,
                 infoContactID: this.infoContact.contactID,
-                userID: 5,
+                userID: !this.userID ? 21 : this.userID,
                 extraPrice: this.totaltouristPrice,
                 currentPrice: this.tour.promotionPrice,
                 totalPrice: this.tour.promotionPrice + this.totaltouristPrice,
@@ -994,11 +993,11 @@ export default {
                 bookingName: this.tour.tourName,
                 bookingDay: new Date().toISOString(),
               });
-
               await this.PlaceBooking();
 
               for (const custum of this.customers) {
                 await this.setTourist({
+                  bookingID: this.Booking.bookingID,
                   touristID: custum.touristID,
                   touristType: custum.touristType,
                   touristName: custum.touristName,
@@ -1017,8 +1016,41 @@ export default {
                   });
                   await this.PlaceTourist_TouristServices();
                 }
-
               }
+
+              let timerInterval;
+              // eslint-disable-next-line no-undef
+              Swal.fire({
+                title: "Đặt Tour thành công!",
+                html: "Sẽ chuyển sang trang thông tin trong <b></b> milliseconds.",
+                timer: 3000,
+                width: 800,
+                padding: "5em",
+                timerProgressBar: true,
+                didOpen: () => {
+                  // eslint-disable-next-line no-undef
+                  Swal.showLoading();
+                  // eslint-disable-next-line no-undef
+                  const b = Swal.getHtmlContainer().querySelector("b");
+                  timerInterval = setInterval(() => {
+                    // eslint-disable-next-line no-undef
+                    b.textContent = Swal.getTimerLeft();
+                  }, 100);
+                },
+                willClose: () => {
+                  clearInterval(timerInterval);
+                },
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                // eslint-disable-next-line no-undef
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  this.$router.push({
+                    name: "inforBooking-id",
+                    query: { bookingID: this.Booking.bookingID },
+                  });
+                }
+              });
+              // .then(() => {});
             } catch (error) {
               console.error(error);
             }

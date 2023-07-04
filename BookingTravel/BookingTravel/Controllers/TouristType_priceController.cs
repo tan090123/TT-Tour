@@ -24,12 +24,12 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristType_priceModel> SearchTouristType([FromQuery] string? searchName)
+        public List<TouristType_priceModel> SearchTouristType([FromQuery] int? TypeID)
         {
             var tourFromDBs = _context.TouristType_price.AsNoTracking();
-            if (searchName != null)
+            if (TypeID != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.TouristTypeName.ToLower().Contains(searchName.ToLower()));
+                tourFromDBs = tourFromDBs.Where(x => x.TypeID==TypeID);
             }
 
             var tourist_type = tourFromDBs.Select(x => new TouristType_priceModel

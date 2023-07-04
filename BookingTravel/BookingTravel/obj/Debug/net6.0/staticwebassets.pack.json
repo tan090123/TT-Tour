@@ -1,8 +1,16 @@
 {
   "Files": [
     {
+      "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\images\\1a117ce9.jpg",
+      "PackagePath": "staticwebassets\\images\\1a117ce9.jpg"
+    },
+    {
       "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\images\\809117b7-2406-413f-993b-1f19fb7913b9.jpg",
       "PackagePath": "staticwebassets\\images\\809117b7-2406-413f-993b-1f19fb7913b9.jpg"
+    },
+    {
+      "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\images\\bbf3034b.jpg",
+      "PackagePath": "staticwebassets\\images\\bbf3034b.jpg"
     },
     {
       "Id": "D:\\TT-Tour\\BookingTravel\\BookingTravel\\wwwroot\\images\\cantho.jpg",

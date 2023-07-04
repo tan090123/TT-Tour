@@ -212,7 +212,7 @@
 
                 <div class="body card-body">
                   <p class="p-date">
-                    {{ product.tourCheckinDays }} -
+                    {{ product.tourCheckinDays.slice(0, 10) }} -
                     {{ product.tour_NumberDays }} Ngày -
                     {{ product.tour_AvalablePeople }} Người
                   </p>

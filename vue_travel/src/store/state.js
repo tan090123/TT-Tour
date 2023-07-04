@@ -24,6 +24,7 @@ export default {
     touristDate: "",
     touristPrice: "",
     servicesPrice: "",
+    bookingID:"",
   },
   Tourist_TouristServices: {
     servicesID: "",
@@ -31,6 +32,7 @@ export default {
     tServicesID: "",
   },
   Booking: {
+    bookingID: "",
     tourID: "",
     infoContactID: "",
     userID: "",

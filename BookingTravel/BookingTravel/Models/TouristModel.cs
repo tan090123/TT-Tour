@@ -11,5 +11,7 @@
         public int? TouristPrice { get; set; }
         public int? ServicesPrice { get; set; }
 
+        public int? BookingID { get; set; }
+
     }
 }

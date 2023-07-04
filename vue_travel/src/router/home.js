@@ -25,6 +25,20 @@ const home = [
         ],
       },
       {
+        path: "/booking/ShowBooking",
+        name: "inforBooking-id",
+        component: () => import("@/pages/home/ShowBooking.vue"),
+        meta: { title: "Thông tin chi tiết Booking - Vietravel" },
+        children: [
+          {
+            path: "bookingID=:bookingID",
+            name: "inforBooking-id",
+            //
+          },
+        ],
+      },
+
+      {
         path: "/contact",
         name: "contact",
         component: () => import("@/pages/home/Contact.vue"),
@@ -75,11 +89,6 @@ const home = [
                 name: "tours_search",
                 //
               },
-              {
-                path: "SoNguoi=:people",
-                name: "tours_search",
-                //
-              },
             ],
           },
         ],
@@ -90,7 +99,6 @@ const home = [
         component: () => import("@/pages/home/TourDetails.vue"),
         meta: { title: "Du Lịch Vietravel - Vietravel" },
       },
-
     ],
   },
 ];

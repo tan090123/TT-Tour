@@ -120,7 +120,7 @@
           <div class="TourDetails__section--detail row">
             <div class="col-12 col-md-8">
               <p class="text">
-                Khởi hành: <span>{{ tour.tourCheckinDays }}</span>
+                Khởi hành: <span>{{ tour.tourCheckinDays.slice(0, 10) }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
               <p class="text">

@@ -24,12 +24,12 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristModel> SearchTourist([FromQuery] int? searchID)
+        public List<TouristModel> SearchTourist([FromQuery] int? bookingID)
         {
             var tourFromDBs = _context.Tourist.AsNoTracking();
-            if (searchID != null)
+            if (bookingID != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.TouristID == searchID);
+                tourFromDBs = tourFromDBs.Where(x => x.BookingID == bookingID);
             }
 
             var tourist = tourFromDBs.Select(x => new TouristModel
@@ -42,8 +42,9 @@ namespace BookingTravel.Controllers
  
                 TouristPrice = x.TouristPrice,
                 TouristSex = x.TouristSex,
-                TouristType = x.TouristType
-                
+                TouristType = x.TouristType,
+                BookingID = x.BookingID
+
             }).ToList();
 
             return tourist;
@@ -63,7 +64,8 @@ namespace BookingTravel.Controllers
                 TouristSex = newToursit.TouristSex,
                 TouristPrice = newToursit.TouristPrice,
                 TouristDate = newToursit.TouristDate,
-                
+                BookingID = newToursit.BookingID
+
             };
 
             _context.Tourist.Add(tourist);
@@ -116,6 +118,7 @@ namespace BookingTravel.Controllers
                 tourist.TouristSex = updateTourist.TouristSex;
                 tourist.ServicesPrice = updateTourist.ServicesPrice;
                 tourist.TouristType = updateTourist.TouristType;
+                tourist.BookingID = updateTourist.BookingID;
 
 
                 _context.Update(tourist);
