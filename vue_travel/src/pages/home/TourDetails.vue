@@ -5,10 +5,10 @@
         <div class="col-12 col-md-6">
           <div class="TourDetails__ticket">
             <i class="fa fa-ticket" aria-hidden="true"></i>
-            <span>{{ tour.tourCode }}</span>
+            <span>{{ details.tour.tourCode }}</span>
           </div>
           <div class="TourDetails__title">
-            <p>{{ tour.tourName }}</p>
+            <p>{{ details.tour.tourName }}</p>
           </div>
           <div class="TourDetails__rating">
             <span class="TourDetails__rating--point">9</span>
@@ -20,16 +20,18 @@
             <div class="col-6 col-md-9">
               <div
                 class="TourDetails__discount"
-                v-if="tour.price != tour.promotionPrice"
+                v-if="details.tour.price != details.tour.promotionPrice"
               >
                 <p>
-                  Giá <span>{{ formatter.format(tour.price) }}</span
+                  Giá <span>{{ formatter.format(details.tour.price) }}</span
                   >/ khách
                 </p>
               </div>
               <div class="TourDetails__price">
                 <p>
-                  <span>{{ formatter.format(tour.promotionPrice) }}</span
+                  <span>{{
+                    formatter.format(details.tour.promotionPrice)
+                  }}</span
                   >/ khách
                 </p>
               </div>
@@ -52,45 +54,12 @@
           </div>
         </div>
       </div>
-      <!-- <div class="carousel mt-5">
-        <div class="owl-carousel owl-theme p-0">
-          <div class="item" v-for="(tourimg, index) in tourImage" :key="index">
-            <a href="#">
-               <img :src="'/images/details/' + tourimg.images" alt="TQ1" />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_1.jpg"
-                alt="TQ1"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_1.jpg"
-                alt="TQ1"
-              />
-            </a>
-          </div>
-          <div class="item">
-            <a href="#">
-              <img
-                src="@/../public/images/details/tq_1.jpg"
-                alt="TQ1"
-              />
-            </a>
-          </div>
-        </div>
-      </div> -->
-      <!-- Images -->
+
       <section class="tour-images">
         <div class="row">
           <div class="col-12 col-md-12 col-lg-7 left">
             <img
-              :src="tour.tourImage"
+              :src="details.tour.tourImage"
               style="object-fit: cover; width: 100%"
               alt=""
             />
@@ -114,23 +83,24 @@
           </div>
         </div>
       </section>
-      <!-- End images -->
+
       <div class="TourDetails__section row">
         <div class="col-12 col-md-5">
           <div class="TourDetails__section--detail row">
             <div class="col-12 col-md-8">
               <p class="text">
-                Khởi hành: <span>{{ tour.tourCheckinDays.slice(0, 10) }}</span>
+                Khởi hành:
+                <span>{{ details.tour.tourCheckinDays.slice(0, 10) }}</span>
               </p>
               <p class="text">Tập trung <span>12:25 ngày 30/05/2023</span></p>
               <p class="text">
-                Thời gian <span>{{ tour.tour_NumberDays }} ngày</span>
+                Thời gian <span>{{ details.tour.tour_NumberDays }} ngày</span>
               </p>
               <p class="text">
-                Nơi khởi hành <span>{{ tour.departure }}</span>
+                Nơi khởi hành <span>{{ details.tour.departure }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận <span>{{ tour.tourAvailableSit }}</span>
+                Số chỗ còn nhận <span>{{ details.tour.tourAvailableSit }}</span>
               </p>
             </div>
             <div class="col-12 col-md-4 text-end">
@@ -159,7 +129,7 @@
             <div class="row">
               <div
                 class="col-12 col-md-3 mb-3"
-                v-for="tourService in ServicesTour"
+                v-for="tourService in details.ServicesTour"
                 :key="tourService.tourID"
               >
                 <img
@@ -181,7 +151,7 @@
     <div class="TourDetails__desc--short col-3">
       <div
         class="d-flex justify-content-between align-items-center row mt-2"
-        v-for="(tourSche, index) in TourSchedule"
+        v-for="(tourSche, index) in details.TourSchedule"
         :key="index"
       >
         <div class="date-left col-1">
@@ -205,7 +175,11 @@
       class="TourDetails__desc--desc col-9 border border-0 border-start border-success"
     >
       <div class="container-fluid">
-        <div class="div" v-for="(tourSche, index) in TourSchedule" :key="index">
+        <div
+          class="div"
+          v-for="(tourSche, index) in details.TourSchedule"
+          :key="index"
+        >
           <h3 class="fs-2">
             Ngày {{ index + 1 }} - {{ tourSche.scheduleName }}
           </h3>
@@ -231,9 +205,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(trist_price,index) in TristType_price" :key="index">
-                  <td>{{trist_price.touristTypeName}}</td>
-                  <td class="price">{{formatter.format(trist_price.touristType_Prices)}}</td>
+                <tr
+                  v-for="(trist_price, index) in details.TristType_price"
+                  :key="index"
+                >
+                  <td>{{ trist_price.touristTypeName }}</td>
+                  <td class="price">
+                    {{ formatter.format(trist_price.touristType_Prices) }}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -244,10 +223,12 @@
           <div class="TourDetails__info--item">
             <p class="title">
               HDV dẫn đoàn:
-              <span>{{ TourGuide.guideName }}</span>
+              <span>{{ details.TourGuide.guideName }}</span>
             </p>
-            <p class="address">Địa chỉ : {{ TourGuide.guideAddress }}</p>
-            <p class="mobile">Số đt : {{ TourGuide.guidePhone }}</p>
+            <p class="address">
+              Địa chỉ : {{ details.TourGuide.guideAddress }}
+            </p>
+            <p class="mobile">Số đt : {{ details.TourGuide.guidePhone }}</p>
             <div class="desc">Đang cập nhật</div>
           </div>
         </div>
@@ -616,11 +597,9 @@
     </div>
   </div>
 
-  <!-- The Modal -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content p-3">
-        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title py-3">DANH SÁCH DỊCH VỤ</h4>
           <button
@@ -630,7 +609,6 @@
           ></button>
         </div>
 
-        <!-- Modal body -->
         <div class="modal-body py-3">
           <h2 class="text-primary">Danh sách lựa chọn</h2>
           <div class="col-12 my-2">
@@ -639,7 +617,7 @@
                 <tr>
                   <td colspan="2" class="fs-4 fst-italic">
                     <span id="OptionName_1">
-                      {{ tour.tourName }}
+                      {{ details.tour.tourName }}
                     </span>
                   </td>
                   <td></td>
@@ -647,9 +625,9 @@
                   <td class="d-flex justify-content-end">
                     <span class="px-2 fs-4 fst-italic" id="optionPrice_1">
                       {{
-                        tour.promotionPrice
-                          ? formatter.format(tour.promotionPrice)
-                          : formatter.format(tour.price)
+                        details.tour.promotionPrice
+                          ? formatter.format(details.tour.promotionPrice)
+                          : formatter.format(details.tour.price)
                       }}
                     </span>
                     <div class="form-check">
@@ -669,7 +647,6 @@
           </div>
         </div>
 
-        <!-- Modal footer -->
         <div class="modal-footer py-5 border border-0">
           <div class="container">
             <div class="row">
@@ -677,9 +654,9 @@
                 <span class="px-4">Thành tiền :</span>
                 <span class="px-2" id="TotalPriceService">
                   {{
-                    tour.promotionPrice
-                      ? formatter.format(tour.promotionPrice)
-                      : formatter.format(tour.price)
+                    details.tour.promotionPrice
+                      ? formatter.format(details.tour.promotionPrice)
+                      : formatter.format(details.tour.price)
                   }}
                 </span>
               </div>
@@ -701,7 +678,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
   name: "details-id",
   data() {
@@ -716,18 +693,28 @@ export default {
     this.$store.dispatch("fetchTourDetails", { id: this.$route.params.id });
   },
   methods: {
+    ...mapActions(["fetchTourOrder"]),
     submitBooking() {
-      this.$router.push({
-        path: `/booking`,
-        query: { tourID: this.tour.tourID },
-      });
+      this.fetchTourOrder({
+        id: this.details.tour.tourID,
+        tourtype: this.details.tour.tourType,
+      })
+        .then(() => {
+          this.$router.push({
+            path: `/booking`,
+            query: { tourID: this.details.tour.tourID },
+          });
 
-      window.location.href = `/booking?tourID=${this.tour.tourID}`;
+          window.location.href = `/booking?tourID=${this.details.tour.tourID}`;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
-  computed:{
-    ...mapState(["tour","TourSchedule","TourGuide","ServicesTour","TristType_price"]),
-  }
+  computed: {
+    ...mapState(["details"]),
+  },
 };
 </script>
 

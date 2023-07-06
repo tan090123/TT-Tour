@@ -310,7 +310,7 @@
                         <button
                           type="submit"
                           class="btn btn-primary w-100 h-100"
-                           @click="SearchDiemDen()"
+                          @click="SearchDiemDen()"
                         >
                           <i class="fa-solid fa-magnifying-glass fa-3x"></i>
                         </button>
@@ -559,21 +559,20 @@
       <div class="TourCard__content row row-cols-lg-3 row-cols-1">
         <div
           class="col mt-sm-auto"
-          v-for="card in tours.slice(0, 3)"
+          v-for="card in tourlist.tours.slice(0, 3)"
           :key="card.tourID"
         >
           <div class="card">
             <div class="img">
-              <router-link
-                :to="{ name: 'details-id', params: { id: card.tourID } }"
-              >
+              <div style="cursor: pointer">
                 <img
                   :src="card.tourImage"
                   class="card-img-top"
                   width="100%"
                   :alt="card.tourName"
+                  @click="routeDetails(card.tourID)"
                 />
-              </router-link>
+              </div>
               <div class="img-icon">
                 <a href="">
                   <i class="fa-regular fa-heart fs-1"></i>
@@ -598,12 +597,8 @@
 
             <div class="body card-body">
               <p class="p-date">{{ card.tourCheckinDays }}</p>
-              <p class="p-title">
-                <router-link
-                  :to="{ name: 'details-id', params: { id: card.tourID } }"
-                >
-                  {{ card.tourName }}
-                </router-link>
+              <p class="p-title fw-bold fs-3" @click="routeDetails(card.tourID)" style="cursor : pointer">
+                {{ card.tourName }}
               </p>
               <div class="code">
                 <p>Mã tour:</p>
@@ -1033,7 +1028,7 @@
   <!-- ========== End Tour .... ========== -->
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 // import cardData from "@/data/cardData.js";
 import productData from "@/data/productData.js";
 export default {
@@ -1128,11 +1123,12 @@ export default {
         autoplayHoverPause: true,
       });
     });
-    this.$store.dispatch("fetchTours");
+    this.fetchTours();
     this.GetTime();
     this.setMinDate();
   },
   methods: {
+    ...mapActions(["fetchTours", "fetchTourDetails"]),
     GetTime() {
       var currentTime = new Date().toISOString().slice(0, 10);
       this.SelectedTime = currentTime;
@@ -1165,9 +1161,21 @@ export default {
         query: { tourtype: this.SelectedTourType0 },
       });
     },
+    routeDetails(index) {
+      this.fetchTourDetails({ id: index })
+        .then(() => {
+          this.$router.push({
+            name: "details-id",
+            params: { id: index },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   computed: {
-    ...mapState(["tours"]),
+    ...mapState(["tourlist"]),
   },
 };
 </script>
@@ -1259,6 +1267,9 @@ export default {
   top: 40%;
   transform: translate(-50%, -40%);
   color: #ffff;
+}
+.p-title:hover{
+  color:red;
 }
 
 .TourPlace__content-place a {

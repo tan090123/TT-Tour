@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router/index.js';
-import store from './store';
+import store from "@/store/index";
 // import { VueRecaptchaPlugin } from 'vue-recaptcha';
 import axios from 'axios';
 window.axios = axios;

@@ -4,7 +4,7 @@
       <div class="TourOrder__card">
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
-            <img :src="tour.tourImage" alt="{{ tour.tourName }}" />
+            <img :src="order.tour.tourImage" alt="{{ order.tour.tourName }}" />
             <!-- <img
               :src="require(`@/../public/images/card/${tours.tourImage}`)"
               class="card-img-top"
@@ -19,24 +19,25 @@
             </div>
             <div class="TourOrder__title">
               <h2>
-                {{ tour.tourName }}
+                {{ order.tour.tourName }}
               </h2>
             </div>
             <div class="TourOrder__desc">
               <p class="text">
-                Mã Tour: <span>{{ tour.tourCode }}</span>
+                Mã Tour: <span>{{ order.tour.tourCode }}</span>
               </p>
               <p class="text">
-                Khởi hành: <span>{{ tour.tourCheckinDays.slice(0, 10) }}</span>
+                Khởi hành:
+                <span>{{ order.tour.tourCheckinDays.slice(0, 10) }}</span>
               </p>
               <p class="text">
-                Thời gian: <span>{{ tour.tour_NumberDays }} ngày</span>
+                Thời gian: <span>{{ order.tour.tour_NumberDays }} ngày</span>
               </p>
               <p class="text">
-                Nơi khởi hành: <span>{{ tour.departure }}</span>
+                Nơi khởi hành: <span>{{ order.tour.departure }}</span>
               </p>
               <p class="text">
-                Số chỗ còn nhận: <span>{{ tour.tourAvailableSit }}</span>
+                Số chỗ còn nhận: <span>{{ order.tour.tourAvailableSit }}</span>
               </p>
             </div>
           </div>
@@ -57,19 +58,19 @@
                   <input
                     class="form-control"
                     type="hidden"
-                    v-model="infoContact.contactID"
+                    v-model="order.infoContact.contactID"
                   />
                   <input
                     class="form-control"
                     type="hidden"
-                    v-model="infoContact.TourID"
+                    v-model="order.infoContact.TourID"
                   />
 
                   <label>Họ và Tên <b>*</b></label>
                   <input
                     class="form-control"
                     type="text"
-                    v-model="infoContact.ContactName"
+                    v-model="order.infoContact.ContactName"
                     v-bind:class="{
                       'is-invalid': error_infoContact.ContactName,
                     }"
@@ -83,7 +84,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    v-model="infoContact.ContactEmail"
+                    v-model="order.infoContact.ContactEmail"
                     v-bind:class="{
                       'is-invalid': error_infoContact.ContactEmail,
                     }"
@@ -97,7 +98,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    v-model="infoContact.ContactPhone"
+                    v-model="order.infoContact.ContactPhone"
                     v-bind:class="{
                       'is-invalid': error_infoContact.ContactPhone,
                     }"
@@ -111,7 +112,7 @@
                   <input
                     class="form-control"
                     type="text"
-                    v-model="infoContact.ContactAddress"
+                    v-model="order.infoContact.ContactAddress"
                   />
                 </div>
               </div>
@@ -287,7 +288,7 @@
                       </td>
                       <td>
                         <div
-                          v-for="tService in TServices"
+                          v-for="tService in order.TServices"
                           :key="tService.tServicesID"
                         >
                           <input
@@ -312,7 +313,7 @@
                   rows="5"
                   cols="20"
                   placeholder="Vui lòng nhập nội dung lời nhắn bằng tiếng việt hoặc tiếng anh..."
-                  v-model="infoContact.ContactNote"
+                  v-model="order.infoContact.ContactNote"
                 ></textarea>
               </div>
             </div>
@@ -570,31 +571,33 @@
                 <b>Xe suốt tuyến - khách sạn tương đương 4* và 5*</b>
               </p>
               <p>
-                <b>{{ TourType.typeName }} </b
-                ><span class="number">({{ tour.tourAvailableSit }} khách)</span>
+                <b>{{ order.TourType.typeName }} </b>
+                <span class="number"
+                  >({{ order.tour.tourAvailableSit }} khách)</span
+                >
               </p>
               <div class="group-product row my-4">
                 <div class="img col-4">
                   <img
-                    :src="'/images/card/' + tour.tourImage"
-                    alt="{{ tour.tourName }}"
+                    :src="'/images/card/' + order.tour.tourImage"
+                    alt="{{ order.tour.tourName }}"
                     class="w-100"
                   />
                 </div>
                 <div class="title col-8">
                   <h4>
-                    {{ tour.tourName }}
+                    {{ order.tour.tourName }}
                   </h4>
                 </div>
               </div>
               <div class="group-go my-5">
                 <div class="start">
                   <h4>Bắt đầu chuyến đi</h4>
-                  <p>{{ tour.tourCheckinDays.slice(0, 10) }}</p>
+                  <p>{{ order.tour.tourCheckinDays.slice(0, 10) }}</p>
                 </div>
                 <div class="end">
                   <h4>Kết thúc chuyến đi</h4>
-                  <p>{{ tour.tourCheckoutDays.slice(0, 10) }}</p>
+                  <p>{{ order.tour.tourCheckoutDays.slice(0, 10) }}</p>
                 </div>
               </div>
               <div class="group-tourist">
@@ -673,7 +676,7 @@
                       <th>
                         <span
                           >còn {{ TotalSit }}/{{
-                            tour.tourAvailableSit
+                            order.tour.tourAvailableSit
                           }}
                           chỗ</span
                         >
@@ -793,25 +796,13 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("fetchTourOrder", {
-      id: this.$route.query.tourID,
-      tourtype: this.tour.tourType,
-    });
     this.customers[0] = this.FilterTristType_price;
     this.SelectedPayment = this.payments[0].name;
     this.userID = localStorage.getItem("userID");
+    console.log(this.customers);
   },
   computed: {
-    ...mapState([
-      "tour",
-      "TServices",
-      "TristType_price",
-      "infoContact",
-      "Tourist",
-      "TourType",
-      "Booking",
-      "Tourist_TouristServices",
-    ]),
+    ...mapState(["order"]),
     totaltouristPrice() {
       let sum = 0;
       this.customers.forEach((customer) => {
@@ -823,7 +814,7 @@ export default {
       return sum;
     },
     FilterTristType_price() {
-      for (const value of this.TristType_price) {
+      for (const value of this.order.TristType_price) {
         if (value.touristTypeName == "Người lớn") {
           // eslint-disable-next-line no-case-declarations, vue/no-side-effects-in-computed-properties
           return {
@@ -865,7 +856,7 @@ export default {
     },
     // eslint-disable-next-line vue/return-in-computed-property
     childrenPrice() {
-      for (const value of this.TristType_price) {
+      for (const value of this.order.TristType_price) {
         if (value.touristTypeName === "Trẻ em") {
           return value.touristType_Prices;
         }
@@ -873,7 +864,7 @@ export default {
     },
     // eslint-disable-next-line vue/return-in-computed-property
     youngPrice() {
-      for (const value of this.TristType_price) {
+      for (const value of this.order.TristType_price) {
         if (value.touristTypeName === "Trẻ nhỏ") {
           return value.touristType_Prices;
         }
@@ -881,7 +872,7 @@ export default {
     },
     // eslint-disable-next-line vue/return-in-computed-property
     babyPrice() {
-      for (const value of this.TristType_price) {
+      for (const value of this.order.TristType_price) {
         if (value.touristTypeName === "Em bé") {
           return value.touristType_Prices;
         }
@@ -912,12 +903,12 @@ export default {
     ChangeCustomer(key, type) {
       switch (key) {
         case "+":
-          for (const value of this.TristType_price) {
+          for (const value of this.order.TristType_price) {
             if (value.touristTypeName == type) {
               // eslint-disable-next-line no-case-declarations, vue/no-side-effects-in-computed-properties
               const newCustomer = {
                 TypeName: value.touristTypeName,
-                touristID: this.Tourist.touristID++,
+                touristID: this.order.Tourist.touristID,
                 touristType: value.typeID,
                 touristName: "",
                 touristSex: "",
@@ -926,7 +917,7 @@ export default {
                 servicesPrice: [],
               };
               //--Số lượng người tham gia < số lượng quy định của tour
-              if (this.customers.length < this.tour.tourAvailableSit) {
+              if (this.customers.length < this.order.tour.tourAvailableSit) {
                 this.customers.push(newCustomer); // Thêm khách hàng mới vào mảng customers
               }
             }
@@ -966,38 +957,39 @@ export default {
             try {
               // Gọi action để cập nhật thông tin liên hệ trong Vuex store
               await this.setInfoContact({
-                contactID: this.infoContact.contactID,
+                contactID: this.order.infoContact.contactID,
                 TourID: this.$route.query.tourID,
-                ContactName: this.infoContact.ContactName,
-                ContactEmail: this.infoContact.ContactEmail,
-                ContactPhone: this.infoContact.ContactPhone,
-                ContactAddress: this.infoContact.ContactAddress,
-                ContactNote: this.infoContact.ContactNote,
+                ContactName: this.order.infoContact.ContactName,
+                ContactEmail: this.order.infoContact.ContactEmail,
+                ContactPhone: this.order.infoContact.ContactPhone,
+                ContactAddress: this.order.infoContact.ContactAddress,
+                ContactNote: this.order.infoContact.ContactNote,
               });
               await this.PlaceInfoContact();
 
               await this.setBooking({
-                bookingID: this.Booking.bookingID,
+                bookingID: this.order.Booking.bookingID,
                 tourID: this.$route.query.tourID,
-                infoContactID: this.infoContact.contactID,
+                infoContactID: this.order.infoContact.contactID,
                 userID: !this.userID ? 21 : this.userID,
                 extraPrice: this.totaltouristPrice,
-                currentPrice: this.tour.promotionPrice,
-                totalPrice: this.tour.promotionPrice + this.totaltouristPrice,
+                currentPrice: this.order.tour.promotionPrice,
+                totalPrice:
+                  this.order.tour.promotionPrice + this.totaltouristPrice,
                 payment: this.SelectedPayment,
                 status: "Chưa thanh toán",
-                tourCheckinDays: this.tour.tourCheckinDays,
-                tourCheckoutDays: this.tour.tourCheckoutDays,
-                departure: this.tour.departure,
-                destination: this.tour.destination,
-                bookingName: this.tour.tourName,
+                tourCheckinDays: this.order.tour.tourCheckinDays,
+                tourCheckoutDays: this.order.tour.tourCheckoutDays,
+                departure: this.order.tour.departure,
+                destination: this.order.tour.destination,
+                bookingName: this.order.tour.tourName,
                 bookingDay: new Date().toISOString(),
               });
               await this.PlaceBooking();
 
               for (const custum of this.customers) {
                 await this.setTourist({
-                  bookingID: this.Booking.bookingID,
+                  bookingID: this.order.Booking.bookingID,
                   touristID: custum.touristID,
                   touristType: custum.touristType,
                   touristName: custum.touristName,
@@ -1010,46 +1002,54 @@ export default {
 
                 for (const cus of custum.servicesPrice) {
                   await this.setTourist_TouristServices({
-                    servicesID: this.Tourist_TouristServices.servicesID,
-                    touristID: this.Tourist.touristID,
+                    servicesID: this.order.Tourist_TouristServices.servicesID,
+                    touristID: this.order.Tourist.touristID,
                     tServicesID: cus.id,
                   });
                   await this.PlaceTourist_TouristServices();
                 }
               }
 
-              let timerInterval;
-              // eslint-disable-next-line no-undef
-              Swal.fire({
-                title: "Đặt Tour thành công!",
-                html: "Sẽ chuyển sang trang thông tin trong <b></b> milliseconds.",
-                timer: 3000,
-                width: 800,
-                padding: "5em",
-                timerProgressBar: true,
-                didOpen: () => {
+              this.$store
+                .dispatch("fetchBooking", {
+                  bookingID: this.order.Booking.bookingID,
+                  tourID: this.$route.query.tourID,
+                  infoContactID: this.order.Booking.infoContactID,
+                })
+                .then(() => {
+                  let timerInterval;
                   // eslint-disable-next-line no-undef
-                  Swal.showLoading();
-                  // eslint-disable-next-line no-undef
-                  const b = Swal.getHtmlContainer().querySelector("b");
-                  timerInterval = setInterval(() => {
+                  Swal.fire({
+                    title: "Đặt Tour thành công!",
+                    html: "Sẽ chuyển sang trang thông tin trong <b></b> milliseconds.",
+                    timer: 3000,
+                    width: 800,
+                    padding: "5em",
+                    timerProgressBar: true,
+                    didOpen: () => {
+                      // eslint-disable-next-line no-undef
+                      Swal.showLoading();
+                      // eslint-disable-next-line no-undef
+                      const b = Swal.getHtmlContainer().querySelector("b");
+                      timerInterval = setInterval(() => {
+                        // eslint-disable-next-line no-undef
+                        b.textContent = Swal.getTimerLeft();
+                      }, 100);
+                    },
+                    willClose: () => {
+                      clearInterval(timerInterval);
+                    },
+                  }).then((result) => {
+                    /* Read more about handling dismissals below */
                     // eslint-disable-next-line no-undef
-                    b.textContent = Swal.getTimerLeft();
-                  }, 100);
-                },
-                willClose: () => {
-                  clearInterval(timerInterval);
-                },
-              }).then((result) => {
-                /* Read more about handling dismissals below */
-                // eslint-disable-next-line no-undef
-                if (result.dismiss === Swal.DismissReason.timer) {
-                  this.$router.push({
-                    name: "inforBooking-id",
-                    query: { bookingID: this.Booking.bookingID },
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                      this.$router.push({
+                        name: "inforBooking-id",
+                        query: { bookingID: this.order.Booking.bookingID },
+                      });
+                    }
                   });
-                }
-              });
+                });
               // .then(() => {});
             } catch (error) {
               console.error(error);
@@ -1066,12 +1066,12 @@ export default {
       }, 0);
     },
     validate_infoContact() {
-      if (!this.infoContact.ContactEmail) {
+      if (!this.order.infoContact.ContactEmail) {
         this.error_infoContact.ContactEmail = "Email không được để trống";
         this.isValid_infoContact = false;
       } else if (
         !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          this.infoContact.ContactEmail
+          this.order.infoContact.ContactEmail
         )
       ) {
         this.error_infoContact.ContactEmail = "Vui lòng đúng định dạng email";
@@ -1081,7 +1081,7 @@ export default {
         this.isValid_infoContact = true;
       }
 
-      if (!this.infoContact.ContactName) {
+      if (!this.order.infoContact.ContactName) {
         this.error_infoContact.ContactName = "Tên không được để trống";
         this.isValid_infoContact = false;
       } else {
@@ -1089,12 +1089,12 @@ export default {
         this.isValid_infoContact = true;
       }
 
-      if (!this.infoContact.ContactPhone) {
+      if (!this.order.infoContact.ContactPhone) {
         this.error_infoContact.ContactPhone = "Sđt không được để trống";
         this.isValid_infoContact = false;
       } else if (
         !/(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/.test(
-          this.infoContact.ContactPhone
+          this.order.infoContact.ContactPhone
         )
       ) {
         this.error_infoContact.ContactPhone = "Vui lòng đúng định dạng Sđt";
