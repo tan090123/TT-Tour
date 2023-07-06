@@ -7,25 +7,25 @@
           <div class="left-inside d-flex border border-0 border-top py-5">
             <div class="w-50">
               <span>Họ tên:</span>
-              <p>{{ infoContact.contactName }}</p>
+              <p>{{ showbooking.infoContact.contactName }}</p>
               <span>Địa chỉ:</span>
-              <p>{{ infoContact.contactAddress }}</p>
+              <p>{{ showbooking.infoContact.contactAddress }}</p>
               <span>Ghi chú:</span>
               <p>
-                {{ infoContact.contactAddress }} ( Booking từ travel.com.vn)
+                {{ showbooking.infoContact.contactAddress }} ( Booking từ travel.com.vn)
               </p>
             </div>
             <div class="w-50">
               <span>Email:</span>
-              <p>{{ infoContact.contactEmail }}</p>
+              <p>{{ showbooking.infoContact.contactEmail }}</p>
               <div class="d-flex">
                 <div class="w-50">
                   <span> Di động:</span>
-                  <p>{{ infoContact.contactPhone }}</p>
+                  <p>{{ showbooking.infoContact.contactPhone }}</p>
                 </div>
                 <div class="w-50">
                   <span> Di động:</span>
-                  <p>{{ infoContact.contactPhone }}</p>
+                  <p>{{ showbooking.infoContact.contactPhone }}</p>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                 <th>Số booking:</th>
                 <td>
                   <span class="text-danger fw-bold">{{
-                    Booking.bookingID
+                    showbooking.Booking.bookingID
                   }}</span>
                   (Quý khách vui lòng nhớ số booking để thuận tiện cho các giao
                   dịch sau này)
@@ -48,7 +48,7 @@
               </tr>
               <tr>
                 <th>Trị giá booking:</th>
-                <td>{{ formatter.format(Booking.totalPrice) }}</td>
+                <td>{{ formatter.format(showbooking.Booking.totalPrice) }}</td>
               </tr>
               <tr>
                 <th>Số tiền đã thanh toán:</th>
@@ -56,20 +56,20 @@
               </tr>
               <tr>
                 <th>Số tiền còn lại:</th>
-                <td>{{ formatter.format(Booking.totalPrice) }}</td>
+                <td>{{ formatter.format(showbooking.Booking.totalPrice) }}</td>
               </tr>
               <tr>
                 <th>Ngày đăng ký:</th>
-                <td>{{ Booking.bookingDay.slice(0, 10) }}</td>
+                <td>{{ showbooking.Booking.bookingDay.slice(0, 10) }}</td>
               </tr>
               <tr>
                 <th>Hình thức thanh toán:</th>
-                <td>{{ Booking.payment }}</td>
+                <td>{{ showbooking.Booking.payment }}</td>
               </tr>
               <tr>
                 <th>Tình trạng:</th>
                 <td>
-                  {{ Booking.status }}
+                  {{ showbooking.Booking.status }}
                 </td>
               </tr>
               <tr>
@@ -88,33 +88,33 @@
         <div class="border border-1 p-5">
           <h1 class="text-danger pb-4">PHIẾU XÁC NHẬN BOOKING</h1>
           <div class="inside border border-0 border-top py-5">
-            <p>{{ Booking.bookingName }}</p>
+            <p>{{ showbooking.Booking.bookingName }}</p>
             <h4>
               Số booking:
-              <span class="text-danger fw-bold"> {{ Booking.bookingID }}</span>
+              <span class="text-danger fw-bold"> {{ showbooking.Booking.bookingID }}</span>
             </h4>
           </div>
           <div class="border border-0 border-top py-5">
             <table>
               <tr>
                 <th>Mã tour:</th>
-                <td>{{ tour.tourCode }}</td>
+                <td>{{ showbooking.tour.tourCode }}</td>
               </tr>
               <tr>
                 <th>Hành trình:</th>
-                <td>{{ tour.departure }} - {{ tour.destination }}</td>
+                <td>{{ showbooking.tour.departure }} - {{ showbooking.tour.destination }}</td>
               </tr>
               <tr>
                 <th>Ngày đi:</th>
-                <td>{{ tour.tourCheckinDays.slice(0, 10) }}</td>
+                <td>{{ showbooking.tour.tourCheckinDays.slice(0, 10) }}</td>
               </tr>
               <tr>
                 <th>Ngày về:</th>
-                <td>{{ tour.tourCheckoutDays.slice(0, 10) }}</td>
+                <td>{{ showbooking.tour.tourCheckoutDays.slice(0, 10) }}</td>
               </tr>
               <tr>
                 <th>Nơi khởi hành:</th>
-                <td>{{ tour.departure }}</td>
+                <td>{{ showbooking.tour.departure }}</td>
               </tr>
             </table>
           </div>
@@ -147,7 +147,7 @@
           <tbody>
             <tr
               class="border border-0 border-bottom"
-              v-for="(tourist, index) in Tourist"
+              v-for="(tourist, index) in showbooking.Tourist"
               :key="index"
             >
               <td>{{ tourist.touristName }}</td>
@@ -172,7 +172,7 @@
         <h3 class="text-end m-3">
           Tổng cộng:
           <span class="text-danger fw-bold ms-3">{{
-            formatter.format(Booking.totalPrice)
+            formatter.format(showbooking.Booking.totalPrice)
           }}</span>
         </h3>
       </div>
@@ -194,12 +194,6 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("fetchBooking", {
-      bookingID: this.$route.query.bookingID,
-      tourID: this.Booking.tourID,
-      infoContactID: this.Booking.infoContactID,
-      touristID: this.Booking.touristID,
-    });
     this.endDate = this.GetTimeOver();
     const currentTime = new Date();
     const endTime = new Date(this.endDate);
@@ -214,19 +208,14 @@ export default {
   },
   computed: {
     ...mapState([
-      "Booking",
-      "infoContact",
-      "tour",
-      "Tourist",
-      "TristType_price",
-      "TServices",
+      "showbooking"
     ]),
     touristTypeName() {
       const inputArray = [];
-      for (const value of this.Tourist) {
+      for (const value of this.showbooking.Tourist) {
         inputArray.push(value.touristType);
       }
-      const filteredData = this.TristType_price.filter((obj) =>
+      const filteredData = this.showbooking.TristType_price.filter((obj) =>
         inputArray.includes(obj.typeID)
       );
 
@@ -236,7 +225,7 @@ export default {
   },
   methods: {
     GetTimeOver() {
-      const startDate = new Date(this.Booking.bookingDay);
+      const startDate = new Date(this.showbooking.Booking.bookingDay);
       startDate.setDate(startDate.getDate() + 2);
       startDate.setHours(0);
       startDate.setMinutes(0);
@@ -260,7 +249,7 @@ export default {
       try {
         // eslint-disable-next-line
         axios
-          .delete(`/api/Bookings/${this.Booking.bookingID}`)
+          .delete(`/api/Bookings/${this.showbooking.Booking.bookingID}`)
           .then((response) => {
             // handle success
             console.log(response);

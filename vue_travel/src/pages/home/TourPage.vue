@@ -13,16 +13,16 @@
       <div class="col mb-5" v-for="card in displayedCarts" :key="card.tourID">
         <div class="card">
           <div class="img">
-            <router-link
-              :to="{ name: 'details-id', params: { id: card.tourID } }"
+            <div style="cursor: pointer"
             >
               <img
                 :src="card.tourImage"
                 class="card-img-top"
                 width="100%"
                 :alt="card.tourName"
+                @click="routeDetails(card.tourID)"
               />
-            </router-link>
+          </div>
             <div class="img-icon">
               <a href="">
                 <i class="fa-regular fa-heart fs-1"></i>
@@ -48,12 +48,10 @@
           <div class="body card-body">
             <p class="p-date">{{ card.tourCheckinDays }}</p>
 
-            <p class="p-title">
-              <router-link
-                :to="{ name: 'details-id', params: { id: card.tourID } }"
-              >
+            <p class="p-title fw-bold fs-3" @click="routeDetails(card.tourID)" style="cursor: pointer;">
+             
                 {{ card.tourName }}
-              </router-link>
+              
             </p>
             <div class="code">
               <p>Mã tour:</p>
@@ -113,7 +111,7 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState,mapActions } from "vuex";
 
 // import cardData from "@/data/cardData.js";
 import Nagination from "@/components/ThePagination.vue";
@@ -134,7 +132,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("fetchTours");
+    this.fetchTours();
   },
   computed: {
     ...mapState(["tours"]),
@@ -148,8 +146,21 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["fetchTours","fetchTourDetails"]),
     changePage(page) {
       this.currentPage = page;
+    },
+    routeDetails(index) {
+      this.fetchTourDetails({ id: index })
+        .then(() => {
+          this.$router.push({
+            name: "details-id",
+            params: { id: index },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
@@ -164,6 +175,9 @@ export default {
 .tours_card {
   margin-top: 6.7rem;
   padding: 0 10px;
+}
+.p-title:hover{
+  color:red;
 }
 
 .TourCard__desc {

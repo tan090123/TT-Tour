@@ -1,16 +1,19 @@
 import createPersistedState from "vuex-persistedstate";
 import { createStore } from "vuex";
-import actions from "./actions";
-import mutations from "./mutations";
-import state from "./state";
-import getters from "./getters";
+
+import TourDetails from "@/store/modules/TourDetails";
+import Tours from "@/store/modules/Tours";
+import TourOrder from "@/store/modules/TourOrder";
+import ShowBooking from "./modules/ShowBooking";
 
 // Create a new store instance.
 const store = createStore({
-  state,
-  getters,
-  mutations,
-  actions,
+  modules: {
+    details: TourDetails,
+    tourlist: Tours,
+    order: TourOrder,
+    showbooking: ShowBooking,
+  },
   plugins: [
     createPersistedState(), // Sử dụng vuex-persistedstate
   ],
