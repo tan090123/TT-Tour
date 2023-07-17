@@ -33,7 +33,10 @@ const TourDetails = {
       try {
         // eslint-disable-next-line no-undef
         const tourResponse = await axios.get(`/api/Tour/${id}`);
-        commit("setTour", tourResponse.data);
+        const ResponseData = tourResponse.data;
+        const tourImage = `http://localhost:8080/api/Upload/${ResponseData.tourImage}`;
+        ResponseData.tourImage = tourImage;
+        commit("setTour", ResponseData);
 
         // eslint-disable-next-line no-undef
         const tourGuideResponse = await axios.get(

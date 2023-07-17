@@ -5,12 +5,6 @@
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
             <img :src="order.tour.tourImage" alt="{{ order.tour.tourName }}" />
-            <!-- <img
-              :src="require(`@/../public/images/card/${tours.tourImage}`)"
-              class="card-img-top"
-              width="100%"
-              :alt="products.tourName"
-            /> -->
           </div>
           <div class="TourOrder__main col-12 col-md-8">
             <div class="TourOrder__rating">
@@ -578,11 +572,7 @@
               </p>
               <div class="group-product row my-4">
                 <div class="img col-4">
-                  <img
-                    :src="'/images/card/' + order.tour.tourImage"
-                    alt="{{ order.tour.tourName }}"
-                    class="w-100"
-                  />
+                  <img :src="order.tour.tourImage" alt="{{ order.tour.tourName }}" class="w-100" />
                 </div>
                 <div class="title col-8">
                   <h4>

@@ -21,7 +21,7 @@ const TourOrder = {
         touristSex: "",
         touristDate: "",
         touristPrice: "",
-        servicesPrice: "", 
+        servicesPrice: "",
         bookingID: "",
       },
       Tourist_TouristServices: {
@@ -84,7 +84,10 @@ const TourOrder = {
         .get(`/api/Tour/${id}`)
         .then((response) => {
           // handle success
-          commit("setTour", response.data);
+          const ResponseData = response.data;
+          const tourImage = `http://localhost:8080/api/Upload/${ResponseData.tourImage}`;
+          ResponseData.tourImage = tourImage;
+          commit("setTour", ResponseData);
         })
         .catch((error) => {
           // handle error
