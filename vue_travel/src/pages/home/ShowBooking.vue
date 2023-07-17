@@ -12,7 +12,8 @@
               <p>{{ showbooking.infoContact.contactAddress }}</p>
               <span>Ghi chú:</span>
               <p>
-                {{ showbooking.infoContact.contactAddress }} ( Booking từ travel.com.vn)
+                {{ showbooking.infoContact.contactAddress }} ( Booking từ
+                travel.com.vn)
               </p>
             </div>
             <div class="w-50">
@@ -74,7 +75,7 @@
               </tr>
               <tr>
                 <th>Thời hạn thanh toán:</th>
-                <td>
+                <td class="text-danger">
                   {{ endDate }} (Theo giờ Việt Nam. Booking sẽ tự động hủy nếu
                   quá thời hạn thanh toán trên)
                 </td>
@@ -91,7 +92,9 @@
             <p>{{ showbooking.Booking.bookingName }}</p>
             <h4>
               Số booking:
-              <span class="text-danger fw-bold"> {{ showbooking.Booking.bookingID }}</span>
+              <span class="text-danger fw-bold">
+                {{ showbooking.Booking.bookingID }}</span
+              >
             </h4>
           </div>
           <div class="border border-0 border-top py-5">
@@ -102,7 +105,10 @@
               </tr>
               <tr>
                 <th>Hành trình:</th>
-                <td>{{ showbooking.tour.departure }} - {{ showbooking.tour.destination }}</td>
+                <td>
+                  {{ showbooking.tour.departure }} -
+                  {{ showbooking.tour.destination }}
+                </td>
               </tr>
               <tr>
                 <th>Ngày đi:</th>
@@ -207,9 +213,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      "showbooking"
-    ]),
+    ...mapState(["showbooking"]),
     touristTypeName() {
       const inputArray = [];
       for (const value of this.showbooking.Tourist) {
@@ -232,18 +236,20 @@ export default {
       startDate.setSeconds(0);
 
       const options = {
-        year: "2-digit",
+        year: "numeric",
         month: "2-digit",
         day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
       };
 
-      const formatter = new Intl.DateTimeFormat("en", options);
-      const endDate = formatter.format(startDate);
-      return endDate;
+      const formattedEndDate = startDate.toLocaleString("en-US", options);
+
+      return formattedEndDate;
     },
+
     deleteBookingOver() {
       // Thực hiện việc xóa API tại đây
       try {

@@ -110,25 +110,7 @@
               </div>
             </div>
 
-            <div class="TourSearch__left--tour">
-              <div class="TourSearch_viewer">
-                <h5 class="l-title">Hiện thị những chuyến đi có</h5>
-                <div class="mb-3">
-                  <label class="toggle" for="toggle">
-                    <input type="checkbox" id="toggle" />
-                    <div class="slider"></div>
-                    <span class="label-text">Khuyến mãi</span>
-                  </label>
-                </div>
-                <div class="mb-3">
-                  <label class="toggle" for="toggle1">
-                    <input type="checkbox" id="toggle1" />
-                    <div class="slider"></div>
-                    <span class="label-text">Còn chỗ</span>
-                  </label>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
 
@@ -175,19 +157,14 @@
               :key="product.tourID"
             >
               <div class="card">
-                <div class="img">
-                  <router-link
-                    :to="{ name: 'details-id', params: { id: product.tourID } }"
-                  >
-                    <img
-                      :src="
-                        product.tourImage
-                      "
-                      class="card-img-top"
-                      width="100%"
-                      :alt="product.tourName"
-                    />
-                  </router-link>
+                <div class="img" style="cursor: pointer">
+                  <img
+                    :src="product.tourImage"
+                    class="card-img-top"
+                    width="100%"
+                    :alt="product.tourName"
+                    @click="routeDetails(product.tourID)"
+                  />
                   <div class="img-icon">
                     <a href="">
                       <i class="fa-regular fa-heart fs-1"></i>
@@ -216,15 +193,12 @@
                     {{ product.tour_NumberDays }} Ngày -
                     {{ product.tour_AvalablePeople }} Người
                   </p>
-                  <p class="p-title">
-                    <router-link
-                      :to="{
-                        name: 'details-id',
-                        params: { id: product.tourID },
-                      }"
-                    >
-                      {{ product.tourName }}
-                    </router-link>
+                  <p
+                    class="p-title fw-bolder fs-3"
+                    @click="routeDetails(product.tourID)"
+                    style="cursor: pointer"
+                  >
+                    {{ product.tourName }}
                   </p>
                   <div class="code">
                     <p>Mã tour:</p>
@@ -366,6 +340,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import Nagination from "@/components/ThePagination.vue";
 
 export default {
@@ -463,6 +438,7 @@ export default {
     this.setMinDate();
   },
   methods: {
+    ...mapActions(["fetchTourDetails"]),
     GetSearch(departure, destination, datetime, numberDay, tourtype) {
       // eslint-disable-next-line
       axios
@@ -472,6 +448,9 @@ export default {
         .then((response) => {
           // handle success
           this.products = response.data;
+          this.products.forEach((tour) => {
+            tour.tourImage = `http://localhost:8080/api/Upload/${tour.tourImage}`;
+          });
         })
         .catch((error) => {
           // handle error
@@ -487,6 +466,9 @@ export default {
         .then((response) => {
           // handle success
           this.products = response.data;
+          this.products.forEach((tour) => {
+            tour.tourImage = `http://localhost:8080/api/Upload/${tour.tourImage}`;
+          });
         })
         .catch((error) => {
           // handle error
@@ -500,49 +482,66 @@ export default {
     GetChangeByDeparture(departure) {
       this.$router.push({
         path: `/search/${departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-        query:{tourtype: this.$route.query.tourtype}
+        query: { tourtype: this.$route.query.tourtype },
       });
     },
     GetChangeByDestination(destination) {
       this.$router.push({
         path: `/search/${this.$route.params.departure}/${destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-        query:{tourtype: this.$route.query.tourtype}
+        query: { tourtype: this.$route.query.tourtype },
       });
     },
     GetChangeByNumberDay(numberDay) {
       this.$router.push({
         path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${numberDay}`,
-        query:{tourtype: this.$route.query.tourtype}
+        query: { tourtype: this.$route.query.tourtype },
       });
     },
     GetChangeByPeople(avalablePeople) {
       this.$router.push({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-        query: { tourtype: this.$route.query.tourtype,SoNguoi: `${avalablePeople}`, OrderBy: `${this.$route.query.OrderBy}` },
-
+        query: {
+          tourtype: this.$route.query.tourtype,
+          SoNguoi: `${avalablePeople}`,
+          OrderBy: `${this.$route.query.OrderBy}`,
+        },
       });
     },
     GetChangeByDateTime(datetime) {
       this.$router.push({
         path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${datetime}/${this.$route.params.numberDay}`,
-        query:{tourtype: this.$route.query.tourtype}
+        query: { tourtype: this.$route.query.tourtype },
       });
     },
     GetChangeByTourType(tourtype) {
       this.$router.push({
         path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-        query:{tourtype: tourtype}
+        query: { tourtype: tourtype },
       });
     },
     GetChangeByOrderBy(order) {
       this.$router.push({
-        path: `/search/${this.$route.params.departure}/${this.$route.params.destination}/${this.$route.params.datetime}/${this.$route.params.numberDay}`,
-        query: { tourtype: this.$route.query.tourtype,SoNguoi: `${this.$route.query.SoNguoi}`, OrderBy: `${order}` },
+        query: {
+          tourtype: this.$route.query.tourtype,
+          SoNguoi: `${this.$route.query.SoNguoi}`,
+          OrderBy: `${order}`,
+        },
       });
     },
     setMinDate() {
       const currentDate = new Date().toISOString().split("T")[0];
       this.minDate = currentDate;
+    },
+    routeDetails(index) {
+      this.fetchTourDetails({ id: index })
+        .then(() => {
+          this.$router.push({
+            name: "details-id",
+            params: { id: index },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   computed: {
@@ -686,4 +685,8 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/_card.scss";
 @import "@/assets/scss/_search.scss";
+
+.p-title:hover {
+  color: red;
+}
 </style>
