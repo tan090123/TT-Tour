@@ -230,7 +230,7 @@ export default {
   methods: {
     GetTimeOver() {
       const startDate = new Date(this.showbooking.Booking.bookingDay);
-      startDate.setDate(startDate.getDate() + 2);
+      startDate.setDate(startDate.getDate() + 1);
       startDate.setHours(0);
       startDate.setMinutes(0);
       startDate.setSeconds(0);
@@ -250,20 +250,36 @@ export default {
       return formattedEndDate;
     },
 
-    deleteBookingOver() {
+    async deleteBookingOver() {
       // Thực hiện việc xóa API tại đây
       try {
+        for (const id of this.showbooking.Tourist) {
+          // eslint-disable-next-line no-undef
+          await axios.delete(`/api/TouristServices/touristID/${id.touristID}`);
+          console.log(`Đã xóa TouristServices có ID: ${id.touristID}`);
+        }
+
+        for (const id of this.showbooking.Tourist) {
+          // eslint-disable-next-line no-undef
+          await axios.delete(`/api/Tourist/${id.touristID}`);
+          console.log(`Đã xóa Tourist có ID: ${id.touristID}`);
+        }
+
         // eslint-disable-next-line
-        axios
-          .delete(`/api/Bookings/${this.showbooking.Booking.bookingID}`)
-          .then((response) => {
-            // handle success
-            console.log(response);
-          })
-          .catch((error) => {
-            // handle error
-            console.log(error);
-          });
+        await axios.delete(
+          `/api/Bookings/${this.showbooking.Booking.bookingID}`
+        );
+        console.log(
+          `Đã xóa Bookings có ID: ${this.showbooking.Booking.bookingID}`
+        );
+
+        // eslint-disable-next-line
+        await axios.delete(
+          `/api/InfoContact/${this.showbooking.Booking.infoContactID}`
+        );
+        console.log(
+          `Đã xóa InfoContact có ID: ${this.showbooking.Booking.infoContactID}`
+        );
       } catch (error) {
         console.error(error);
         // Xử lý lỗi khi xóa không thành công

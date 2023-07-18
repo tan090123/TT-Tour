@@ -8,7 +8,7 @@
         public int? UserID { get; set; }
         public int? ExtraPrice { get; set; }
         public int? CurrentPrice { get; set; }
-        public int? TotalPrice { get; set; }
+        public int TotalPrice { get; set; }
         public string? Payment { get; set; }
         public string? Status { get; set; }
         public DateTime? TourCheckinDays { get; set; }

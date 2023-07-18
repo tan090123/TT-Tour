@@ -1005,6 +1005,7 @@ export default {
                   bookingID: this.order.Booking.bookingID,
                   tourID: this.$route.query.tourID,
                   infoContactID: this.order.Booking.infoContactID,
+                  touristID: this.order.Tourist.touristID,
                 })
                 .then(() => {
                   let timerInterval;
