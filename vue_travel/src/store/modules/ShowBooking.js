@@ -3,7 +3,6 @@ const ShowBooking = {
     return {
       // Trạng thái của module
       tour: null,
-      TServices: null,
       TristType_price: null,
       infoContact: {
         contactID: "",
@@ -23,6 +22,11 @@ const ShowBooking = {
         touristPrice: "",
         servicesPrice: "",
         bookingID: "",
+      },
+      Tourist_TouristServices: {
+        servicesID: "",
+        touristID: "",
+        tServicesID: "",
       },
       Booking: {
         bookingID: "",
@@ -57,6 +61,9 @@ const ShowBooking = {
     SET_Tourist(state, tourist) {
       state.Tourist = tourist;
     },
+    SET_Tourist_TouristServices(state, newTourist_TouristServices) {
+      state.Tourist_TouristServices = newTourist_TouristServices;
+    },
     setTristType_price(state, newTristType_price) {
       state.TristType_price = newTristType_price;
     },
@@ -64,7 +71,7 @@ const ShowBooking = {
   actions: {
     // Actions để thực hiện các hoạt động bất đồng bộ
 
-    async fetchBooking({ commit }, { bookingID, tourID, infoContactID }) {
+    async fetchBooking({ commit }, { bookingID, tourID, infoContactID,touristID }) {
       try {
         // eslint-disable-next-line no-undef
         const bookingResponse = await axios.get(`/api/Bookings/${bookingID}`);
@@ -79,6 +86,15 @@ const ShowBooking = {
           `/api/InfoContact/${infoContactID}`
         );
         commit("SET_INFO_CONTACT", infoContactResponse.data);
+
+        // eslint-disable-next-line no-undef
+        const Tourist_TouristServicesResponse = await axios.get(
+          `/api/TouristServices?TouristID=${touristID}`
+        );
+        commit(
+          "SET_Tourist_TouristServices",
+          Tourist_TouristServicesResponse.data
+        );
 
         // eslint-disable-next-line no-undef
         const touristResponse = await axios.get(

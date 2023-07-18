@@ -85,8 +85,8 @@ const TourOrder = {
         .then((response) => {
           // handle success
           const ResponseData = response.data;
-          const tourImage = `http://localhost:8080/api/Upload/${ResponseData.tourImage}`;
-          ResponseData.tourImage = tourImage;
+          const img = `http://localhost:8080/api/Upload/${ResponseData.tourImage}`;
+          ResponseData.tourImage = img;
           commit("setTour", ResponseData);
         })
         .catch((error) => {

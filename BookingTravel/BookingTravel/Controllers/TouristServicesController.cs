@@ -24,20 +24,20 @@ namespace BookingTravel.Controllers
 
         // GET: api/ToursFromDb
         [HttpGet]
-        public List<TouristServicesModel> SearchTouristSV([FromQuery] int? searchID)
+        public List<TouristServicesModel> SearchTouristSV([FromQuery] int? TouristID)
         {
             var tourFromDBs = _context.TouristServices.AsNoTracking();
-            if (searchID != null)
+            if (TouristID != null)
             {
-                tourFromDBs = tourFromDBs.Where(x => x.ServicesID == searchID);
+                tourFromDBs = tourFromDBs.Where(x => x.TouristID == TouristID);
             }
 
             var touristSV = tourFromDBs.Select(x => new TouristServicesModel
             {
-                TouristID = x.TouristID,
                 ServicesID = x.ServicesID,
+                TouristID = x.TouristID,
                 TServicesID = x.TServicesID,
-               
+
             }).ToList();
 
             return touristSV;
@@ -53,7 +53,7 @@ namespace BookingTravel.Controllers
             {
                 TServicesID = newTouristSV.TServicesID,
                 TouristID = newTouristSV.TouristID,
-                
+
             };
 
             _context.TouristServices.Add(touristSV);
@@ -111,11 +111,11 @@ namespace BookingTravel.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async  Task<ActionResult<UpdateTourResultModel>> DeleteTouristSV([FromRoute] int id)
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteTouristSV([FromRoute] int id)
         {
             var response = new UpdateTourResultModel();
 
-            var touristSV =await _context.TouristServices.FindAsync(id);
+            var touristSV = await _context.TouristServices.FindAsync(id);
 
             if (touristSV == null)
             {
@@ -131,6 +131,43 @@ namespace BookingTravel.Controllers
             }
 
             return Ok(touristSV);
+        }
+
+        [HttpDelete("touristID/{id}")]
+        public async Task<ActionResult<UpdateTourResultModel>> DeleteTouristSVaa([FromRoute] int id)
+        {
+            var response = new UpdateTourResultModel();
+
+            var touristSV = await _context.TouristServices.Where(x => x.TouristID == id).ToListAsync();
+
+            if (touristSV == null || touristSV.Count == 0)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Không có bản ghi nào có TouristID là #" + id;
+                return BadRequest(response);
+            }
+
+            try
+            {
+                response.Result = true;
+
+                // Xóa từng bản ghi trong danh sách touristSV
+                foreach (var touristService in touristSV)
+                {
+                    _context.TouristServices.Remove(touristService);
+                }
+
+                // Lưu thay đổi vào database
+                await _context.SaveChangesAsync();
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                response.Result = false;
+                response.ErrorMessage = "Đã xảy ra lỗi khi xóa bản ghi có TouristID là #" + id;
+                return StatusCode(500, response);
+            }
         }
     }
 }
