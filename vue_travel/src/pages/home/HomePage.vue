@@ -596,7 +596,7 @@
             </div>
 
             <div class="body card-body">
-              <p class="p-date">{{ card.tourCheckinDays }}</p>
+              <p class="p-date">{{ card.tourCheckinDays.slice(0, 10) }}</p>
               <p class="p-title fw-bold fs-3" @click="routeDetails(card.tourID)" style="cursor : pointer">
                 {{ card.tourName }}
               </p>

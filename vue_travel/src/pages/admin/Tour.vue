@@ -93,20 +93,20 @@ export default {
         };
     },
     computed: {
-        ...mapState(["tours"]),
+        ...mapState(["tours","tourlist"]),
         totalPages() {
             return Math.ceil(this.tours.length / this.perPage);
         },
         displayedItems() {
             const start = (this.currentPage - 1) * this.perPage;
             const end = start + this.perPage;
-            return this.tours.slice(start, end);
+            return this.tourlist.tours.slice(start, end);
         },
     },
 
     mounted() {
         this.getType();
-
+        console.log(this.tourlist.tours);
     },
     methods: {
         changePage(page) {
