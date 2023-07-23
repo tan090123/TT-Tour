@@ -4,7 +4,7 @@
       <div class="TourOrder__card">
         <div class="row">
           <div class="TourOrder__img col-12 col-md-4">
-            <img :src="order.tour.tourImage" alt="{{ order.tour.tourName }}" />
+            <img :src="order.tour.tourImage" alt="{{ order.tour.tourName }}"  />
           </div>
           <div class="TourOrder__main col-12 col-md-8">
             <div class="TourOrder__rating">

@@ -76,7 +76,7 @@
                 <span class="price-now-number">{{
                   formatter.format(card.promotionPrice)
                 }}</span>
-                <span class="price-now-discount" v-if="card.discountTour != 0"
+                <span class="price-now-discount" v-if="card.discountTour != null"
                   >{{ card.discountTour }} GIẢM</span
                 >
               </div>
@@ -135,14 +135,14 @@ export default {
     this.fetchTours();
   },
   computed: {
-    ...mapState(["tours"]),
+    ...mapState(["tourlist"]),
     totalPages() {
-      return Math.ceil(this.tours.length / this.perPage);
+      return Math.ceil(this.tourlist.tours.length / this.perPage);
     },
     displayedCarts() {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
-      return this.tours.slice(start, end);
+      return this.tourlist.tours.slice(start, end);
     },
   },
   methods: {

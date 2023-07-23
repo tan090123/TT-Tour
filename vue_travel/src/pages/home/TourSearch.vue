@@ -229,13 +229,13 @@
                       }}</span>
                       <span
                         class="price-now-discount"
-                        v-if="product.discountTour != 0"
+                        v-if="product.discountTour != null"
                         >{{ product.discountTour }} GIẢM</span
                       >
                     </div>
                   </div>
                   <div class="timer">
-                    <span>{{ product.tourCheckinDays }}</span>
+                    <span>Hạn chót đăng kí: {{ product.tourCheckinDays.slice(0, 10) }}</span>
                   </div>
                   <div class="addList-numberSit">
                     <div class="addList">
